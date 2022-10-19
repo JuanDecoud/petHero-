@@ -1,9 +1,18 @@
 <?php
+namespace Models;
+
     abstract class User{
         private $id;
         private $nombreUser;
         private $contrasena;
-        
+
+        public function __construct($id,$nombreUser,$contrasena)
+        {
+                $this-> id = $id;
+                $this -> nombreUser = $nombreUser;
+                $this -> contrasena = $contrasena;               
+        }
+
         /**
          * Get the value of id
          */
