@@ -2,12 +2,17 @@
    namespace Models ;
 
     abstract class User{
-      
+        private $id;
         private $nombreUser;
         private $contrasena;
         private $tipodeCuenta ;
 
+        public function __construct($id, $nombreUser, $contrasena ){
+                $this->id = $id ;
+                $this->nombreUser = $nombreUser ;
+                $this->contrasena = $contrasena ;
 
+        }
         
         public function setTipodecuenta ($tipe){
                 $this->tipodeCuenta = $tipe;

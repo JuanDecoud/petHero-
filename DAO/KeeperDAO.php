@@ -19,10 +19,7 @@
 
 
 
-        public function __construct()
-        {
-            
-        }
+  
 
         public function obtenerDatos  (){
             if (file_exists($this->fileName)){
