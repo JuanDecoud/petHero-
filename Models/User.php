@@ -1,26 +1,29 @@
 <?php
+   namespace Models ;
+
     abstract class User{
-        private $id;
+      
         private $nombreUser;
         private $contrasena;
+        private $tipodeCuenta ;
+
+
+        
+        public function setTipodecuenta ($tipe){
+                $this->tipodeCuenta = $tipe;
+        }
+
+        public function getTipodecuenta (){return $this->tipodeCuenta;}
         
         /**
          * Get the value of id
          */
-        public function getId()
-        {
-                return $this->id;
-        }
+ 
 
         /**
          * Set the value of id
          */
-        public function setId($id): self
-        {
-                $this->id = $id;
-
-                return $this;
-        }
+   
 
         /**
          * Get the value of nombreUser
