@@ -1,6 +1,6 @@
 <?php include_once("Header.php") ?>
 
-<div class = "container abs-center    col-md-6 bg-light  ">
+<div class = "container abs-center    col-md-6 border border-dark ">
     <div class = " container   ">
         <h2 class = "mb-4">Registro de Usuario</h2>
         <form class = "m-2" method = "post" action = "<?php echo FRONT_ROOT."Register/agregarKeeper"  ?>"> 
@@ -33,7 +33,7 @@
                     <label class="form-check-label" for="inlineCheckbox1"  value = "Chica">Grande</label>
                 </div>
                 <div class = "form-group m-2">
-                    <button type="submit" class="btn btn-success">Confirmar</button>
+                    <button type="submit" class="btn btn-danger">Confirmar</button>
                 </div>  
         </form>
     </div>

@@ -14,3 +14,28 @@
     margin-top: 100px;
     
   }
+
+
+
+body{
+    background-color: blanchedalmond;
+}
+
+
+.navbar-brand{
+    font-size:  20px;
+    font-weight: bold;
+    
+}
+
+.nav-link {
+    font-size:  15px;
+    font-weight: bold;
+}
+
+
+
+li a:hover {
+    background-color: antiquewhite;
+}
+

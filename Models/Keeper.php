@@ -3,6 +3,7 @@
 
     class Keeper extends User {
 
+        
         private $tipoMascota ;
         private $remuneracion ;
         

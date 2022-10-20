@@ -13,8 +13,13 @@
 
         public function Index($message = "")
         {
-            require_once(VIEWS_PATH."tipodecuenta.php");
+            require_once(VIEWS_PATH."Home.php");
         } 
+
+
+        public function vistaTipocuenta (){
+            require_once(VIEWS_PATH."tipodecuenta.php");
+        }
         
     
 

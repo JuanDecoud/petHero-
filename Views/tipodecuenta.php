@@ -1,6 +1,6 @@
 <?php require_once("Header.php") ?>
 
-<div class = "container abs-center    col-md-6 bg-light  ">
+<div class = "container abs-center    col-md-6 border border-dark  ">
     <div class = " container   ">
         <h2 class = "mb-4">Seleccione tipo de cuenta</h2>
         <form class = "m-2" method ="post" action = "<?php echo FRONT_ROOT."Home/seleccinarCuenta"  ?>"> 
@@ -12,7 +12,7 @@
                 </select>
             </div >
             <div class = "form-group m-2">
-                <button type="submit" class="btn btn-success">Continuar</button>
+                <button type="submit" class="btn btn-danger">Continuar</button>
             </div>  
         </form>
     </div>
