@@ -1,7 +1,7 @@
 <?php 
     namespace Models ;
 
-    class Keep extends User {
+    class Keeper extends User {
 
         private $tipoMascota ;
         private $remuneracion ;

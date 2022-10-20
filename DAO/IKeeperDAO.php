@@ -1,11 +1,11 @@
 <?php 
     namespace DAO ;
 
-use Models\Keep;
+use Models\Keeper as Keeper;
 
     interface IKeeperDAO {
         public function getALL ();
-        public function addKeeper (Keep $keeper);
+        public function addKeeper (Keeper $keeper);
         
     }
 ?>

@@ -2,7 +2,7 @@
     namespace Controllers ;
 
     use DAO\KeeperDAO as KeeperDao;
-    use Models\Keep as Keep;
+    use Models\Keeper as Keeper;
 
     class RegisterController {
 
@@ -33,7 +33,7 @@
                     array_push ($tipoMascota , $_POST['mascota'.$x]);
                 }
             }
-            $keeper = new Keep($userName,$contrasena,"Keeper",$tipoMascota,$remuneracion);
+            $keeper = new Keeper($userName,$contrasena,"Keeper",$tipoMascota,$remuneracion);
             $this->keeperDAO->addKeeper($keeper);
             $this->registrar();
           
