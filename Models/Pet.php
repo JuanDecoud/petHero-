@@ -1,23 +1,48 @@
 <?php
 namespace Models;
-use Models\User as User;
+use Models\Owner as Owner;
 
     class Pet{
+        private $id;
         private $nombre;
         private $owner;
         private $raza;
-        private $tamaño;
+        private $tamano;
         private $planVacunacion;
         private $observacionesGrals;
         private $video;
 
         
-
-        public function __construct($nombre,$owner,$raza,$tamaño,$planVacunacion,$observacionesGrals,$video)
+        /*
+        public function __construct($nombre,$owner,$raza,$tamano,$planVacunacion,$observacionesGrals,$video)
         {
-            
+            $this -> nombre = $nombre;
+            $this -> owner = $owner;
+            $this -> raza = $raza;
+            $this -> tamano = $tamano;
+            $this -> planVacunacion = $planVacunacion;
+            $this -> observacionesGrals = $observacionesGrals;
+            $this -> video = $video;
 
+        }
+        */
+        
+        /**
+         * Get the value of id
+         */
+        public function getId()
+        {
+                return $this->id;
+        }
 
+        /**
+         * Set the value of id
+         */
+        public function setId($id): self
+        {
+                $this->id = $id;
+
+                return $this;
         }
 
         /**
@@ -75,19 +100,19 @@ use Models\User as User;
         }
 
         /**
-         * Get the value of tama
+         * Get the value of tamano
          */
-        public function getTama()
+        public function getTamano()
         {
-                return $this->tama;
+                return $this->tamano;
         }
 
         /**
-         * Set the value of tama
+         * Set the value of tamano
          */
-        public function setTama($tama): self
+        public function setTamano($tamano): self
         {
-                $this->tama = $tama;
+                $this->tamano = $tamano;
 
                 return $this;
         }
