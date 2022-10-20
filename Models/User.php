@@ -3,6 +3,9 @@
 
     abstract class User{
         private $id;
+        //Hacer el id autoincremental dentro del construct y sacarlo de los parametros
+        /**Pregunto porque cuando voy a crear un nuevo owner tengo el atributo id que no se como llenarlo */
+        //Agregar Email en user podria ser mejor porque tanto owner como keeper lo requieren
         private $nombreUser;
         private $contrasena;
         private $tipodeCuenta ;

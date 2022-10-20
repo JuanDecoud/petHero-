@@ -1,5 +1,5 @@
 <?php
-
+    namespace DAO;
     use DAO\IOwnerDAO as IOwnerDAO;
     use Models\Owner as Owner;
     
@@ -48,13 +48,13 @@
                 foreach($arrayToDecode as $valuesArray)
                 {
                     $owner=new Owner($valuesArray["id"], $valuesArray["nombreUser"],$valuesArray["contrasena"], 
-                    $valuesArray["dni"], $valuesArray["email"], $valuesArray["tarjeta"]);
+                    $valuesArray["dni"], $valuesArray["email"]);
                     /*$owner->setId($valuesArray["id"]);
                     $owner->setNombreUser($valuesArray["nombreUser"]);
                     $owner->setContrasena($valuesArray["contrasena"]);
                     $owner->setDni($valuesArray["dni"]);
-                    $owner->setEmail($valuesArray["email"]);
-                    $owner->setTarjeta($valuesArray["tarjeta"]);*/
+                    $owner->setEmail($valuesArray["email"]);*/
+                    $owner->setTarjeta($valuesArray["tarjeta"]);
 
                     array_push($this->ownerList, $owner);
                     

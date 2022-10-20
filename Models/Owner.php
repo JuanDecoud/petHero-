@@ -10,11 +10,10 @@ class Owner extends User
     private $email;
     private Tarjeta $tarjeta;
 
-    public function __construct($id, $nombreUser, $contrasena, $dni, $email, $tarjeta){
+    public function __construct($id, $nombreUser, $contrasena, $dni, $email){
         parent::__construct($id, $nombreUser, $contrasena);
         $this->dni=$dni;
         $this->email=$email;
-        $this->tarjeta=$tarjeta;
     }
     
 
