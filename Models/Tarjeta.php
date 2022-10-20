@@ -98,6 +98,15 @@ class Tarjeta
 
         return $this;
     }
+    
+    public function getList()
+    {
+        echo "Numero: ".$this->numero.
+        "Nombre: ".$this->nombre.
+        "Fecha de Vencimiento: ".$this->fechaVenc.
+        "Codigo: ".$this->codigo;
+    }
+
 }
 
 ?>

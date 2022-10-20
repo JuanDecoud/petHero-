@@ -2,12 +2,13 @@
 
 namespace Models;
 use Models\User as User;
+use Models\Tarjeta as Tarjeta;
 
 class Owner extends User
 {
     private $dni;
     private $email;
-    private $tarjeta;
+    private Tarjeta $tarjeta;
 
     public function __construct($id, $nombreUser, $contrasena, $dni, $email, $tarjeta){
         parent::__construct($id, $nombreUser, $contrasena);
@@ -63,7 +64,7 @@ class Owner extends User
      */ 
     public function getTarjeta()
     {
-        return $this->tarjeta;
+        return $this->tarjeta->getList();
     }
 
     /**
