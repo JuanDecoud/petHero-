@@ -6,6 +6,8 @@
         
         private $tipoMascota ;
         private $remuneracion ;
+        private $fechasDisponibles = array();
+
         
 
     
