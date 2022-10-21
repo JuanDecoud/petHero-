@@ -16,7 +16,7 @@ require_once "Config/Autoload.php";
             if($email== "admin@utn.com" && md5($password)=="123456"){
                 session_start();
                 $_SESSION["email"] = $email;
-                header("location:menuOwner.php");
+                header("location:menu-owner.php");
             } 
             else{
                 header("location:index.php");

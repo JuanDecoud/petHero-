@@ -3,12 +3,14 @@
 namespace Models;
 use Models\User as User;
 use Models\Tarjeta as Tarjeta;
+use Models\Pet as Pet;
 
 class Owner extends User
 {
     private $dni;
     private $email;
     private Tarjeta $tarjeta;
+    private Pet $pet;
 
     public function __construct($id, $nombreUser, $contrasena, $dni, $email){
         parent::__construct($id, $nombreUser, $contrasena);
@@ -71,10 +73,12 @@ class Owner extends User
      *
      * @return  self
      */ 
-    public function setTarjeta($tarjeta)
+    public function setTarjeta($numero, $nombre, $fechaVenc, $codigo)
     {
-        $this->tarjeta = $tarjeta;
-
+        $this->tarjeta->setNumero($numero);
+        $this->tarjeta->setNombre($nombre);
+        $this->tarjeta->setFechaVenc($fechaVenc);
+        $this->tarjeta->setCodigo($codigo);
         return $this;
     }
 
