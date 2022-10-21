@@ -7,9 +7,11 @@
                <h2 class="mb-4">Listado de clientes</h2>
                <table class="table bg-light-alpha">
                     <thead>
-                         <th>Legajo</th>
-                         <th>Apellido</th>
-                         <th>Nombre</th>
+                         <th>ID</th>
+                         <th>Nombre de Usuario</th>
+                         <th>Contraseña</th>
+                         <th>Tipo Cuenta</th>
+                         <th>Remuneración</th>
                     </thead>
                     <tbody>
                          <?php
