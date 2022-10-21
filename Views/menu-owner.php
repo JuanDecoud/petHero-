@@ -6,7 +6,7 @@
     <body>
         <center>
             <a href="views/.php">Editar Cuenta</a><br>
-            <a href="views/.php">Agregar Mascota</a><br>
+            <a href="views/Add-mascota.php">Agregar Mascota</a><br>
             <a href="views/.php">Listar Mascotas</a><br>
             <a href="views/.php">Buscar Mascota</a><br>
             <a href="views/.php">Realizar Reserva</a><br>
