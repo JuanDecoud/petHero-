@@ -1,6 +1,8 @@
 <?php
    namespace Models ;
 
+        use DAO\UserDAO as UserDAO;
+
     abstract class User{
         private $id;
         //Hacer el id autoincremental dentro del construct y sacarlo de los parametros
@@ -10,11 +12,11 @@
         private $contrasena;
         private $tipodeCuenta;
 
-        public function __construct($id, $nombreUser, $contrasena ){
-                $this->id = $id ;
+        public function __construct($nombreUser, $contrasena){
+                $userDAO = new UserDAO();
+                $this->id = $userDAO -> GetMaxID() +1;
                 $this->nombreUser = $nombreUser ;
                 $this->contrasena = $contrasena ;
-
         }
         
         public function setTipodecuenta ($tipe){
@@ -26,7 +28,9 @@
         /**
          * Get the value of id
          */
- 
+        public function getID(){
+                return $this -> id;
+        }
 
         /**
          * Set the value of id

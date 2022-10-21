@@ -29,7 +29,7 @@
             $arrayToEncode = array();
 
             foreach($this->petLIst as $pet)
-            {
+            {              
                 $valuesArray["petId"] = $pet->getId();
                 $valuesArray["petName"] = $pet->getNombre();
                 $valuesArray["petOwner"] = $pet ->getOwner();
