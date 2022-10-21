@@ -30,7 +30,13 @@
                 $_SESSION['keeper'] =$tipo; 
                 $this->registerC->registrarKeeper();
             }
+            else if($tipo == "Owner")
+            {
+                $_SESSION['owner'] =$tipo; 
+                $this->registerC->registrarOwner();
+            }
 
         }
+
     }
 ?>

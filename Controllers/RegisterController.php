@@ -2,7 +2,9 @@
     namespace Controllers ;
 
     use DAO\KeeperDAO as KeeperDao;
+    use DAO\OwnerDAO as OwnerDAO;
     use Models\Keeper as Keeper;
+    use Models\Owner as Owner;
 
     class RegisterController {
 
@@ -14,6 +16,7 @@
         public function __construct()
         {
             $this->keeperDAO = new KeeperDAO ();
+            $this->ownerDAO = new OwnerDAO ();
             $this->homeController = new HomeController ();
         }
 
@@ -44,6 +47,25 @@
           
             
         }
+
+        public function registrarOwner (){
+            
+            require_once(VIEWS_PATH."Sign-upOwner.php");
+        }
+
+        
+
+        public function agregarOwner ($userName , $contrasena){
+
+            
+            $owner = new Owner($userName,$contrasena,$_SESSION['owner']);
+            $this->ownerDAO->addKeeper($owner);
+            $this->registrarKeeper();
+          
+            
+        }
+
+
 
 
 

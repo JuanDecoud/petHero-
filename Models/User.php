@@ -8,7 +8,7 @@
         //Agregar Email en user podria ser mejor porque tanto owner como keeper lo requieren
         private $nombreUser;
         private $contrasena;
-        private $tipodeCuenta ;
+        private $tipodeCuenta;
 
         public function __construct($id, $nombreUser, $contrasena ){
                 $this->id = $id ;

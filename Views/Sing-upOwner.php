@@ -12,12 +12,8 @@
   <form action="addOwner.php" method="post">
         <label for:"iname">Usuario:</label>
         <input type="text" name="name" id="iname" placeholder="Escriba su Nombre de Usuario"><br>
-        <label for:"iemail">Email:</label>
-        <input type="email" name="email" id="iemail" placeholder="Escriba su Email"><br>
         <label for:"ipass">Contraseña:</label>
         <input type="password" name="pass" id="ipass" placeholder="Escriba su Contraseña"><br>
-        <label for="idni">DNI:</label>
-        <input type="number" name="dni" id="idni" placeholder="Escriba su DNI"><br>
     <br>
     <button type="submit">Crear usuario</button>
   </form>
