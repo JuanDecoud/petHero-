@@ -21,7 +21,7 @@
             </ul>
             <ul class="navbar-nav  me-5">
                 <li class="nav-item border-start border-dark">
-                    <a class="nav-link active" aria-current="page" href="#">Login</a>
+                    <a class="nav-link active" aria-current="page" href="<?php echo FRONT_ROOT."Home/vistaLogin" ?>">Login</a>
                 </li>
                 <li class="nav-item border-dark border-start ">
                     <a class="nav-link active" href="<?php echo FRONT_ROOT."Home/vistaTipocuenta" ?>">Sing Up</a>
@@ -33,4 +33,4 @@
         </div>
 </nav>
 
-<?php require_once("Footer.php")  ?>
+<?php require_once("Footer.php") ; ?>

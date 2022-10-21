@@ -17,11 +17,11 @@
         {
             $this->keeperDAO = new KeeperDAO ();
             $this->ownerDAO = new OwnerDAO ();
-            $this->homeController = new HomeController ();
+            
         }
 
         public function login (){
-            require_once(VIEWS_PATH."Sign-up.php");
+            require_once(VIEWS_PATH."Login.php");
         }
 
 
@@ -35,8 +35,11 @@
         }
 
 
-        public function agregarOwner (){
-            
+        public function agregarOwner ($userName , $contrasena ){
+
+            $owner = new Owner ($userName ,$contrasena , $_SESSION['owner']);
+            $this->ownerDAO->Add($owner);
+            $this->login();
         }
 
         
@@ -56,6 +59,8 @@
           
             
         }
+
+      
 
         public function asignarFecha ($fecha){
             $this->keeperDAO->agregarFecha($fecha);

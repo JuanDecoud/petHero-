@@ -72,5 +72,7 @@
 
                 return $this;
         }
+
+        public function getTipocuenta (){return $this->tipodeCuenta;}
     }
 ?>

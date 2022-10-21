@@ -1,22 +1,25 @@
 <?php
     namespace Controllers;
 
-use DAO\KeeperDAO;
+    use DAO\KeeperDAO as KeeperDAO ;
+    use  DAO\OwnerDao as OwnerDAO ;
 
     class HomeController
     {
         private $keeperDao ;
+        private $ownerDao ;
 
         public function __construct()
         {
             $this->keeperDao = new KeeperDAO();
+            $this->ownerDao = new OwnerDAO ();
         }
 
   
 
         public function Index($message = "")
         {
-            require_once(VIEWS_PATH."mainKeeper.php");
+            require_once(VIEWS_PATH."Home.php");
         } 
 
 
@@ -31,6 +34,17 @@ use DAO\KeeperDAO;
         public function vistaLogin (){
             require_once(VIEWS_PATH."Login.php");
         }
+
+
+        public function login ($usuario , $contraseña){
+           $listaOwners = array () ;
+           $listaKeepers = $this->keeperDao->obtenerDatos() ;
+
+        }
+
+        public function registrarOwner (){
+            require_once(VIEWS_PATH."Sing-upOwner.php");
+        }
     
 
         public function seleccinarCuenta ($tipoCuenta){
@@ -44,7 +58,7 @@ use DAO\KeeperDAO;
             else if($tipo == "Owner")
             {
                 $_SESSION['owner'] =$tipo; 
-                $this->registerC->registrarOwner();
+                $this->registrarOwner();
             }
 
         }

@@ -1,11 +1,11 @@
 <?php include_once("Header.php") ?>
 
     <center>
-  <form action="addOwner.php" method="post">
+  <form action="<?php echo FRONT_ROOT."Register/agregarOwner" ?>" method="post">
         <label for:"iname">Usuario:</label>
-        <input type="text" name="name" id="iname" placeholder="Escriba su Nombre de Usuario"><br>
+        <input type="text" name="userName" id="iname" placeholder="Escriba su Nombre de Usuario"><br>
         <label for:"ipass">Contraseña:</label>
-        <input type="password" name="pass" id="ipass" placeholder="Escriba su Contraseña"><br>
+        <input type="password" name="contrasena" id="ipass" placeholder="Escriba su Contraseña"><br>
     <br>
     <button type="submit">Crear usuario</button>
   </form>

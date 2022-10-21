@@ -8,12 +8,7 @@
             "Mediana",
             "Grande"
         ],
-        "remuneracion": "1000",
-        "fechasDisponibles": [
-            "2022-10-20",
-            "2022-10-23",
-            "2022-10-29",
-            "2022-10-14"
-        ]
+        "remuneracion": "5000",
+        "fechasDisponibles": []
     }
 ]

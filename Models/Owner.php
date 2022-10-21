@@ -16,14 +16,15 @@ class Owner extends User
     }
     
     
-    public function setTarjeta($numero, $nombre, $fechaVenc, $codigo)
-    {
-        $this->tarjeta->setNumero($numero);
-        $this->tarjeta->setNombre($nombre);
-        $this->tarjeta->setFechaVenc($fechaVenc);
-        $this->tarjeta->setCodigo($codigo);
-        return $this;
+    public function setTarjeta(Tarjeta $tarjeta){
+        $this->tarjeta = $tarjeta ;
     }
+
+
+    //public function getTarjeta (){return $this->tarjeta;}
+
+    
+  
 
 
 }
