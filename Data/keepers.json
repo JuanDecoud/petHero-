@@ -1,0 +1,18 @@
+[
+    {
+        "nombreUser": "Juan",
+        "contrasena": "145623",
+        "tipodeCuenta": "Keeper",
+        "tipoMascota": [
+            "Chica",
+            "Mediana",
+            "Grande"
+        ],
+        "remuneracion": "1000",
+        "fechasDisponibles": [
+            "2022-10-20",
+            "2022-10-23",
+            "2022-10-29"
+        ]
+    }
+]

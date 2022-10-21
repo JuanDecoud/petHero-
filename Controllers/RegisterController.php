@@ -30,6 +30,10 @@
             require_once(VIEWS_PATH."Sign-upKeeper.php");
         }
 
+        public function principalKeeper (){
+            require_once(VIEWS_PATH."mainKeeper.php");
+        }
+
         
 
         public function agregarKeeper ($userName , $contrasena , $remuneracion){
@@ -48,6 +52,7 @@
             
         }
 
+<<<<<<< Updated upstream
         public function registrarOwner (){
             
             require_once(VIEWS_PATH."Sign-upOwner.php");
@@ -67,6 +72,13 @@
 
 
 
+=======
+        public function asignarFecha ($fecha){
+            $this->keeperDAO->agregarFecha($fecha);
+            $this->principalKeeper();   
+        }
+
+>>>>>>> Stashed changes
 
 
 

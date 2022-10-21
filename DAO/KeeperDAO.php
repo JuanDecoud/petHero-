@@ -7,6 +7,7 @@
         private $keeperList = array ();
 
         public function getAll (){
+            $this->obtenerDatos();
             return $this->keeperList ;
         }
         
@@ -15,6 +16,18 @@
             
             array_push($this->keeperList , $keeper);
             $this->guardarDatos();
+        }
+
+
+        public function agregarFecha ($fecha ){
+            
+            $this->obtenerDatos();
+            foreach($this->keeperList  as $keeper){
+                $keeper->agregarFecha ($fecha);
+            }
+           
+            $this->guardarDatos();
+
         }
 
 
@@ -27,6 +40,7 @@
                 $arrayDecodificar = ($contenidoJson) ? json_decode($contenidoJson , true) : array ();
                 foreach ($arrayDecodificar as $value ){
                     $keeper = new Keeper($value['nombreUser'] ,$value['contrasena'],$value['tipodeCuenta'],$value['tipoMascota'],$value['remuneracion']  );
+                    $keeper->setFechas($value['fechasDisponibles']);
                     array_push($this->keeperList , $keeper);
                 }
 
@@ -41,6 +55,10 @@
                 $value ['tipodeCuenta'] = $keeper->getTipodecuenta ();
                 $value ['tipoMascota'] = $keeper->getTipo();
                 $value ['remuneracion'] = $keeper->getRemuneracion ();
+                $value ['fechasDisponibles'] = array ();
+                foreach ($keeper->getFechas() as $fechas){
+                    array_push($value['fechasDisponibles'] , $fechas);
+                }
                 array_push($arraytoEncode , $value);
 
             }

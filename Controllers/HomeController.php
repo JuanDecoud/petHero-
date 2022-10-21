@@ -1,34 +1,42 @@
 <?php
     namespace Controllers;
 
+use DAO\KeeperDAO;
+
     class HomeController
     {
-        private $registerC  ;
+        private $keeperDao ;
+
+        public function __construct()
+        {
+            $this->keeperDao = new KeeperDAO();
+        }
 
   
-      public function __construct()
-      {
-        
-      }
 
         public function Index($message = "")
         {
-            require_once(VIEWS_PATH."Home.php");
+            require_once(VIEWS_PATH."mainKeeper.php");
         } 
 
 
         public function vistaTipocuenta (){
             require_once(VIEWS_PATH."tipodecuenta.php");
         }
+
+        public function registerKeeper (){
+            require_once (VIEWS_PATH."Sign-upKeeper.php");
+        }
         
     
 
         public function seleccinarCuenta ($tipoCuenta){
-            $this->registerC = new RegisterController();
+           
             $tipo = $tipoCuenta ;
             if ($tipo == "Keeper"){
                 $_SESSION['keeper'] =$tipo; 
-                $this->registerC->registrarKeeper();
+                $this->registerKeeper();
+                
             }
             else if($tipo == "Owner")
             {
