@@ -1,9 +1,6 @@
 <?php
-  session_start();
-
-  if (isset($_SESSION["email"])) {
-    header("location:index.php");
-  }
+  require_once("Header.php");
+  require_once("check.php");
 ?>
 
 <!DOCTYPE html>
@@ -24,5 +21,5 @@
     <button type="submit">Iniciar sesión</button>
     </center>
   </form>
-</body>
-</html>
+
+<?php  require_once("Footer.php") ?>

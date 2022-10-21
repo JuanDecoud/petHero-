@@ -32,3 +32,5 @@
           </div>
         </div>
 </nav>
+
+<?php require_once("Footer.php")  ?>

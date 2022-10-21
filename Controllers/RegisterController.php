@@ -34,6 +34,11 @@
             require_once(VIEWS_PATH."mainKeeper.php");
         }
 
+
+        public function agregarOwner (){
+            
+        }
+
         
 
         public function agregarKeeper ($userName , $contrasena , $remuneracion){
@@ -52,33 +57,11 @@
             
         }
 
-<<<<<<< Updated upstream
-        public function registrarOwner (){
-            
-            require_once(VIEWS_PATH."Sign-upOwner.php");
-        }
-
-        
-
-        public function agregarOwner ($userName , $contrasena){
-
-            
-            $owner = new Owner($userName,$contrasena,$_SESSION['owner']);
-            $this->ownerDAO->addKeeper($owner);
-            $this->registrarKeeper();
-          
-            
-        }
-
-
-
-=======
         public function asignarFecha ($fecha){
             $this->keeperDAO->agregarFecha($fecha);
             $this->principalKeeper();   
         }
 
->>>>>>> Stashed changes
 
 
 

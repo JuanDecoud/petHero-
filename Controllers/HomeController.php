@@ -28,6 +28,9 @@ use DAO\KeeperDAO;
             require_once (VIEWS_PATH."Sign-upKeeper.php");
         }
         
+        public function vistaLogin (){
+            require_once(VIEWS_PATH."Login.php");
+        }
     
 
         public function seleccinarCuenta ($tipoCuenta){
