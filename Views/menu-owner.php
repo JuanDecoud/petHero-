@@ -1,9 +1,6 @@
 <?php
-    require_once "check.php";
-    require_once "Config/Autoload.php";
     require_once("Header.php");
     echo "BIENVENIDO";
-
     ?>
 
     <body>

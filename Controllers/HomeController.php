@@ -15,12 +15,19 @@
             $this->ownerDao = new OwnerDAO ();
         }
 
+
+
   
 
         public function Index($message = "")
         {
             require_once(VIEWS_PATH."Home.php");
         } 
+
+
+        public function principalKeeper (){
+            require_once(VIEWS_PATH."mainKeeper.php");
+        }
 
 
         public function vistaTipocuenta (){
@@ -35,10 +42,27 @@
             require_once(VIEWS_PATH."Login.php");
         }
 
+        public function menuOwner (){
+            require_once(VIEWS_PATH."menu-owner.php");
+        }
+
 
         public function login ($usuario , $contraseña){
-           $listaOwners = array () ;
-           $listaKeepers = $this->keeperDao->obtenerDatos() ;
+             $userkeeper = $this->keeperDao->obtenerUser($usuario , $contraseña);
+             $userOwner = $this->ownerDao->obtenerUser($usuario , $contraseña);
+
+             var_dump($userkeeper);
+             
+
+             if ($userkeeper !=null){
+                $_SESSION['loggedUser'] = $userkeeper ;
+                $this->principalKeeper();  
+             }
+             else if ($userOwner !=null){
+                $_SESSION['loggedUser'] = $userOwner ;
+                $this->menuOwner();
+             }
+             
 
         }
 

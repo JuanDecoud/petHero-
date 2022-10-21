@@ -32,6 +32,20 @@
 
 
 
+        public function obtenerUser ($username , $contrasena){
+            $this->obtenerDatos();
+            $user = null ;
+            foreach ($this->keeperList as $keeper){
+                if ($keeper->getNombreUser() == $username && $keeper->getContrasena() == $contrasena ){
+                    $user = $keeper ;
+                }
+            }
+
+            return $user ;
+        }
+
+
+
   
 
         public function obtenerDatos  (){

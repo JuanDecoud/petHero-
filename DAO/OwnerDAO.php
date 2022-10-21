@@ -19,6 +19,18 @@
             $this->RetrieveData();
             return $this->ownerList;
         }
+
+        public function obtenerUser ($username , $contrasena){
+            $this->RetrieveData();
+            $user = null ;
+            foreach ($this->ownerList as $owner){
+                if ($owner->getNombreUser() == $username && $owner->getContrasena() == $contrasena ){
+                    $user = $owner ;
+                }
+            }
+
+            return $user ;
+        }
         private function SaveData()
         {
             $arrayToEncode=array();
