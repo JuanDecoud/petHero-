@@ -51,7 +51,7 @@
              $userkeeper = $this->keeperDao->obtenerUser($usuario , $contraseña);
              $userOwner = $this->ownerDao->obtenerUser($usuario , $contraseña);
 
-             var_dump($userkeeper);
+            
              
 
              if ($userkeeper !=null){
