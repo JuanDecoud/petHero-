@@ -1,7 +1,7 @@
 <?php include_once("Header.php") ?>
 
     <center>
-  <form action="<?php echo FRONT_ROOT."" ?>" method="post">
+  <form action="<?php echo FRONT_ROOT."Register/agregarMascota" ?>" method="post">
         <label for:"iname">Nombre:</label>
         <input type="text" name="nombre" id="iname" placeholder="Escriba el Nombre de su Mascota"><br>
         <label for:"iowner">Owner:</label>
