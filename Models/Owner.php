@@ -11,8 +11,7 @@ class Owner extends User
     private Pet $pet;
 
     public function __construct($username , $contrasena , $tipocuenta){
-        $this->setNombreUser($username);
-        $this->setContrasena($contrasena);
+        parent::__construct($username,$contrasena);
         $this->setTipodecuenta($tipocuenta);
     }
     
