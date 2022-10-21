@@ -23,6 +23,15 @@
 
         public function getTipo (){return $this->tipoMascota;}
         public function getRemuneracion (){return $this->remuneracion;}
+        public function setFechas ($fecha){
+            $this->fechasDisponibles = $fecha ;
+        }
+
+        public function agregarFecha ($fecha){
+            array_push($this->fechasDisponibles , $fecha);
+        }
+
+        public function getFechas (){return $this->fechasDisponibles;}
 
 
     }
