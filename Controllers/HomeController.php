@@ -20,7 +20,7 @@
 
         public function Index($message = "")
         {
-            require_once(VIEWS_PATH."Home.php");
+            require_once(VIEWS_PATH."menu-owner.php");
         } 
 
         public function principalKeeper (){

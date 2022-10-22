@@ -12,7 +12,6 @@
         }
         
         public function addKeeper (Keeper $keeper){
-            $this->obtenerDatos() ;
             
             array_push($this->keeperList , $keeper);
             $this->guardarDatos();

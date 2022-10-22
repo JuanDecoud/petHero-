@@ -51,7 +51,7 @@
                 
                 $comprobarUser = $this->keeperDAO->obtenerUser($userName , $contrasena);
                 $comprobarUser = $this->ownerDAO->obtenerUser($userName , $contrasena);
-                if ($comprobarUser != null){
+                if ($comprobarUser == null){
 
                     $owner = new Owner ();
                     $owner->setNombreUser($userName);
@@ -87,18 +87,20 @@
             if ($userName !=null && $contrasena!=null){
                 $comprobarUser = $this->keeperDAO->obtenerUser($userName , $contrasena);
                 $comprobarUser = $this->ownerDAO->obtenerUser($userName , $contrasena);
-                if ($comprobarUser != null){
+                if ($comprobarUser == null){
                     $keeper = new Keeper($userName,$contrasena,$_SESSION['keeper'],$tipoMascota,$remuneracion);
                     $this->keeperDAO->addKeeper($keeper);
-                    $this->registrarKeeper();
+                    $this->login();
                 }
                 else {
                     echo '<script language="javascript">alert("Nombre de usuario ya existe");</script>';
+                    $this->registrarKeeper();
     
                 }
             }
             else {
                 echo '<script language="javascript">alert("Complete todos los campos");</script>';
+                $this->registrarKeeper();
             }
 
 

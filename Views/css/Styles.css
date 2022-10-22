@@ -16,6 +16,14 @@
     
   }
 
+.abs-center1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 500px;
+    margin-top: 200px;
+}
+
 
 
 body{
