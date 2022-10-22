@@ -22,7 +22,7 @@
                                              <td><?php echo $keeper->getID() ?></td>
                                              <td><?php echo $keeper->getNombreUser() ?></td>
                                              <td><?php echo $keeper->getContrasena() ?></td>
-                                             <td><?php echo $keeper->getTipo() ?></td>
+                                             <td><?php echo $keeper->getTipocuenta() ?></td>
                                              <td><?php echo $keeper->getRemuneracion() ?></td>
                                         </tr>
                                    <?php

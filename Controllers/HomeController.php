@@ -81,7 +81,7 @@
 
         public function ShowListViewKeeper()
         {
-            $keeperList = $this->keeperDAO->GetAll();
+            $keeperList = $this->keeperDao->GetAll();
 
             require_once(VIEWS_PATH."List-AllKeepers.php");
         }
