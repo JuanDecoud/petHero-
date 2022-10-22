@@ -45,8 +45,12 @@
         }
 
         public function agregarOwner ($userName , $contrasena ){
-
-            $owner = new Owner ($userName ,$contrasena , $_SESSION['owner']);
+            $owner = new Owner ();
+            
+            $owner->setNombreUser($userName);
+            $owner->setContrasena($contrasena);
+            $owner->setTipodecuenta($_SESSION['owner']);
+            
             $this->ownerDAO->Add($owner);
             $this->login();
         }

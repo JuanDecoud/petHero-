@@ -7,11 +7,14 @@
 
     class OwnerDao implements IOwnerDAO
     {
-        private $ownerList ;
+       
+       
+        private $ownerList = array();
 
         public function Add(Owner $owner)
         {
             $this->RetrieveData();
+            var_dump($owner);
             array_push($this->ownerList, $owner);
             $this->SaveData();
         }
@@ -21,6 +24,7 @@
             return $this->ownerList;
         }
 
+
         public function obtenerUser ($username , $contrasena){
             $this->RetrieveData();
             $user = null ;
@@ -29,9 +33,9 @@
                     $user = $owner ;
                 }
             }
-
             return $user ;
         }
+
         private function SaveData()
         {
             $tarjeta = array() ;
@@ -55,21 +59,24 @@
                     $tarjeta['codigo'] = $tarjetaOwner->getCodigo ();
                     
                 }
-                $valuesArray["tarjeta"] = $tarjeta;
-               
- 
-
-                $petOwner = $owner->getPet ();
-                if ($petOwner !=null){
-                    $pet['nombre'] = $petOwner->getNombre();
-                    $pet['raza'] = $petOwner->getRaza();
-                    $pet ['tamano'] = $petOwner->getTamano();
-                    $pet['planVacunacion'] = $petOwner ->GetPlanVacunacion();
-                    $pet ['observacionesGrals'] = $petOwner->getObservacionesGrals();
-                    $pet ['video'] = $petOwner->getVideo(); 
-                    
+                $valuesArray['tarjeta']= $tarjeta ;
+    
+                
+               $valuesArray['pets']=array ();
+                foreach($owner->getPetList() as $pet){
+                    $valuesArray["pets"][] = array(
+                        'nombre' => $pet->getNombre(),
+                        'raza' => $pet->getRaza(),
+                        'tamano' => $pet->getTamano(),
+                        'planVacunacion' => $pet->GetPlanVacunacion(),
+                        'observacionesGrals' => $pet->getObservacionesGrals(),
+                        'video' => $pet->getVideo(),
+                        'imagen' => $pet->getImg()
+                    );
                 }
-                $valuesArray['pet'] = $pet ;
+
+                
+           
    
 
 
@@ -82,9 +89,10 @@
 
         private function RetrieveData()
         {
-            $this->ownerList=array();
-            $tarjeta = null ;
+            
+            $tarjeta = new tarjeta () ;
             $owner = null ;
+            $pet = null ;
             if(file_exists(ROOT."Data/owner.json" ))
             {
                 $jsonContent=file_get_contents(ROOT."Data/owner.json" );
@@ -93,41 +101,46 @@
                 foreach($arrayToDecode as $valuesArray)
                 {   
                     $owner=new owner ();
-                    /*$owner=new Owner( $valuesArray["nombreUser"],$valuesArray["contrasena"], 
-                    $valuesArray["tipodeCuenta"]);
-                        */
+          
                    $owner->setNombreUser( $valuesArray["nombreUser"]);
                    $owner->setContrasena($valuesArray["contrasena"]);
                    $owner->setTipodecuenta ($valuesArray["tipodeCuenta"]);
 
-                    $tarjeta = new Tarjeta ();
+                   
                     foreach ($valuesArray['tarjeta'] as $value){
-                        $tarjeta->setNumero($value['numero'] );
-                        $tarjeta->setNombre($value['nombre']);
-                        $tarjeta->setFechaVenc($value['fechaVenc']);
-                        $tarjeta->setCodigo($value['codigo'] );
+                            $tarjeta->setNumero($value['numero'] );
+                            $tarjeta->setNombre($value['nombre']);
+                            $tarjeta->setFechaVenc($value['fechaVenc']);
+                            $tarjeta->setCodigo($value['codigo'] );
                     }
                     $owner->setTarjeta($tarjeta);
+                    
+              
 
+                    if ($valuesArray['pets']!=null){
+                        $pet  = new Pet ();
+                        foreach ($valuesArray['pets'] as $value){
+                            $pet->setNombre($value['nombre']);
+                            $pet->setRaza($value['raza']);
+                            $pet->setTamano($value ['tamano']);
+                            $pet ->setPlanVacunacion($value['planVacunacion'] );
+                            $pet->setObservacionesGrals($value ['observacionesGrals']);
+                            $pet->setVideo($value ['video']);
+                        }
+    
+                        $owner->setPet($pet);
 
-                    $pet  = new Pet ();
-                    foreach ($valuesArray['pet'] as $value){
-                        $pet->setNombre($value['nombre']);
-                        $pet->setRaza($value['raza']);
-                        $pet->setTamano($value ['tamano']);
-                        $pet ->setPlanVacunacion($value['planVacunacion'] );
-                        $pet->setObservacionesGrals($value ['observacionesGrals']);
-                        $pet->setVideo($value ['video']);
                     }
-
-                    $owner->setPet($pet);
+    
 
 
                     array_push($this->ownerList, $owner);
+
                     
                 }
             }
         }
+       
     }
 
 ?>
