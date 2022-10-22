@@ -1,9 +1,26 @@
 [
     {
-        "nombreUser": "nahuel",
-        "contrasena": "2345",
+        "nombreUser": "Juan",
+        "contrasena": "123",
         "tipodeCuenta": "Owner",
-        "tarjeta": [],
+        "tarjeta": {
+            "numero": null,
+            "nombre": null,
+            "fechaVenc": null,
+            "codigo": null
+        },
+        "pets": []
+    },
+    {
+        "nombreUser": "isma",
+        "contrasena": "234",
+        "tipodeCuenta": "Owner",
+        "tarjeta": {
+            "numero": null,
+            "nombre": null,
+            "fechaVenc": null,
+            "codigo": null
+        },
         "pets": []
     }
 ]

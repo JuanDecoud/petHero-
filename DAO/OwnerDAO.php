@@ -74,12 +74,6 @@
                         'imagen' => $pet->getImg()
                     );
                 }
-
-                
-           
-   
-
-
                 array_push($arrayToEncode, $valuesArray);
             }
             $jsonContent= json_encode($arrayToEncode, JSON_PRETTY_PRINT);
@@ -108,14 +102,15 @@
 
                    
                     foreach ($valuesArray['tarjeta'] as $value){
+                        if ($value !=null){
                             $tarjeta->setNumero($value['numero'] );
                             $tarjeta->setNombre($value['nombre']);
                             $tarjeta->setFechaVenc($value['fechaVenc']);
                             $tarjeta->setCodigo($value['codigo'] );
+                        }
+    
                     }
                     $owner->setTarjeta($tarjeta);
-                    
-              
 
                     if ($valuesArray['pets']!=null){
                         $pet  = new Pet ();
@@ -132,8 +127,6 @@
 
                     }
     
-
-
                     array_push($this->ownerList, $owner);
 
                     
