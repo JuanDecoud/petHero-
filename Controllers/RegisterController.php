@@ -45,17 +45,36 @@
         }
 
         public function agregarOwner ($userName , $contrasena ){
-            $owner = new Owner ();
-            
-            $owner->setNombreUser($userName);
-            $owner->setContrasena($contrasena);
-            $owner->setTipodecuenta($_SESSION['owner']);
+
+
+            if ($userName != null && $contrasena !=null){
+                
+                $comprobarUser = $this->keeperDAO->obtenerUser($userName , $contrasena);
+                $comprobarUser = $this->ownerDAO->obtenerUser($userName , $contrasena);
+                if ($comprobarUser != null){
+
+                    $owner = new Owner ();
+                    $owner->setNombreUser($userName);
+                    $owner->setContrasena($contrasena);
+                    $owner->setTipodecuenta($_SESSION['owner']);
+                }
+                else {
+                    echo '<script language="javascript">alert("Nombre de usuario ya existe");</script>';
+    
+                }
+
+            }
+            else {
+                echo '<script language="javascript">alert("Complete todos los campos");</script>';
+            }
+
+
             
             $this->ownerDAO->Add($owner);
             $this->login();
         }
 
-        public function agregarKeeper ($userName , $contrasena , $remuneracion){
+        public function agregarKeeper ($userName , $contrasena , $remuneracion ){
 
             
             $tipoMascota = array ();
@@ -64,9 +83,26 @@
                     array_push ($tipoMascota , $_POST['mascota'.$x]);
                 }
             }
-            $keeper = new Keeper($userName,$contrasena,$_SESSION['keeper'],$tipoMascota,$remuneracion);
-            $this->keeperDAO->addKeeper($keeper);
-            $this->registrarKeeper();           
+
+            if ($userName !=null && $contrasena!=null){
+                $comprobarUser = $this->keeperDAO->obtenerUser($userName , $contrasena);
+                $comprobarUser = $this->ownerDAO->obtenerUser($userName , $contrasena);
+                if ($comprobarUser != null){
+                    $keeper = new Keeper($userName,$contrasena,$_SESSION['keeper'],$tipoMascota,$remuneracion);
+                    $this->keeperDAO->addKeeper($keeper);
+                    $this->registrarKeeper();
+                }
+                else {
+                    echo '<script language="javascript">alert("Nombre de usuario ya existe");</script>';
+    
+                }
+            }
+            else {
+                echo '<script language="javascript">alert("Complete todos los campos");</script>';
+            }
+
+
+          
         }
 
 
