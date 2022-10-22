@@ -26,7 +26,10 @@
                 <li class="nav-item border-dark border-start ">
                     <a class="nav-link active" href="<?php echo FRONT_ROOT."Home/vistaTipocuenta" ;?>">Sing Up</a>
                 </li>
-            </ul>
+                <li class="nav-item">
+               <a class="nav-link" href="<?php echo FRONT_ROOT ?>Home/ShowListViewKeeper">Listar Keepers</a>
+                </li>  
+              </ul>
 
             </ul>
           </div>
