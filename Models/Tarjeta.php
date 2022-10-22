@@ -9,14 +9,10 @@ class Tarjeta
     private $fechaVenc;
     private $codigo;
 
-    public function __construct($numero, $nombre, $fechaVenc, $codigo)
-    {
-        $this->numero=$numero;
-        $this->nombre=$nombre;
-        $this->fechaVenc=$fechaVenc;
-        $this->codigo=$codigo;
-    }
+   public function __construct()
+   {
     
+   }
 
 
     /**

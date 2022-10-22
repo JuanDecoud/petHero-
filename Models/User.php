@@ -11,6 +11,7 @@
         private $nombreUser;
         private $contrasena;
         private $tipodeCuenta;
+        
 
         public function __construct($nombreUser, $contrasena){
                 $userDAO = new UserDAO();

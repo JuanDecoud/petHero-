@@ -1,7 +1,9 @@
 [
     {
-        "nombreUser": "owner",
-        "contrasena": "145623",
-        "tipodeCuenta": "Owner"
+        "nombreUser": "Juan",
+        "contrasena": "1456",
+        "tipodeCuenta": "Owner",
+        "tarjeta": [],
+        "pet": []
     }
 ]

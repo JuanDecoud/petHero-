@@ -19,7 +19,7 @@
 
 
 body{
-    background-color: blanchedalmond;
+    background-color: #f7f5f5d7;
 }
 
 
@@ -48,4 +48,9 @@ li a:hover {
     width: 400px;
     height: 50px;
     
+}
+
+
+.agregar {
+    margin-top: 100px;
 }

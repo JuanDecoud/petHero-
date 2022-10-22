@@ -20,7 +20,7 @@ use Models\Keeper;
 
 <div class = "container mt-5  border border-white">
     <div class ="d-flex  flex-row  justify-content-around">
-        <form action="<?php echo FRONT_ROOT."Register/asignarFecha" ?>" method="post" class ="form-group mr-auto p-2 ">
+        <form action="<?php echo FRONT_ROOT."Register/asignarFecha"; ?>" method="post" class ="form-group mr-auto p-2 ">
             <h4 class = "my-2">Agregar Disponibilidad</h4>
             <input  class ="calendar my-4" type="date" name="fecha" placeholder="" >
             <div >
@@ -89,4 +89,4 @@ use Models\Keeper;
 
 
 
-<?php require_once ("Footer.php") ?>
+<?php require_once ("Footer.php"); ?>

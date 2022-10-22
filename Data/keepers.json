@@ -1,6 +1,6 @@
 [
     {
-        "nombreUser": "Juan",
+        "nombreUser": "Ignacio",
         "contrasena": "145623",
         "tipodeCuenta": "Keeper",
         "tipoMascota": [
@@ -8,7 +8,9 @@
             "Mediana",
             "Grande"
         ],
-        "remuneracion": "5000",
-        "fechasDisponibles": []
+        "remuneracion": "1000",
+        "fechasDisponibles": [
+            ""
+        ]
     }
 ]

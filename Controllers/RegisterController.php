@@ -13,14 +13,14 @@
         private $homeController ;
         private $keeperDAO ;
         private $ownerDAO ;
-        private $petDAO ;
+    
 
 
         public function __construct()
         {
             $this->keeperDAO = new KeeperDAO ();
             $this->ownerDAO = new OwnerDAO ();
-            $this->petDAO = new PetDAO ();            
+                     
         }
 
         public function login (){
@@ -35,10 +35,7 @@
             
             require_once(VIEWS_PATH."Sign-upOwner.php");
         }
-        public function registrarMascota (){
-            
-            require_once(VIEWS_PATH."Sign-upMascota.php");
-        }
+  
 
         public function principalKeeper (){
             require_once(VIEWS_PATH."mainKeeper.php");
@@ -68,18 +65,7 @@
             $this->registrarKeeper();           
         }
 
-        public function agregarMascota ($nombre , $owner, $raza, $tamano, $planVacunacion, $observacionesGrals){
 
-            $pet = new Pet ();
-            $pet->setNombre($nombre);
-            $pet->setOwner($owner);
-            $pet->setRaza($raza);
-            $pet->setTamano($tamano);
-            $pet->setPlanVacunacion($planVacunacion);
-            $pet->setObservacionesGrals($observacionesGrals);
-            $this->petDAO->Add($pet);
-            $this->registrarMascota();
-        }
 
         public function asignarFecha ($fecha){
             $this->keeperDAO->agregarFecha($fecha);

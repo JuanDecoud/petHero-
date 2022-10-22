@@ -3,6 +3,7 @@
     use DAO\IOwnerDAO as IOwnerDAO;
     use Models\Owner as Owner;
     use Models\Tarjeta as Tarjeta;
+    use Models\Pet as Pet ;
 
     class OwnerDao implements IOwnerDAO
     {
@@ -33,6 +34,9 @@
         }
         private function SaveData()
         {
+            $tarjeta = array() ;
+            $pet = array() ;
+        
             $arrayToEncode=array();
             foreach($this->ownerList as $owner)
             {
@@ -41,17 +45,34 @@
                 $valuesArray["contrasena"]=$owner->getContrasena();
                 $valuesArray["tipodeCuenta"]=$owner->getTipocuenta();
                 
-                    /*$tarjeta = $owner->getTarjeta ();
-             
-                    $valuesArray["tarjeta"][] = array(
-                        'numero' => $tarjeta->getNumero(),
-                        'nombre' => $tarjeta->getFechaVenc(),
-                        'fechaVenc' => $tarjeta->getDescription(),
-                        'codigo' => $tarjeta->getCodigo()
-                        
-                    );
-            
-*/
+                // agrego la tarjeta 
+                
+                $tarjetaOwner = $owner->getTarjeta ();
+                if ($tarjetaOwner != null){
+                    $tarjeta['numero'] = $tarjetaOwner->getNumero ();
+                    $tarjeta['nombre'] = $tarjetaOwner->getNombre ();
+                    $tarjeta['fechaVenc'] = $tarjetaOwner->getFechaVenc ();
+                    $tarjeta['codigo'] = $tarjetaOwner->getCodigo ();
+                    
+                }
+                $valuesArray["tarjeta"] = $tarjeta;
+               
+ 
+
+                $petOwner = $owner->getPet ();
+                if ($petOwner !=null){
+                    $pet['nombre'] = $petOwner->getNombre();
+                    $pet['raza'] = $petOwner->getRaza();
+                    $pet ['tamano'] = $petOwner->getTamano();
+                    $pet['planVacunacion'] = $petOwner ->GetPlanVacunacion();
+                    $pet ['observacionesGrals'] = $petOwner->getObservacionesGrals();
+                    $pet ['video'] = $petOwner->getVideo(); 
+                    
+                }
+                $valuesArray['pet'] = $pet ;
+   
+
+
                 array_push($arrayToEncode, $valuesArray);
             }
             $jsonContent= json_encode($arrayToEncode, JSON_PRETTY_PRINT);
@@ -70,20 +91,38 @@
                 $arrayToDecode=($jsonContent) ? json_decode($jsonContent, true) : array();
 
                 foreach($arrayToDecode as $valuesArray)
-                {
-                    $owner=new Owner( $valuesArray["nombreUser"],$valuesArray["contrasena"], 
+                {   
+                    $owner=new owner ();
+                    /*$owner=new Owner( $valuesArray["nombreUser"],$valuesArray["contrasena"], 
                     $valuesArray["tipodeCuenta"]);
-                    /*$owner->setId($valuesArray["id"]);
-                    $owner->setNombreUser($valuesArray["nombreUser"]);
-                    $owner->setContrasena($valuesArray["contrasena"]);
-                    $owner->setDni($valuesArray["dni"]);
-                    $owner->setEmail($valuesArray["email"]);*/
-                   // $owner->setTarjeta($valuesArray["tarjeta"]);
-                  /* foreach ($valuesArray['tarjeta'] as $value){
-                    $tarjeta = new Tarjeta ($value['numero'] ,$value['nombre'] ,$value['fechaVenc'] ,$value['codigo']  );
+                        */
+                   $owner->setNombreUser( $valuesArray["nombreUser"]);
+                   $owner->setContrasena($valuesArray["contrasena"]);
+                   $owner->setTipodecuenta ($valuesArray["tipodeCuenta"]);
 
-                   }
-                   $owner->setTarjeta($tarjeta);*/
+                    $tarjeta = new Tarjeta ();
+                    foreach ($valuesArray['tarjeta'] as $value){
+                        $tarjeta->setNumero($value['numero'] );
+                        $tarjeta->setNombre($value['nombre']);
+                        $tarjeta->setFechaVenc($value['fechaVenc']);
+                        $tarjeta->setCodigo($value['codigo'] );
+                    }
+                    $owner->setTarjeta($tarjeta);
+
+
+                    $pet  = new Pet ();
+                    foreach ($valuesArray['pet'] as $value){
+                        $pet->setNombre($value['nombre']);
+                        $pet->setRaza($value['raza']);
+                        $pet->setTamano($value ['tamano']);
+                        $pet ->setPlanVacunacion($value['planVacunacion'] );
+                        $pet->setObservacionesGrals($value ['observacionesGrals']);
+                        $pet->setVideo($value ['video']);
+                    }
+
+                    $owner->setPet($pet);
+
+
                     array_push($this->ownerList, $owner);
                     
                 }

@@ -2,6 +2,7 @@
     namespace DAO;
 
     use DAO\IPetDAO as IPetDAO;
+    use Models\Owner as Owner;
     use Models\Pet as Pet;
 
     class PetDAO implements IPetDAO
@@ -27,19 +28,30 @@
         private function Save()
         {
             $arrayToEncode = array();
+            $petowner = array ();
+            $valuesOwner = array();
 
-            foreach($this->petLIst as $pet)
+            foreach($this->petList as $pet)
             {              
-                $valuesArray["petId"] = $pet->getId();
+                //$valuesArray["petId"] = $pet->getId();
+
                 $valuesArray["petName"] = $pet->getNombre();
-                $valuesArray["petOwner"] = $pet ->getOwner();
-                //$valuesArray["petOwner"] = json_decode($_SESSION["Owner"],true); Posible solución al conseguir las mascotas de la persona.
                 $valuesArray["petBreed"] = $pet->getRaza();
                 $valuesArray["petSize"] = $pet->getTamano();
-                $valuesArray["petVacc"] = $pet->getPlanVacunacion();
                 $valuesArray["petObserv"] = $pet->getObservacionesGrals();
                 $valuesArray["petVideo"] = $pet->getVideo();
+                $valuesArray['petImg'] = $pet->getImg();
+                $valuesArray["petVacc"] = $pet->getPlanVacunacion();
 
+
+                
+                $petowner = $pet->getOwner ();
+                if ($petowner !=null){
+                $valuesOwner["nombreUser"]=$petowner->getNombreUser();     
+          
+                }
+                
+                $valuesArray['owner'] = $valuesOwner ;
 
                 array_push($arrayToEncode, $valuesArray);
             }
@@ -58,21 +70,41 @@
                 $jsonContent = file_get_contents('Data/pets.json');
 
                 $arrayToDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
+                $owner = new Owner ();
 
                 foreach($arrayToDecode as $valuesArray)
                 {
                     $pet = new Pet();
-                    $pet->setId($valuesArray["petId"]);
+                   // $pet->setId($valuesArray["petId"]);
                     $pet->setNombre($valuesArray["petName"]);
-                    $pet->setOwner($valuesArray["petOwner"]);
                     $pet->setRaza($valuesArray["petBreed"]);
                     $pet->setTamano($valuesArray["petSize"]);
                     $pet->setPlanVacunacion($valuesArray["petVacc"]);
                     $pet->setObservacionesGrals($valuesArray["petObserv"]);
                     $pet->setVideo($valuesArray["petVideo"]);
+                    $pet->setImg($valuesArray["petImg"]);
+
+                    $array = $valuesArray['owner'];
+                    $owner->setNombreUser($array['nombreUser']);
+                    $pet->setOwner($owner);
+
                     array_push($this->petList, $pet);
+                    
                 }
             }
+        }
+
+
+        public function buscarPets ($userName){
+            $this->RetrieveData();
+            $petList = array ();
+            foreach($this->petList as $pet){
+                $owner = $pet->getOwner ();
+                if ($owner->getNombreUser()==$userName){
+                    array_push($petList , $pet);
+                }
+            }
+            return $petList;
         }
     }
 ?>

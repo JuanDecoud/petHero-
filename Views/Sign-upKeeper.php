@@ -1,9 +1,9 @@
-<?php include_once("Header.php") ?>
+<?php include_once("Header.php") ;?>
 
-<div class = "container abs-center    col-md-6 border border-dark ">
+<div class = "container abs-center    col-md-6 shadow p-3 mb-5 bg-body rounded ">
     <div class = " container   ">
         <h2 class = "mb-4">Registro de Usuario</h2>
-        <form class = "m-2" method = "post" action = "<?php echo FRONT_ROOT."Register/agregarKeeper"  ?>"> 
+        <form class = "m-2" method = "post" action = "<?php echo FRONT_ROOT."Register/agregarKeeper" ; ?>"> 
                 <div class="form-group m-4  ">
                     <label for="exampleInputEmail1" class = " ">Nombre Usuario</label>
                     <input type="text" class="form-control  " id="exampleInputEmail1" 
@@ -39,4 +39,4 @@
     </div>
 </div>
 
-<?php include_once("Footer.php") ?>
+<?php include_once("Footer.php"); ?>

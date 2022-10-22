@@ -5,13 +5,21 @@ use Models\Owner as Owner;
     class Pet{
         private $id;
         private $nombre;
-        private $owner;
+        private Owner $owner ;
         private $raza;
         private $tamano;
+        private $imagen ;
         private $planVacunacion;
         private $observacionesGrals;
         private $video;
 
+        public function __construct()
+        {
+                
+        }
+
+        public function setImg ($img){$this->imagen = $img;}
+        public function getImg (){return $this->imagen;}
         
         /*
         public function __construct($nombre,$owner,$raza,$tamano,$planVacunacion,$observacionesGrals,$video)
@@ -74,7 +82,7 @@ use Models\Owner as Owner;
         /**
          * Set the value of owner
          */
-        public function setOwner($owner): self
+        public function setOwner(Owner $owner): self
         {
                 $this->owner = $owner;
 

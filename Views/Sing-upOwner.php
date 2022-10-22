@@ -1,7 +1,7 @@
-<?php include_once("Header.php") ?>
+<?php include_once("Header.php") ;?>
 
     <center>
-  <form action="<?php echo FRONT_ROOT."Register/agregarOwner" ?>" method="post">
+  <form action="<?php echo FRONT_ROOT."Register/agregarOwner"; ?>" method="post">
         <label for:"iname">Usuario:</label>
         <input type="text" name="userName" id="iname" placeholder="Escriba su Nombre de Usuario"><br>
         <label for:"ipass">Contraseña:</label>
@@ -11,4 +11,4 @@
   </form>
   </center>
 
-<?php include_once("Footer.php") ?>
+<?php include_once("Footer.php"); ?>

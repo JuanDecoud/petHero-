@@ -1,11 +1,9 @@
-<?php include_once("Header.php") ?>
+<?php include_once("Header.php") ;?>
 
     <center>
-  <form action="<?php echo FRONT_ROOT."Register/agregarMascota" ?>" method="post">
+  <form action="<?php echo "hola" ?>" method="post">
         <label for:"iname">Nombre:</label>
         <input type="text" name="nombre" id="iname" placeholder="Escriba el Nombre de su Mascota"><br>
-        <label for:"iowner">Owner:</label>
-        <input type="text" name="owner" id="iowner" placeholder="Escriba su Nombre de Usuario"><br>
         <label for:"iraza">Raza:</label>
         <input type="text" name="raza" id="iraza" placeholder="Escriba la Raza de su Mascota"><br>
         <label for:"iname">Tamaño:</label>
@@ -22,4 +20,4 @@
   </form>
   </center>
 
-<?php include_once("Footer.php") ?>
+<?php include_once("Footer.php"); ?>
