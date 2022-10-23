@@ -18,8 +18,8 @@ use Models\Keeper;
 
 ?>
    
-<div class = "d-flex justify-content-center mt-5 ">
-        <div class = "d-flex flex-wrap  col-10  shadow p-3 mb-2 mt-5 bg-body rounded ">
+<div class = "d-flex justify-content-center mt-6 ">
+        <div class = "d-flex flex-wrap  col-10  shadow p-3 mb-2 mt-5 bg-body rounded  ">
             <div class = "container  mt-2   col col-10 ">
                 <form action="<?php echo FRONT_ROOT."Pet/agregarPet"; ?>" method="post" class ="form-inline  p-2 ">
                     <div class ="d-flex flex-row">
@@ -51,7 +51,10 @@ use Models\Keeper;
                                             <li class="list-group-item"><strong>Raza:</strong><?php echo "  ". $pet->getRaza();?></li>
                                         </ul>
                                         <div class="card-body">
-                                            <a href="#" class="card-link">Plan de Vacunacion</a>
+                                            <img onclick="javascript:this.width=450;this.height=338" ondblclick="javascript:this.width=250;this.height=150" width="250" height = "150" src="<?php echo $pet->getPlanVacunacion()?>" width="100"/>
+                                        </div>
+                                        <div class="card-body">
+                                            <iframe class="embed-responsive-item card-img-top" src="<?php echo $pet->getVideo(); ?>"></iframe>
                                         </div>
                                     </div>
                                     <?php  }?>
@@ -68,7 +71,7 @@ use Models\Keeper;
                     </button>
                 </form>
             </div>
-            <div class = "container  border border-white col col-10">
+            <div class = "container  border border-white col col-10 mb-5">
                 <div class="accordion  " id="accordion2">
                     <div class="accordion-item active">
                         <h2 class="accordion-header" id="headingTwo">

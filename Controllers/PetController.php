@@ -34,9 +34,9 @@ use DAO\PetDAO as petDAO;
           
             
             $target_dir = VIEWS_PATH."/img/uploads/";
-            $target_file1 = $target_dir .basename($_FILES["imagenPerfil"]["name"]);
-            $target_file2 = $target_dir .basename($_FILES["vacunacion"]["name"]);
-            $target_file3 = $target_dir .basename($_FILES["vacunacion"]["name"]);
+            $target_file1 = $target_dir.basename($_FILES["imagenPerfil"]["name"]);
+            $target_file2 = $target_dir.basename($_FILES["vacunacion"]["name"]);
+            $target_file3 = $target_dir.basename($_FILES["video"]["name"]);
 
             move_uploaded_file($_FILES["imagenPerfil"]["tmp_name"], $target_file1);
             move_uploaded_file($_FILES["vacunacion"]["tmp_name"], $target_file2);
