@@ -48,7 +48,11 @@
                 $valuesArray["nombreUser"]=$owner->getNombreUser();
                 $valuesArray["contrasena"]=$owner->getContrasena();
                 $valuesArray["tipodeCuenta"]=$owner->getTipocuenta();
-                
+                $valuesArray["tipodeCuenta"]=$owner->getTipocuenta();
+                $valuesArray ['nombre'] = $owner->getNombre();
+                $valuesArray ['apellido'] = $owner->getApellido();
+                $valuesArray ['DNI'] = $owner->getDni();
+                $valuesArray ['telefono'] = $owner->getTelefono();
                 // agrego la tarjeta 
                 
                 $tarjetaOwner = $owner->getTarjeta ();
@@ -94,13 +98,16 @@
 
                 foreach($arrayToDecode as $valuesArray)
                 {   
-                    $owner=new owner ();
+                    $owner=new Owner ();
           
                    $owner->setNombreUser( $valuesArray["nombreUser"]);
                    $owner->setContrasena($valuesArray["contrasena"]);
                    $owner->setTipodecuenta ($valuesArray["tipodeCuenta"]);
+                   $owner->setNombre($valuesArray["nombre"]);
+                   $owner->setApellido($valuesArray["apellido"]);
+                   $owner->setDni($valuesArray["DNI"]);
+                   $owner->setTelefono($valuesArray["telefono"]);
 
-                   
                     foreach ($valuesArray['tarjeta'] as $value){
                         if ($value !=null){
                             $tarjeta->setNumero($value['numero'] );
