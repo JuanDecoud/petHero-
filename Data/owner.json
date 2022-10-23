@@ -1,19 +1,46 @@
 [
     {
-        "nombreUser": "nahuel22",
-        "contrasena": "1234",
+        "nombreUser": "ignatius15",
+        "contrasena": "123",
         "tipodeCuenta": "Owner",
-        "nombre": "Nahuel",
-        "apellido": "decoud",
-        "DNI": "1231451231",
-        "telefono": "231331232",
+        "nombre": "Juan",
+        "apellido": "Decoud",
+        "DNI": "35410517",
+        "telefono": "2234559528",
         "tarjeta": {
             "numero": null,
             "nombre": null,
             "fechaVenc": null,
             "codigo": null
         },
-        "pets": []
+        "pets": [
+            {
+                "nombre": "Scooby",
+                "raza": "Perro",
+                "tamano": "grande",
+                "planVacunacion": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg",
+                "observacionesGrals": "observacion",
+                "video": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg",
+                "imagen": null
+            },
+            {
+                "nombre": "bigo",
+                "raza": "asd",
+                "tamano": "asdf",
+                "planVacunacion": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg",
+                "observacionesGrals": "asdg",
+                "video": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg",
+                "imagen": null
+            },
+            {
+                "nombre": "asdf",
+                "raza": "asdg",
+                "tamano": "asdg",
+                "planVacunacion": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg",
+                "observacionesGrals": "asdag",
+                "video": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg",
+                "imagen": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg"
+            }
+        ]
     }
-
 ]

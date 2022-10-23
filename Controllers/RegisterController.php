@@ -10,7 +10,7 @@
 
     class RegisterController {
 
-        private $homeController ;
+        
         private $keeperDAO ;
         private $ownerDAO ;
     

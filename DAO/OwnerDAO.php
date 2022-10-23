@@ -28,7 +28,8 @@
             $this->RetrieveData();
             foreach($this->ownerList  as $owner){
                 if ($owner->getNombreUser()==$username)
-                    $owner->agregarPets ($pet);
+                    $owner->agregarPet ($pet);
+                    var_dump($owner->getPet());
             }
             $this->SaveData();
         }
@@ -84,7 +85,7 @@
                 $valuesArray['tarjeta']= $tarjeta ;
     
                 
-               $valuesArray['pets']=array ();
+              /* $valuesArray['pets']=array ();
                 foreach($owner->getPetList() as $pet){
                     $valuesArray["pets"][] = array(
                         'nombre' => $pet->getNombre(),
@@ -95,7 +96,26 @@
                         'video' => $pet->getVideo(),
                         'imagen' => $pet->getImg()
                     );
-                }
+                }*/
+
+                $petarray = $owner->getPet();
+                $valuesArray['pets']=array ();
+                
+                    foreach ($petarray as $mascota){
+                        $value['nombre']=$mascota->getNombre ();
+                        $value['raza']=$mascota->getRaza ();
+                        $value['tamano']=$mascota->getTamano ();
+                        $value['planVacunacion']=$mascota->GetPlanVacunacion ();
+                        $value['observacionesGrals']=$mascota->getObservacionesGrals ();
+                        $value['video']=$mascota->getVideo ();
+                        $value['imagen']=$mascota->getImg ();
+                        array_push($valuesArray['pets'] ,$value);
+                    }
+
+                
+                
+                
+
                 array_push($arrayToEncode, $valuesArray);
             }
             $jsonContent= json_encode($arrayToEncode, JSON_PRETTY_PRINT);
@@ -138,17 +158,20 @@
                     $owner->setTarjeta($tarjeta);
 
                     if ($valuesArray['pets']!=null){
-                        $pet  = new Pet ();
+                        
+                        
                         foreach ($valuesArray['pets'] as $value){
+                            $pet  = new Pet ();
                             $pet->setNombre($value['nombre']);
                             $pet->setRaza($value['raza']);
                             $pet->setTamano($value ['tamano']);
                             $pet ->setPlanVacunacion($value['planVacunacion'] );
                             $pet->setObservacionesGrals($value ['observacionesGrals']);
                             $pet->setVideo($value ['video']);
+                            $owner->agregarPet($pet);
                         }
     
-                        $owner->setPet($pet);
+                       
 
                     }
     

@@ -30,7 +30,7 @@ use DAO\PetDAO;
                         </button>
                         </h2>
                         <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                            <div class = " d-inline-flex">
+                            <div class = " d-inline-flex flex-wrap">
                                 <?php foreach ($petlist as $pet){ ?>
                                     <div class="card" style="width: 18rem;">
                                         <img src="<?php echo $pet->getImg(); ?>" class="card-img-top" alt="...">

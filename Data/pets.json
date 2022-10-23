@@ -1,14 +1,38 @@
 [
     {
         "petName": "Scooby",
-        "petBreed": "Perruno",
+        "petBreed": "Perro",
         "petSize": "grande",
-        "petObserv": "Perrucho",
+        "petObserv": "observacion",
+        "petVideo": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg",
+        "petImg": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/images.jfif",
+        "petVacc": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg",
+        "owner": {
+            "nombreUser": "ignatius15"
+        }
+    },
+    {
+        "petName": "bigo",
+        "petBreed": "asd",
+        "petSize": "asdf",
+        "petObserv": "asdg",
         "petVideo": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg",
         "petImg": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg",
         "petVacc": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg",
         "owner": {
-            "nombreUser": "Juan"
+            "nombreUser": "ignatius15"
+        }
+    },
+    {
+        "petName": "asdf",
+        "petBreed": "asdg",
+        "petSize": "asdg",
+        "petObserv": "asdag",
+        "petVideo": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg",
+        "petImg": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg",
+        "petVacc": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg",
+        "owner": {
+            "nombreUser": "ignatius15"
         }
     }
 ]

@@ -14,7 +14,8 @@
         "DNI": "35410517",
         "telefono": "2234559528",
         "fechasDisponibles": [
-            "2022-10-07"
+            "2022-10-07",
+            "2022-10-14"
         ]
     },
     {
@@ -31,7 +32,10 @@
         "apellido": "Jose",
         "DNI": "35410517",
         "telefono": "2234559528",
-        "fechasDisponibles": []
+        "fechasDisponibles": [
+            "2022-10-13",
+            "2022-10-15"
+        ]
     },
     {
         "nombreUser": "gere22",

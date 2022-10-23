@@ -3,7 +3,7 @@ namespace Models;
 use Models\Owner as Owner;
 
     class Pet{
-        private $id;
+        
         private $nombre;
         private Owner $owner ;
         private $raza;

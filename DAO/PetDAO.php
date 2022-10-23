@@ -11,10 +11,8 @@
 
         public function Add(Pet $pet)
         {
-            $this->RetrieveData();
-            
+           
             array_push($this->petList, $pet);
-
             $this->Save();
         }
 

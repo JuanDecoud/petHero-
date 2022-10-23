@@ -52,6 +52,7 @@ use DAO\PetDAO as petDAO;
             $pet->setPlanVacunacion(FRONT_ROOT.VIEWS_PATH."/img/uploads/".basename($_FILES['vacunacion']['name']));
             $pet->setVideo(FRONT_ROOT.VIEWS_PATH."/img/uploads/".basename($_FILES['video']['name']));
             $pet->setObservacionesGrals($observacion);
+            $this->petDao->GetAll();
             $this->petDao->Add($pet);
         
             // asocia al owner con la mascota
