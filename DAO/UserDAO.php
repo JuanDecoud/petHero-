@@ -1,9 +1,11 @@
 <?php namespace DAO;
 
     use Models\User as User;
+    use DAO\KeeperDAO as KeeperDAO;
 
     class UserDAO{
         private $userList = array();
+        private $kList = array();
 
         public function Add(User $user)
         {
@@ -23,14 +25,15 @@
 
         public function GetMaxID(){
             $this -> RetrieveData();
+            $this -> addArray();
             $maxID = 0;
-
+            
             foreach($this->userList as $user){
                if($user -> getID() > $maxID){
                 $maxID = $user ->getID();
                }
             }
-
+            
             return $maxID;
         }
 
@@ -44,10 +47,10 @@
                 $valuesArray["userID"] = $user->getId();
                 $valuesArray["userName"] = $user->getNombreUser();
                 $valuesArray["password"] = $user ->getContrasena();
-                $valuesArray["email"] = $user -> getEmail();
                 $valuesArray["accountType"] = $user->getTipodecuenta();
-
-
+                $valuesArray["accountType"] = $user->getTipodecuenta();
+                $valuesArray["accountType"] = $user->getTipodecuenta();
+                $valuesArray["accountType"] = $user->getTipodecuenta();
 
                 array_push($arrayToEncode, $valuesArray);
             }
@@ -76,6 +79,17 @@
                     array_push($this->userList, $user);
                 }
             }
+        }
+
+        private function addArray(){
+            $this -> userList = array();
+            $this -> kList = array();
+
+            //$furgon = new KeeperDAO();
+            //$this -> kList = $furgon -> GetAll(); 
+            
+            array_merge($this -> userList, $this->kList);
+
         }
     }
 

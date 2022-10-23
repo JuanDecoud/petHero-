@@ -74,7 +74,7 @@
             $this->login();
         }
 
-        public function agregarKeeper ($userName , $contrasena , $remuneracion ){
+        public function agregarKeeper ($nombre,$apellido,$dni,$telefono,$userName,$contrasena,$remuneracion,$tipoMascota){
 
             
             $tipoMascota = array ();
@@ -88,9 +88,8 @@
                 $comprobarUser = $this->keeperDAO->obtenerUser($userName , $contrasena);
                 $comprobarUser = $this->ownerDAO->obtenerUser($userName , $contrasena);
                 if ($comprobarUser == null){
-                    $keeper = new Keeper($userName,$contrasena,$_SESSION['keeper'],$tipoMascota,$remuneracion);
+                    $keeper = new Keeper($userName,$contrasena,$_SESSION['keeper'],$tipoMascota,$remuneracion,$nombre, $apellido,$dni,$telefono);
                     $this->keeperDAO->addKeeper($keeper);
-                    $this->login();
                 }
                 else {
                     echo '<script language="javascript">alert("Nombre de usuario ya existe");</script>';
@@ -102,8 +101,7 @@
                 echo '<script language="javascript">alert("Complete todos los campos");</script>';
                 $this->registrarKeeper();
             }
-
-
+            $this->login();
           
         }
 

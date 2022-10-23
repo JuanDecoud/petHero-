@@ -11,11 +11,14 @@
         private $nombreUser;
         private $contrasena;
         private $tipodeCuenta;
-        
+        private $nombre;
+        private $apellido;
+        private $dni;
+        private $telefono;
 
         public function __construct($nombreUser, $contrasena){
                 $userDAO = new UserDAO();
-                $this->id = $userDAO -> GetMaxID() +1;
+                $this->id = ($userDAO -> GetMaxID()+1);
                 $this->nombreUser = $nombreUser ;
                 $this->contrasena = $contrasena ;
         }
@@ -75,5 +78,80 @@
         }
 
         public function getTipocuenta (){return $this->tipodeCuenta;}
+
+
+        
+
+        /**
+         * Get the value of nombre
+         */
+        public function getNombre()
+        {
+                return $this->nombre;
+        }
+
+        /**
+         * Set the value of nombre
+         */
+        public function setNombre($nombre): self
+        {
+                $this->nombre = $nombre;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of apellido
+         */
+        public function getApellido()
+        {
+                return $this->apellido;
+        }
+
+        /**
+         * Set the value of apellido
+         */
+        public function setApellido($apellido): self
+        {
+                $this->apellido = $apellido;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of dni
+         */
+        public function getDni()
+        {
+                return $this->dni;
+        }
+
+        /**
+         * Set the value of dni
+         */
+        public function setDni($dni): self
+        {
+                $this->dni = $dni;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of telefono
+         */
+        public function getTelefono()
+        {
+                return $this->telefono;
+        }
+
+        /**
+         * Set the value of telefono
+         */
+        public function setTelefono($telefono): self
+        {
+                $this->telefono = $telefono;
+
+                return $this;
+        }
     }
 ?>
