@@ -2,9 +2,13 @@
     require_once ("Header.php");
 ?>
 
+
+   
+
 <div class = "container col-md-6 mt-5     shadow p-3 mb-5 bg-body rounded">
+    
     <div class = " container  ">
-        <h2 class = "m-0">Registro de Mascota</h2>
+        <h2 class = "m-0">Registro de Mascota  <span><img style = "ml-4" src="<?php echo FRONT_ROOT.VIEWS_PATH."img/mascota2.png";?>" alt=""></span></h2>
         <form class = "m-2" method = "post" action = "<?php echo FRONT_ROOT."Pet/agregarMascota" ?>" enctype="multipart/form-data"> 
                <div class="form-group   ">
                     <label for="exampleInputEmail1" class = " mb-2"><strong>Nombre</strong></label>
