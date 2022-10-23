@@ -9,18 +9,11 @@
             "Grande"
         ],
         "remuneracion": "1000",
-        "fechasDisponibles": []
-    },
-    {
-        "nombreUser": "arriba",
-        "contrasena": "1234",
-        "tipodeCuenta": "Keeper",
-        "tipoMascota": [
-            "Chica",
-            "Mediana",
-            "Grande"
-        ],
-        "remuneracion": "1500",
-        "fechasDisponibles": []
+        "fechasDisponibles": [
+            "2022-10-23",
+            "2022-10-21",
+            "2022-10-09",
+            "2022-10-16"
+        ]
     }
 ]

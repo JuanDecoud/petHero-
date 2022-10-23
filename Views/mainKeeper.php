@@ -22,7 +22,7 @@ use Models\Keeper;
     <div class ="d-flex  flex-row  justify-content-around">
         <form action="<?php echo FRONT_ROOT."Register/asignarFecha"; ?>" method="post" class ="form-group mr-auto p-2 ">
             <h4 class = "my-2">Agregar Disponibilidad</h4>
-            <input  class ="calendar my-4" type="date" name="fecha" placeholder="" >
+            <input  class ="calendar my-4" style ="border 2px solid black" type="date" name="fecha" placeholder="" >
             <div >
                 <button type="submit" class="btn btn-default btn-sm bg-danger mb-4">
                     <span><img src="<?php echo FRONT_ROOT.VIEWS_PATH."img/anadir.png" ?>" alt=""></span> 

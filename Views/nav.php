@@ -1,10 +1,10 @@
 <?php require_once("Header.php"); ?>
 
-<nav class="navbar navbar-expand-lg bg-danger">
+<nav class="navbar navbar-expand-lg bg bg-danger">
         <div class="container-fluid ">
           <a class="navbar-brand border-bottom " href="#">
             <img src="<?php echo FRONT_ROOT.VIEWS_PATH."img/91505.png"; ?>" alt="" width="30" height="24" class="d-inline-block align-text-top">
-             Pet Hero
+             <span style ="color:black">Pet Hero</span>
           </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -13,18 +13,18 @@
 
             <ul class="navbar-nav mx-auto ">
                 <li class="nav-item  border-dark border-start  m-1">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link  " aria-current="page" href="#">Home</a>
                 </li>
                 <li class="nav-item  border-dark border-start border-end m-1">
-                    <a class="nav-link active" href="#">Estadias</a>
+                    <a class="nav-link " href="#">Estadias</a>
                 </li>
             </ul>
             <ul class="navbar-nav  me-5">
                 <li class="nav-item border-start border-dark">
-                    <a class="nav-link active" aria-current="page" href="<?php echo FRONT_ROOT."Home/vistaLogin" ?>">Login</a>
+                    <a class="nav-link " aria-current="page" href="<?php echo FRONT_ROOT."Home/vistaLogin" ?>">Login</a>
                 </li>
                 <li class="nav-item border-dark border-start ">
-                    <a class="nav-link active" href="<?php echo FRONT_ROOT."Home/vistaTipocuenta" ;?>">Sing Up</a>
+                    <a class="nav-link " href="<?php echo FRONT_ROOT."Home/vistaTipocuenta" ;?>">Sing Up</a>
                 </li>
                 <li class="nav-item">
                <a class="nav-link" href="<?php echo FRONT_ROOT ?>Home/ShowListViewKeeper">Listar Keepers</a>

@@ -4,7 +4,7 @@
   
 ?>
 
-  <div class = "container abs-center    col-md-6 shadow p-3 mb-5 bg-body rounded ">
+  <div class = "container abs-center    col-md-4 shadow p-3 mb-5 bg-body rounded ">
     <div class = " container   ">
         <h2 class = "mb-4">Login</h2>
         <form class = "m-2" method = "post" action="<?php echo FRONT_ROOT."Home/login"; ?>"> 
