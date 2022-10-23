@@ -15,11 +15,11 @@
         },
         "pets": [
             {
-                "nombre": "Peluche",
-                "raza": "San Bernardo",
+                "nombre": "Scooby",
+                "raza": "Perruno",
                 "tamano": "grande",
                 "planVacunacion": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg",
-                "observacionesGrals": "Perro dificil de tratar",
+                "observacionesGrals": "Perrucho",
                 "video": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg",
                 "imagen": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg"
             }

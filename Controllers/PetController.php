@@ -53,9 +53,7 @@ use DAO\PetDAO as petDAO;
             $pet->setVideo(FRONT_ROOT.VIEWS_PATH."/img/uploads/".basename($_FILES['video']['name']));
             $pet->setObservacionesGrals($observacion);
             $this->petDao->Add($pet);
-
-            //agregar mascota al sistema
-            $this->agregarPet();
+        
             // asocia al owner con la mascota
             $this->ownerDao->agregarPets($owner->getNombreUser() , $pet);
             $this->principalOwner();

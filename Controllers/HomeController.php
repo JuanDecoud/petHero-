@@ -62,6 +62,10 @@
                 $_SESSION['loggedUser'] = $userOwner ;
                 $this->menuOwner();
              }
+             else {
+                echo '<script language="javascript">alert("Nombre de usuario o contraseña incorrecto");</script>';
+                $this->vistaLogin();
+             }
         }
 
         public function seleccinarCuenta ($tipoCuenta){

@@ -1,21 +1,9 @@
 [
     {
         "petName": "Scooby",
-        "petBreed": "Perruna",
-        "petSize": "Grande",
-        "petObserv": "Es muy inquieto",
-        "petVideo": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg",
-        "petImg": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg",
-        "petVacc": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg",
-        "owner": {
-            "nombreUser": "Juan"
-        }
-    },
-    {
-        "petName": "Peluche",
-        "petBreed": "San Bernardo",
+        "petBreed": "Perruno",
         "petSize": "grande",
-        "petObserv": "Perro dificil de tratar",
+        "petObserv": "Perrucho",
         "petVideo": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg",
         "petImg": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg",
         "petVacc": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg",
