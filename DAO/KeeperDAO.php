@@ -18,6 +18,25 @@
         }
 
 
+        public function quitarFecha ($username , $fecha){
+            $this->obtenerDatos();
+            $nuevoArray  = array ();
+            foreach ($this->keeperList as $keeper){
+                if ($keeper->getNombreUser()== $username){
+                    $arrayFechas = $keeper->getFechas();
+                    foreach ($arrayFechas as $value){
+                        if ($value != $fecha){
+                            echo $value ;
+                            array_push($nuevoArray , $value); 
+                        }
+                    }
+                    $keeper->setFechas($nuevoArray);
+                }
+            }
+            $this->guardarDatos();
+        }
+
+
         public function agregarFecha ($fecha ,$username ){
             
             $this->obtenerDatos();

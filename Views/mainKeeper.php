@@ -18,9 +18,9 @@ use Models\Keeper;
 
 <div class = "container mt-5  border border-white">
     <div class ="d-flex  flex-row  justify-content-around">
-        <form action="<?php echo FRONT_ROOT."Register/asignarFecha"; ?>" method="post" class ="form-group mr-auto p-2 ">
+        <form action="<?php echo FRONT_ROOT."Keeper/asignarFecha"; ?>" method="post" class ="form-group mr-auto p-2 ">
             <h4 class = "my-2">Agregar Disponibilidad</h4>
-            <input  class ="calendar my-4" style ="border 2px solid" type="date" name="fecha" placeholder="" >
+            <input  class ="calendar my-4" style ="border 2px solid" type="date" name="fecha" placeholder="" required >
             <div >
                 <button type="submit" class="btn btn-default btn-sm bg-danger mb-4">
                     <span><img src="<?php echo FRONT_ROOT.VIEWS_PATH."img/anadir.png" ?>" alt=""></span> 
@@ -40,7 +40,12 @@ use Models\Keeper;
                     <?php foreach ($fechas as $fechasKeeper ) { 
                                                              ?>
                     <tr>
-                        <td><?php  echo $fechasKeeper;?></td>
+                        <form action="<?php echo FRONT_ROOT."Keeper/quitarFecha" ?>" method="post">
+                            <td ><input style =" text-align: center; font-weight:bold; color:black;" type="text" placeholder="<?php  echo $fechasKeeper;?>" name ="fecha"  value = "<?php  echo $fechasKeeper;?>"readonly ></td>
+                            <td>
+                                <button type="submit" class="btn btn-danger btn-sm">Quitar</button>
+                            </td>
+                        </form>
                     </tr>
 
                     <?php }?>

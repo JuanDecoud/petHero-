@@ -49,11 +49,13 @@
         
         public function vistaLogin (){
             require_once(VIEWS_PATH."Login.php");
+            
         }
       
         public function login ($usuario , $contraseña){
              $userkeeper = $this->keeperDao->comprobarLogin($usuario , $contraseña);
              $userOwner = $this->ownerDao->obtenerUser($usuario , $contraseña);
+
              if ($userkeeper !=null){
                 $_SESSION['loggedUser'] = $userkeeper ;
                 $this->principalKeeper();  

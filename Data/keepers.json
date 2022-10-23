@@ -13,10 +13,7 @@
         "apellido": "Decoud",
         "DNI": "35410517",
         "telefono": "2234559528",
-        "fechasDisponibles": [
-            "2022-10-07",
-            "2022-10-14"
-        ]
+        "fechasDisponibles": []
     },
     {
         "nombreUser": "pedrito",

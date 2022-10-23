@@ -37,9 +37,6 @@
         }
   
 
-        public function principalKeeper (){
-            require_once(VIEWS_PATH."mainKeeper.php");
-        }
         public function menuOwner (){
             require_once(VIEWS_PATH."menu-owner.php");
         }
@@ -118,15 +115,6 @@
             
           
         }
-
-
-
-        public function asignarFecha ($fecha ){
-            $keeper = $_SESSION['loggedUser'];
-            $this->keeperDAO->agregarFecha($fecha , $keeper->getNombreUser() );
-            $this->principalKeeper();   
-        }
-
 
 
 
