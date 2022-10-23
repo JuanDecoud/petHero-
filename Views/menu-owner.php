@@ -1,6 +1,8 @@
 <?php
 
+use DAO\KeeperDAO;
 use DAO\PetDAO;
+use Models\Keeper;
 
     require_once("Header.php");
     require_once ("navOwner.php");
@@ -8,6 +10,12 @@ use DAO\PetDAO;
     $petDao = new PetDAO ();
     $user = $_SESSION['loggedUser'];
     $petlist = $petDao->buscarPets($user->getNombreUser());
+
+
+    $keeperDao = new KeeperDAO();
+    $keeperlist = $keeperDao->getAll();
+
+
 ?>
    
 <div class = "d-flex justify-content-center mt-5 ">
@@ -55,8 +63,8 @@ use DAO\PetDAO;
             <div class = "container col col-10 agregar ">
                 <form action="<?php echo FRONT_ROOT."Pet/agregarPet"; ?>" method="post" class ="form-inline  p-2 ">
                     <button type="submit" class="btn btn-default btn-sm bg-danger mb-4">
-                        <span><img src="<?php echo FRONT_ROOT.VIEWS_PATH."img/anadir.png" ?>" alt=""></span> 
-                        <span><strong>Actualizar Lista</strong></span>
+                        <span><img src="<?php echo FRONT_ROOT.VIEWS_PATH."img/recargar.png" ?>" alt=""></span> 
+                        
                     </button>
                 </form>
             </div>
@@ -69,23 +77,19 @@ use DAO\PetDAO;
                         </button>
                         </h2>
                         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordion2">
-                        <div class = " d-inline-flex">
-                                <?php foreach ($petlist as $pet){ ?>
-                                    <div class="card" style="width: 18rem;">
-                                        <img src="<?php echo $pet->getImg(); ?>" class="card-img-top" alt="...">
-                                        <div class="card-body">
-                                            <h5 class="card-title"><?php echo $pet->getNombre(); ?></h5>
-                                            <p class="card-text"><?php echo $pet->getObservacionesGrals()?></p>
-                                        </div>
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item"><strong>Tamaño:</strong><?php echo"  ". $pet->getTamano();?></li>
-                                            <li class="list-group-item"><strong>Raza:</strong><?php echo "  ". $pet->getRaza();?></li>
-                                        </ul>
-                                        <div class="card-body">
-                                            <a href="#" class="card-link">Plan de Vacunacion</a>
-                                        </div>
+                            <div class = " d-inline-flex flex-wrap">
+                                <?php foreach ($keeperlist as $keeper){ ?>
+                                <div class="card" style="width: 18rem;">
+                                    <div class="card-body">
+                                        <h7 style= "color:aqua">Disponible</h7>
+                                        <h5 class="card-title"><?php echo $keeper->getNombre()." ".$keeper->getApellido(); ?></h5>
                                     </div>
-                                    <?php  }?>
+                                    <div class="card-body">
+                                        <a href="#" class="card-link">Disponibilidad</a>
+                                        <a href="#" class="card-link">Reviews</a>
+                                    </div>
+                                </div>
+                                <?php }?>
                             </div>     
                         </div>
                     </div>

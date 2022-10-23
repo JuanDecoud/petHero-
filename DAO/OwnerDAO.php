@@ -29,7 +29,7 @@
             foreach($this->ownerList  as $owner){
                 if ($owner->getNombreUser()==$username)
                     $owner->agregarPet ($pet);
-                    var_dump($owner->getPet());
+                  
             }
             $this->SaveData();
         }
