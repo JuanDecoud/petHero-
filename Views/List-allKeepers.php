@@ -1,5 +1,6 @@
-<?php
+<?php namespace Views;
     require_once('nav.php');
+    use DAO\UserDAO as UserDAO;
 ?>
 <main class="py-5">
      <section id="listado" class="mb-5">
@@ -14,7 +15,11 @@
                          <th>Remuneración</th>
                     </thead>
                     <tbody>
+                         
                          <?php
+                              $userDao = new UserDAO();
+                              
+
                               foreach($keeperList as $keeper)
                               {
                                    ?>

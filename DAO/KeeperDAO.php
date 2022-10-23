@@ -8,10 +8,11 @@
 
         public function getAll (){
             $this->obtenerDatos();
-            return $this->keeperList ;
+            return $this->keeperList;
         }
         
         public function addKeeper (Keeper $keeper){
+            $this->obtenerDatos() ;
             
             array_push($this->keeperList , $keeper);
             $this->guardarDatos();
@@ -43,16 +44,13 @@
             return $user ;
         }
 
-
-
-  
-
         public function obtenerDatos  (){
+            $this -> keeperList = array ();
             if (file_exists($this->fileName)){
                 $contenidoJson = file_get_contents($this->fileName);
                 $arrayDecodificar = ($contenidoJson) ? json_decode($contenidoJson , true) : array ();
                 foreach ($arrayDecodificar as $value ){
-                    $keeper = new Keeper($value['nombreUser'] ,$value['contrasena'],$value['tipodeCuenta'],$value['tipoMascota'],$value['remuneracion']  );
+                    $keeper = new Keeper($value['nombreUser'] ,$value['contrasena'],$value['tipodeCuenta'],$value['tipoMascota'],$value['remuneracion'],$value['nombre'],$value['apellido'],$value['DNI'],$value['telefono']);
                     $keeper->setFechas($value['fechasDisponibles']);
                     array_push($this->keeperList , $keeper);
                 }
@@ -67,7 +65,11 @@
                 $value ['contrasena'] = $keeper->getContrasena();
                 $value ['tipodeCuenta'] = $keeper->getTipodecuenta ();
                 $value ['tipoMascota'] = $keeper->getTipo();
-                $value ['remuneracion'] = $keeper->getRemuneracion ();
+                $value ['remuneracion'] = $keeper->getRemuneracion();
+                $value ['nombre'] = $keeper->getNombre();
+                $value ['apellido'] = $keeper->getApellido();
+                $value ['DNI'] = $keeper->getDni();
+                $value ['telefono'] = $keeper->getTelefono();
                 $value ['fechasDisponibles'] = array ();
                 foreach ($keeper->getFechas() as $fechas){
                     array_push($value['fechasDisponibles'] , $fechas);

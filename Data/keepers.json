@@ -1,5 +1,4 @@
-[
-    {
+[{
         "nombreUser": "Bigo",
         "contrasena": "123",
         "tipodeCuenta": "Keeper",
@@ -9,6 +8,10 @@
             "Grande"
         ],
         "remuneracion": "1000",
+        "nombre": null,
+        "apellido": null,
+        "DNI": null,
+        "telefono": null,
         "fechasDisponibles": []
     },
     {
@@ -21,6 +24,56 @@
             "Grande"
         ],
         "remuneracion": "1500",
+        "nombre": null,
+        "apellido": null,
+        "DNI": null,
+        "telefono": null,
+        "fechasDisponibles": []
+    },
+    {
+        "nombreUser": "Bigo",
+        "contrasena": "123",
+        "tipodeCuenta": "Keeper",
+        "tipoMascota": [
+            "Chica",
+            "Mediana",
+            "Grande"
+        ],
+        "remuneracion": "1000",
+        "nombre": null,
+        "apellido": null,
+        "DNI": null,
+        "telefono": null,
+        "fechasDisponibles": []
+    },
+    {
+        "nombreUser": "arriba",
+        "contrasena": "1234",
+        "tipodeCuenta": "Keeper",
+        "tipoMascota": [
+            "Chica",
+            "Mediana",
+            "Grande"
+        ],
+        "remuneracion": "1500",
+        "nombre": null,
+        "apellido": null,
+        "DNI": null,
+        "telefono": null,
+        "fechasDisponibles": []
+    },
+    {
+        "nombreUser": "oliverap1",
+        "contrasena": "1234",
+        "tipodeCuenta": "Keeper",
+        "tipoMascota": [
+            "Chica"
+        ],
+        "remuneracion": "1",
+        "nombre": "Pablo",
+        "apellido": "Olivera",
+        "DNI": "123123213",
+        "telefono": "12312321321",
         "fechasDisponibles": []
     }
 ]
