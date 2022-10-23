@@ -1,28 +1,19 @@
 [
     {
-        "nombreUser": "Juan",
-        "contrasena": "123",
+        "nombreUser": "nahuel22",
+        "contrasena": "1234",
         "tipodeCuenta": "Owner",
-        "nombre": "Juan Jose",
-        "apellido": "Decoud",
-        "DNI": "35410517",
-        "telefono": "2234559528",
+        "nombre": "Nahuel",
+        "apellido": "decoud",
+        "DNI": "1231451231",
+        "telefono": "231331232",
         "tarjeta": {
             "numero": null,
             "nombre": null,
             "fechaVenc": null,
             "codigo": null
         },
-        "pets": [
-            {
-                "nombre": "Scooby",
-                "raza": "Perruno",
-                "tamano": "grande",
-                "planVacunacion": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg",
-                "observacionesGrals": "Perrucho",
-                "video": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg",
-                "imagen": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg"
-            }
-        ]
+        "pets": []
     }
+
 ]

@@ -52,7 +52,7 @@
         }
       
         public function login ($usuario , $contraseña){
-             $userkeeper = $this->keeperDao->obtenerUser($usuario , $contraseña);
+             $userkeeper = $this->keeperDao->comprobarLogin($usuario , $contraseña);
              $userOwner = $this->ownerDao->obtenerUser($usuario , $contraseña);
              if ($userkeeper !=null){
                 $_SESSION['loggedUser'] = $userkeeper ;

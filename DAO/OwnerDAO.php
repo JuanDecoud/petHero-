@@ -13,7 +13,7 @@
 
         public function Add(Owner $owner)
         {
-            $this->RetrieveData();
+            
             array_push($this->ownerList, $owner);
             $this->SaveData();
         }
@@ -24,20 +24,31 @@
         }
 
         public function agregarPets ($username ,Pet $pet ){
+
             $this->RetrieveData();
             foreach($this->ownerList  as $owner){
                 if ($owner->getNombreUser()==$username)
-                    $owner->agregarPet ($pet);
+                    $owner->agregarPets ($pet);
             }
             $this->SaveData();
         }
 
 
-        public function obtenerUser ($username , $contrasena){
+        public function comprobarLogin($username , $contrasena){
             $this->RetrieveData();
             $user = null ;
             foreach ($this->ownerList as $owner){
                 if ($owner->getNombreUser() == $username && $owner->getContrasena() == $contrasena ){
+                    $user = $owner ;
+                }
+            }
+            return $user ;
+        }
+        public function obtenerUser ($username){
+            $this->RetrieveData();
+            $user = null ;
+            foreach ($this->ownerList as $owner){
+                if ($owner->getNombreUser() == $username  ){
                     $user = $owner ;
                 }
             }

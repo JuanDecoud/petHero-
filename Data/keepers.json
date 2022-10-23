@@ -16,5 +16,37 @@
         "fechasDisponibles": [
             "2022-10-07"
         ]
+    },
+    {
+        "nombreUser": "pedrito",
+        "contrasena": "1234",
+        "tipodeCuenta": "Keeper",
+        "tipoMascota": [
+            "Chica",
+            "Mediana",
+            "Grande"
+        ],
+        "remuneracion": "1500",
+        "nombre": "Juan",
+        "apellido": "Jose",
+        "DNI": "35410517",
+        "telefono": "2234559528",
+        "fechasDisponibles": []
+    },
+    {
+        "nombreUser": "gere22",
+        "contrasena": "1234",
+        "tipodeCuenta": "Keeper",
+        "tipoMascota": [
+            "Chica",
+            "Mediana",
+            "Grande"
+        ],
+        "remuneracion": "1500",
+        "nombre": "geremias",
+        "apellido": "esprinfil",
+        "DNI": "3541318",
+        "telefono": "2234559528",
+        "fechasDisponibles": []
     }
 ]

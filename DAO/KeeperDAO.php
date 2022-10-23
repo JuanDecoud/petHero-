@@ -12,7 +12,6 @@
         }
         
         public function addKeeper (Keeper $keeper){
-            $this->obtenerDatos() ;
             
             array_push($this->keeperList , $keeper);
             $this->guardarDatos();
@@ -31,7 +30,19 @@
         }
 
 
-        public function obtenerUser ($username , $contrasena){
+        public function obtenerUser ($username){
+            $user = null ;
+            $this->obtenerDatos();
+            foreach ($this->keeperList as $keeper){
+                if ($keeper->getNombreUser() == $username){
+                    $user = $keeper;
+                    return $user ;
+                }
+            }
+            return $user ;
+        }
+
+        public function comprobarLogin($username , $contrasena){
             $this->obtenerDatos();
             $user = null ;
             foreach ($this->keeperList as $keeper){
@@ -39,12 +50,11 @@
                     $user = $keeper ;
                 }
             }
-
             return $user ;
         }
 
         public function obtenerDatos  (){
-            $this -> keeperList = array ();
+            
             if (file_exists($this->fileName)){
                 $contenidoJson = file_get_contents($this->fileName);
                 $arrayDecodificar = ($contenidoJson) ? json_decode($contenidoJson , true) : array ();
