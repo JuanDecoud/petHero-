@@ -91,6 +91,11 @@ use Models\Keeper;
                                         <a href="#" class="card-link">Disponibilidad</a>
                                         <a href="#" class="card-link">Reviews</a>
                                     </div>
+                                    <div class = "container mx-auto mb-2">
+                                            <?php foreach () ?>
+                                            <input class="col-6 " style =" text-align: center; font-weight:bold; color:black; border:0;" type="text" placeholder="" name ="fecha"  value = " "readonly >
+                                            <button type="submit" class=" btn btn-danger btn-sm ">Reservar</button>
+                                    </div>
                                 </div>
                                 <?php }?>
                             </div>     
