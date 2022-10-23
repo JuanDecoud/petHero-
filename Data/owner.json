@@ -1,81 +1,28 @@
-[{
-        "nombreUser": "Juan",
-        "contrasena": "123",
-        "tipodeCuenta": "Owner",
-        "nombre": null,
-        "apellido": null,
-        "DNI": null,
-        "telefono": null,
-        "tarjeta": {
-            "numero": null,
-            "nombre": null,
-            "fechaVenc": null,
-            "codigo": null
-        },
-        "pets": []
-    },
-    {
-        "nombreUser": "isma",
-        "contrasena": "234",
-        "tipodeCuenta": "Owner",
-        "nombre": null,
-        "apellido": null,
-        "DNI": null,
-        "telefono": null,
-        "tarjeta": {
-            "numero": null,
-            "nombre": null,
-            "fechaVenc": null,
-            "codigo": null
-        },
-        "pets": []
-    },
+[
     {
         "nombreUser": "Juan",
         "contrasena": "123",
         "tipodeCuenta": "Owner",
-        "nombre": null,
-        "apellido": null,
-        "DNI": null,
-        "telefono": null,
+        "nombre": "Juan Jose",
+        "apellido": "Decoud",
+        "DNI": "35410517",
+        "telefono": "2234559528",
         "tarjeta": {
             "numero": null,
             "nombre": null,
             "fechaVenc": null,
             "codigo": null
         },
-        "pets": []
-    },
-    {
-        "nombreUser": "isma",
-        "contrasena": "234",
-        "tipodeCuenta": "Owner",
-        "nombre": null,
-        "apellido": null,
-        "DNI": null,
-        "telefono": null,
-        "tarjeta": {
-            "numero": null,
-            "nombre": null,
-            "fechaVenc": null,
-            "codigo": null
-        },
-        "pets": []
-    },
-    {
-        "nombreUser": "asd",
-        "contrasena": "asdasd",
-        "tipodeCuenta": "Owner",
-        "nombre": null,
-        "apellido": null,
-        "DNI": null,
-        "telefono": null,
-        "tarjeta": {
-            "numero": null,
-            "nombre": null,
-            "fechaVenc": null,
-            "codigo": null
-        },
-        "pets": []
+        "pets": [
+            {
+                "nombre": "Peluche",
+                "raza": "San Bernardo",
+                "tamano": "grande",
+                "planVacunacion": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg",
+                "observacionesGrals": "Perro dificil de tratar",
+                "video": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg",
+                "imagen": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg"
+            }
+        ]
     }
 ]

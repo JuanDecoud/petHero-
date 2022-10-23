@@ -1,17 +1,20 @@
 <?php 
     namespace Controllers ;
 
-    use DAO\PetDAO as petDAO;
+use DAO\OwnerDao;
+use DAO\PetDAO as petDAO;
     use Models\Pet as Pet ;
 
     class PetController {
 
         private $petDao ;
+        private $ownerDao ;
 
 
         public function __construct()
         {
             $this->petDao = new PetDAO ();
+            $this->ownerDao = new OwnerDao();
         }
 /*
         public function agregarMascota ($nombre , $raza, $tamano, $planVacunacion, $observacionesGrals){
@@ -50,11 +53,12 @@
             $pet->setVideo(FRONT_ROOT.VIEWS_PATH."/img/uploads/".basename($_FILES['video']['name']));
             $pet->setObservacionesGrals($observacion);
             $this->petDao->Add($pet);
+
+            //agregar mascota al sistema
             $this->agregarPet();
+            // asocia al owner con la mascota
+            $this->ownerDao->agregarPets($owner->getNombreUser() , $pet);
             $this->principalOwner();
-
-
-
 
        
         }

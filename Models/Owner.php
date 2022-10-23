@@ -39,6 +39,10 @@ class Owner extends User
         return $this->pet ;
     }
 
+    public function agregarPet (Pet $pet){
+        array_push($this->pet , $pet );
+    }
+
     //public function getTarjeta (){return $this->tarjeta;}
 
     

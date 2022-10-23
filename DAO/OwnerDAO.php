@@ -14,7 +14,6 @@
         public function Add(Owner $owner)
         {
             $this->RetrieveData();
-            var_dump($owner);
             array_push($this->ownerList, $owner);
             $this->SaveData();
         }
@@ -22,6 +21,15 @@
         {
             $this->RetrieveData();
             return $this->ownerList;
+        }
+
+        public function agregarPets ($username ,Pet $pet ){
+            $this->RetrieveData();
+            foreach($this->ownerList  as $owner){
+                if ($owner->getNombreUser()==$username)
+                    $owner->agregarPet ($pet);
+            }
+            $this->SaveData();
         }
 
 
@@ -47,7 +55,6 @@
 
                 $valuesArray["nombreUser"]=$owner->getNombreUser();
                 $valuesArray["contrasena"]=$owner->getContrasena();
-                $valuesArray["tipodeCuenta"]=$owner->getTipocuenta();
                 $valuesArray["tipodeCuenta"]=$owner->getTipocuenta();
                 $valuesArray ['nombre'] = $owner->getNombre();
                 $valuesArray ['apellido'] = $owner->getApellido();

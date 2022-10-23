@@ -44,7 +44,7 @@
             require_once(VIEWS_PATH."menu-owner.php");
         }
 
-        public function agregarOwner ($userName , $contrasena ){
+        public function agregarOwner ($nombre,$apellido,$dni,$telefono,$userName,$contrasena ){
 
 
             if ($userName != null && $contrasena !=null){
@@ -54,6 +54,10 @@
                 if ($comprobarUser == null){
 
                     $owner = new Owner ();
+                    $owner->setNombre($nombre);
+                    $owner->setApellido($apellido);
+                    $owner->setDni($dni);
+                    $owner->setTelefono($telefono);
                     $owner->setNombreUser($userName);
                     $owner->setContrasena($contrasena);
                     $owner->setTipodecuenta($_SESSION['owner']);
@@ -107,8 +111,9 @@
 
 
 
-        public function asignarFecha ($fecha){
-            $this->keeperDAO->agregarFecha($fecha);
+        public function asignarFecha ($fecha ){
+            $keeper = $_SESSION['loggedUser'];
+            $this->keeperDAO->agregarFecha($fecha , $keeper->getNombreUser() );
             $this->principalKeeper();   
         }
 

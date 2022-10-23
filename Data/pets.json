@@ -1,24 +1,24 @@
 [
     {
         "petName": "Scooby",
-        "petBreed": "doo",
-        "petSize": "Small",
-        "petObserv": "El perro es muy molesto",
-        "petVideo": "\/TP-FINAL-2022\/Views\/Digrama parcial.png",
-        "petImg": "\/TP-FINAL-2022\/Views\/img\/uploads\/perro.jpg",
-        "petVacc": "\/TP-FINAL-2022\/Views\/ejercicio.png",
+        "petBreed": "Perruna",
+        "petSize": "Grande",
+        "petObserv": "Es muy inquieto",
+        "petVideo": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg",
+        "petImg": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg",
+        "petVacc": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg",
         "owner": {
             "nombreUser": "Juan"
         }
     },
     {
-        "petName": "Scooby",
-        "petBreed": "Perrito",
-        "petSize": "Mediano",
-        "petObserv": "Buen perro",
-        "petVideo": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/ejercicio.png",
+        "petName": "Peluche",
+        "petBreed": "San Bernardo",
+        "petSize": "grande",
+        "petObserv": "Perro dificil de tratar",
+        "petVideo": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg",
         "petImg": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg",
-        "petVacc": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/diagrama restaurantes.png",
+        "petVacc": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg",
         "owner": {
             "nombreUser": "Juan"
         }

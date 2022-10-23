@@ -19,17 +19,16 @@
         }
 
 
-        public function agregarFecha ($fecha ){
+        public function agregarFecha ($fecha ,$username ){
             
             $this->obtenerDatos();
             foreach($this->keeperList  as $keeper){
-                $keeper->agregarFecha ($fecha);
+                if ($keeper->getNombreUser()==$username)
+                    $keeper->agregarFecha ($fecha);
             }
-           
             $this->guardarDatos();
 
         }
-
 
 
         public function obtenerUser ($username , $contrasena){
