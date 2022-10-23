@@ -101,7 +101,7 @@
                 echo '<script language="javascript">alert("Complete todos los campos");</script>';
                 $this->registrarKeeper();
             }
-            $this->registrarKeeper();
+            $this->login();
           
         }
 

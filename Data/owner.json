@@ -1,8 +1,11 @@
-[
-    {
+[{
         "nombreUser": "Juan",
         "contrasena": "123",
         "tipodeCuenta": "Owner",
+        "nombre": null,
+        "apellido": null,
+        "DNI": null,
+        "telefono": null,
         "tarjeta": {
             "numero": null,
             "nombre": null,
@@ -15,6 +18,58 @@
         "nombreUser": "isma",
         "contrasena": "234",
         "tipodeCuenta": "Owner",
+        "nombre": null,
+        "apellido": null,
+        "DNI": null,
+        "telefono": null,
+        "tarjeta": {
+            "numero": null,
+            "nombre": null,
+            "fechaVenc": null,
+            "codigo": null
+        },
+        "pets": []
+    },
+    {
+        "nombreUser": "Juan",
+        "contrasena": "123",
+        "tipodeCuenta": "Owner",
+        "nombre": null,
+        "apellido": null,
+        "DNI": null,
+        "telefono": null,
+        "tarjeta": {
+            "numero": null,
+            "nombre": null,
+            "fechaVenc": null,
+            "codigo": null
+        },
+        "pets": []
+    },
+    {
+        "nombreUser": "isma",
+        "contrasena": "234",
+        "tipodeCuenta": "Owner",
+        "nombre": null,
+        "apellido": null,
+        "DNI": null,
+        "telefono": null,
+        "tarjeta": {
+            "numero": null,
+            "nombre": null,
+            "fechaVenc": null,
+            "codigo": null
+        },
+        "pets": []
+    },
+    {
+        "nombreUser": "asd",
+        "contrasena": "asdasd",
+        "tipodeCuenta": "Owner",
+        "nombre": null,
+        "apellido": null,
+        "DNI": null,
+        "telefono": null,
         "tarjeta": {
             "numero": null,
             "nombre": null,
