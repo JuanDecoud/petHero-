@@ -2,10 +2,12 @@
 
     use Models\User as User;
     use DAO\KeeperDAO as KeeperDAO;
+    use DAO\OwnerDAO as OwnerDAO;
 
     class UserDAO{
         private $userList = array();
-        private $kList = array();
+        private $keepers = array();
+        private $owners = array();
 
         public function Add(User $user)
         {
@@ -28,11 +30,29 @@
             $this -> addArray();
             $maxID = 0;
             
-            foreach($this->userList as $user){
-               if($user -> getID() > $maxID){
-                $maxID = $user ->getID();
-               }
+            if($this -> userList != null){
+                foreach($this->userList as $user){
+                    if($user -> getID() > $maxID){
+                    $maxID = $user ->getID();
+                    }
+                }
             }
+            if($this -> keepers != null){
+                foreach($this->keepers as $user){
+                    if($user -> getID() > $maxID){
+                    $maxID = $user ->getID();
+                    }
+                }
+            }
+            
+            if($this -> owners != null){
+                foreach($this->owners as $user){
+                    if($user -> getID() > $maxID){
+                    $maxID = $user ->getID();
+                    }
+                }
+            }
+
             
             return $maxID;
         }
@@ -85,11 +105,10 @@
             $this -> userList = array();
             $this -> kList = array();
 
-            //$furgon = new KeeperDAO();
-            //$this -> kList = $furgon -> GetAll(); 
-            
-            array_merge($this -> userList, $this->kList);
-
+            $keep = new KeeperDAO();
+            $own = new OwnerDAO();
+            //$this -> keepers = $keep -> GetAll(); 
+            $this -> owners = $own -> GetAll();
         }
     }
 

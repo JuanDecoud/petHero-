@@ -1,10 +1,12 @@
 <?php 
     namespace DAO ;
     use Models\Keeper as Keeper ;
-    
+    use DAO\OwnerDao as OwnerDao;
+
     class KeeperDAO implements IKeeperDAO {
         private $fileName = ROOT."Data/keepers.json" ;
         private $keeperList = array ();
+        private $ownerList = array();
 
         public function getAll (){
             $this->obtenerDatos();

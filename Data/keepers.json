@@ -1,5 +1,4 @@
-[
-    {
+[{
         "nombreUser": "juan22",
         "contrasena": "1234",
         "tipodeCuenta": "Keeper",
@@ -48,6 +47,53 @@
         "apellido": "esprinfil",
         "DNI": "3541318",
         "telefono": "2234559528",
+        "fechasDisponibles": []
+    },
+    {
+        "nombreUser": "polivera1",
+        "contrasena": "123",
+        "tipodeCuenta": "Keeper",
+        "tipoMascota": [
+            "Mediana"
+        ],
+        "remuneracion": "1",
+        "nombre": "Pablo",
+        "apellido": "Olivera",
+        "DNI": "12590823",
+        "telefono": "1234566778",
+        "fechasDisponibles": [
+            "2022-10-28",
+            "2022-10-06"
+        ]
+    },
+    {
+        "nombreUser": "polivera12",
+        "contrasena": "123123123",
+        "tipodeCuenta": "Keeper",
+        "tipoMascota": [
+            "Mediana",
+            "Grande"
+        ],
+        "remuneracion": "1",
+        "nombre": "Pablo",
+        "apellido": "Olivera",
+        "DNI": "1234566",
+        "telefono": "12312321321",
+        "fechasDisponibles": []
+    },
+    {
+        "nombreUser": "polivera21312321",
+        "contrasena": "12378123762317869",
+        "tipodeCuenta": "Keeper",
+        "tipoMascota": [
+            "Chica",
+            "Mediana"
+        ],
+        "remuneracion": "1",
+        "nombre": "ASDASDSADA",
+        "apellido": "asdasdasdasds",
+        "DNI": "123123123",
+        "telefono": "12312321312",
         "fechasDisponibles": []
     }
 ]

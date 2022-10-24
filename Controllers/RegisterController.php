@@ -4,6 +4,7 @@
     use DAO\KeeperDAO as KeeperDao;
     use DAO\OwnerDAO as OwnerDAO;
     use DAO\PetDAO as PetDAO;
+    use DAO\UserDAO;
     use Models\Keeper as Keeper;
     use Models\Owner as Owner;
     use Models\Pet as Pet;
@@ -13,14 +14,14 @@
         
         private $keeperDAO ;
         private $ownerDAO ;
-    
+        private $userDAO;
 
 
         public function __construct()
         {
             $this->keeperDAO = new KeeperDAO ();
             $this->ownerDAO = new OwnerDAO ();
-                     
+            $this->userDAO = new UserDAO;
         }
 
         public function login (){
@@ -115,9 +116,6 @@
             
           
         }
-
-
-
 
     }
 ?>

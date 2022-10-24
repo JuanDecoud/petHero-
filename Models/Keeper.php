@@ -31,7 +31,7 @@
             $this->fechasDisponibles = $fechas ;
         }
         public function getFechas (){
-            return $this->fechasDisponibles ;
+            return $this->fechasDisponibles;
         }
 
         public function agregarFecha ($fecha){

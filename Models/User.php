@@ -1,7 +1,6 @@
 <?php
    namespace Models ;
-
-        use DAO\UserDAO as UserDAO;
+use DAO\UserDAO as UserDAO;
 
     abstract class User{
         private $id;
