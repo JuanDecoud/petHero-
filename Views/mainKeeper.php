@@ -10,17 +10,17 @@ use Models\Keeper;
     $userLogged = $_SESSION['loggedUser'];
     $user= $keepDao->obtenerUser($userLogged->getNombreUser());
     $fechas = $user->getFechas();
- 
-   
-    
- 
+
 ?>
 
 <div class = "container mt-5  border border-white">
     <div class ="d-flex  flex-row  justify-content-around">
         <form action="<?php echo FRONT_ROOT."Keeper/asignarFecha"; ?>" method="post" class ="form-group mr-auto p-2 ">
             <h4 class = "my-2">Agregar Disponibilidad</h4>
-            <input  class ="calendar my-4" style ="border 2px solid" type="date" name="fecha" placeholder="" required >
+            <input  class ="calendar my-4" style ="border 2px solid" type="date" name="desde" placeholder="" required >
+            <div >
+            </div>
+            <input  class ="calendar my-4" style ="border 2px solid" type="date" name="hasta" placeholder="" required >
             <div >
                 <button type="submit" class="btn btn-default btn-sm bg-danger mb-4">
                     <span><img src="<?php echo FRONT_ROOT.VIEWS_PATH."img/anadir.png" ?>" alt=""></span> 
@@ -32,7 +32,8 @@ use Models\Keeper;
             <table class ="table bg bg-dark text-white">
                 <thead>
                     <tr>
-                        <th scope ="col">Fecha</th>
+                        <th scope ="col">Desde</th>
+                        <th scope ="col">Hasta</th>
                     </tr>
                    
                 </thead>
@@ -41,7 +42,10 @@ use Models\Keeper;
                                                              ?>
                     <tr>
                         <form action="<?php echo FRONT_ROOT."Keeper/quitarFecha" ?>" method="post">
-                            <td ><input style =" text-align: center; font-weight:bold; color:black;" type="text" placeholder="<?php  echo $fechasKeeper;?>" name ="fecha"  value = "<?php  echo $fechasKeeper;?>"readonly ></td>
+                            <td ><input style =" text-align: center; font-weight:bold; color:black;" type="text" placeholder="<?php  echo $fechasKeeper->getDesde();?>" name ="desde"  value = "<?php  echo $fechasKeeper->getDesde();?>"readonly ></td>
+                            <td>
+                                <input style =" text-align: center; font-weight:bold; color:black;" type="text" placeholder="<?php  echo $fechasKeeper->getHasta();?>" name ="hasta"  value = "<?php  echo $fechasKeeper->getHasta();?>"readonly >
+                            </td>
                             <td>
                                 <button type="submit" class="btn btn-danger btn-sm">Quitar</button>
                             </td>

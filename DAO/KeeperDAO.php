@@ -2,6 +2,7 @@
     namespace DAO ;
     use Models\Keeper as Keeper ;
     use DAO\OwnerDao as OwnerDao;
+    use Models\FechasEstadias as FechasEstadias;
 
     class KeeperDAO implements IKeeperDAO {
         private $fileName = ROOT."Data/keepers.json" ;
@@ -20,16 +21,16 @@
         }
 
 
-        public function quitarFecha ($username , $fecha){
+        public function quitarFecha ($username , FechasEstadias $fecha){
             $this->obtenerDatos();
             $nuevoArray  = array ();
             foreach ($this->keeperList as $keeper){
                 if ($keeper->getNombreUser()== $username){
                     $arrayFechas = $keeper->getFechas();
-                    foreach ($arrayFechas as $value){
-                        if ($value != $fecha){
-                            echo $value ;
-                            array_push($nuevoArray , $value); 
+                    foreach ($arrayFechas as $estadias){
+                        if ($estadias->getDesde()!=$fecha->getDesde() 
+                        && $estadias->getHasta()!=$fecha->getHasta() ){
+                            array_push($nuevoArray , $estadias); 
                         }
                     }
                     $keeper->setFechas($nuevoArray);
@@ -39,12 +40,12 @@
         }
 
 
-        public function agregarFecha ($fecha ,$username ){
+        public function agregarFecha (FechasEstadias $estadia ,$username ){
             
             $this->obtenerDatos();
             foreach($this->keeperList  as $keeper){
                 if ($keeper->getNombreUser()==$username)
-                    $keeper->agregarFecha ($fecha);
+                    $keeper->agregarFecha ($estadia);
             }
             $this->guardarDatos();
 
@@ -81,10 +82,12 @@
                 $arrayDecodificar = ($contenidoJson) ? json_decode($contenidoJson , true) : array ();
                 foreach ($arrayDecodificar as $value ){
                     $keeper = new Keeper($value['nombreUser'] ,$value['contrasena'],$value['tipodeCuenta'],$value['tipoMascota'],$value['remuneracion'],$value['nombre'],$value['apellido'],$value['DNI'],$value['telefono']);
-                    $keeper->setFechas($value['fechasDisponibles']);
+                    foreach ($value['fechasDisponibles'] as $fechas){
+                        $estadia= new FechasEstadias($fechas['desde'], $fechas['hasta']);
+                        $keeper->agregarFecha($estadia);
+                    }  
                     array_push($this->keeperList , $keeper);
                 }
-
             }
         }
 
@@ -101,13 +104,13 @@
                 $value ['DNI'] = $keeper->getDni();
                 $value ['telefono'] = $keeper->getTelefono();
                 $value ['fechasDisponibles'] = array ();
-                foreach ($keeper->getFechas() as $fechas){
-                    array_push($value['fechasDisponibles'] , $fechas);
+                foreach ($keeper->getFechas() as $estadia){
+                    $values['desde']=$estadia->getDesde();
+                    $values['hasta']=$estadia->getHasta();
+                    array_push($value['fechasDisponibles'] , $values); 
                 }
                 array_push($arraytoEncode , $value);
-
             }
-
             $contenidoJson = json_encode($arraytoEncode , JSON_PRETTY_PRINT);
             file_put_contents($this->fileName , $contenidoJson);
         }

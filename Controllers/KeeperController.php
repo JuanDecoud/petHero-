@@ -1,7 +1,8 @@
 <?php 
     namespace Controllers ;
 
-use DAO\KeeperDAO;
+    use DAO\KeeperDAO;
+    use Models\FechasEstadias;
 
     class KeeperController {
         private $keeperDao ;
@@ -17,17 +18,18 @@ use DAO\KeeperDAO;
         }
 
 
-        public function asignarFecha ($fecha ){
+        public function asignarFecha ($desde , $hasta ){
+            $estadia = new FechasEstadias($desde , $hasta);
+
             $keeper = $_SESSION['loggedUser'];
-            echo $fecha ;
-            $this->keeperDao->agregarFecha($fecha , $keeper->getNombreUser() );
+            $this->keeperDao->agregarFecha($estadia , $keeper->getNombreUser() );
             $this->principalKeeper();   
         }
 
-        public function quitarFecha ($fecha ){
-           
+        public function quitarFecha ($desde , $hasta ){
+            $estadia = new FechasEstadias($desde , $hasta);
             $user = $_SESSION['loggedUser'];
-            $this->keeperDao->quitarFecha($user->getNombreUser(),$fecha);
+            $this->keeperDao->quitarFecha($user->getNombreUser(),$estadia);
             $this->principalKeeper();
             
 

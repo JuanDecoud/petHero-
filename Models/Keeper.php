@@ -34,8 +34,8 @@
             return $this->fechasDisponibles;
         }
 
-        public function agregarFecha ($fecha){
-            array_push($this->fechasDisponibles , $fecha);
+        public function agregarFecha (FechasEstadias $estadia){
+            array_push($this->fechasDisponibles , $estadia);
         }
 
     }
