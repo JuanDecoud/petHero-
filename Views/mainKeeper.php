@@ -13,21 +13,27 @@ use Models\Keeper;
 
 ?>
 
-<div class = "container mt-5   shadow p-3 mb-5 bg-body rounded">
+<div class = "container mt-5   shadow p-3 mb-5 bg-ligh rounded">
     <div class ="d-flex  flex-row  justify-content-around">
-        <form action="<?php echo FRONT_ROOT."Keeper/asignarFecha"; ?>" method="post" class ="form-group mr-auto p-2 ">
+        <form action="<?php echo FRONT_ROOT."Keeper/asignarFecha"; ?>" method="post" class ="form-group mr-auto p-2 shadow p-3 mb-5 bg-ligh rounded ">
             <h4 class = "my-2">Agregar Disponibilidad</h4>
-            <input  class ="calendar my-4" style ="border 2px solid" type="date" name="desde" placeholder="" required >
-            <div >
+            <div class = "col-auto">
+                 <label for="" class = "mx-2"><h5>Desde:</h5></label>
+                <input  class ="calendar my-4 col-8" style ="border 2px solid" type="date" name="desde" placeholder="" required >
             </div>
-            <input  class ="calendar my-4" style ="border 2px solid" type="date" name="hasta" placeholder="" required >
+           
+            <div class = "col-auto" >
+                <label for="" class = "mx-2"><h5>Hasta:</h5></label>
+                <input  class ="calendar my-4 col-8" style ="border 2px solid" type="date" name="hasta" placeholder="" required >
+            </div>
+            
             <div >
                 <button type="submit" class="btn btn-default btn-sm bg-danger mb-4">
                     <span><img src="<?php echo FRONT_ROOT.VIEWS_PATH."img/anadir.png" ?>" alt=""></span> 
                 </button>
             </div>
         </form>
-        <div>
+        <div class = "shadow p-3 mb-5 bg-ligh rounded">
             <h4>Fechas Seleccionadas</h4>
             <table class ="table bg bg-dark text-white">
                 <thead>
@@ -42,7 +48,7 @@ use Models\Keeper;
                                                              ?>
                     <tr>
                         <form action="<?php echo FRONT_ROOT."Keeper/quitarFecha" ?>" method="post">
-                            <td ><input style =" text-align: center; font-weight:bold; color:black;" type="text" placeholder="<?php  echo $fechasKeeper->getDesde();?>" name ="desde"  value = "<?php  echo $fechasKeeper->getDesde();?>"readonly ></td>
+                            <td ><input style =" text-align: center; font-weight:bold; color:black;" class ="" type="text" placeholder="<?php  echo $fechasKeeper->getDesde();?>" name ="desde"  value = "<?php  echo $fechasKeeper->getDesde();?>"readonly ></td>
                             <td>
                                 <input style =" text-align: center; font-weight:bold; color:black;" type="text" placeholder="<?php  echo $fechasKeeper->getHasta();?>" name ="hasta"  value = "<?php  echo $fechasKeeper->getHasta();?>"readonly >
                             </td>
@@ -66,7 +72,7 @@ use Models\Keeper;
 </div>
 
 
-<div class = "container mt-5  shadow p-3 mb-5 bg-body rounded col col-10">
+<div class = "container mt-5  shadow p-3 mb-5 bg-ligh rounded col col-10">
     <div class="accordion mt-5" id="accordionExample">
         <div class="accordion-item mt-5">
             <h2 class="accordion-header" id="headingTwo">
