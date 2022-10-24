@@ -13,7 +13,7 @@ use Models\Keeper;
 
 ?>
 
-<div class = "container mt-5  border border-white">
+<div class = "container mt-5   shadow p-3 mb-5 bg-body rounded">
     <div class ="d-flex  flex-row  justify-content-around">
         <form action="<?php echo FRONT_ROOT."Keeper/asignarFecha"; ?>" method="post" class ="form-group mr-auto p-2 ">
             <h4 class = "my-2">Agregar Disponibilidad</h4>
@@ -66,11 +66,11 @@ use Models\Keeper;
 </div>
 
 
-<div class = "container mt-5 border border-white col col-10">
+<div class = "container mt-5  shadow p-3 mb-5 bg-body rounded col col-10">
     <div class="accordion mt-5" id="accordionExample">
         <div class="accordion-item mt-5">
             <h2 class="accordion-header" id="headingTwo">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            <button class="accordion-button collapsed bg bg-danger" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                 Estadias Solicitadas
             </button>
             </h2>
@@ -82,7 +82,7 @@ use Models\Keeper;
         </div>
         <div class="accordion-item mt-5 mb-5">
             <h2 class="accordion-header" id="headingThree">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            <button class="accordion-button collapsed bg bg-danger" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                 Estadias Aceptadas 
             </button>
             </h2>
