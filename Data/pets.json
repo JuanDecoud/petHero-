@@ -1,3 +1,38 @@
 [
-
+    {
+        "petName": "Perrucho",
+        "petBreed": "perro",
+        "petSize": "chico",
+        "petObserv": "Buen Perro",
+        "petVideo": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/Monta\u00c3\u00b1as - 81945.mp4",
+        "petImg": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/perro.jpg",
+        "petVacc": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/planVACUNACON.jpg",
+        "owner": {
+            "nombreUser": "Juan"
+        }
+    },
+    {
+        "petName": "Scooby",
+        "petBreed": "Perrito",
+        "petSize": "Grande",
+        "petObserv": "Perro agresivo",
+        "petVideo": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/Rana - 113403.mp4",
+        "petImg": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/perro2.jpg",
+        "petVacc": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/planVACUNACON.jpg",
+        "owner": {
+            "nombreUser": "Juan"
+        }
+    },
+    {
+        "petName": "Peerucho",
+        "petBreed": "Perrito",
+        "petSize": "chico",
+        "petObserv": "asdf",
+        "petVideo": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/Rana - 113403.mp4",
+        "petImg": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/perro.jpg",
+        "petVacc": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/planVACUNACON.jpg",
+        "owner": {
+            "nombreUser": "Juan"
+        }
+    }
 ]

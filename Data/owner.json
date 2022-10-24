@@ -14,7 +14,33 @@
             "codigo": null
         },
         "pets": [
-         
+            {
+                "nombre": "Perrucho",
+                "raza": "perro",
+                "tamano": "chico",
+                "planVacunacion": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/planVACUNACON.jpg",
+                "observacionesGrals": "Buen Perro",
+                "video": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/Monta\u00c3\u00b1as - 81945.mp4",
+                "imagen": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/perro.jpg"
+            },
+            {
+                "nombre": "Scooby",
+                "raza": "Perrito",
+                "tamano": "Grande",
+                "planVacunacion": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/planVACUNACON.jpg",
+                "observacionesGrals": "Perro agresivo",
+                "video": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/Rana - 113403.mp4",
+                "imagen": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/perro2.jpg"
+            },
+            {
+                "nombre": "Peerucho",
+                "raza": "Perrito",
+                "tamano": "chico",
+                "planVacunacion": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/planVACUNACON.jpg",
+                "observacionesGrals": "asdf",
+                "video": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/Rana - 113403.mp4",
+                "imagen": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/perro.jpg"
+            }
         ]
     }
 ]

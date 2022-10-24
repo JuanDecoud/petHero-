@@ -168,6 +168,7 @@
                             $pet ->setPlanVacunacion($value['planVacunacion'] );
                             $pet->setObservacionesGrals($value ['observacionesGrals']);
                             $pet->setVideo($value ['video']);
+                            $pet->setImg($value ['imagen']);
                             $owner->agregarPet($pet);
                         }
     
