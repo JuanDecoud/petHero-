@@ -110,9 +110,11 @@
                         $pet->setObservacionesGrals($valuesArray["pet"] ['observacionesGrals']);
                         $pet->setVideo($valuesArray["pet"] ['video']);
                         $pet->setImg($valuesArray["pet"] ['imagen']);
-                        $reserva-> setPet($pet);
+                        
                     }
-                    
+
+                    $reserva-> setPet($pet);
+
                     if($valuesArray["keeper"] != null){
                         $keeper = new Keeper(null,null,null,null,null,null,null,null,null);
                         $keeper->setNombreUser( $valuesArray['nombreUser']);
@@ -125,9 +127,10 @@
                         $keeper->setDni( $valuesArray['DNI']);
                         $keeper->setTelefono( $valuesArray['telefono']);
                         $keeper->setFechas( $valuesArray['fechasDisponibles']);
-                        $reserva->setKeeper($keeper);
+                        
                     }
-                            
+                        $reserva->setKeeper($keeper); 
+                        
                     array_push($this->reservaList, $reserva);
                 }
             }
