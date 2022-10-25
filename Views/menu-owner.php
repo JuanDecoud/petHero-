@@ -14,6 +14,7 @@ use Models\Keeper;
 
     $keeperDao = new KeeperDAO();
     $keeperlist = $keeperDao->getAll();
+    $listaEstadias = $keeperDao->listaEstadias($keeperlist);
 
 
 ?>
@@ -26,8 +27,6 @@ use Models\Keeper;
                         <button type="submit" class="btn btn-default btn-sm bg-danger mb-4 ">
                                 <span><img src="<?php echo FRONT_ROOT.VIEWS_PATH."img/anadir.png" ?>" alt=""></span> 
                         </button>
-                       
-                        
                     </div>
                 </form>
                 <div class="accordion mt-2 " id="accordionExample">
@@ -82,33 +81,36 @@ use Models\Keeper;
                         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordion2">
                             <div class = " d-inline-flex flex-wrap">
                                 <?php foreach ($keeperlist as $keeper){ ?>
+
+                                <?php foreach ($keeper->getFechas() as $estadias){?>
+                        <form action="<?php echo FRONT_ROOT."Reserva/prueba" ?>" method = "post">
                                 <div class="card" style="width: 18rem;">
                                     <div class="card-body">
                                         <h7 style= "color:aqua">Disponible</h7>
                                         <h5 class="card-title"><?php echo $keeper->getNombre()." ".$keeper->getApellido(); ?></h5>
+                                        <input id="prodId" name="prodId" type="hidden" value="<?php echo $keeper->getNombreUser(); ?>">
                                     </div>
                                     <div class="card-body">
-                                        <a href="#" class="card-link">Disponibilidad</a>
-                                        <a href="#" class="card-link">Reviews</a>
-                                    </div>
-                                    <div class = "container mx-auto mb-2">
-                                            
-                                            <input class="col-6 " style =" text-align: center; font-weight:bold; color:black; border:0;" type="text" placeholder="" name ="fecha"  value = " "readonly >
-                                            <button type="submit" class=" btn btn-danger btn-sm ">Reservar</button>
+                                        <div class = "col-auto">
+                                            <label for="" class = "mx-2 "><h5>Desde:</h5></label>
+                                            <input style =" text-align: center; font-weight:bold; color:black; border :0;" class ="border-bottom" type="text" placeholder="<?php echo $estadias->getDesde(); ?>" name ="desde"  value = "<?php echo $estadias->getDesde() ?>"readonly ></td>
+                                        </div>
+            
+                                        <div class = "col-auto" >
+                                            <label for="" class = "mx-2 "><h5>Hasta:</h5></label>
+                                            <input style =" text-align: center; font-weight:bold; color:black; border:0;" class ="border-bottom" type="text" placeholder="<?php echo $estadias->getHasta() ?>" name ="hasta"  value = "<?php echo $estadias->getHasta() ;?>"readonly ></td>
+                                        </div>
+                                        <button type="submit" class=" mt-2 btn btn-danger btn-sm ">Reservar</button>
                                     </div>
                                 </div>
-                                <?php }?>
+                            </form>
+                                <?php } }?>
                             </div>     
                         </div>
                     </div>
                     </div>
                 </div>
         </div>
-        
-
- 
-
-
 </div>
     
    

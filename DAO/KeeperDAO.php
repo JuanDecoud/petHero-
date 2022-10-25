@@ -13,6 +13,16 @@
             $this->obtenerDatos();
             return $this->keeperList;
         }
+
+        public function listaEstadias ($listadeKeepers){
+            $listaEstadias = array ();
+            foreach ($listadeKeepers as $keeper){
+                foreach ($keeper->getFechas() as $estadias){
+                    array_push($listaEstadias , $estadias);
+                }
+            }
+            return $listaEstadias;
+        }
         
         public function addKeeper (Keeper $keeper){
             

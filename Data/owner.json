@@ -42,5 +42,21 @@
                 "imagen": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/perro.jpg"
             }
         ]
+    },
+    {
+        "nombreUser": "german",
+        "contrasena": "1234",
+        "tipodeCuenta": "Owner",
+        "nombre": "German",
+        "apellido": "Klaver",
+        "DNI": "35410517",
+        "telefono": "2234559528",
+        "tarjeta": {
+            "numero": null,
+            "nombre": null,
+            "fechaVenc": null,
+            "codigo": null
+        },
+        "pets": []
     }
 ]
