@@ -17,12 +17,12 @@ use Models\Keeper;
     <div class ="d-flex  flex-row  justify-content-around">
         <form action="<?php echo FRONT_ROOT."Keeper/asignarFecha"; ?>" method="post" class ="form-group mr-auto p-2 shadow p-3 mb-5 bg-ligh rounded ">
             <h4 class = "my-2">Agregar Disponibilidad</h4>
-            <div class = "col-auto">
+            <div class = "col-auto mx-auto">
                  <label for="" class = "mx-2"><h5>Desde:</h5></label>
                 <input  class ="calendar my-4 col-8" style ="border 2px solid" type="date" name="desde" placeholder="" required >
             </div>
            
-            <div class = "col-auto" >
+            <div class = "col-auto mx-auto" >
                 <label for="" class = "mx-2"><h5>Hasta:</h5></label>
                 <input  class ="calendar my-4 col-8" style ="border 2px solid" type="date" name="hasta" placeholder="" required >
             </div>
@@ -64,11 +64,7 @@ use Models\Keeper;
             </table>
 
         </div>
-      
-        
     </div>
-    
-
 </div>
 
 

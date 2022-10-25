@@ -63,7 +63,7 @@ use Models\Keeper;
                 </div>
             </div>
             <div class = "container col col-10 agregar ">
-                <form action="<?php echo FRONT_ROOT."Pet/agregarPet"; ?>" method="post" class ="form-inline  p-2 ">
+                <form action="<?php echo FRONT_ROOT."Pet/prueba"; ?>" method="post" class ="form-inline  p-2 ">
                     <button type="submit" class="btn btn-default btn-sm bg-danger mb-4">
                         <span><img src="<?php echo FRONT_ROOT.VIEWS_PATH."img/recargar.png" ?>" alt=""></span> 
                         
@@ -83,7 +83,7 @@ use Models\Keeper;
                                 <?php foreach ($keeperlist as $keeper){ ?>
 
                                 <?php foreach ($keeper->getFechas() as $estadias){?>
-                        <form action="<?php echo FRONT_ROOT."Reserva/prueba" ?>" method = "post">
+                            <form action="<?php echo FRONT_ROOT."Reserva/prueba" ?>" method = "post">
                                 <div class="card" style="width: 18rem;">
                                     <div class="card-body">
                                         <h7 style= "color:aqua">Disponible</h7>
@@ -100,11 +100,20 @@ use Models\Keeper;
                                             <label for="" class = "mx-2 "><h5>Hasta:</h5></label>
                                             <input style =" text-align: center; font-weight:bold; color:black; border:0;" class ="border-bottom" type="text" placeholder="<?php echo $estadias->getHasta() ?>" name ="hasta"  value = "<?php echo $estadias->getHasta() ;?>"readonly ></td>
                                         </div>
+                                        <?php 
+                                            $select = '<select name="tipo" class = "form-select mt-2 " id="">';
+                                            $select.='<option selected >Elija su mascota</option> ';
+                                            foreach ($petlist as $pet) {
+                                                $select.='<option value="'.$pet->getNombre().'">'.$pet->getNombre().'</option>';
+                                            }
+                                            $select.='</select>';
+                                            echo $select;
+                                        ?>
                                         <button type="submit" class=" mt-2 btn btn-danger btn-sm ">Reservar</button>
                                     </div>
                                 </div>
                             </form>
-                                <?php } }?>
+                            <?php  } }?>
                             </div>     
                         </div>
                     </div>

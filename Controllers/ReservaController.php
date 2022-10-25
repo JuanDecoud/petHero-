@@ -17,8 +17,8 @@ use DAO\PetDAO ;
         }
 
 
-        public function prueba ($nombre , $fecha , $fecha2){
-            echo $nombre.$fecha.$fecha2;
+        public function prueba ($nombre , $fecha , $fecha2 , $pet){
+            echo $nombre.$fecha.$fecha2.$pet;
             $this->vistaOwner();
         }
 
