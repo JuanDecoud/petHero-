@@ -34,6 +34,14 @@
             return $this->fechasDisponibles;
         }
 
+        public function setTipoMascota($tipoMascota){
+            $this -> tipoMascota = $tipoMascota;
+        }
+
+        public function setRemuneracion($remuneracion){
+            $this -> remuneracion = $remuneracion;
+        }
+
         public function agregarFecha (FechasEstadias $estadia){
             array_push($this->fechasDisponibles , $estadia);
         }

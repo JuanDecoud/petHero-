@@ -9,7 +9,7 @@
         private $importeReserva ;
         private $importeTotal ;
 
-
+        /*
         public function __construct($fdesde ,$fhasta , Keeper $keeper , Pet $pet , $importeReserva , $importeTotal )
         {
             $this->fdesde= $fdesde ;
@@ -21,7 +21,8 @@
 
             
         }
-
+        */
+        
         public function setFechadesde ($fdesde){$this->fdesde = $fdesde ;}
         public function getFechadesde (){ return $this->fdesde  ;}
 
