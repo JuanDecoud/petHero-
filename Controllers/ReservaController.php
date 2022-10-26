@@ -47,6 +47,8 @@
                 $reserva->setKeeper($keeper);
                 $this->reservaDao->Add ($reserva);
 
+                $this->vistaOwner();
+
 
 
                 

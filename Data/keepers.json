@@ -9,45 +9,39 @@
             "Grande"
         ],
         "remuneracion": "1500",
-        "nombre": "Juan",
+        "nombre": "Nahuel",
+        "apellido": "Inglesias",
+        "DNI": "22344535",
+        "telefono": "2234559528",
+        "fechasDisponibles": [
+            {
+                "desde": "2022-10-21",
+                "hasta": "2022-10-27"
+            }
+        ]
+    },
+    {
+        "nombreUser": "juancito",
+        "contrasena": "1234",
+        "tipodeCuenta": "Keeper",
+        "tipoMascota": [
+            "Chica",
+            "Mediana",
+            "Grande"
+        ],
+        "remuneracion": "1500",
+        "nombre": "Juan Jose",
         "apellido": "Decoud",
         "DNI": "35410517",
         "telefono": "2234559528",
         "fechasDisponibles": [
             {
                 "desde": "2022-10-20",
-                "hasta": "2022-10-28"
+                "hasta": "2022-10-27"
             },
             {
-                "desde": "2022-10-22",
+                "desde": "2022-10-28",
                 "hasta": "2022-10-29"
-            },
-            {
-                "desde": "2022-10-30",
-                "hasta": "2022-11-10"
-            }
-        ]
-    },
-    {
-        "nombreUser": "dany",
-        "contrasena": "12345",
-        "tipodeCuenta": "Keeper",
-        "tipoMascota": [
-            "Mediana"
-        ],
-        "remuneracion": "10000",
-        "nombre": "Daniel",
-        "apellido": "Sciacco",
-        "DNI": "11111111",
-        "telefono": "22222222222",
-        "fechasDisponibles": [
-            {
-                "desde": "2022-10-26",
-                "hasta": "2022-11-09"
-            },
-            {
-                "desde": "2022-11-23",
-                "hasta": "2022-11-30"
             }
         ]
     }
