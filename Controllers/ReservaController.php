@@ -23,8 +23,8 @@
 
 
         public function prueba (){
-           
-            
+
+
         }
 
         public function vistaOwner (){
@@ -49,7 +49,19 @@
 
 
 
+                
+        }
 
+        public function listaKeepers (){
+            
+
+            $keeperdao = new KeeperDAO();
+            $keeperlist = $keeperdao->getAll();
+            $listaEstadias = $keeperdao->listaEstadias($keeperlist);
+
+  
+            require_once(VIEWS_PATH."menu-owner.php");
+            require_once(VIEWS_PATH."actualizarKeepers.php");
         }
     }
 ?>
