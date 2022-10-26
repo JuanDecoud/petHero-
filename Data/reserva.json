@@ -28,5 +28,121 @@
             "DNI": "35410517",
             "telefono": "2234559528"
         }
+    },
+    {
+        "fdesde": "2022-10-14",
+        "fhasta": "2022-10-21",
+        "importeReserva": 750,
+        "importeTotal": "1500",
+        "pet": {
+            "nombre": "Perrucho",
+            "raza": "perro",
+            "tamano": "chico",
+            "planVacunacion": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/planVACUNACON.jpg",
+            "observacionesGrals": "Buen Perro",
+            "video": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/Monta\u00c3\u00b1as - 81945.mp4",
+            "imagen": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/perro.jpg"
+        },
+        "keeper": {
+            "nombreUser": "Decoud",
+            "contrasena": "1234",
+            "tipodeCuenta": "Keeper",
+            "tipoMascota": [
+                "Chica",
+                "Mediana",
+                "Grande"
+            ],
+            "remuneracion": "1500",
+            "nombre": "Juan",
+            "apellido": "Decoud",
+            "DNI": "35410517",
+            "telefono": "2234559528"
+        }
+    },
+    {
+        "fdesde": "2022-10-21",
+        "fhasta": "2022-10-15",
+        "importeReserva": 750,
+        "importeTotal": "1500",
+        "pet": {
+            "nombre": "Scooby",
+            "raza": "Perrito",
+            "tamano": "Grande",
+            "planVacunacion": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/planVACUNACON.jpg",
+            "observacionesGrals": "Perro agresivo",
+            "video": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/Rana - 113403.mp4",
+            "imagen": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/perro2.jpg"
+        },
+        "keeper": {
+            "nombreUser": "bigo",
+            "contrasena": "1234",
+            "tipodeCuenta": "Keeper",
+            "tipoMascota": [
+                "Chica",
+                "Mediana",
+                "Grande"
+            ],
+            "remuneracion": "1500",
+            "nombre": "BIGOTE",
+            "apellido": "BIGO",
+            "DNI": "35410517",
+            "telefono": "231231412"
+        }
+    },
+    {
+        "fdesde": "2022-11-23",
+        "fhasta": "2022-11-30",
+        "importeReserva": 5000,
+        "importeTotal": "10000",
+        "pet": {
+            "nombre": "Perrucho",
+            "raza": "perro",
+            "tamano": "chico",
+            "planVacunacion": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/planVACUNACON.jpg",
+            "observacionesGrals": "Buen Perro",
+            "video": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/Monta\u00c3\u00b1as - 81945.mp4",
+            "imagen": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/perro.jpg"
+        },
+        "keeper": {
+            "nombreUser": "dany",
+            "contrasena": "12345",
+            "tipodeCuenta": "Keeper",
+            "tipoMascota": [
+                "Mediana"
+            ],
+            "remuneracion": "10000",
+            "nombre": "Daniel",
+            "apellido": "Sciacco",
+            "DNI": "11111111",
+            "telefono": "22222222222"
+        }
+    },
+    {
+        "fdesde": "2022-11-23",
+        "fhasta": "2022-11-30",
+        "importeReserva": 5000,
+        "importeTotal": "10000",
+        "pet": {
+            "nombre": "Perrucho",
+            "raza": "perro",
+            "tamano": "chico",
+            "planVacunacion": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/planVACUNACON.jpg",
+            "observacionesGrals": "Buen Perro",
+            "video": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/Monta\u00c3\u00b1as - 81945.mp4",
+            "imagen": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/perro.jpg"
+        },
+        "keeper": {
+            "nombreUser": "dany",
+            "contrasena": "12345",
+            "tipodeCuenta": "Keeper",
+            "tipoMascota": [
+                "Mediana"
+            ],
+            "remuneracion": "10000",
+            "nombre": "Daniel",
+            "apellido": "Sciacco",
+            "DNI": "11111111",
+            "telefono": "22222222222"
+        }
     }
 ]

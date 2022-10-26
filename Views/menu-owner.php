@@ -51,6 +51,11 @@ use Models\Keeper;
                                         </ul>
                                         <div class="card-body">
                                             <img onclick="javascript:this.width=450;this.height=338" ondblclick="javascript:this.width=250;this.height=150" width="250" height = "150" src="<?php echo $pet->getPlanVacunacion()?>" width="100"/>
+                                            <?php 
+                                            if($pet->getPlanVacunacion()==null) {
+                                                echo "Plan de Vacunacion no agregado";
+                                            }
+                                            ?>
                                         </div>
                                         <div class="card-body">
                                             <iframe class="embed-responsive-item card-img-top" src="<?php echo $pet->getVideo(); ?>"></iframe>
