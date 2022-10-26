@@ -15,33 +15,16 @@
         "telefono": "2234559528",
         "fechasDisponibles": [
             {
-                "desde": "2022-10-14",
-                "hasta": "2022-10-21"
+                "desde": "2022-10-20",
+                "hasta": "2022-10-28"
             },
             {
-                "desde": "2022-10-13",
-                "hasta": "2022-09-29"
-            }
-        ]
-    },
-    {
-        "nombreUser": "bigo",
-        "contrasena": "1234",
-        "tipodeCuenta": "Keeper",
-        "tipoMascota": [
-            "Chica",
-            "Mediana",
-            "Grande"
-        ],
-        "remuneracion": "1500",
-        "nombre": "BIGOTE",
-        "apellido": "BIGO",
-        "DNI": "35410517",
-        "telefono": "231231412",
-        "fechasDisponibles": [
+                "desde": "2022-10-22",
+                "hasta": "2022-10-29"
+            },
             {
-                "desde": "2022-10-21",
-                "hasta": "2022-10-15"
+                "desde": "2022-10-30",
+                "hasta": "2022-11-10"
             }
         ]
     }

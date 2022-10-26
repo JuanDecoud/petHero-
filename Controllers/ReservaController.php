@@ -31,5 +31,19 @@ use DAO\PetDAO ;
                 $user = $this->keeperdao->obtenerUser($nombreKeeper);
                 
         }
+
+        public function listaKeepers (){
+            
+            $petdao = new PetDAO ();
+            $user = $_SESSION['loggedUser'];
+            $petlist = $petdao->buscarPets($user->getNombreUser());
+            $keeperdao = new KeeperDAO();
+            $keeperlist = $keeperdao->getAll();
+            $listaEstadias = $keeperdao->listaEstadias($keeperlist);
+            echo "hola";
+
+            require_once(VIEWS_PATH."menu-owner.php");
+            require_once(VIEWS_PATH."actualizarKeepers.php");
+        }
     }
 ?>
