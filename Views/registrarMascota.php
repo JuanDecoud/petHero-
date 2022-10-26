@@ -13,17 +13,22 @@
                <div class="form-group   ">
                     <label for="exampleInputEmail1" class = " mb-2"><strong>Nombre</strong></label>
                     <input type="text" class="form-control  " id="exampleInputEmail1" 
-                        aria-describedby="emailHelp" placeholder="" name = "nombre" require>
+                        aria-describedby="emailHelp" placeholder="" name = "nombre" required>
                 </div>
                 <div class="form-group  ">
                     <label for="exampleInputEmail1" class = "mb-2" ><strong>Raza</strong></label>
                     <input type="text" class="form-control " id="exampleInputEmail1" 
-                        aria-describedby="emailHelp" placeholder="" name = "raza" requiere>
+                        aria-describedby="emailHelp" placeholder="" name = "raza" required>
                 </div>
                 <div class="form-group ">
                     <label for="exampleInputEmail1" class = "mb-2" ><strong>Tamaño</strong></label>
-                    <input type="text" class="form-control " id="exampleInputEmail1" 
-                        aria-describedby="emailHelp" placeholder="" name = "tamaño" requiere>
+                    <select name="tamaño" class="form-select" id="iname" placeholder="Seleccione tamaño" required>
+                    <option value="Chico">Chico</option>
+                    <option value="Medio">Mediano</option>
+                    <option value="Grande">Grande</option>
+                    </select>
+                    <!-- <input type="text" class="form-control " id="exampleInputEmail1" 
+                        aria-describedby="emailHelp" placeholder="" name = "tamaño" requiere> -->
                 </div>
                 <div class="mb-3 ">
                     <label for="formFile" class="form-label"><strong>Foto</strong></label>
@@ -47,7 +52,6 @@
         </form>
     </div>
 </div>
-
 
 <?php   
     require_once ("Footer.php");
