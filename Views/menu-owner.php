@@ -51,6 +51,9 @@
                                         <div class="card-body">
                                             <iframe class="embed-responsive-item card-img-top" src="<?php echo $pet->getVideo(); ?>"></iframe>
                                         </div>
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item"><strong>Observacion:</strong><?php echo"  ". $pet->getObservacionesGrals();?></li>
+                                        </ul>
                                     </div>
                                     <?php  }?>
                             </div>
