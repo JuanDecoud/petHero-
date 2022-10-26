@@ -1,4 +1,5 @@
-[{
+[
+    {
         "petName": "Perrucho",
         "petBreed": "perro",
         "petSize": "chico",
@@ -30,6 +31,18 @@
         "petVideo": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/Rana - 113403.mp4",
         "petImg": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/perro.jpg",
         "petVacc": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/planVACUNACON.jpg",
+        "owner": {
+            "nombreUser": "Juan"
+        }
+    },
+    {
+        "petName": "Toby",
+        "petBreed": "Pastor Alem\u00e1n",
+        "petSize": "Grande",
+        "petObserv": "",
+        "petVideo": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/",
+        "petImg": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/raza-de-perro-pastor-aleman-m.jpg",
+        "petVacc": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/",
         "owner": {
             "nombreUser": "Juan"
         }
