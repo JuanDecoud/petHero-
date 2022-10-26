@@ -40,6 +40,24 @@
                 "observacionesGrals": "asdf",
                 "video": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/Rana - 113403.mp4",
                 "imagen": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/perro.jpg"
+            },
+            {
+                "nombre": "Toby",
+                "raza": "Ovejero",
+                "tamano": "Grande",
+                "planVacunacion": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/",
+                "observacionesGrals": "Perro que ladra no muerde",
+                "video": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/",
+                "imagen": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/raza-de-perro-pastor-aleman-m.jpg"
+            },
+            {
+                "nombre": "Firulais",
+                "raza": "Salchicha",
+                "tamano": "chico",
+                "planVacunacion": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/",
+                "observacionesGrals": "No muerde",
+                "video": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/",
+                "imagen": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/perro-salchicha-1.jpeg"
             }
         ]
     },
