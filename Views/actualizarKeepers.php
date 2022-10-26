@@ -2,7 +2,7 @@
                             <div class = " d-inline-flex flex-wrap">
                                 <?php foreach ($keeperlist as $keeper){ ?>
                                 <?php foreach ($keeper->getFechas() as $estadias){?>
-                            <form action="<?php echo FRONT_ROOT."Reserva/prueba" ?>" method = "post">
+                            <form action="<?php echo FRONT_ROOT."Reserva/solicitadudEstadia" ?>" method = "post">
                                 <div class="card" style="width: 18rem;">
                                     <div class="card-body">
                                         <h7 style= "color:aqua">Disponible</h7>
