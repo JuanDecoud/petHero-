@@ -26,13 +26,13 @@
         public function setFechadesde ($fdesde){$this->fdesde = $fdesde ;}
         public function getFechadesde (){ return $this->fdesde  ;}
 
-        public function setFechahasta ($fhasta){$this->fdesde = $fhasta ;}
+        public function setFechahasta ($fhasta){$this->fhasta = $fhasta ;}
         public function getFechahasta (){ return $this->fhasta  ;}
 
-        public function setKeeper ($keeper){$this->keeper = $keeper ;}
+        public function setKeeper ( Keeper $keeper){$this->keeper = $keeper ;}
         public function getKeeper (){ return $this->keeper  ;}
 
-        public function setPet ($pet){$this->pet = $pet ;}
+        public function setPet (Pet $pet){$this->pet = $pet ;}
         public function getPet (){ return $this->pet  ;}
 
         public function setImporteReserva ($importe){$this->importeReserva = $importe ;}
