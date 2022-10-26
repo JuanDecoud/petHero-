@@ -76,19 +76,6 @@
                         </h2>
                         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordion2">
    
-                        </div>
-                    </div>
-                    </div>
-                </div>
-        </div>
-</div>
-    
-   
-
-   
-
-  
-
 
  
 <?php require_once("Footer.php"); ?>
