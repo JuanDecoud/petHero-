@@ -6,7 +6,7 @@
     use Models\Keeper as Keeper ;
     use Models\Reserva as Reserva;
 
-    class StudentDAO implements IReservaDAO
+    class ReservaDAO implements IReservaDAO
     {
         private $reservaList = array();
 
@@ -26,6 +26,18 @@
             return $this->reservaList;
         }
 
+        public function buscarReservas (Keeper $keeper){
+            $this->RetrieveData();
+            $listadeReservas = array();
+            foreach ($this->reservaList as $reserva ){
+                $keeperReserva = $reserva->getKeeper();
+                if($keeperReserva->getNombreUser()==$keeper->getNombreUser()){
+                    array_push($listadeReservas , $reserva);
+                }
+            }
+            return $listadeReservas;      
+        }
+
         private function SaveData()
         {
             $arrayToEncode = array();
@@ -41,15 +53,16 @@
 
                 $pet = $reserva -> getPet();
                 if($pet != null){
-                    $value['nombre']=$pet->getNombre ();
-                    $value['raza']=$pet->getRaza ();
-                    $value['tamano']=$pet->getTamano ();
-                    $value['planVacunacion']=$pet->GetPlanVacunacion ();
-                    $value['observacionesGrals']=$pet->getObservacionesGrals ();
-                    $value['video']=$pet->getVideo ();
-                    $value['imagen']=$pet->getImg ();
+                    $valuepet['nombre']=$pet->getNombre ();
+                    $valuepet['raza']=$pet->getRaza ();
+                    $valuepet['tamano']=$pet->getTamano ();
+                    $valuepet['planVacunacion']=$pet->GetPlanVacunacion ();
+                    $valuepet['observacionesGrals']=$pet->getObservacionesGrals ();
+                    $valuepet['video']=$pet->getVideo ();
+                    $valuepet['imagen']=$pet->getImg ();
+                    $valuesArray["pet"] = $valuepet;
                 }
-                $valuesArray["pet"] = $pet;
+                
 
                 $keeper = $reserva -> getKeeper();
                 if ($keeper != null){
@@ -62,14 +75,9 @@
                     $value ['apellido'] = $keeper->getApellido();
                     $value ['DNI'] = $keeper->getDni();
                     $value ['telefono'] = $keeper->getTelefono();
-                    $value ['fechasDisponibles'] = array ();
-                    foreach ($keeper->getFechas() as $estadia){
-                        $values['desde']=$estadia->getDesde();
-                        $values['hasta']=$estadia->getHasta();
-                        array_push($value['fechasDisponibles'] , $values); 
-                    }
+                    $valuesArray["keeper"] = $value;
                 }
-                $valuesArray["keeper"] = $keeper;
+               
 
                 array_push($arrayToEncode, $valuesArray);
             }
@@ -81,7 +89,7 @@
 
         private function RetrieveData()
         {
-            $this->reservaList = array();
+           
             $pet = null;
             $keeper = null;
 
@@ -116,18 +124,8 @@
                     $reserva-> setPet($pet);
 
                     if($valuesArray["keeper"] != null){
-                        $keeper = new Keeper(null,null,null,null,null,null,null,null,null);
-                        $keeper->setNombreUser( $valuesArray['nombreUser']);
-                        $keeper->setContrasena( $valuesArray['contrasena']);
-                        $keeper->setTipodecuenta( $valuesArray['tipodeCuenta']);
-                        $keeper->setTipoMascota( $valuesArray['tipoMascota']);
-                        $keeper->setRemuneracion( $valuesArray['remuneracion']);
-                        $keeper->setNombre( $valuesArray['nombre']);
-                        $keeper->setApellido( $valuesArray['apellido']);
-                        $keeper->setDni( $valuesArray['DNI']);
-                        $keeper->setTelefono( $valuesArray['telefono']);
-                        $keeper->setFechas( $valuesArray['fechasDisponibles']);
-                        
+                        $keeper = new Keeper($valuesArray["keeper"]['nombreUser'],$valuesArray["keeper"]['contrasena'], $valuesArray["keeper"]['tipodeCuenta'],$valuesArray["keeper"]['tipoMascota'],$valuesArray["keeper"]['remuneracion'],$valuesArray["keeper"]['nombre'],$valuesArray["keeper"]['apellido'],$valuesArray["keeper"]['DNI'],$valuesArray["keeper"]['telefono']);
+
                     }
                         $reserva->setKeeper($keeper); 
                         

@@ -1,0 +1,32 @@
+[
+    {
+        "fdesde": "2022-10-14",
+        "fhasta": "2022-10-21",
+        "importeReserva": 750,
+        "importeTotal": "1500",
+        "pet": {
+            "nombre": "Perrucho",
+            "raza": "perro",
+            "tamano": "chico",
+            "planVacunacion": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/planVACUNACON.jpg",
+            "observacionesGrals": "Buen Perro",
+            "video": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/Monta\u00c3\u00b1as - 81945.mp4",
+            "imagen": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/perro.jpg"
+        },
+        "keeper": {
+            "nombreUser": "Decoud",
+            "contrasena": "1234",
+            "tipodeCuenta": "Keeper",
+            "tipoMascota": [
+                "Chica",
+                "Mediana",
+                "Grande"
+            ],
+            "remuneracion": "1500",
+            "nombre": "Juan",
+            "apellido": "Decoud",
+            "DNI": "35410517",
+            "telefono": "2234559528"
+        }
+    }
+]

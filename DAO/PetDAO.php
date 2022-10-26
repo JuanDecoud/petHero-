@@ -23,6 +23,18 @@
             return $this->petList;
         }
 
+        public function retrievePet ($petName){
+            $this->RetrieveData();
+            $petFound = null ;
+            foreach ($this->petList as $pet){
+                if ($petName == $pet->getNombre()){
+                    $petFound = $pet ;
+                }
+            }
+            return $petFound ;
+
+        }
+
         private function Save()
         {
             $arrayToEncode = array();
