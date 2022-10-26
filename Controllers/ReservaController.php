@@ -22,9 +22,9 @@
         }
 
 
-        public function prueba ($nombre , $fecha , $fecha2 , $pet){
-            echo $nombre.$fecha.$fecha2.$pet;
-            $this->vistaOwner();
+        public function prueba (){
+           
+            
         }
 
         public function vistaOwner (){

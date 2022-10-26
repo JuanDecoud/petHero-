@@ -26,6 +26,18 @@
             return $this->reservaList;
         }
 
+        public function buscarReservas (Keeper $keeper){
+            $this->RetrieveData();
+            $listadeReservas = array();
+            foreach ($this->reservaList as $reserva ){
+                $keeperReserva = $reserva->getKeeper();
+                if($keeperReserva->getNombreUser()==$keeper->getNombreUser()){
+                    array_push($listadeReservas , $reserva);
+                }
+            }
+            return $listadeReservas;      
+        }
+
         private function SaveData()
         {
             $arrayToEncode = array();
