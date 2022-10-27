@@ -1,0 +1,32 @@
+[
+    {
+        "nombreUser": "Nahuel",
+        "contrasena": "1234",
+        "tipodeCuenta": "Keeper",
+        "tipoMascota": [
+            "Chica",
+            "Mediana",
+            "Grande"
+        ],
+        "remuneracion": "1500",
+        "nombre": "naasd",
+        "apellido": "asd",
+        "DNI": "51651",
+        "telefono": "51465146",
+        "fechasDisponibles": []
+    },
+    {
+        "nombreUser": "elsa",
+        "contrasena": "1234",
+        "tipodeCuenta": "Keeper",
+        "tipoMascota": [
+            "Mediana"
+        ],
+        "remuneracion": "1500",
+        "nombre": "asd",
+        "apellido": "asd",
+        "DNI": "546",
+        "telefono": "5465",
+        "fechasDisponibles": []
+    }
+]

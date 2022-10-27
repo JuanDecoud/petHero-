@@ -43,15 +43,15 @@
                 </div>
                 <h6 class = "m-1 mx-4"> Tipos de Mascota</h6>
                 <div class="form-check form-check-inline m-1 mx-4">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Chica" name = "mascota1">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Chica" name = "arreglo[]">
                     <label class="form-check-label" for="inlineCheckbox1"  value = "Chica">Chica</label>
                 </div>
                 <div class="form-check form-check-inline m-1">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Mediana" name = "mascota2">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Mediana" name = "arreglo[]">
                     <label class="form-check-label" for="inlineCheckbox1"  value = "Chica">Mediana</label>
                 </div>
                 <div class="form-check form-check-inline m-1">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Grande" name = "mascota3">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Grande" name = "arreglo[]">
                     <label class="form-check-label" for="inlineCheckbox1"  value = "Chica">Grande</label>
                 </div>
                 <div class = "form-group m-4 mx-4">

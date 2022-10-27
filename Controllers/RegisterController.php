@@ -80,15 +80,10 @@
 
         }
 
-        public function agregarKeeper ($nombre,$apellido,$dni,$telefono,$userName,$contrasena,$remuneracion,$tipoMascota){
+        public function agregarKeeper ($nombre,$apellido,$dni,$telefono,$userName,$contrasena,$remuneracion,$arrayTipo ){
 
-            $tipoMascota = array ();
-            for ($x=1; $x <=3 ; $x++){
-                if ($_POST['mascota'.$x] !=null){
-                    array_push ($tipoMascota , $_POST['mascota'.$x]);
-                }
-            }
-            
+            $tipoMascota = $arrayTipo ;
+          
 
             if ($userName !=null && $contrasena!=null){
                 strtolower($userName);
