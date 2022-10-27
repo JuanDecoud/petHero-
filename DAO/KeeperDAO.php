@@ -12,12 +12,21 @@
         public function getAll (){
             $this->obtenerDatos();
             return $this->keeperList;
+
         }
 
         public function estadiasPorfecha ($desde , $hasta){
             $listaEstadias = array ();
-            $this->obtenerDatos();
 
+            $this->obtenerDatos();
+            foreach ($this->keeperList as $keeper){
+                foreach ($keeper->getFechas() as $estadias){
+                    if ($estadias->getDesde () >= $desde && $estadias->getHasta () <= $hasta){
+                        array_push ($listaEstadias , $estadias);
+                    }
+                }
+            }
+            return $listaEstadias();
         }
 
         public function listaEstadias ($listadeKeepers){
@@ -55,10 +64,33 @@
             $this->guardarDatos();
         }
 
+        public function verificarRangos ($desde , $hasta  ,$userName){
+            $verificar = null ;
+            $this->obtenerDatos();
+            foreach ($this->keeperList as $keeper){
+                if ($keeper->getNombreUser () == $userName){
+                    foreach ($keeper->getFechas () as $estadias){
+                        if (($desde >= $estadias->getDesde() && $hasta <= $estadias->getHasta()) 
+                        || ($desde < $estadias->getDesde () &&  $hasta > $estadias->getHasta()) 
+                        || ($desde>$estadias->getDesde() && $desde<$estadias->getHasta() && $hasta> $estadias->getHasta() )){
+                                $verificar = true ;
+                                return $verificar ;
+                           
+                        }
+                        else {
+                            $verificar = false ;
+                            return $verificar ;
+                        } 
+                    }
+                }
+            }
+
+        }
+
 
         public function agregarFecha (FechasEstadias $estadia ,$username ){
             
-            $this->obtenerDatos();
+           /* $this->obtenerDatos();*/
             foreach($this->keeperList  as $keeper){
                 if ($keeper->getNombreUser()==$username)
                     $keeper->agregarFecha ($estadia);
