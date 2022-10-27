@@ -19,17 +19,19 @@
 
 
         public function asignarFecha ($desde , $hasta ){
-            $estadia = new FechasEstadias($desde , $hasta);
+            
+            $keeper = $_SESSION['loggedUser'];
+            $verificar = $this->keeperDao->verificarRangos ($desde,$hasta,$keeper->getNombreUser() );
+            $fechaDeldia=$this->keeperDao->verificarFechadeldia($desde , $hasta);
+            echo $fechaDeldia;
 
-           $verificar = $this->keeperDao->verificarRangos ($desde,$hasta,$_SESSION['loggedUser'] );
-
-           if ($verificar == false){
-                $keeper = $_SESSION['loggedUser'];
+           if ($verificar ==null && $fechaDeldia ==true){
+                $estadia = new FechasEstadias($desde , $hasta);
                 $this->keeperDao->agregarFecha($estadia , $keeper->getNombreUser() );
                 $this->principalKeeper(); 
            }
            else {
-                echo '<script language="javascript">alert("Rango de fechas repetido");</script>';
+                echo '<script language="javascript">alert("Rango de fechas repetido o fecha ingresada inferior a la actual");</script>';
                 $this->principalKeeper();
            }
   
