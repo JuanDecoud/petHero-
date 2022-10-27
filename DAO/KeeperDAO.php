@@ -75,7 +75,6 @@
                         || ($desde>$estadias->getDesde() && $desde<$estadias->getHasta() && $hasta> $estadias->getHasta() )){
                                 $verificar = true ;
                                 return $verificar ;
-                           
                         }
                         else {
                             $verificar = false ;

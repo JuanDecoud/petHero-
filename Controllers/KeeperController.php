@@ -21,9 +21,18 @@
         public function asignarFecha ($desde , $hasta ){
             $estadia = new FechasEstadias($desde , $hasta);
 
-            $keeper = $_SESSION['loggedUser'];
-            $this->keeperDao->agregarFecha($estadia , $keeper->getNombreUser() );
-            $this->principalKeeper();   
+           $verificar = $this->keeperDao->verificarRangos ($desde,$hasta,$_SESSION['loggedUser'] );
+
+           if ($verificar == false){
+                $keeper = $_SESSION['loggedUser'];
+                $this->keeperDao->agregarFecha($estadia , $keeper->getNombreUser() );
+                $this->principalKeeper(); 
+           }
+           else {
+                echo '<script language="javascript">alert("Rango de fechas repetido");</script>';
+                $this->principalKeeper();
+           }
+  
         }
 
         public function quitarFecha ($desde , $hasta ){
@@ -31,7 +40,6 @@
             $user = $_SESSION['loggedUser'];
             $this->keeperDao->quitarFecha($user->getNombreUser(),$estadia);
             $this->principalKeeper();
-            
 
         }
 
