@@ -15,8 +15,8 @@
 
 ?>
    
-<div class = "d-flex justify-content-center mt-6 ">
-        <div class = "d-flex flex-wrap  col-10  shadow p-3 mb-2 mt-5 bg-body rounded  ">
+<div class = "d-flex justify-content-center mt-6 col-10 mx-auto ">
+        <div class = "d-flex flex-wrap  col-12  shadow p-3 mb-2 mt-5 bg-body rounded  ">
             <div class = "container  mt-2   col col-10 ">
                 <form action="<?php echo FRONT_ROOT."Pet/agregarPet"; ?>" method="post" class ="form-inline  p-2 ">
                     <div class ="d-flex flex-row">
@@ -58,15 +58,26 @@
                     </div>
                 </div>
             </div>
-            <div class = "container col col-10 agregar ">
-                <form action="<?php echo FRONT_ROOT."Reserva/listaKeepers"; ?>" method="post" class ="form-inline  p-2 ">
-                    <button type="submit" class="btn btn-default btn-sm bg-danger mb-4">
-                        <span><img src="<?php echo FRONT_ROOT.VIEWS_PATH."img/recargar.png" ?>" alt=""></span> 
-                        
-                    </button>
-                </form>
-            </div>
-            <div class = "container  border border-white col col-10 mb-5">
+           
+                <div class = "d-inline-flex  col-10 agregar mx-auto  justify-content-between   ">
+                    <div class = "d-flex col-2  justify-content-start  ">
+                        <form action="<?php echo FRONT_ROOT."Reserva/listaKeepers"; ?>" method="post">
+                            <button type="submit" class="btn btn-default btn-sm mt-4 mx-4  bg-danger">
+                                <img src="<?php echo FRONT_ROOT.VIEWS_PATH."img/recargar.png" ?>" alt="">
+                            </button>
+                        </form>
+                    </div>
+                    <form class="row g-5 d-flex justify-content-end " method = "post" action="<?php echo FRONT_ROOT."Reserva/keepersPorfecha" ;?>">
+                            <div class = "d-inline-flex  col-9   ">
+                                <input type="text" readonly class="form-control-plaintext text-center mt-4" id="" value="Desde">
+                                <input type="date" class="form-control mt-4" id="" placeholder="" name="desde">
+                                <input type="text" readonly class="form-control-plaintext text-center mt-4" id="" value="Hasta">
+                                <input type="date" class="form-control mt-4" id="" placeholder="" name="desde">
+                                <button class = "btn btn-sm btn-danger mx-4 mt-4">Buscar</button>
+                            </div>
+                    </form>
+                </div>
+            <div class = "container  border border-white col col-10 mb-5 mt-2">
                 <div class="accordion  " id="accordion2">
                     <div class="accordion-item active">
                         <h2 class="accordion-header" id="headingTwo">

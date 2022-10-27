@@ -7,11 +7,17 @@
     class KeeperDAO implements IKeeperDAO {
         private $fileName = ROOT."Data/keepers.json" ;
         private $keeperList = array ();
-        private $ownerList = array();
+       
 
         public function getAll (){
             $this->obtenerDatos();
             return $this->keeperList;
+        }
+
+        public function estadiasPorfecha ($desde , $hasta){
+            $listaEstadias = array ();
+            $this->obtenerDatos();
+
         }
 
         public function listaEstadias ($listadeKeepers){
