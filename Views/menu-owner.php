@@ -85,7 +85,7 @@
                             Keepers Disponibles
                         </button>
                         </h2>
-                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordion2">
+                        <div id="collapseTwo" class="accordion-collapse collapse show " aria-labelledby="headingTwo" data-bs-parent="#accordion2">
    
 
  
