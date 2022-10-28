@@ -75,9 +75,8 @@
 
         public function verificarFechadeldia ($desde , $hasta){
             $date = date("Y-m-d");
-            echo $desde ;
-            echo $hasta;
-            if ($desde > $date  && $hasta > $date ){
+
+            if ($desde >= $date  || $hasta >= $date ){
                 return true;
             }
             else {
@@ -93,7 +92,7 @@
                     foreach ($keeper->getFechas () as $estadias){
                         if (($desde >= $estadias->getDesde() && $hasta <= $estadias->getHasta()) 
                         || ($desde < $estadias->getDesde () &&  $hasta > $estadias->getHasta()) 
-                        || ($desde>$estadias->getDesde() && $desde<=$estadias->getHasta() && $hasta> $estadias->getHasta() )){
+                        || ($desde>=$estadias->getDesde() && $desde<=$estadias->getHasta() && $hasta> $estadias->getHasta() )){
                                 
                             $verificar=$estadias ;
                             return $verificar;

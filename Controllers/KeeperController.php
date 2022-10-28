@@ -23,8 +23,8 @@
             $keeper = $_SESSION['loggedUser'];
             $verificar = $this->keeperDao->verificarRangos ($desde,$hasta,$keeper->getNombreUser() );
             $fechaDeldia=$this->keeperDao->verificarFechadeldia($desde , $hasta);
-            echo $fechaDeldia;
-
+          
+      
            if ($verificar ==null && $fechaDeldia ==true){
                 $estadia = new FechasEstadias($desde , $hasta);
                 $this->keeperDao->agregarFecha($estadia , $keeper->getNombreUser() );
