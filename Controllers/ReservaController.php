@@ -55,12 +55,15 @@
         }
 
         public function  keepersPorfecha ($desde , $hasta){
-
-            $listaEstadias = $this->keeperdao->estadiasPorfecha($desde , $hasta);
+   
+            $keeperlist = array ();
+            $keeperlist = $this->keeperdao->estadiasPorfecha($desde , $hasta);
+            
             require_once(VIEWS_PATH."menu-owner.php");
             require_once(VIEWS_PATH."actualizarKeepers.php");
 
         }
+
 
         public function listaKeepers (){
             

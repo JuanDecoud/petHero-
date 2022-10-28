@@ -70,10 +70,10 @@
                     <form class="row g-5 d-flex justify-content-end " method = "post" action="<?php echo FRONT_ROOT."Reserva/keepersPorfecha" ;?>">
                             <div class = "d-inline-flex  col-9   ">
                                 <input type="text" readonly class="form-control-plaintext text-center mt-4" id="" value="Desde">
-                                <input type="date" class="form-control mt-4" id="" placeholder="" name="desde">
+                                <input type="date" class="form-control mt-4" id="" placeholder="" name="desde" required>
                                 <input type="text" readonly class="form-control-plaintext text-center mt-4" id="" value="Hasta">
-                                <input type="date" class="form-control mt-4" id="" placeholder="" name="desde">
-                                <button class = "btn btn-sm btn-danger mx-4 mt-4">Buscar</button>
+                                <input type="date" class="form-control mt-4" id="" placeholder="" name="hasta" required>
+                                <button  type ="submit"class = "btn btn-sm btn-danger mx-4 mt-4">Buscar</button>
                             </div>
                     </form>
                 </div>

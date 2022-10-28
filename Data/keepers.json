@@ -13,7 +13,20 @@
         "apellido": "asd",
         "DNI": "51651",
         "telefono": "51465146",
-        "fechasDisponibles": []
+        "fechasDisponibles": [
+            {
+                "desde": "2022-10-28",
+                "hasta": "2022-10-30"
+            },
+            {
+                "desde": "2022-10-31",
+                "hasta": "2022-11-19"
+            },
+            {
+                "desde": "2022-11-12",
+                "hasta": "2022-11-17"
+            }
+        ]
     },
     {
         "nombreUser": "elsa",

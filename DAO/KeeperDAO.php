@@ -16,17 +16,26 @@
         }
 
         public function estadiasPorfecha ($desde , $hasta){
+            $keeperlist = array ();
             $listaEstadias = array ();
+            $newkeeper = null ;
 
             $this->obtenerDatos();
+       
             foreach ($this->keeperList as $keeper){
                 foreach ($keeper->getFechas() as $estadias){
                     if ($estadias->getDesde () >= $desde && $estadias->getHasta () <= $hasta){
-                        array_push ($listaEstadias , $estadias);
-                    }
+                        $newkeeper = $keeper ;
+                        array_push ($listaEstadias , $estadias); 
+                    }   
                 }
+                if ($listaEstadias != null){
+                    $newkeeper->setFechas ($listaEstadias); 
+                    array_push ($keeperlist ,  $newkeeper);
+                }
+                $listaEstadias = array();
             }
-            return $listaEstadias();
+            return $keeperlist;
         }
 
         public function listaEstadias ($listadeKeepers){
