@@ -3,7 +3,7 @@
                                 <?php foreach ($keeperlist as $keeper){ ?>
                                 <?php foreach ($keeper->getFechas() as $estadias){?>
                             <form action="<?php echo FRONT_ROOT."Reserva/solicitadudEstadia" ?>" method = "post">
-                                <div class="card" style="width: 18rem;">
+                                <div class="card m-2" style="width: 18rem;">
                                     <div class="card-body">
                                         <h7 style= "color:aqua">Disponible</h7>
                                         <h5 class="card-title"><?php echo $keeper->getNombre()." ".$keeper->getApellido(); ?></h5>
@@ -11,7 +11,7 @@
                                     </div>
                                     <div class="card-body">
                                         <div class = "col-auto">
-                                            <label for="" class = "mx-2  mt-2"><h5>Desde:</h5></label>
+                                            <label for="" class = "m-2  "><h5>Desde:</h5></label>
                                             <input style =" text-align: center; font-weight:bold; color:black; border :0;" class ="border-bottom mt-1" type="text" placeholder="<?php echo $estadias->getDesde(); ?>" name ="desde"  value = "<?php echo $estadias->getDesde() ?>"readonly >
                                         </div>
                                         <div class = "col-auto" >
