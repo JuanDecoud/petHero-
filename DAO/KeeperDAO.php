@@ -76,7 +76,7 @@
         public function verificarFechadeldia ($desde , $hasta){
             $date = date("Y-m-d");
 
-            if ($desde >= $date  || $hasta >= $date ){
+            if ( $hasta >= $date && $desde>= $date){
                 return true;
             }
             else {
@@ -93,10 +93,9 @@
                         if (($desde >= $estadias->getDesde() && $hasta <= $estadias->getHasta()) 
                         || ($desde < $estadias->getDesde () &&  $hasta > $estadias->getHasta()) 
                         || ($desde>=$estadias->getDesde() && $desde<=$estadias->getHasta() && $hasta> $estadias->getHasta() )){
-                                
+                            
                             $verificar=$estadias ;
                             return $verificar;
-                               
                         }
                         else {
                             $verificar = null ;
