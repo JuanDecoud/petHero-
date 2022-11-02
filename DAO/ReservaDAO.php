@@ -73,6 +73,7 @@
                     $valuepet['observacionesGrals']=$pet->getObservacionesGrals ();
                     $valuepet['video']=$pet->getVideo ();
                     $valuepet['imagen']=$pet->getImg ();
+                    $valuepet['user'] = $pet->getOwner();
                     $valuesArray["pet"] = $valuepet;
                 }
                 
