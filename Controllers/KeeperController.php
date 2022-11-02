@@ -3,6 +3,8 @@
 
     use DAO\KeeperDAO;
     use Models\FechasEstadias;
+    use Models\Reserva;
+    use DAO\ReservaDAO;
 
     class KeeperController {
         private $keeperDao ;
@@ -45,8 +47,14 @@
 
         }
 
+        public function rechazarReserva($petName){
+            $borrarReserva = new ReservaDAO();
+
+            $user = $_SESSION['loggedUser'];
+            $borrarReserva -> borrarReservaxNombre($user->getNombre(),$petName);
+            $this->principalKeeper();
+        }
         
-    
 
 
 

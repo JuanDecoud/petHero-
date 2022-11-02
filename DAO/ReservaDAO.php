@@ -133,5 +133,29 @@
                 }
             }
         }
+
+        public function borrarReservaxNombre($nombreKeeper, $nombrePet){
+            $this -> RetrieveData();
+
+            $keeper = null;
+            $pet = null;
+            foreach($this-> reservaList as $reserva){
+                $keeper = $reserva->getKeeper();
+                $pet = $reserva -> getPet();
+                if($keeper -> getNombreUser() == $nombreKeeper && $pet ->getNombre() == $nombrePet){
+                    $this -> borrarReserva($reserva);
+                }
+            }
+     
+        }
+
+        private function borrarReserva(Reserva $reserva){
+            
+            if(($clave = array_search($reserva, $this->reservaList) !== false)){
+                unset($this -> reservaList[$clave]);
+            }
+
+            $this -> SaveData();
+        }
     }
 ?>

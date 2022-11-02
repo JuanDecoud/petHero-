@@ -1,0 +1,32 @@
+[
+    {
+        "fdesde": "2022-11-01",
+        "fhasta": "2022-12-31",
+        "importeReserva": 750,
+        "importeTotal": "1500",
+        "pet": {
+            "nombre": "Perruno",
+            "raza": "Perro",
+            "tamano": "Grande",
+            "planVacunacion": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/planVACUNACON.jpg",
+            "observacionesGrals": "Buen Perro",
+            "video": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/Rana - 113403.mp4",
+            "imagen": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/perro.jpg"
+        },
+        "keeper": {
+            "nombreUser": "Nahuel",
+            "contrasena": "1234",
+            "tipodeCuenta": "Keeper",
+            "tipoMascota": [
+                "Chica",
+                "Mediana",
+                "Grande"
+            ],
+            "remuneracion": "1500",
+            "nombre": "naasd",
+            "apellido": "asd",
+            "DNI": "51651",
+            "telefono": "51465146"
+        }
+    }
+]

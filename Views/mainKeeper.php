@@ -96,7 +96,7 @@ $listaReservas = $reservadao->buscarReservas($user);
                             <div class="card" style="width: 18rem;">
                                 <div class="card-body">
                                     <h5 class="border-bottom">Solicitud de estadia.</h5>
-                                    <form action="">
+                                    <form action="<?php echo FRONT_ROOT . "Keeper/rechazarReserva" ?>">
                                         <div class="col-auto mt-2">
                                             <label for="" class="mx-2  ">
                                                 <h7>Desde:</h7>

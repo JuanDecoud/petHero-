@@ -11,7 +11,7 @@
         
 
     
-
+        
         public function __construct($username , $contrasena , $tipocuenta , $tipoMascota , $remuneracion, $nombre, $apellido,$dni,$telefono)
         {
             parent::__construct($username,$contrasena);
@@ -24,6 +24,7 @@
             $this->tipoMascota = $tipoMascota;          
             $this->remuneracion = $remuneracion ;
         }
+        
 
         public function getTipo (){return $this->tipoMascota;}
         public function getRemuneracion (){return $this->remuneracion;}
