@@ -2,6 +2,7 @@
     namespace DAO;
 
     use DAO\IReservaDAO as IReservaDAO;
+    use Models\Estadoreserva as Estadoreserva;
     use Models\Pet as Pet ;
     use Models\Keeper as Keeper ;
     use Models\Reserva as Reserva;
@@ -13,7 +14,7 @@
         public function Add(Reserva $reserva)
         {
             $this->RetrieveData();
-            
+            $reserva->setEstado(Estadoreserva::Pendiente);
             array_push($this->reservaList, $reserva);
 
             $this->SaveData();
@@ -26,12 +27,23 @@
             return $this->reservaList;
         }
 
+        public function reservasAceptadas (){
+            $reservasAceptadas = array ();
+            foreach ($this->reservaList as $reserva){
+                if ($reserva ->getEstado () == Estadoreserva::Aceptada){
+                    array_push($reservasAceptadas , $reserva);
+                }
+            }
+            return $reservasAceptadas ;
+        }
+
         public function buscarReservas (Keeper $keeper){
             $this->RetrieveData();
             $listadeReservas = array();
             foreach ($this->reservaList as $reserva ){
                 $keeperReserva = $reserva->getKeeper();
-                if($keeperReserva->getNombreUser()==$keeper->getNombreUser()){
+                if($keeperReserva->getNombreUser()==$keeper->getNombreUser() 
+                && $reserva->getEstado()==Estadoreserva::Pendiente){
                     array_push($listadeReservas , $reserva);
                 }
             }
@@ -50,6 +62,7 @@
                 $valuesArray["fhasta"] = $reserva->getFechahasta();
                 $valuesArray["importeReserva"] = $reserva->getImporteReserva();
                 $valuesArray["importeTotal"] = $reserva->getImporteTotal();
+                
 
                 $pet = $reserva -> getPet();
                 if($pet != null){
@@ -77,6 +90,8 @@
                     $value ['telefono'] = $keeper->getTelefono();
                     $valuesArray["keeper"] = $value;
                 }
+
+               $valuesArray['estado'] = $reserva ->getEstado ();
                
 
                 array_push($arrayToEncode, $valuesArray);
@@ -108,7 +123,7 @@
                     $reserva->setImporteReserva($valuesArray["importeReserva"]);
                     $reserva->setImporteTotal($valuesArray["importeTotal"]);
                     
-                    
+                                        
                     if($valuesArray["pet"] != null){
                         $pet = new Pet();
                         $pet->setNombre($valuesArray["pet"]['nombre']);
@@ -127,12 +142,15 @@
                         $keeper = new Keeper($valuesArray["keeper"]['nombreUser'],$valuesArray["keeper"]['contrasena'], $valuesArray["keeper"]['tipodeCuenta'],$valuesArray["keeper"]['tipoMascota'],$valuesArray["keeper"]['remuneracion'],$valuesArray["keeper"]['nombre'],$valuesArray["keeper"]['apellido'],$valuesArray["keeper"]['DNI'],$valuesArray["keeper"]['telefono']);
 
                     }
-                        $reserva->setKeeper($keeper); 
                         
+                    $reserva->setKeeper($keeper); 
+                    $reserva->setEstado($valuesArray['estado']);
                     array_push($this->reservaList, $reserva);
                 }
             }
         }
+
+ 
 
         public function borrarReservaxNombre($nombreKeeper, $nombrePet){
             $this -> RetrieveData();
@@ -171,6 +189,31 @@
                 }
             }
             return null;
+        }
+
+        public function buscarReservaAceptada ($nombreUser ){
+            $this->RetrieveData();
+            $listaReservas = array ();
+            foreach($this->reservaList as $reserva){
+                
+                $pet = $reserva->getPet();
+                $owner = $pet->getOwner();
+                if ($owner->getNombreUser() == $nombreUser && $pet->getNombre() 
+                && $reserva->getEstado () == Estadoreserva::Aceptada){
+                    array_push($listaReservas , $reserva);
+                }
+            }
+            return $listaReservas;
+        }
+
+        public function cambiarEstado ($desde , $hasta ){
+            $this->RetrieveData();
+            foreach ($this->reservaList as $reserva){
+                if ($reserva->getFechadesde ()== $desde && $reserva->getFechahasta ()==$hasta){
+                    $reserva->setEstado (Estadoreserva::Aceptada);
+                }
+            }
+            $this->SaveData();
         }
     }
 

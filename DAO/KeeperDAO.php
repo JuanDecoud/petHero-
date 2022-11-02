@@ -155,12 +155,12 @@ use Models\Reserva;
                         $estadia= new FechasEstadias($fechas['desde'], $fechas['hasta']);
                         $keeper->agregarFecha($estadia);
                     }
-                    ///nuevo desde aqui
+                   /* ///nuevo desde aqui
                     foreach ($value['reservasAceptadas'] as $reserva){
                         $reserva= new Reserva();
                         $keeper->agregarReservaAceptada($reserva);
                     }
-                    ///fin
+                    ///fin*/
                     array_push($this->keeperList , $keeper);
                 }
             }
@@ -184,7 +184,7 @@ use Models\Reserva;
                     $values['hasta']=$estadia->getHasta();
                     array_push($value['fechasDisponibles'] , $values); 
                 }
-                ///Nuevo apartir de aqui
+               /* ///Nuevo apartir de aqui
                 $value ['reservasAceptadas'] = array ();
                 foreach ($keeper->getReservas() as $reserva){
                     $values['desde']=$reserva->getFechadesde();
@@ -195,7 +195,7 @@ use Models\Reserva;
                     $values['iTotal']=$reserva->getImporteTotal();
                     array_push($value['reservasAceptadas'] , $values); 
                 }
-                ///fin
+                ///fin*/
                 array_push($arraytoEncode , $value);
             }
             $contenidoJson = json_encode($arraytoEncode , JSON_PRETTY_PRINT);

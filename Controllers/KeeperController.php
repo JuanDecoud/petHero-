@@ -59,7 +59,7 @@ use Models\Keeper;
         public function aceptarReserva($petName){
             $buscarReserva = new ReservaDAO();
             $user = $_SESSION['loggedUser'];
-            $keeper=;
+            //$keeper=;
 
             $reserva = new Reserva();
 

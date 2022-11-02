@@ -1,7 +1,38 @@
 [
     {
-        "fdesde": "2022-11-01",
-        "fhasta": "2022-12-31",
+        "fdesde": "2022-11-17",
+        "fhasta": "2022-11-17",
+        "importeReserva": 750,
+        "importeTotal": "1500",
+        "pet": {
+            "nombre": "Toby",
+            "raza": "Perro",
+            "tamano": "Grande",
+            "planVacunacion": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/planVACUNACON.jpg",
+            "observacionesGrals": "Buen Perro",
+            "video": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/Monta\u00c3\u00b1as - 81945.mp4",
+            "imagen": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/perro2.jpg"
+        },
+        "keeper": {
+            "nombreUser": "decoud",
+            "contrasena": "1234",
+            "tipodeCuenta": "Keeper",
+            "tipoMascota": [
+                "Chica",
+                "Mediana",
+                "Grande"
+            ],
+            "remuneracion": "1500",
+            "nombre": "Juan",
+            "apellido": "Decoud",
+            "DNI": "35410517",
+            "telefono": "2234559528"
+        },
+        "estado": "Pendiente"
+    },
+    {
+        "fdesde": "2022-11-30",
+        "fhasta": "2022-12-01",
         "importeReserva": 750,
         "importeTotal": "1500",
         "pet": {
@@ -14,7 +45,7 @@
             "imagen": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/perro.jpg"
         },
         "keeper": {
-            "nombreUser": "Nahuel",
+            "nombreUser": "decoud",
             "contrasena": "1234",
             "tipodeCuenta": "Keeper",
             "tipoMascota": [
@@ -23,10 +54,73 @@
                 "Grande"
             ],
             "remuneracion": "1500",
-            "nombre": "naasd",
-            "apellido": "asd",
-            "DNI": "51651",
-            "telefono": "51465146"
-        }
+            "nombre": "Juan",
+            "apellido": "Decoud",
+            "DNI": "35410517",
+            "telefono": "2234559528"
+        },
+        "estado": "Pendiente"
+    },
+    {
+        "fdesde": "2022-11-24",
+        "fhasta": "2022-11-26",
+        "importeReserva": 750,
+        "importeTotal": "1500",
+        "pet": {
+            "nombre": "Toby",
+            "raza": "Perro",
+            "tamano": "Grande",
+            "planVacunacion": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/planVACUNACON.jpg",
+            "observacionesGrals": "Buen Perro",
+            "video": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/Monta\u00c3\u00b1as - 81945.mp4",
+            "imagen": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/perro2.jpg"
+        },
+        "keeper": {
+            "nombreUser": "decoud",
+            "contrasena": "1234",
+            "tipodeCuenta": "Keeper",
+            "tipoMascota": [
+                "Chica",
+                "Mediana",
+                "Grande"
+            ],
+            "remuneracion": "1500",
+            "nombre": "Juan",
+            "apellido": "Decoud",
+            "DNI": "35410517",
+            "telefono": "2234559528"
+        },
+        "estado": "Pendiente"
+    },
+    {
+        "fdesde": "2022-12-03",
+        "fhasta": "2022-12-09",
+        "importeReserva": 750,
+        "importeTotal": "1500",
+        "pet": {
+            "nombre": "Perruno",
+            "raza": "Perro",
+            "tamano": "Grande",
+            "planVacunacion": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/planVACUNACON.jpg",
+            "observacionesGrals": "Buen Perro",
+            "video": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/Rana - 113403.mp4",
+            "imagen": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/perro.jpg"
+        },
+        "keeper": {
+            "nombreUser": "decoud",
+            "contrasena": "1234",
+            "tipodeCuenta": "Keeper",
+            "tipoMascota": [
+                "Chica",
+                "Mediana",
+                "Grande"
+            ],
+            "remuneracion": "1500",
+            "nombre": "Juan",
+            "apellido": "Decoud",
+            "DNI": "35410517",
+            "telefono": "2234559528"
+        },
+        "estado": "Pendiente"
     }
 ]

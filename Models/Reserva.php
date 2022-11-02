@@ -8,6 +8,7 @@
         private Pet $pet ;
         private $importeReserva ;
         private $importeTotal ;
+        private $estado ;
 
         /*
         public function __construct($fdesde ,$fhasta , Keeper $keeper , Pet $pet , $importeReserva , $importeTotal )
@@ -40,6 +41,9 @@
 
         public function setImporteTotal ($importe){ $this->importeTotal = $importe;}
         public function getImporteTotal (){ return $this->importeTotal;}
+
+        public function setEstado ($estado){$this->estado = $estado ;}
+        public function getEstado (){return $this->estado;}
         
 }
 ?>
