@@ -5,6 +5,7 @@
     use Models\FechasEstadias;
     use Models\Reserva;
     use DAO\ReservaDAO;
+use Models\Keeper;
 
     class KeeperController {
         private $keeperDao ;
@@ -55,7 +56,19 @@
             $this->principalKeeper();
         }
         
+        public function aceptarReserva($petName){
+            $buscarReserva = new ReservaDAO();
+            $user = $_SESSION['loggedUser'];
+            $keeper=;
 
+            $reserva = new Reserva();
+
+            $reserva = $buscarReserva -> buscarReserva($user->getNombre(), $petName);
+
+            $keeper = $this->keeperDao->obtenerUser($user->getNombre());
+
+            $keeper->agregarReservaAceptada($reserva);
+        }
 
 
     }

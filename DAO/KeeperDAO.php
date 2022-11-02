@@ -3,6 +3,7 @@
     use Models\Keeper as Keeper ;
     use DAO\OwnerDao as OwnerDao;
     use Models\FechasEstadias as FechasEstadias;
+use Models\Reserva;
 
     class KeeperDAO implements IKeeperDAO {
         private $fileName = ROOT."Data/keepers.json" ;
@@ -153,7 +154,13 @@
                     foreach ($value['fechasDisponibles'] as $fechas){
                         $estadia= new FechasEstadias($fechas['desde'], $fechas['hasta']);
                         $keeper->agregarFecha($estadia);
-                    }  
+                    }
+                    ///nuevo desde aqui
+                    foreach ($value['reservasAceptadas'] as $reserva){
+                        $reserva= new Reserva();
+                        $keeper->agregarReservaAceptada($reserva);
+                    }
+                    ///fin
                     array_push($this->keeperList , $keeper);
                 }
             }
@@ -177,6 +184,18 @@
                     $values['hasta']=$estadia->getHasta();
                     array_push($value['fechasDisponibles'] , $values); 
                 }
+                ///Nuevo apartir de aqui
+                $value ['reservasAceptadas'] = array ();
+                foreach ($keeper->getReservas() as $reserva){
+                    $values['desde']=$reserva->getFechadesde();
+                    $values['hasta']=$reserva->getFechahasta();
+                    $values['keeper']=$reserva->getKeeper();
+                    $values['pet']=$reserva->getPet();
+                    $values['iReserva']=$reserva->getImporteReserva();
+                    $values['iTotal']=$reserva->getImporteTotal();
+                    array_push($value['reservasAceptadas'] , $values); 
+                }
+                ///fin
                 array_push($arraytoEncode , $value);
             }
             $contenidoJson = json_encode($arraytoEncode , JSON_PRETTY_PRINT);

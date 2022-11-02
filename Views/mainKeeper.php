@@ -130,10 +130,10 @@ $listaReservas = $reservadao->buscarReservas($user);
                                             <input style=" text-align: center; font-weight:bold; color:black; border:0;" class="border-bottom" type="text" placeholder="<?php echo $pet->getNombre(); ?>" name="petName" value="<?php echo $pet->getNombre(); ?>" readonly></td>
                                         </div>
                                         <div class="d-inline-flex ">
-                                            <button type="submit" class=" mx-2 mt-2 btn btn-danger btn-sm ">Aceptar</button>
+                                            <button type="submit" class=" mx-2 mt-2 btn btn-danger btn-sm ">Rechazar</button>
                                     </form>
                                     <form action="" method="post">
-                                        <button type="submit " class=" mt-2 btn btn-danger btn-sm ">Rechazar</button>
+                                        <button type="submit " class=" mt-2 btn btn-danger btn-sm ">Aceptar</button>
                                     </form>
                                 </div>
                             <?php } ?>

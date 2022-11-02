@@ -7,7 +7,7 @@
         private $tipoMascota ;
         private $remuneracion ;
         private $fechasDisponibles = array();
-
+        private $reservasAceptadas = array();
         
 
     
@@ -47,6 +47,13 @@
             array_push($this->fechasDisponibles , $estadia);
         }
 
+        public function agregarReservaAceptada(Reserva $reserva){
+            array_push($this -> reservasAceptadas, $reserva);
+        }
+
+        public function getReservas(){
+            return $this -> reservasAceptadas;
+        }
     }
 
 ?>

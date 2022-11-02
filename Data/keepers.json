@@ -1,5 +1,4 @@
-[
-    {
+[{
         "nombreUser": "Nahuel",
         "contrasena": "1234",
         "tipodeCuenta": "Keeper",
@@ -13,12 +12,10 @@
         "apellido": "asd",
         "DNI": "51651",
         "telefono": "51465146",
-        "fechasDisponibles": [
-            {
-                "desde": "2022-11-01",
-                "hasta": "2022-12-31"
-            }
-        ]
+        "fechasDisponibles": [{
+            "desde": "2022-11-01",
+            "hasta": "2022-12-31"
+        }]
     },
     {
         "nombreUser": "elsa",

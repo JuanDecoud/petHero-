@@ -143,7 +143,7 @@
                 $keeper = $reserva->getKeeper();
                 $pet = $reserva -> getPet();
                 if($keeper -> getNombreUser() == $nombreKeeper && $pet ->getNombre() == $nombrePet){
-                    $this -> borrarReserva($reserva);
+                    $this -> borrarReserva($reserva); /// NO LLEGA puede ser por el if de arriba
                 }
             }
      
@@ -157,5 +157,22 @@
 
             $this -> SaveData();
         }
+
+        public function buscarReserva($nombreKeeper, $nombrePet){
+            $this -> RetrieveData();
+
+            $keeper = null;
+            $pet = null;
+            foreach($this-> reservaList as $reserva){
+                $keeper = $reserva->getKeeper();
+                $pet = $reserva -> getPet();
+                if($keeper -> getNombreUser() == $nombreKeeper && $pet ->getNombre() == $nombrePet){
+                    return $reserva;     /// NO LLEGA puede ser por el if de arriba
+                }
+            }
+            return null;
+        }
     }
+
+    
 ?>
