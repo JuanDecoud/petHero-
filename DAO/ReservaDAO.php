@@ -166,15 +166,16 @@
 
  
 
-        public function borrarReservaxNombre($nombreKeeper, $nombrePet){
+        public function borrarReservaxNombre($nombrePet){
             $this -> RetrieveData();
 
-            $keeper = null;
             $pet = null;
             foreach($this-> reservaList as $reserva){
-                $keeper = $reserva->getKeeper();
+                
                 $pet = $reserva -> getPet();
-                if($keeper -> getNombreUser() == $nombreKeeper && $pet ->getNombre() == $nombrePet){
+                echo($nombrePet . '+');
+                echo($pet->getNombre() . '------------------------------');
+                if($pet ->getNombre() == $nombrePet){
                     $this -> borrarReserva($reserva); /// NO LLEGA puede ser por el if de arriba
                 }
             }
