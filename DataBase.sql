@@ -33,7 +33,10 @@ create table keeper(
 create table fechasDisponibles(
 	idFechasDisp int primary key not null auto_increment,
     desde date not null,
-    hasta date not null
+    hasta date not null,
+    idKeeper int not null,
+    constraint fk_idKeeper foreign key(idKeeper) 
+    references keeper(idKeeper) on update cascade on delete cascade
 );
 create table pet(
 	idPet int primary key not null auto_increment,
