@@ -4,8 +4,8 @@
     require_once("Header.php");
     require_once ("navOwner.php");
     use DAO\PetDAO;
-use DAO\ReservaDAO;
-use Models\Estadoreserva;
+    use DAO\ReservaDAO;
+    use Models\Estadoreserva;
 
     $petDao = new PetDAO ();
     $user = $_SESSION['loggedUser'];
@@ -15,16 +15,11 @@ use Models\Estadoreserva;
     $listaAceptada = $reservadao->buscarReservaxEstado($lista,$user->getNombreUser(), Estadoreserva::Aceptada);
     $ListaEnCurso = $reservadao->buscarReservaxEstado($lista,$user->getNombreUser(),Estadoreserva::Confirmada);
      
-
-
-
-
-
 ?>
    
 <div class = "d-flex justify-content-center mt-10 col-11 mx-auto  ">
     
-        <div class = "d-flex flex-wrap  col-12  shadow p-3 mb-2 mt-5 bg-body rounded border border-secondary ">
+        <div class = "d-flex flex-wrap f col-12  shadow p-3 mb-2 mt-5 bg-body rounded border border-secondary ">
             <div class = "container  col col-10 mt-4">
                 <form action="<?php echo FRONT_ROOT."Pet/agregarPet"; ?>" method="post" class ="form-inline  p-2 ">
                     <div class ="d-flex flex-row">
@@ -94,7 +89,7 @@ use Models\Estadoreserva;
                                             </div>
                                             <ul class="list-group list-group-flush">
                                                 <li class="list-group-item"><strong>Desde:</strong>:<input style=" text-align: center;  color:black; border:0;"  type="text" placeholder="<?php echo $reserva->getFechadesde(); ?>" name="desde" value="<?php echo $reserva->getFechadesde(); ?>" readonly></li>
-                                                
+
                                                 <li class="list-group-item"><strong>Hasta:</strong><input style=" text-align: center; color:black; border:0;"  type="text" placeholder="<?php echo $reserva->getFechahasta(); ?>" name="hasta" value="<?php echo $reserva->getFechahasta(); ?>" readonly></li>
 
                                                 <li class="list-group-item"><strong>Keeper:</strong><input style=" text-align: center; color:black; border:0;"  type="text" placeholder="<?php echo $keeper->getNombreUser(); ?>" name="keeper" value="<?php echo $keeper->getNombreUser(); ?>" readonly></li>
@@ -111,7 +106,7 @@ use Models\Estadoreserva;
                         </div>
                 </div>
             </div>
-        
+        <div class = "container"><
             <div class="accordion  " id="accordio4">
                     <div class="accordion-item mt-5 active">
                         <h2 class="accordion-header" id="heading4">
@@ -168,8 +163,9 @@ use Models\Estadoreserva;
                         </div>
                 </form>
             </div>
+
             
-                <div class="accordion mt-2 mb-4 " id="accordion2">
+            <div class="accordion mt-2 mb-4 " id="accordion2">
                     <div class="accordion-item active">
                         <h2 class="accordion-header" id="headingTwo">
                         <button class="accordion-button collapsed bg bg-danger " type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
@@ -177,7 +173,7 @@ use Models\Estadoreserva;
                         </button>
                         </h2>
                         <div id="collapseTwo" class="accordion-collapse collapse show " aria-labelledby="headingTwo" data-bs-parent="#accordion2">
-   
+
 
  
 <?php require_once("Footer.php"); ?>
