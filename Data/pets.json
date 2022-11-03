@@ -10,5 +10,17 @@
         "owner": {
             "nombreUser": "Juan"
         }
+    },
+    {
+        "petName": "Toby",
+        "petBreed": "Ovejero",
+        "petSize": "Medio",
+        "petObserv": "Perro que ladra no muerde",
+        "petVideo": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/",
+        "petImg": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/raza-de-perro-pastor-aleman-m.jpg",
+        "petVacc": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/",
+        "owner": {
+            "nombreUser": "Juan"
+        }
     }
 ]
