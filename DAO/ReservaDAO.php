@@ -28,6 +28,10 @@
             return $this->reservaList;
         }
 
+        public function getLista (){
+            return $this->reservaList;
+        }
+
         public function reservasAceptadas (){
             $reservasAceptadas = array ();
             foreach ($this->reservaList as $reserva){

@@ -7,5 +7,6 @@
     {
         function Add(Reserva $reserva);
         function GetAll();
+        function getLista ();
     }
 ?>

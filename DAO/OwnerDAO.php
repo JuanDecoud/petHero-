@@ -21,8 +21,8 @@
         public function agregarTarjeta ($username , Tarjeta $tarjeta){
             $this->RetrieveData();
             foreach ($this->ownerList as $owner){
-                if ($owner -> getNombrUser ==  $username){
-                    $owner->setTarjeta ($tarjeta);
+                if ($owner -> getNombreUser() ==  $username){
+                    $owner->agregarTarjeta($tarjeta);
                 }
             }
             $this->SaveData();
@@ -66,6 +66,27 @@
             return $user ;
         }
 
+        public function buscarTarjeta ($nombreUsuario){
+            $this->RetrieveData();
+            $nuevaTarjeta = null ;
+            foreach ($this->ownerList as $owner){
+                if ($owner->getNombreUser()== $nombreUsuario){
+                    $listaTarjet = $owner->getTarjeta();
+                    foreach ($listaTarjet as $tarjeta){
+                        $nuevaTarjeta = new Tarjeta ();
+                        $nuevaTarjeta->setNombre($tarjeta->getNombre());
+                        $nuevaTarjeta ->setNumero($tarjeta->getNumero());
+                        $nuevaTarjeta ->setCodigo($tarjeta->getCodigo());
+                        $nuevaTarjeta->setFechaVenc($tarjeta->getFechaVenc());
+                        $nuevaTarjeta->setApellido($tarjeta->getApellido());
+                    }
+                }
+                
+            }
+            var_dump($tarjeta);
+            return $tarjeta ;
+        }
+
         private function SaveData()
         {
             $tarjeta = array() ;
@@ -85,15 +106,19 @@
                 // agrego la tarjeta 
                 
                 $tarjetaOwner = $owner->getTarjeta ();
+                $valuesArray['tarjeta'] = array ();
                 if ($tarjetaOwner != null){
-                    $tarjeta['numero'] = $tarjetaOwner->getNumero ();
-                    $tarjeta['nombre'] = $tarjetaOwner->getNombre ();
-                    $tarjeta ['apellido'] = $tarjetaOwner->getApellido ();
-                    $tarjeta['fechaVenc'] = $tarjetaOwner->getFechaVenc ();
-                    $tarjeta['codigo'] = $tarjetaOwner->getCodigo ();
+                    foreach ($tarjetaOwner as $tarjeta){
+                        $arrayTarjeta['numero'] = $tarjeta->getNumero ();
+                        $arrayTarjeta['nombre'] = $tarjeta->getNombre ();
+                        $arrayTarjeta ['apellido'] = $tarjeta->getApellido ();
+                        $arrayTarjeta['fechaVenc'] = $tarjeta->getFechaVenc ();
+                        $arrayTarjeta['codigo'] = $tarjeta->getCodigo ();
+                        array_push($valuesArray['tarjeta'] , $arrayTarjeta);
+                    }
                     
                 }
-                $valuesArray['tarjeta']= $tarjeta ;
+                
     
                 
               /* $valuesArray['pets']=array ();
@@ -155,17 +180,19 @@
                   if ($valuesArray['tarjeta'] != null){
                     foreach ($valuesArray['tarjeta'] as $value){
                         
-                        $tarjeta = new Tarjeta ($value['numero'],$value['nombre']
-                        ,$value['apellido'],$value['fechaVenc'],$value['codigo']);
-                 
-                    }
-                    $owner->setTarjeta($tarjeta);
+                        $tarjeta = new Tarjeta ();
+                        $tarjeta->setNombre($value['nombre']);
+                        $tarjeta ->setNumero($value['numero']);
+                        $tarjeta ->setCodigo($value['codigo']);
+                        $tarjeta->setFechaVenc($value['fechaVenc']);
+                        $tarjeta->setApellido($value['apellido']);
+                        $owner->agregarTarjeta($tarjeta);
+                    
+                    }                   
                   }
                      
-
                     if ($valuesArray['pets']!=null){
-                        
-                        
+
                         foreach ($valuesArray['pets'] as $value){
                             $pet  = new Pet ();
                             $pet->setNombre($value['nombre']);
@@ -178,8 +205,6 @@
                             $owner->agregarPet($pet);
                         }
     
-                       
-
                     }
     
                     array_push($this->ownerList, $owner);

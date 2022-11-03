@@ -7,7 +7,15 @@
         "apellido": "Decoud",
         "DNI": "35410517",
         "telefono": "2234559528",
-        "tarjeta": [],
+        "tarjeta": [
+            {
+                "numero": "2234559",
+                "nombre": "Juan",
+                "apellido": "Decoud",
+                "fechaVenc": "12\/25",
+                "codigo": "123"
+            }
+        ],
         "pets": [
             {
                 "nombre": "Scooby",

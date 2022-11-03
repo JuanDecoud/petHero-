@@ -18,6 +18,7 @@
         }
 
         public function principalOwner (){
+            echo "<script>if(confirm('Pago realizado con exito'));</script>";
             require_once (VIEWS_PATH."menu-owner.php");
         }
 
@@ -33,7 +34,12 @@
 
         public function AgregarTarjeta ($nombre , $apellido , $numero , $codigo ,$vencimiento){
             $owner = $_SESSION['loggedUser'];
-            $tarjeta = new Tarjeta($numero , $nombre , $apellido , $codigo , $vencimiento );
+            $tarjeta = new Tarjeta( );
+            $tarjeta->setNombre($nombre);
+            $tarjeta ->setNumero($numero);
+            $tarjeta ->setCodigo($codigo);
+            $tarjeta->setFechaVenc($vencimiento);
+            $tarjeta->setApellido($apellido);
             $this->ownerdao->agregarTarjeta($owner->getNombreUser() ,$tarjeta);
             $this->vistaSimulacionpago();
         }

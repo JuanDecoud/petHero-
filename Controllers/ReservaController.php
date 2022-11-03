@@ -80,27 +80,45 @@
 
 
         public function  simulacionPago ($desde , $hasta ,$keeper, $importe){
-            $desde = $desde ;
-            $hasta = $hasta ;
-            $keeper = $keeper ;
-            $importe = $importe ;
 
-            $user=$_SESSION['loggedUser'];
-            if ($user->getTarjeta != null){
+ 
+            $user = $_SESSION['loggedUser'];
+            // Confirma la reserva
+            $this->reservaDao->cambiarEstado($desde , $hasta , $keeper , Estadoreserva::Confirmada);
 
-                $this->reservaDao->cambiarEstado($desde , $hasta , $keeper , Estadoreserva::Confirmada);
-                require_once(VIEWS_PATH."simulacionPago.php");
+            // buscar y crea la reserva para guardarla en un session
+
+            $lista=$this->reservaDao->getLista();
+            $reservaLista = $this->reservaDao->buscarReservaEnCurso($lista,$keeper,Estadoreserva::Confirmada,$desde,$hasta);
+            $reservaNueva = null ;
+            foreach($reservaLista as $reserva){
+                $reservaNueva = new Reserva ();
+                $reservaNueva->setFechadesde($reserva->getFechadesde());
+                $reservaNueva->setFechahasta($reserva->getFechahasta());
+                $reservaNueva->setPet($reserva->getPet());
+                $reservaNueva->setKeeper($reserva->getKeeper());
+                $reservaNueva->setImporteTotal($reserva->getImporteTotal());
+                $reservaNueva->setImporteReserva($reserva->getImporteReserva());
+                $reservaNueva->setEstado ($reserva->getEstado());
+
+            }
+            $_SESSION['reserva'] = $reservaNueva;
+        
+           
+            
+            /// si el usuario no tiene tarjeta se ingresa una sino directamente se pasa al pago 
+
+            if ($user->getTarjeta() == null){
+                $this->agregarTarjeta();
             }
             else {
-                $this->reservaDao->cambiarEstado($desde , $hasta , $keeper , Estadoreserva::Confirmada);
-                require_once(VIEWS_PATH."agregarTarjeta.php");
                 $this->vistaPago();
             }
-            
+ 
+        }
 
-            
-            
-            
+        public function agregarTarjeta (){
+            require_once(VIEWS_PATH."agregarTarjeta.php");
         }
 
 
