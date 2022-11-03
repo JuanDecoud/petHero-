@@ -25,6 +25,15 @@
                 "observacionesGrals": "Buen Perro",
                 "video": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/Mujer - 58142.mp4",
                 "imagen": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg"
+            },
+            {
+                "nombre": "Toby",
+                "raza": "Ovejero",
+                "tamano": "Medio",
+                "planVacunacion": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/",
+                "observacionesGrals": "Perro que ladra no muerde",
+                "video": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/",
+                "imagen": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/raza-de-perro-pastor-aleman-m.jpg"
             }
         ]
     }

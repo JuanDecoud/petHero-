@@ -13,6 +13,32 @@
         "apellido": "Decoud",
         "DNI": "35410517",
         "telefono": "2234559528",
-        "fechasDisponibles": []
+        "fechasDisponibles": [
+            {
+                "desde": "2022-11-03",
+                "hasta": "2023-05-03"
+            }
+        ]
+    },
+    {
+        "nombreUser": "daniel",
+        "contrasena": "1234",
+        "tipodeCuenta": "Keeper",
+        "tipoMascota": [
+            "Chica",
+            "Mediana",
+            "Grande"
+        ],
+        "remuneracion": "1500",
+        "nombre": "daniel",
+        "apellido": "sciacco",
+        "DNI": "33333333",
+        "telefono": "2222222222",
+        "fechasDisponibles": [
+            {
+                "desde": "2022-11-03",
+                "hasta": "2023-04-20"
+            }
+        ]
     }
 ]
