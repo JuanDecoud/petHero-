@@ -1,7 +1,7 @@
 [
     {
-        "fdesde": "2022-11-15",
-        "fhasta": "2022-11-18",
+        "fdesde": "2022-11-18",
+        "fhasta": "2022-11-24",
         "importeReserva": 750,
         "importeTotal": "1500",
         "pet": {
@@ -13,15 +13,49 @@
             "video": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/Rana - 113403.mp4",
             "imagen": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/perro2.jpg",
             "owner": {
-                "nombreUser": "decoud"
+                "nombreUser": "Juan"
             }
         },
         "keeper": {
-            "nombreUser": "Juan",
+            "nombreUser": "decoud",
             "contrasena": "1234",
             "tipodeCuenta": "Keeper",
             "tipoMascota": [
-                "Chica"
+                "Chica",
+                "Mediana"
+            ],
+            "remuneracion": "1500",
+            "nombre": "Juan",
+            "apellido": "Decoud",
+            "DNI": "35410517",
+            "telefono": "2234559528"
+        },
+        "estado": "Confirmada"
+    },
+    {
+        "fdesde": "2022-11-26",
+        "fhasta": "2022-11-30",
+        "importeReserva": 750,
+        "importeTotal": "1500",
+        "pet": {
+            "nombre": "Scooby",
+            "raza": "Perro",
+            "tamano": "Chico",
+            "planVacunacion": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/planVACUNACON.jpg",
+            "observacionesGrals": "Buen Perro",
+            "video": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/Rana - 113403.mp4",
+            "imagen": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/perro2.jpg",
+            "owner": {
+                "nombreUser": "Juan"
+            }
+        },
+        "keeper": {
+            "nombreUser": "decoud",
+            "contrasena": "1234",
+            "tipodeCuenta": "Keeper",
+            "tipoMascota": [
+                "Chica",
+                "Mediana"
             ],
             "remuneracion": "1500",
             "nombre": "Juan",

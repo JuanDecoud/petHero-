@@ -83,8 +83,7 @@
                 }
                 
             }
-            var_dump($tarjeta);
-            return $tarjeta ;
+            return $nuevaTarjeta ;
         }
 
         private function SaveData()

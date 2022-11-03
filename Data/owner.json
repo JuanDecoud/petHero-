@@ -1,19 +1,19 @@
 [
     {
-        "nombreUser": "decoud",
+        "nombreUser": "Juan",
         "contrasena": "1234",
         "tipodeCuenta": "Owner",
-        "nombre": "decoud",
-        "apellido": "decoud",
-        "DNI": "2316468",
-        "telefono": "165464",
+        "nombre": "Juan",
+        "apellido": "Decoud",
+        "DNI": "35410517",
+        "telefono": "2234559528",
         "tarjeta": [
             {
-                "numero": "2234526",
+                "numero": "22351634",
                 "nombre": "Juan",
                 "apellido": "Decoud",
-                "fechaVenc": "22\/10",
-                "codigo": "135"
+                "fechaVenc": "12\/25",
+                "codigo": "121"
             }
         ],
         "pets": [

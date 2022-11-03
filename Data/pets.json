@@ -1,5 +1,4 @@
 [
-
     {
         "petName": "Scooby",
         "petBreed": "Perro",
@@ -8,18 +7,6 @@
         "petVideo": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/Rana - 113403.mp4",
         "petImg": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/perro2.jpg",
         "petVacc": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/planVACUNACON.jpg",
-        "owner": {
-            "nombreUser": "decoud"
-        }
-    },
-    {
-        "petName": "Toby",
-        "petBreed": "Ovejero",
-        "petSize": "Medio",
-        "petObserv": "Perro que ladra no muerde",
-        "petVideo": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/",
-        "petImg": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/raza-de-perro-pastor-aleman-m.jpg",
-        "petVacc": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/",
         "owner": {
             "nombreUser": "Juan"
         }

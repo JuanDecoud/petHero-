@@ -2,7 +2,8 @@
     namespace Controllers ;
 
     use DAO\KeeperDAO;
-    use DAO\PetDAO ;
+use DAO\OwnerDao;
+use DAO\PetDAO ;
     use DAO\ReservaDAO ;
     use Models\Estadoreserva;
     use Models\Reserva ;
@@ -13,12 +14,14 @@
         private KeeperDAO $keeperdao;
         private PetDAO $petdao ;
         private ReservaDAO $reservaDao ;
+        private OwnerDAO $ownerdao ;
 
         public function __construct()
         {
             $this->keeperdao = new KeeperDAO();
             $this->petdao = new PetDAO ();
             $this->reservaDao = new ReservaDAO ();
+            $this->ownerdao = new OwnerDao();
             
         }
         public function vistaKeeper (){
@@ -103,12 +106,13 @@
 
             }
             $_SESSION['reserva'] = $reservaNueva;
+            $comprobartarjeta = $this->ownerdao->buscarTarjeta($user->getNombreUser());
         
            
             
             /// si el usuario no tiene tarjeta se ingresa una sino directamente se pasa al pago 
 
-            if ($user->getTarjeta() == null){
+            if ($comprobartarjeta == null){
                 $this->agregarTarjeta();
             }
             else {
