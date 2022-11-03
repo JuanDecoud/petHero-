@@ -31,7 +31,7 @@ use Models\Keeper;
             $fechaDeldia=$this->keeperDao->verificarFechadeldia($desde , $hasta);
             $lista = $this->reservaDao->GetAll();
             $EstadiaEnCurso = $this->reservaDao->buscarReservaEnCurso($lista,$keeper->getNombreUser(),Estadoreserva::Confirmada ,$desde ,$hasta);
-          
+            var_dump($EstadiaEnCurso);
       
            if ($verificar ==null && $fechaDeldia ==true && $EstadiaEnCurso == null){
                 $estadia = new FechasEstadias($desde , $hasta);

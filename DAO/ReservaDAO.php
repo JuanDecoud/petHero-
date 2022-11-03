@@ -241,7 +241,7 @@
                 if ($keeper->getNombreUser() == $nombreUser 
                 && $reserva->getEstado () == $estado 
                 && $reserva->getFechadesde()== $desde
-                && $reserva->getFechadesde()== $hasta ){
+                && $reserva->getFechahasta()== $hasta ){
                     array_push($listaReservas , $reserva);
                 }
             }
