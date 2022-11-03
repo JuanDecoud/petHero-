@@ -52,7 +52,7 @@ use Models\Keeper;
             $this->principalKeeper();
 
         }
-
+        /*
         public function rechazarReserva($petName){
             $borrarReserva = new ReservaDAO();
 
@@ -60,6 +60,7 @@ use Models\Keeper;
             $borrarReserva -> borrarReservaxNombre($user->getNombre(),$petName);
             $this->principalKeeper();
         }
+
         
         public function aceptarReserva($petName){
 
@@ -70,7 +71,7 @@ use Models\Keeper;
             $keeper = $this->keeperDao->obtenerUser($user->getNombre());
             $keeper->agregarReservaAceptada($reserva);
         }
-
+        */
 
     }
 ?>

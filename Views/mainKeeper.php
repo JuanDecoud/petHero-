@@ -140,8 +140,9 @@ $listaConfirmadas = $reservadao->buscarReservaxEstadoKeeper( $lista ,$user->getN
                                                     <button type="submit" class=" mx-2 mt-2 btn btn-danger btn-sm ">Aceptar</button>
                                                 
                                     </form>
-                                            <form action="" method="post">
-                                                <button type="submit " class=" mt-2 btn btn-danger btn-sm ">Rechazar</button>
+                                            <form action="<?php echo FRONT_ROOT . "Reserva/rechazarReserva" ?>" method="post">
+                                            <input style=" text-align: center; font-weight:bold; color:black; border:0;" class="border-bottom" type="hidden" placeholder="<?php echo $pet->getNombre(); ?>" name="petName" value="<?php echo $pet->getNombre(); ?>" readonly></td>
+                                            <button type="submit " class=" mt-2 btn btn-danger btn-sm ">Rechazar</button>
                                             </form>
                                         </div>
                                 </div>

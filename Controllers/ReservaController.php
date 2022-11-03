@@ -121,7 +121,12 @@
             require_once(VIEWS_PATH."agregarTarjeta.php");
         }
 
-
+        public function rechazarReserva($petName){
+            $borrarReserva = new ReservaDAO();
+            $user = $_SESSION['loggedUser'];
+            $borrarReserva -> borrarReservaxNombre($petName);
+            $this->vistaKeeper();
+        }
 
     }
 ?>
