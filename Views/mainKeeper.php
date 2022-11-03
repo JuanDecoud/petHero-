@@ -7,6 +7,7 @@ require_once("navKeeper.php");
 
 use DAO\KeeperDAO as KeeperDAO;
 use DAO\ReservaDAO;
+use Models\Estadoreserva;
 use Models\Pet;
 
 $keepDao = new KeeperDao();
@@ -15,8 +16,13 @@ $user = $keepDao->obtenerUser($userLogged->getNombreUser());
 $fechas = $user->getFechas();
 
 $reservadao = new ReservaDAO();
-$listaReservas = $reservadao->buscarReservas($user);
-$listaAceptadas = $reservadao->reservasAceptadas();
+
+$lista = $reservadao->getAll();
+
+$listaReservas = $reservadao->buscarReservaxEstadoKeeper($lista , $user->getNombreUser (),Estadoreserva::Pendiente);
+$listaAceptadas = $reservadao->buscarReservaxEstadoKeeper( $lista ,$user->getNombreUser (), Estadoreserva::Aceptada);
+$listaConfirmadas = $reservadao->buscarReservaxEstadoKeeper( $lista ,$user->getNombreUser (), Estadoreserva::Confirmada);
+
 
 
 ?>
@@ -78,7 +84,6 @@ $listaAceptadas = $reservadao->reservasAceptadas();
         </div>
     </div>
 </div>
-
 
 <div class="container mt-5  shadow p-3 mb-5 bg-ligh rounded col col-10">
     <div class="accordion mt-5" id="accordionExample">
@@ -147,125 +152,126 @@ $listaAceptadas = $reservadao->reservasAceptadas();
             </div>
         </div>
     </div>
-</div>
-<div class="accordion mt-5" id="accordion2">
-        <div class="accordion-item mt-5">
-            <h2 class="accordion-header" id="headingTwo">
-                <button class="accordion-button collapsed bg bg-danger" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                    Pendientes de cobro
-                </button>
-            </h2>
-            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordion2">
-                <div class="accordion-body  ">            
-                    <?php foreach ($listaAceptadas as $reserva) {
-                            $pet = $reserva->getPet();  ?>
-                        <div class="d-inline-flex flex-wrap ">
-                            <div class="card m-2" style="width: 18rem;">
-                                <div class="card-body">
-                                    <h5 class="border-bottom">En proceso de cobro.</h5>
-                                        <div class="col-auto mt-2">
-                                            <label for="" class="mx-2  ">
-                                                <h7>Desde:</h7>
-                                            </label>
-                                            <input style=" text-align: center; font-weight:bold; color:black; border :0;" class="border-bottom" type="text" placeholder="<?php echo $reserva->getFechadesde(); ?>" name="desde" value="<?php echo $reserva->getFechadesde(); ?>" readonly></td>
-                                        </div>
 
-                                        <div class="col-auto">
-                                            <label for="" class="mx-2 ">
-                                                <h7>Hasta:</h7>
-                                            </label>
-                                            <input style=" text-align: center; font-weight:bold; color:black; border:0;" class="border-bottom" type="text" placeholder="<?php echo $reserva->getFechahasta(); ?>" name="hasta" value="<?php echo $reserva->getFechahasta(); ?>" readonly></td>
-                                        </div>
+    <div class="accordion mt-5" id="accordion2">
+            <div class="accordion-item mt-5">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed bg bg-danger" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Pendientes de cobro
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordion2">
+                    <div class="accordion-body  ">            
+                        <?php foreach ($listaAceptadas as $reserva) {
+                                $pet = $reserva->getPet();  ?>
+                            <div class="d-inline-flex flex-wrap ">
+                                <div class="card m-2" style="width: 18rem;">
+                                    <div class="card-body">
+                                        <h5 class="border-bottom">En proceso de cobro.</h5>
+                                            <div class="col-auto mt-2">
+                                                <label for="" class="mx-2  ">
+                                                    <h7>Desde:</h7>
+                                                </label>
+                                                <input style=" text-align: center; font-weight:bold; color:black; border :0;" class="border-bottom" type="text" placeholder="<?php echo $reserva->getFechadesde(); ?>" name="desde" value="<?php echo $reserva->getFechadesde(); ?>" readonly></td>
+                                            </div>
 
-                                        <div class="col-auto">
-                                            <label for="" class="mx-2 ">
-                                                <h7>Raza</h7>
-                                            </label>
-                                            <input style=" text-align: center; font-weight:bold; color:black; border:0;" class="border-bottom" type="text" placeholder="<?php echo $pet->getRaza(); ?>" name="raza" value="<?php echo $pet->getRaza(); ?>" readonly></td>
-                                        </div>
-                                        <div class="col-auto">
-                                            <label for="" class="mx-2 ">
-                                                <h7>Tamaño:</h7>
-                                            </label>
-                                            <input style=" text-align: center; font-weight:bold; color:black; border:0;" class="border-bottom" type="text" placeholder="<?php echo $pet->getTamano(); ?>" name="tamano" value="<?php echo $pet->getTamano(); ?>" readonly></td>
-                                        </div>
-                                        <div class="col-auto">
-                                            <label for="" class="mx-2 ">
-                                                <h7>Nombre:</h7>
-                                            </label>
-                                            <input style=" text-align: center; font-weight:bold; color:black; border:0;" class="border-bottom" type="text" placeholder="<?php echo $pet->getNombre(); ?>" name="petName" value="<?php echo $pet->getNombre(); ?>" readonly></td>
-                                        </div>
-                                        <div class="col-auto">
-                                            <label for="" class="mx-2 ">
-                                                <h7>Valor:</h7>
-                                            </label>
-                                            <input style=" text-align: center; font-weight:bold; color:green; border:0; " class="border-bottom" type="text" placeholder= "<?php echo '$'.$reserva->getImporteReserva(); ?>" name="petName" value="<?php echo $reserva->getImporteReserva(); ?>" readonly></td>
-                                        </div>
+                                            <div class="col-auto">
+                                                <label for="" class="mx-2 ">
+                                                    <h7>Hasta:</h7>
+                                                </label>
+                                                <input style=" text-align: center; font-weight:bold; color:black; border:0;" class="border-bottom" type="text" placeholder="<?php echo $reserva->getFechahasta(); ?>" name="hasta" value="<?php echo $reserva->getFechahasta(); ?>" readonly></td>
+                                            </div>
+
+                                            <div class="col-auto">
+                                                <label for="" class="mx-2 ">
+                                                    <h7>Raza</h7>
+                                                </label>
+                                                <input style=" text-align: center; font-weight:bold; color:black; border:0;" class="border-bottom" type="text" placeholder="<?php echo $pet->getRaza(); ?>" name="raza" value="<?php echo $pet->getRaza(); ?>" readonly></td>
+                                            </div>
+                                            <div class="col-auto">
+                                                <label for="" class="mx-2 ">
+                                                    <h7>Tamaño:</h7>
+                                                </label>
+                                                <input style=" text-align: center; font-weight:bold; color:black; border:0;" class="border-bottom" type="text" placeholder="<?php echo $pet->getTamano(); ?>" name="tamano" value="<?php echo $pet->getTamano(); ?>" readonly></td>
+                                            </div>
+                                            <div class="col-auto">
+                                                <label for="" class="mx-2 ">
+                                                    <h7>Nombre:</h7>
+                                                </label>
+                                                <input style=" text-align: center; font-weight:bold; color:black; border:0;" class="border-bottom" type="text" placeholder="<?php echo $pet->getNombre(); ?>" name="petName" value="<?php echo $pet->getNombre(); ?>" readonly></td>
+                                            </div>
+                                            <div class="col-auto">
+                                                <label for="" class="mx-2 ">
+                                                    <h7>Valor:</h7>
+                                                </label>
+                                                <input style=" text-align: center; font-weight:bold; color:green; border:0; " class="border-bottom" type="text" placeholder= "<?php echo '$'.$reserva->getImporteReserva(); ?>" name="petName" value="<?php echo $reserva->getImporteReserva(); ?>" readonly></td>
+                                            </div>
+                                    </div>
                                 </div>
                             </div>
-                         </div>
-                        <?php } ?>
+                            <?php } ?>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<div class="accordion mt-5" id="accordion3">
-        <div class="accordion-item mt-5">
-            <h2 class="accordion-header" id="heading3">
-                <button class="accordion-button collapsed bg bg-danger" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
-                    Estadias en curso.
-                </button>
-            </h2>
-            <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="heading3" data-bs-parent="#accordion3">
-                <div class="accordion-body  ">            
-                    <?php foreach ($listaAceptadas as $reserva) {
-                            $pet = $reserva->getPet();  ?>
-                        <div class="d-inline-flex flex-wrap ">
-                            <div class="card m-2" style="width: 18rem;">
-                                <div class="card-body">
-                                    <h5 class="border-bottom">Estadia en curso.</h5>
-                                    <form action="<?php echo FRONT_ROOT . "Keeper/rechazarReserva" ?>">
-                                        <div class="col-auto mt-2">
-                                            <label for="" class="mx-2  ">
-                                                <h7>Desde:</h7>
-                                            </label>
-                                            <input style=" text-align: center; font-weight:bold; color:black; border :0;" class="border-bottom" type="text" placeholder="<?php echo $reserva->getFechadesde(); ?>" name="desde" value="<?php echo $reserva->getFechadesde(); ?>" readonly></td>
-                                        </div>
+   
+    <div class="accordion mt-5" id="accordion3">
+            <div class="accordion-item mt-5">
+                <h2 class="accordion-header" id="heading3">
+                    <button class="accordion-button collapsed bg bg-danger" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                        Estadias en curso.
+                    </button>
+                </h2>
+                <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="heading3" data-bs-parent="#accordion3">
+                    <div class="accordion-body  ">            
+                        <?php foreach ($listaConfirmadas as $reserva) {
+                                $pet = $reserva->getPet();  ?>
+                            <div class="d-inline-flex flex-wrap ">
+                                <div class="card m-2" style="width: 18rem;">
+                                    <div class="card-body">
+                                        <h5 class="border-bottom">Estadia en curso.</h5>
+                                        <form action="<?php echo FRONT_ROOT . "Keeper/rechazarReserva" ?>">
+                                            <div class="col-auto mt-2">
+                                                <label for="" class="mx-2  ">
+                                                    <h7>Desde:</h7>
+                                                </label>
+                                                <input style=" text-align: center; font-weight:bold; color:black; border :0;" class="border-bottom" type="text" placeholder="<?php echo $reserva->getFechadesde(); ?>" name="desde" value="<?php echo $reserva->getFechadesde(); ?>" readonly></td>
+                                            </div>
 
-                                        <div class="col-auto">
-                                            <label for="" class="mx-2 ">
-                                                <h7>Hasta:</h7>
-                                            </label>
-                                            <input style=" text-align: center; font-weight:bold; color:black; border:0;" class="border-bottom" type="text" placeholder="<?php echo $reserva->getFechahasta(); ?>" name="hasta" value="<?php echo $reserva->getFechahasta(); ?>" readonly></td>
-                                        </div>
+                                            <div class="col-auto">
+                                                <label for="" class="mx-2 ">
+                                                    <h7>Hasta:</h7>
+                                                </label>
+                                                <input style=" text-align: center; font-weight:bold; color:black; border:0;" class="border-bottom" type="text" placeholder="<?php echo $reserva->getFechahasta(); ?>" name="hasta" value="<?php echo $reserva->getFechahasta(); ?>" readonly></td>
+                                            </div>
 
-                                        <div class="col-auto">
-                                            <label for="" class="mx-2 ">
-                                                <h7>Raza</h7>
-                                            </label>
-                                            <input style=" text-align: center; font-weight:bold; color:black; border:0;" class="border-bottom" type="text" placeholder="<?php echo $pet->getRaza(); ?>" name="raza" value="<?php echo $pet->getRaza(); ?>" readonly></td>
-                                        </div>
-                                        <div class="col-auto">
-                                            <label for="" class="mx-2 ">
-                                                <h7>Tamaño:</h7>
-                                            </label>
-                                            <input style=" text-align: center; font-weight:bold; color:black; border:0;" class="border-bottom" type="text" placeholder="<?php echo $pet->getTamano(); ?>" name="tamano" value="<?php echo $pet->getTamano(); ?>" readonly></td>
-                                        </div>
-                                        <div class="col-auto">
-                                            <label for="" class="mx-2 ">
-                                                <h7>Nombre:</h7>
-                                            </label>
-                                            <input style=" text-align: center; font-weight:bold; color:black; border:0;" class="border-bottom" type="text" placeholder="<?php echo $pet->getNombre(); ?>" name="petName" value="<?php echo $pet->getNombre(); ?>" readonly></td>
-                                        </div>
-                                     
-                                    </form>
+                                            <div class="col-auto">
+                                                <label for="" class="mx-2 ">
+                                                    <h7>Raza</h7>
+                                                </label>
+                                                <input style=" text-align: center; font-weight:bold; color:black; border:0;" class="border-bottom" type="text" placeholder="<?php echo $pet->getRaza(); ?>" name="raza" value="<?php echo $pet->getRaza(); ?>" readonly></td>
+                                            </div>
+                                            <div class="col-auto">
+                                                <label for="" class="mx-2 ">
+                                                    <h7>Tamaño:</h7>
+                                                </label>
+                                                <input style=" text-align: center; font-weight:bold; color:black; border:0;" class="border-bottom" type="text" placeholder="<?php echo $pet->getTamano(); ?>" name="tamano" value="<?php echo $pet->getTamano(); ?>" readonly></td>
+                                            </div>
+                                            <div class="col-auto">
+                                                <label for="" class="mx-2 ">
+                                                    <h7>Nombre:</h7>
+                                                </label>
+                                                <input style=" text-align: center; font-weight:bold; color:black; border:0;" class="border-bottom" type="text" placeholder="<?php echo $pet->getNombre(); ?>" name="petName" value="<?php echo $pet->getNombre(); ?>" readonly></td>
+                                            </div>
+                                        
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-                         </div>
-                        <?php } ?>
+                            <?php } ?>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <?php require_once("Footer.php"); ?>
+</div>
+<?php require_once("Footer.php"); ?>

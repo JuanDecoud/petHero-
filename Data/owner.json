@@ -1,10 +1,11 @@
-[{
-        "nombreUser": "Juan",
+[
+    {
+        "nombreUser": "juan",
         "contrasena": "1234",
         "tipodeCuenta": "Owner",
-        "nombre": "Juan",
+        "nombre": "juan",
         "apellido": "Decoud",
-        "DNI": "35410517",
+        "DNI": "1234",
         "telefono": "2234559528",
         "tarjeta": {
             "numero": null,
@@ -14,23 +15,15 @@
         },
         "pets": [
             {
-                "nombre": "Perruno",
+                "nombre": "Scooby",
                 "raza": "Perro",
-                "tamano": "Grande",
-                "planVacunacion": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/planVACUNACON.jpg",
+                "tamano": "Chico",
+                "planVacunacion": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/b0922b69bac5f67df40c7e3fad643040.jpg",
                 "observacionesGrals": "Buen Perro",
-                "video": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/Rana - 113403.mp4",
-                "imagen": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/perro.jpg"
-            },
-            {
-                "nombre": "Toby",
-                "raza": "Perro",
-                "tamano": "Grande",
-                "planVacunacion": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/planVACUNACON.jpg",
-                "observacionesGrals": "Buen Perro",
-                "video": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/Monta\u00c3\u00b1as - 81945.mp4",
-                "imagen": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/perro2.jpg"
+                "video": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/Mujer - 58142.mp4",
+                "imagen": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg"
             }
+
         ]
     }
 ]

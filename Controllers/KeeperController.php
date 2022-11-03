@@ -5,14 +5,17 @@
     use Models\FechasEstadias;
     use Models\Reserva;
     use DAO\ReservaDAO;
+use Models\Estadoreserva;
 use Models\Keeper;
 
     class KeeperController {
         private $keeperDao ;
+        private $reservaDao ;
 
         public function __construct()
         {
             $this->keeperDao = new KeeperDAO();
+            $this->reservaDao = new ReservaDAO();
         }
 
         
@@ -26,9 +29,11 @@ use Models\Keeper;
             $keeper = $_SESSION['loggedUser'];
             $verificar = $this->keeperDao->verificarRangos ($desde,$hasta,$keeper->getNombreUser() );
             $fechaDeldia=$this->keeperDao->verificarFechadeldia($desde , $hasta);
+            $lista = $this->reservaDao->GetAll();
+            $EstadiaEnCurso = $this->reservaDao->buscarReservaxEstadoKeeper($lista,$keeper->getNombreUser(),Estadoreserva::Confirmada);
           
       
-           if ($verificar ==null && $fechaDeldia ==true){
+           if ($verificar ==null && $fechaDeldia ==true && $EstadiaEnCurso == null){
                 $estadia = new FechasEstadias($desde , $hasta);
                 $this->keeperDao->agregarFecha($estadia , $keeper->getNombreUser() );
                 $this->principalKeeper(); 
@@ -57,16 +62,12 @@ use Models\Keeper;
         }
         
         public function aceptarReserva($petName){
+
             $buscarReserva = new ReservaDAO();
             $user = $_SESSION['loggedUser'];
-            //$keeper=;
-
             $reserva = new Reserva();
-
             $reserva = $buscarReserva -> buscarReserva($user->getNombre(), $petName);
-
             $keeper = $this->keeperDao->obtenerUser($user->getNombre());
-
             $keeper->agregarReservaAceptada($reserva);
         }
 

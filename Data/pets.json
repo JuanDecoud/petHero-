@@ -1,26 +1,14 @@
 [
     {
-        "petName": "Perruno",
+        "petName": "Scooby",
         "petBreed": "Perro",
-        "petSize": "Grande",
+        "petSize": "Chico",
         "petObserv": "Buen Perro",
-        "petVideo": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/Rana - 113403.mp4",
-        "petImg": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/perro.jpg",
-        "petVacc": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/planVACUNACON.jpg",
+        "petVideo": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/Mujer - 58142.mp4",
+        "petImg": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg",
+        "petVacc": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/b0922b69bac5f67df40c7e3fad643040.jpg",
         "owner": {
-            "nombreUser": "Juan"
-        }
-    },
-    {
-        "petName": "Toby",
-        "petBreed": "Perro",
-        "petSize": "Grande",
-        "petObserv": "Buen Perro",
-        "petVideo": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/Monta\u00c3\u00b1as - 81945.mp4",
-        "petImg": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/perro2.jpg",
-        "petVacc": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/planVACUNACON.jpg",
-        "owner": {
-            "nombreUser": "Juan"
+            "nombreUser": "juan"
         }
     }
 ]

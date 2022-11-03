@@ -4,6 +4,7 @@
     use DAO\KeeperDAO;
     use DAO\PetDAO ;
     use DAO\ReservaDAO ;
+    use Models\Estadoreserva;
     use Models\Reserva ;
     use Models\FechasEstadias ;
 
@@ -65,11 +66,20 @@
 
         public function aceptarReserva ($desde , $hasta){
 
-            $this->reservaDao->cambiarEstado($desde , $hasta);
-            $estadia = new FechasEstadias($desde , $hasta);
             $user = $_SESSION['loggedUser'];
+            $this->reservaDao->cambiarEstado($desde , $hasta , $user->getNombreUser() , Estadoreserva::Aceptada);
+            $estadia = new FechasEstadias($desde , $hasta);
+            
             $this->keeperdao->quitarFecha($user->getNombreUser(), $estadia);
             $this->vistaKeeper();
+        }
+
+        public function pagarReserva ( $desde , $hasta ,$keeperName , $importe){
+
+            $this->reservaDao->cambiarEstado($desde , $hasta , $keeperName , Estadoreserva::Confirmada);
+            $this->vistaOwner();
+
+
         }
 
     

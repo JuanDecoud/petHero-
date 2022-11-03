@@ -13,15 +13,6 @@
         "apellido": "Decoud",
         "DNI": "35410517",
         "telefono": "2234559528",
-        "fechasDisponibles": [
-            {
-                "desde": "2022-11-30",
-                "hasta": "2022-12-01"
-            },
-            {
-                "desde": "2022-11-24",
-                "hasta": "2022-11-26"
-            }
-        ]
+        "fechasDisponibles": []
     }
 ]
