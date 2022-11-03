@@ -1,8 +1,4 @@
-<?php
-  require_once("Header.php");
-  require_once("nav.php");
-  
-?>
+<?php require_once ("nav.php") ?>
 
   <div class = "container abs-center    col-md-4 shadow p-3 mb-5 bg-body rounded ">
     <div class = " container   ">
@@ -25,4 +21,3 @@
     </div>
   </div>
 
-<?php  require_once("Footer.php"); ?>

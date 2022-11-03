@@ -3,7 +3,7 @@
 use DAO\OwnerDao;
 use Models\Tarjeta;
 
- require_once ("Header.php");
+
 
     $owner = $_SESSION['loggedUser'];
     $tarjeta= null ;
@@ -60,6 +60,3 @@ use Models\Tarjeta;
 
 
 
-
-
-<?php  require_once("Footer.php");?>

@@ -39,13 +39,4 @@ $listaEstadias = $keeperdao->listaEstadias($listaKeepers);
         </table>  
      </form>
 <?php }?>
-                            </div>
-                                    
-                                
-                            </div>     
-                        </div>
-                    </div>
-                    </div>
-                </div>
-        </div>
-</div>
+                    

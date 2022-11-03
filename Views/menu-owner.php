@@ -1,7 +1,6 @@
 <?php
 
 
-    require_once("Header.php");
     require_once ("navOwner.php");
     use DAO\PetDAO;
     use DAO\ReservaDAO;
@@ -176,4 +175,3 @@
 
 
  
-<?php require_once("Footer.php"); ?>
