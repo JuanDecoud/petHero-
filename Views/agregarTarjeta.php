@@ -8,7 +8,7 @@
                 
                 <div class="form-group  mx-4">
              
-                    <h2 class = "mb-4 border-bottom col-4">Registro de Usuario</h2>
+                    <h2 class = "mb-4 border-bottom col-4">Nueva Tarjeta Debito/Credito</h2>
                     <label for="exampleInputEmail1" class = " ">Nombre</label>
                     <input type="text" class="form-control  " id="exampleInputEmail1" 
                         aria-describedby="emailHelp" placeholder="Nombre" name = "nombre" required>

@@ -1,18 +1,21 @@
 [
     {
-        "nombreUser": "decoud",
+        "nombreUser": "Juan",
         "contrasena": "1234",
         "tipodeCuenta": "Keeper",
         "tipoMascota": [
-            "Chica",
-            "Mediana",
-            "Grande"
+            "Chica"
         ],
         "remuneracion": "1500",
         "nombre": "Juan",
         "apellido": "Decoud",
         "DNI": "35410517",
         "telefono": "2234559528",
-        "fechasDisponibles": []
+        "fechasDisponibles": [
+            {
+                "desde": "2022-11-25",
+                "hasta": "2022-11-26"
+            }
+        ]
     }
 ]

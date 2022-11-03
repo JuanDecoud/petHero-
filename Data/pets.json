@@ -1,14 +1,15 @@
 [
+
     {
         "petName": "Scooby",
         "petBreed": "Perro",
-        "petSize": "Medio",
+        "petSize": "Chico",
         "petObserv": "Buen Perro",
-        "petVideo": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/Mujer - 58142.mp4",
-        "petImg": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg",
-        "petVacc": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/b0922b69bac5f67df40c7e3fad643040.jpg",
+        "petVideo": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/Rana - 113403.mp4",
+        "petImg": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/perro2.jpg",
+        "petVacc": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/planVACUNACON.jpg",
         "owner": {
-            "nombreUser": "Juan"
+            "nombreUser": "decoud"
         }
     }
 ]

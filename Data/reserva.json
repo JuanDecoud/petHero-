@@ -1,29 +1,27 @@
 [
     {
-        "fdesde": "2022-11-17",
+        "fdesde": "2022-11-15",
         "fhasta": "2022-11-18",
         "importeReserva": 750,
         "importeTotal": "1500",
         "pet": {
             "nombre": "Scooby",
             "raza": "Perro",
-            "tamano": "Medio",
-            "planVacunacion": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/b0922b69bac5f67df40c7e3fad643040.jpg",
+            "tamano": "Chico",
+            "planVacunacion": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/planVACUNACON.jpg",
             "observacionesGrals": "Buen Perro",
-            "video": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/Mujer - 58142.mp4",
-            "imagen": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg",
+            "video": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/Rana - 113403.mp4",
+            "imagen": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/perro2.jpg",
             "owner": {
-                "nombreUser": "Juan"
+                "nombreUser": "decoud"
             }
         },
         "keeper": {
-            "nombreUser": "decoud",
+            "nombreUser": "Juan",
             "contrasena": "1234",
             "tipodeCuenta": "Keeper",
             "tipoMascota": [
-                "Chica",
-                "Mediana",
-                "Grande"
+                "Chica"
             ],
             "remuneracion": "1500",
             "nombre": "Juan",
