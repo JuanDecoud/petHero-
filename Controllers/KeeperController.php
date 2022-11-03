@@ -30,7 +30,7 @@ use Models\Keeper;
             $verificar = $this->keeperDao->verificarRangos ($desde,$hasta,$keeper->getNombreUser() );
             $fechaDeldia=$this->keeperDao->verificarFechadeldia($desde , $hasta);
             $lista = $this->reservaDao->GetAll();
-            $EstadiaEnCurso = $this->reservaDao->buscarReservaxEstadoKeeper($lista,$keeper->getNombreUser(),Estadoreserva::Confirmada);
+            $EstadiaEnCurso = $this->reservaDao->buscarReservaEnCurso($lista,$keeper->getNombreUser(),Estadoreserva::Confirmada ,$desde ,$hasta);
           
       
            if ($verificar ==null && $fechaDeldia ==true && $EstadiaEnCurso == null){

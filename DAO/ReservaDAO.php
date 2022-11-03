@@ -231,6 +231,23 @@
             return $listaReservas;
         }
 
+        public function buscarReservaEnCurso ($lista,$nombreUser , $estado , $desde , $hasta ){
+           
+            $listaReservas = array ();
+            foreach($lista as $reserva){
+                
+                $pet = $reserva->getPet();
+                $keeper = $reserva->getKeeper();
+                if ($keeper->getNombreUser() == $nombreUser 
+                && $reserva->getEstado () == $estado 
+                && $reserva->getFechadesde()== $desde
+                && $reserva->getFechadesde()== $hasta ){
+                    array_push($listaReservas , $reserva);
+                }
+            }
+            return $listaReservas;
+        }
+
         public function cambiarEstado ( $desde , $hasta , $nombreUsuario ,$estado){
             $this->RetrieveData();
             foreach ($this->reservaList as $reserva){
