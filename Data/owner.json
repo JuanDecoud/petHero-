@@ -1,29 +1,23 @@
 [
     {
-        "nombreUser": "juan",
+        "nombreUser": "Juan",
         "contrasena": "1234",
         "tipodeCuenta": "Owner",
-        "nombre": "juan",
+        "nombre": "Jaun",
         "apellido": "Decoud",
-        "DNI": "1234",
+        "DNI": "35410517",
         "telefono": "2234559528",
-        "tarjeta": {
-            "numero": null,
-            "nombre": null,
-            "fechaVenc": null,
-            "codigo": null
-        },
+        "tarjeta": [],
         "pets": [
             {
                 "nombre": "Scooby",
                 "raza": "Perro",
-                "tamano": "Chico",
+                "tamano": "Medio",
                 "planVacunacion": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/b0922b69bac5f67df40c7e3fad643040.jpg",
                 "observacionesGrals": "Buen Perro",
                 "video": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/Mujer - 58142.mp4",
                 "imagen": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg"
             }
-
         ]
     }
 ]

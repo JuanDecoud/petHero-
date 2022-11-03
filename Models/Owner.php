@@ -7,7 +7,7 @@ use Models\Pet as Pet;
 
 class Owner extends User
 {
-    private $tarjeta ;
+    private   $tarjeta = array() ;
     private $pet =array() ;
 
    

@@ -78,7 +78,7 @@
                                         $keeper = $reserva->getKeeper ();
                                         ?>
                                 <div class = " d-inline-flex flex-wrap">
-                                    <form action="<?php echo FRONT_ROOT."Reserva/pagarReserva"; ?>" method ="post">
+                                    <form action="<?php echo FRONT_ROOT."Reserva/simulacionPago"; ?>" method ="post">
                                         <div class="card m-3 " style="width: 18rem;">
                                             <div class="card-body">
                                                 <h5 class="card-title">Estadia</h5>

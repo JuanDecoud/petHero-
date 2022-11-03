@@ -75,9 +75,6 @@
                 $this->registrarOwner();
             }
 
-
-            
-
         }
 
         public function agregarKeeper ($nombre,$apellido,$dni,$telefono,$userName,$contrasena,$remuneracion,$arrayTipo ){

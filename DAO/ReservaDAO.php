@@ -255,10 +255,30 @@
                 if ($reserva->getFechadesde ()== $desde && $reserva->getFechahasta ()==$hasta 
                 && $keeper->getNombreUser() ==$nombreUsuario ){
                     $reserva->setEstado ($estado);
+                    
                 }
             }
+            
             $this->SaveData();
         }
+
+        public function cambiarEstadoOwner ( $desde , $hasta , $nombreUsuario ,$estado){
+            $this->RetrieveData();
+            foreach ($this->reservaList as $reserva){
+                $pet = $reserva->getPet ();
+                $owner = $pet->getOwner();
+                if ($reserva->getFechadesde ()== $desde && $reserva->getFechahasta ()==$hasta 
+                && $owner->getNombreUser() ==$nombreUsuario ){
+                    $reserva->setEstado ($estado);
+                    
+                }
+            }
+            
+            $this->SaveData();
+        }
+
+
+        
     }
 
     

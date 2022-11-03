@@ -74,15 +74,36 @@
             $this->vistaKeeper();
         }
 
-        public function pagarReserva ( $desde , $hasta ,$keeperName , $importe){
-
-            $this->reservaDao->cambiarEstado($desde , $hasta , $keeperName , Estadoreserva::Confirmada);
-            $this->vistaOwner();
-
-
+        public function vistaPago (){
+            require_once(VIEWS_PATH."simulacionPago.php");
         }
 
-    
+
+        public function  simulacionPago ($desde , $hasta ,$keeper, $importe){
+            $desde = $desde ;
+            $hasta = $hasta ;
+            $keeper = $keeper ;
+            $importe = $importe ;
+
+            $user=$_SESSION['loggedUser'];
+            if ($user->getTarjeta != null){
+
+                $this->reservaDao->cambiarEstado($desde , $hasta , $keeper , Estadoreserva::Confirmada);
+                require_once(VIEWS_PATH."simulacionPago.php");
+            }
+            else {
+                $this->reservaDao->cambiarEstado($desde , $hasta , $keeper , Estadoreserva::Confirmada);
+                require_once(VIEWS_PATH."agregarTarjeta.php");
+                $this->vistaPago();
+            }
+            
+
+            
+            
+            
+        }
+
+
 
     }
 ?>
