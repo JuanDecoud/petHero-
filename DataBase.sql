@@ -124,3 +124,10 @@ BEGIN
     END IF;
 END;
 --el id del owner se pasa por parametro hasta encontrar una mejor manera
+create procedure seleccionarOwner(nomU varchar(50))
+BEGIN
+	select user.nombreUser,user.contrasena,user.tipoDeCuenta,user.nombre,user.apellido,user.dni,
+    user.telefono from owner o
+    inner join user u on o.idUser=u.idUser;
+END;
+--es la base del owner, sin tarjetas ni mascotas
