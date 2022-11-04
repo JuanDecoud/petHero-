@@ -72,3 +72,38 @@ create table reserva(
     constraint fk_idPet foreign key (idPet) 
     references pet(idPet) on update cascade on delete cascade
 );
+create table reviews(
+	idReview int primary key not null auto_increment,
+    descripcion varchar(150) not null,
+    fecha date not null,
+    puntuacion float not null
+);
+
+delimiter //
+create procedure insertarUser(nomU varchar(50), pass varchar(50),  tipo varchar(50),
+nom varchar(50), apell varchar(50), docu int, tel long)
+BEGIN
+	declare existe_persona int;
+    declare id int;
+    set existe_persona =(select count(*) from user where nomU=nombreUser);
+    IF existe_persona=0 THEN
+		INSERT INTO user(nombreUser,contrasena,tipoDeCuenta,nombre,apellido,dni,telefono)
+        VALUES (nomU,pass,tipo,nom,apell,docu, tel);
+		SET id=last_insert_id();
+	ELSE
+		SET id=0;
+    END IF;
+END;
+
+create procedure insertarTarjeta(nro int, nom varchar(50),  venc date, cod int)
+BEGIN
+	declare existe_persona int;
+    declare id int;
+    set existe_persona =(select count(*) from user where nomU=nombreUser);
+    IF existe_persona=0 THEN
+		INSERT INTO user(numero,nombre,fechaVenc,codigo) VALUES (nro,nom,venc,cod);
+		SET id=last_insert_id();
+	ELSE
+		SET id=0;
+    END IF;
+END;
