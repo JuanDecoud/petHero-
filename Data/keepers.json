@@ -13,5 +13,21 @@
         "DNI": "35410517",
         "telefono": "2234559528",
         "fechasDisponibles": []
+    },
+    {
+        "nombreUser": "mati123",
+        "contrasena": "1234",
+        "tipodeCuenta": "Keeper",
+        "tipoMascota": [
+            "Chica",
+            "Mediana",
+            "Grande"
+        ],
+        "remuneracion": "1",
+        "nombre": "Mati",
+        "apellido": "Matimati",
+        "DNI": "123456678",
+        "telefono": "87654321",
+        "fechasDisponibles": []
     }
 ]

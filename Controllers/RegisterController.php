@@ -1,7 +1,7 @@
 <?php 
     namespace Controllers ;
 
-    use DAO\KeeperDAO as KeeperDao;
+    use DAO\KeeperDAOSQL as KeeperDao;
     use DAO\OwnerDAO as OwnerDAO;
     use DAO\PetDAO as PetDAO;
     use DAO\UserDAO;

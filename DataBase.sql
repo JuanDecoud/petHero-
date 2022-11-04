@@ -1,6 +1,6 @@
 create database pet_home;
 use pet_home;
-create table user(
+create table users(
 	idUser int primary key not null auto_increment,
     nombreUser varchar(50) not null,
     contrasena varchar(50) not null,
@@ -24,11 +24,8 @@ create table keeper(
     tipoMascota varchar(50) not null,
     remuneracion float not null,
     idUserr int not null,
-    idFechasDisp int not null,
     constraint fk_idUserr foreign key (idUserr) 
     references user(idUser) on update cascade on delete cascade,
-    constraint fk_idFechasDisp foreign key(idFechasDisp) 
-    references fechasDisponibles(idFechasDisp) on update cascade on delete cascade
 );
 create table fechasDisponibles(
 	idFechasDisp int primary key not null auto_increment,

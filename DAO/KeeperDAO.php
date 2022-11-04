@@ -3,7 +3,7 @@
     use Models\Keeper as Keeper ;
     use DAO\OwnerDao as OwnerDao;
     use Models\FechasEstadias as FechasEstadias;
-use Models\Reserva;
+    use Models\Reserva;
 
     class KeeperDAO implements IKeeperDAO {
         private $fileName = ROOT."Data/keepers.json" ;
@@ -179,6 +179,7 @@ use Models\Reserva;
                 $value ['DNI'] = $keeper->getDni();
                 $value ['telefono'] = $keeper->getTelefono();
                 $value ['fechasDisponibles'] = array ();
+                
                 foreach ($keeper->getFechas() as $estadia){
                     $values['desde']=$estadia->getDesde();
                     $values['hasta']=$estadia->getHasta();

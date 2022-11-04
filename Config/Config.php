@@ -8,9 +8,9 @@ define("CSS_PATH", FRONT_ROOT.VIEWS_PATH . "css/");
 define("JS_PATH", FRONT_ROOT.VIEWS_PATH . "js/");
 ini_set('xdebug.max_nesting_level', 600);
 define("DB_HOST", "localhost");
-define("DB_NAME", "University");
+define("DB_NAME", "pet_home");
 define("DB_USER", "root");
-define("DB_PASS", "");
+define("DB_PASS", "admin");
 
 
 ?>

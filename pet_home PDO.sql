@@ -24,7 +24,6 @@ create table keeper(
     tipoMascota varchar(50) not null,
     remuneracion float not null,
     idUserr int not null,
-    idFechasDisp int not null,
     constraint fk_idUserr foreign key (idUserr) 
     references user(idUser) on update cascade on delete cascade
 );
