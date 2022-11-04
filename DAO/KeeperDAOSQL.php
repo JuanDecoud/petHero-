@@ -85,7 +85,7 @@
 
             try{
                 
-                $query = "SELECT * FROM ". $this->tablename. " k JOIN ". $this->tableUser. " u ON k.idUserr = u.idUser ";
+                $query = "SELECT * FROM ". $this->tablename. " k JOIN ". $this->tableUser. " u ON k.idUserr = u.idUser ". "WHERE u.nombreUser = \"". $username ."\"";
 
                 $this->connection = Connection::GetInstance();
 
@@ -100,6 +100,7 @@
             }catch(Exception $ex){
                 throw $ex;
             }
+            
             return $theKeeper;
         }
 
