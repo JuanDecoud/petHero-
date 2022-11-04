@@ -42,11 +42,16 @@
                 $this->connection->ExecuteNonQuery($queryUser, $parametersUser);
 
                 /////Keeper como tal
-                $parametersKeeper["tipoMascota"] = $keeper->getTipo();
+                $tiposMascota = $keeper->getTipo();
+                $string = "";
+                foreach($tiposMascota as $tipo){
+                    $string .= $tipo;
+                    $string .= " ";
+                }
+                $parametersKeeper["tipoMascota"] = $string;
                 $parametersKeeper["remuneracion"] = $keeper->getRemuneracion();
                 $result = $this->connection->Execute($thirdQuery);
                 $parametersKeeper["idUserr"] = $result[0]["idUser"];
-                var_dump($result);
 
                 $this->connection->ExecuteNonQuery($queryKeeper, $parametersKeeper);
 
