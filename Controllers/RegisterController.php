@@ -90,7 +90,7 @@
                 }
                 
 
-                if ($comprobarUser == null){
+                if ($comprobarUser != null){
                     $keeper = new Keeper($userName,$contrasena,$_SESSION['keeper'],$tipoMascota,$remuneracion,$nombre, $apellido,$dni,$telefono);
                     $this->keeperDAO->addKeeper($keeper);
                     $this->login();

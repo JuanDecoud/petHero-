@@ -21,12 +21,13 @@
 
                 $queryUser =  "INSERT INTO " . $this-> tableUser. " (nombreUser, contrasena,tipoDeCuenta,nombre,apellido,dni,telefono)
                                                                     VALUES (:nombreUser, :contrasena,:tipoDeCuenta,:nombre,:apellido,:dni,:telefono)";
-                $queryKeeper= "INSERT INTO ".$this->tableName." (tipoMascota,remuneracion,idUserr) VALUES (:tipoMascota,:remuneracion,:idUserr);";
+                $queryKeeper= "INSERT INTO ".$this->tablename." (tipoMascota,remuneracion,idUserr) VALUES (:tipoMascota,:remuneracion,:idUserr);";
                 
                 $queryFechas= "INSERT INTO ". $this->tableDates . " (desde,hasta,idKeeper) VALUES (:desde, :hasta, :idKeeper) ";
 
-                $thirdQuery = "SELECT idUser FROM ". $this->tableUser . " WHERE ". $this->tableUser .".nombreUser =".$keeper->getNombreUser();
-                $fourthQuery = "SELECT k.idKeeper FROM ". $this->tablename . " k LEFT JOIN " . $this->tableUser." u ON k.idUserr = u.idUser WHERE u.nombreUser = ".$keeper->getNombreUser();
+                $thirdQuery = "SELECT idUser FROM ". $this->tableUser . " WHERE "." nombreUser = \"". $keeper->getNombreUser()."\"";
+                
+                $fourthQuery = "SELECT k.idKeeper FROM ". $this->tablename . " k LEFT JOIN " . $this->tableUser." u ON k.idUserr = u.idUser WHERE u.nombreUser = \"".$keeper->getNombreUser()."\"";
                 
                 
                 $parametersUser["nombreUser"] = $keeper->getNombreUser();
@@ -40,13 +41,12 @@
                 $this->connection = Connection::GetInstance();
                 $this->connection->ExecuteNonQuery($queryUser, $parametersUser);
 
-
-
                 /////Keeper como tal
-                $parametersKeeper["lastName"] = $keeper->getTipo();
-                $parametersKeeper["lastName"] = $keeper->getRemuneracion();
+                $parametersKeeper["tipoMascota"] = $keeper->getTipo();
+                $parametersKeeper["remuneracion"] = $keeper->getRemuneracion();
                 $result = $this->connection->Execute($thirdQuery);
-                $parametersKeeper["fkUser"] = $result["idUser"][0];
+                $parametersKeeper["idUserr"] = $result[0]["idUser"];
+                var_dump($result);
 
                 $this->connection->ExecuteNonQuery($queryKeeper, $parametersKeeper);
 
