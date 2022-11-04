@@ -94,16 +94,33 @@ BEGIN
 		SET id=0;
     END IF;
 END;
+--verifica si exitste el nombre de usuario
 
 create procedure insertarTarjeta(nro int, nom varchar(50),  venc date, cod int)
 BEGIN
-	declare existe_persona int;
+	declare existe_tarjeta int;
     declare id int;
-    set existe_persona =(select count(*) from user where nomU=nombreUser);
-    IF existe_persona=0 THEN
-		INSERT INTO user(numero,nombre,fechaVenc,codigo) VALUES (nro,nom,venc,cod);
+    set existe_tarjeta =(select count(*) from tarjeta where nro=numero);
+    IF existe_tarjeta=0 THEN
+		INSERT INTO tarjeta(numero,nombre,fechaVenc,codigo) VALUES (nro,nom,venc,cod);
 		SET id=last_insert_id();
 	ELSE
 		SET id=0;
     END IF;
 END;
+
+create procedure insertarPet(nom varchar(50),raz varchar(50),tam varchar(50),imag varchar(100),
+planVac varchar(100),obserGrals varchar(150),vidd varchar(100),idOwn int)
+BEGIN
+	declare existe_mascota int;
+    declare id int;
+    set existe_mascota =(select count(*) from pet where imag=imagen);
+    IF existe_mascota=0 THEN
+		INSERT INTO pet(nombre,raza,tamaño,imagen,planVacunacion,observacionesGrals,video,idDueño) 
+        VALUES (nom,raz,tam,imag,planVac,obserGrals,vidd,idOwn);
+		SET id=last_insert_id();
+	ELSE
+		SET id=0;
+    END IF;
+END;
+--el id del owner se pasa por parametro hasta encontrar una mejor manera
