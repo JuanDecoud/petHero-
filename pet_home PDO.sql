@@ -1,5 +1,13 @@
 create database pet_home;
 use pet_home;
+drop table reviews;
+drop table reserva;
+drop table pet;
+drop table fechasdisponibles;
+drop table tarjeta;
+drop table keeper;
+drop table owner;
+drop table user;
 create table user(
 	idUser int primary key not null auto_increment,
     nombreUser varchar(50) not null,
@@ -12,28 +20,31 @@ create table user(
 );
 create table owner(
 	idOwner int primary key not null auto_increment,
-    idTarjeta int not null,
     idUser int not null,
-    constraint fk_idUser foreign key (idUser) 
-    references user(idUser) on update cascade on delete cascade,
-    constraint fk_idTarjeta foreign key(idTarjeta) 
-    references tarjeta(numero) on update cascade on delete cascade
+    foreign key (idUser) references user(idUser) on update cascade on delete cascade
+);
+create table tarjeta(
+    numero int not null,
+    nombre varchar(50) not null,
+    apellido varchar(50) not null,
+    fechaVenc date not null,
+    codigo int not null,
+    idOwner int not null,
+    foreign key(idOwner) references owner(idOwner) on update cascade on delete cascade
 );
 create table keeper(
 	idKeeper int primary key not null auto_increment,
     tipoMascota varchar(50) not null,
     remuneracion float not null,
-    idUserr int not null,
-    constraint fk_idUserr foreign key (idUserr) 
-    references user(idUser) on update cascade on delete cascade
+    idUser int not null,
+    foreign key (idUser) references user(idUser) on update cascade on delete cascade
 );
 create table fechasDisponibles(
-	idFechasDisp int primary key not null auto_increment,
+	idFechasDisp int primary key auto_increment,
     desde date not null,
     hasta date not null,
     idKeeper int not null,
-    constraint fk_idKeeper foreign key (idKeeper) 
-    references keeper(idKeeper) on update cascade on delete cascade
+    foreign key (idKeeper) references keeper(idKeeper) on update cascade on delete cascade
 );
 create table pet(
 	idPet int primary key not null auto_increment,
@@ -44,15 +55,8 @@ create table pet(
     planVacunacion varchar(100),
     observacionesGrals varchar(150),
     video longblob,
-    idDueño int not null,
-    constraint fk_idOwnerr foreign key (idDueño) 
-    references owner(idOwner) on update cascade on delete cascade
-);
-create table tarjeta(
-	numero int primary key not null,
-    nombre varchar(50) not null,
-    fechaVenc date not null,
-    codigo int not null
+    idOwner int not null,
+    foreign key (idOwner) references owner(idOwner) on update cascade on delete cascade
 );
 create table reserva(
 	idReserva int primary key not null auto_increment,
@@ -62,12 +66,9 @@ create table reserva(
     importeReserva float not null,
     importeTotal float not null,
     estado ENUM('Pendiente','Cumplida','Aceptada','Confirmada') not null,
-    constraint fk_idKeeperr foreign key (idKeeper) 
-    references keeper(idKeeper) on update cascade on delete cascade,
-    constraint fk_idFechasDis foreign key (idFechasDis) 
-    references fechasDisponibles(idFechasDisp) on update cascade on delete cascade,
-    constraint fk_idPet foreign key (idPet) 
-    references pet(idPet) on update cascade on delete cascade
+	foreign key (idKeeper) references keeper(idKeeper) on update cascade on delete cascade,
+    foreign key (idFechasDis) references fechasDisponibles(idFechasDisp) on update cascade on delete cascade,
+    foreign key (idPet) references pet(idPet) on update cascade on delete cascade
 );
 create table reviews(
 	idReview int primary key not null auto_increment,
@@ -76,7 +77,10 @@ create table reviews(
     puntuacion float not null
 );
 
-delimiter //
+/**______________________________________________________________________________ */
+drop procedure insertarOwner;
+drop procedure insertarUser;
+delimiter $$
 create procedure insertarUser(nomU varchar(50), pass varchar(50),  tipo varchar(50),
 nom varchar(50), apell varchar(50), docu int, tel long)
 BEGIN
@@ -85,24 +89,53 @@ BEGIN
     set existe_persona =(select count(*) from user where nomU=nombreUser);
     IF existe_persona=0 THEN
 		INSERT INTO user(nombreUser,contrasena,tipoDeCuenta,nombre,apellido,dni,telefono)
-        VALUES (nomU,pass,tipo,nom,apell,docu, tel);
+        VALUES (nomU,pass,tipo,nom,apell,docu,tel);
 		SET id=last_insert_id();
 	ELSE
 		SET id=0;
     END IF;
-END;
-create procedure insertarTarjeta(nro int, nom varchar(50),  venc date, cod int)
+    call insertarOwner(nomU);
+END $$
+delimiter ;
+
+delimiter $$
+create procedure insertarOwner(nomU varchar(50))
+BEGIN
+	declare existe_persona int;
+    declare id int;
+    set existe_persona =(select count(*) from user where nomU=nombreUser);
+    IF existe_persona=0 THEN
+        insert into owner(idUser) select idUser from user;
+		SET id=last_insert_id();
+	ELSE
+		SET id=0;
+    END IF;
+END $$
+delimiter ;
+
+call insertarUser('dany','1234','Owner','Daniel','Sciacco','33333333','222222222');
+call insertarUser('damy','1234','Owner','Damian','Tacconi','44444444','555555555');
+select*from user;
+select*from owner;
+
+delimiter $$
+create procedure insertarTarjeta(nro int, nom varchar(50), apell varchar(50),  venc date, cod int)
 BEGIN
 	declare existe_tarjeta int;
     declare id int;
     set existe_tarjeta =(select count(*) from tarjeta where nro=numero);
     IF existe_tarjeta=0 THEN
-		INSERT INTO tarjeta(numero,nombre,fechaVenc,codigo) VALUES (nro,nom,venc,cod);
+		INSERT INTO tarjeta(numero,nombre,apellido,fechaVenc,codigo) VALUES (nro,nom,apell,venc,cod);
 		SET id=last_insert_id();
 	ELSE
 		SET id=0;
     END IF;
-END;
+END $$
+delimiter ;
+call insertarTarjeta('1234567','dan','sci','2023-11-20','666');
+select*from tarjeta;
+
+delimiter $$
 create procedure insertarPet(nom varchar(50),raz varchar(50),tam varchar(50),imag varchar(100),
 planVac varchar(100),obserGrals varchar(150),vidd varchar(100),idOwn int)
 BEGIN
@@ -116,17 +149,18 @@ BEGIN
 	ELSE
 		SET id=0;
     END IF;
-END;
+END; $$
+delimiter ;
+
+delimiter $$
 create procedure seleccionarOwner(nomU varchar(50))
 BEGIN
 	select user.nombreUser,user.contrasena,user.tipoDeCuenta,user.nombre,user.apellido,user.dni,
     user.telefono from owner o
     inner join user u on o.idUser=u.idUser;
-END;
-create procedure insertarOwner(nomU varchar(50), pass varchar(50),  tipo varchar(50),
-nom varchar(50), apell varchar(50), docu int, tel long)
-BEGIN
-	call isertarUser(nomU,pass,tipo,nom,apell,docu,tel);
-END;
+END $$
+delimiter ;
 
+
+ 
 
