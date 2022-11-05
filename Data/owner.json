@@ -1,6 +1,6 @@
 [
     {
-        "nombreUser": "Juan",
+        "nombreUser": "juan",
         "contrasena": "1234",
         "tipodeCuenta": "Owner",
         "nombre": "Juan",
@@ -9,11 +9,11 @@
         "telefono": "2234559528",
         "tarjeta": [
             {
-                "numero": "22351634",
+                "numero": "25366975",
                 "nombre": "Juan",
                 "apellido": "Decoud",
                 "fechaVenc": "12\/25",
-                "codigo": "121"
+                "codigo": "725"
             }
         ],
         "pets": [
@@ -21,10 +21,10 @@
                 "nombre": "Scooby",
                 "raza": "Perro",
                 "tamano": "Chico",
-                "planVacunacion": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/planVACUNACON.jpg",
+                "planVacunacion": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/b0922b69bac5f67df40c7e3fad643040.jpg",
                 "observacionesGrals": "Buen Perro",
-                "video": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/Rana - 113403.mp4",
-                "imagen": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/perro2.jpg"
+                "video": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/Mujer - 58142.mp4",
+                "imagen": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg"
             }
         ]
     }

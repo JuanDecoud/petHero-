@@ -4,7 +4,7 @@
         <div class="d-inline-flex justify-content-around  w-100">
           <div class = "container">
             <a class="navbar-brand border-bottom " href="#">
-                <img src="<?php echo FRONT_ROOT.VIEWS_PATH."img/91505.png"; ?>" alt="" width="30" height="24" class="d-inline-block align-text-top">
+                <img src="<?php echo FRONT_ROOT.VIEWS_PATH."img/91506.png"; ?>" alt="" width="30" height="24" class="d-inline-block align-text-top">
                 Pet Hero
             </a>
           </div>

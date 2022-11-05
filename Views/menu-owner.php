@@ -117,24 +117,23 @@
                             
                                 <?php foreach ($ListaEnCurso as $reserva){ 
                                     $pet = $reserva->getPet();
+                                    $keeper = $reserva->getKeeper();
                                     ?>
                             <div class = " d-inline-flex flex-wrap">
-                                <form action="" method ="post">
+                                <form action="<?php echo FRONT_ROOT."Review/vistaReview"?>" method ="post">
                                     <div class="card m-3 " style="width: 18rem;">
                                         <div class="card-body">
                                             <h5 class="card-title">Estadia</h5>
                                         </div>
                                         <img src="<?php echo $pet->getImg(); ?>" class="card-img-top" alt="...">
-                                        <div class="card-body">
-                                            <h5 class="card-title"><?php echo $pet->getNombre(); ?></h5>
-                                        </div>
                                         <ul class="list-group list-group-flush">
+                                            <li class="list-group-item">Nombre:<input style=" text-align: center; color:black; border:0;"  type="text" placeholder="<?php echo $pet->getNombre(); ?>" name="pet" value="<?php echo $pet->getNombre(); ?>" readonly></li> 
+                                            <li class="list-group-item">Cuidador:<input style=" text-align: center; color:black; border:0;"  type="text" placeholder="<?php echo $keeper->getNombreUser(); ?>" name="keeper" value="<?php echo $keeper->getNombreUser(); ?>" readonly></li>
                                             <li class="list-group-item"><strong>Desde:</strong><?php  echo $reserva->getFechadesde(); ?><li>
                                             <li class="list-group-item"><strong>Hasta:</strong><?php echo $reserva->getFechahasta();?></li>
-
                                         </ul>
                                         <div class="card-body">
-                                            <button type = "button" class = "btn-sm btn-danger">Completar</button>
+                                            <button type = "submit" class = "btn-sm btn-danger">Completar</button>
                                         </div>
                                     </div>
                                 </form>

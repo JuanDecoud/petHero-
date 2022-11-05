@@ -1,7 +1,7 @@
 <?php require_once ("nav.php") ?>
 
-  <div class = "container abs-center    col-md-4 shadow p-3 mb-5 bg-body rounded ">
-    <div class = " container   ">
+  <div class = "container abs-center    col-md-4 shadow p-3 mb-5 bg-body rounded  ">
+    <div class = " container style "    >
         <h2 class = "mb-4">Login</h2>
         <form class = "m-2" method = "post" action="<?php echo FRONT_ROOT."Home/login"; ?>"> 
                 <div class="form-group m-4  ">
@@ -19,5 +19,5 @@
                 </div>  
         </form>
     </div>
-  </div>
+</div>
 

@@ -10,7 +10,7 @@ ini_set('xdebug.max_nesting_level', 600);
 define("DB_HOST", "localhost");
 define("DB_NAME", "pet_home");
 define("DB_USER", "root");
-define("DB_PASS", "admin");
+define("DB_PASS", "1456");
 
 
 ?>

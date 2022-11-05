@@ -69,12 +69,34 @@ create table reserva(
     constraint fk_idPet foreign key (idPet) 
     references pet(idPet) on update cascade on delete cascade
 );
+
+// tabla review con el store procedure
+
 create table reviews(
 	idReview int primary key not null auto_increment,
     descripcion varchar(150) not null,
     fecha date not null,
-    puntuacion float not null
+    puntuacion double not null 
+    idpet int not null ,
+    idkeeper int not null ,
+    constraint  fk_petReview  foreign key (idpet) references pet (idPet),
+    constraint  fk_keeperReview  foreign key (idkeeper) references keeper (idKeeper) 
 );
+
+DELIMITER $$
+
+CREATE PROCEDURE agregar_Review (IN descripcion VARCHAR(150) , IN fecha date, IN puntuacion int , in idKeeper int , in idPet int)
+BEGIN
+	INSERT INTO reviews
+        (descripcion, fecha, puntuacion , idKeeper , idPet)
+    VALUES
+        (descripcion, fecha, puntuacion , idKeeper , idPet);
+END$$
+
+DELIMITER ;
+
+
+
 
 delimiter //
 create procedure insertarUser(nomU varchar(50), pass varchar(50),  tipo varchar(50),
