@@ -84,6 +84,10 @@
             {
                 $query = "SELECT * FROM ". $this->tablename. " k JOIN ". $this->tableUser. " u ON k.idUserr = u.idUser ";
 
+                $queryDates = "SELECT * FROM ". $this->tablename . "k JOIN " . $this->tableDates . " d ON k.idKeeper = d.idKeeper";
+                
+
+
                 $this->connection = Connection::GetInstance();
 
                 $resultUser = $this->connection->Execute($query);
@@ -92,6 +96,18 @@
                     $keeper = new Keeper($value['nombreUser'],$value ['contrasena'],$value ['tipodeCuenta'],
                     $value ['tipoMascota'],$value ['remuneracion'],$value ['nombre'], $value ['apellido'],$value ['DNI'],
                     $value ['telefono']);
+
+                    $queryDates = "SELECT * FROM ". $this->tablename . "k JOIN " . $this->tableDates . " d ON k.idKeeper = d.idKeeper"
+                    . "WHERE d.idKeeper= (SELECT k.idKeeper FROM keeper k JOIN users u ON k.idUserr = u.idUser WHERE u.nombreUser = \"".$keeper->getNombreUser() . "\")";
+                    
+                    $result = $this->connection->Execute($queryDates);
+                    if($result){
+                        foreach($result as $fecha){
+                            $fechaResultado = new FechasEstadias($fecha[0]["desde"],$fecha[0]["hasta"]);
+                            $keeper->agregarFecha($fechaResultado);
+                        }
+                    }
+
 
                     array_push($keeperList,$keeper);
                 }
@@ -149,7 +165,7 @@
                     
                     } 
                 }
-
+                
             }catch(Exception $ex){
                 throw $ex;
             }
@@ -162,12 +178,15 @@
         public function agregarFecha(FechasEstadias $estadia, $username){
                 $desde = $estadia -> getDesde();
                 $hasta = $estadia -> getHasta();
-                $desde = date_parse_from_format('d-m-Y',$desde);
-                $desde = date_parse_from_format('d-m-Y',$hasta);
+                //$desde = date_parse_from_format('Y-m-d',$desde);
+                //$desde = date_parse_from_format('Y-m-d',$hasta);
+                $dateDesde = date_create($estadia -> getDesde());
+                $dateHasta = date_create($estadia -> getHasta());
+                
 
             try{
-                $query = "INSERT INTO ". $this->tableDates . " (desde,hasta,idKeeper) VALUES " . "(".$desde.",".$hasta.",".
-                "(SELECT k.idKeeper FROM keeper k JOIN users u on k.idUserr = u.idUser Where u.nombreUser = \"". $username . "\"))";
+                $query = "INSERT INTO ". $this->tableDates . " (desde,hasta,idKeeper) VALUES " . "(\"".date_format($dateDesde,"Y/m/d")."\",\"".date_format($dateHasta,"Y/m/d")."\",".
+                "(SELECT k.idKeeper FROM keeper k JOIN users u on k.idUserr = u.idUser WHERE u.nombreUser = \"". $username . "\"))";
 
                 $this->connection = Connection::GetInstance();
                 $this->connection->Execute($query);
@@ -177,6 +196,40 @@
                 throw $ex;
             }
             
+        }
+
+        public function verificarRangos ($desde , $hasta  ,$userName){
+            $verificar = null ;
+
+            foreach ($this->keeperList as $keeper){
+                if ($keeper->getNombreUser () == $userName){
+                    foreach ($keeper->getFechas () as $estadias){
+                        if (($desde >= $estadias->getDesde() && $hasta <= $estadias->getHasta()) 
+                        || ($desde < $estadias->getDesde () &&  $hasta > $estadias->getHasta()) 
+                        || ($desde>=$estadias->getDesde() && $desde<=$estadias->getHasta() && $hasta> $estadias->getHasta() )){
+                            
+                            $verificar=$estadias ;
+                            return $verificar;
+                        }
+                        else {
+                            $verificar = null ;
+                            return $verificar ;
+                        } 
+                    }
+                }
+            }
+
+        }
+
+        public function verificarFechadeldia ($desde , $hasta){
+            $date = date("Y-m-d");
+
+            if ( $hasta >= $date && $desde>= $date){
+                return true;
+            }
+            else {
+                return false ;
+            }
         }
         
        

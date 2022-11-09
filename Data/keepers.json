@@ -17,5 +17,28 @@
                 "hasta": "2022-11-24"
             }
         ]
+    },
+    {
+        "nombreUser": "decoud",
+        "contrasena": "1234",
+        "tipodeCuenta": "Keeper",
+        "tipoMascota": [
+            "Chica"
+        ],
+        "remuneracion": "1500",
+        "nombre": "decoud",
+        "apellido": "decouyd",
+        "DNI": "123",
+        "telefono": "123",
+        "fechasDisponibles": [
+            {
+                "desde": "2022-12-01",
+                "hasta": "2022-12-06"
+            },
+            {
+                "desde": "2022-12-17",
+                "hasta": "2022-12-19"
+            }
+        ]
     }
 ]
