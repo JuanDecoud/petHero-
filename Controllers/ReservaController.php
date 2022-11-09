@@ -33,9 +33,10 @@ use DAO\PetDAO ;
         }
 
         public function solicitadudEstadia ($nombreKeeper ,  $fechainicio , $fechaFin ,$nombreMascota ){
+
                 $keeper = $this->keeperdao->obtenerUser($nombreKeeper);
                 $pet = $this->petdao->retrievePet($nombreMascota);
-                $importeTotal = $keeper->getRemuneracion ();
+                $importeTotal = $keeper->getRemuneracion();
                 $importeReserva = ($importeTotal/2) ;
 
                 $reserva = new Reserva ();

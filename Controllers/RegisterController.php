@@ -1,16 +1,16 @@
 <?php 
     namespace Controllers ;
 
-    use DAO\KeeperDAOSQL as KeeperDao;
+    //use DAO\KeeperDAOSQL as KeeperDao;
     use DAO\OwnerDAO as OwnerDAO;
     use DAO\PetDAO as PetDAO;
     use DAO\UserDAO;
-    //use DAO\KeeperDAO ;
+    use DAO\KeeperDAO ;
     use Models\Keeper as Keeper;
     use Models\Owner as Owner;
     use Models\Pet as Pet;
-    use DAO\OwnerdbDAO as OwnerdbDAO ;
-use Exception;
+   // use DAO\OwnerdbDAO as OwnerdbDAO ;
+    use Exception;
 
     class RegisterController {
 
@@ -18,7 +18,7 @@ use Exception;
         private $keeperDAO ;
         private $ownerDAO ;
         private $userDAO;
-        private $ownerdb ;
+        //private $ownerdb ;
 
 
         public function __construct()
@@ -26,7 +26,7 @@ use Exception;
             $this->keeperDAO = new KeeperDAO ();
             $this->ownerDAO = new OwnerDAO ();
             $this->userDAO = new UserDAO;
-            $this->ownerdb = new OwnerdbDAO() ;
+            //$this->ownerdb = new OwnerdbDAO() ;
         }
 
         public function login (){
@@ -49,7 +49,7 @@ use Exception;
 
         public function agregarOwner ($nombre,$apellido,$dni,$telefono,$userName,$contrasena ){
 
-            // Base De Datos 
+          /*  // Base De Datos 
             try
             {
                 if ($userName != null && $contrasena !=null){
@@ -83,10 +83,10 @@ use Exception;
             echo '<script language="javascript">alert("Nombre de usuario ya existe");</script>';
             $this->registrarOwner();
         }
-
+*/
         //resguardo en JSON
 
-/*
+
         if ($userName != null && $contrasena !=null){
             strtolower($userName);
             $usuarios = array ();
@@ -115,18 +115,15 @@ use Exception;
                 $this->registrarOwner();
             }
 
-<<<<<<< HEAD
         }
         else {
             echo '<script language="javascript">alert("Complete todos los campos");</script>';
             $this->registrarOwner();
         }
 
-*/
+
             
 
-=======
->>>>>>> 5692f2913d424f96b83856dbe5527bf05029b589
         }
 
         public function agregarKeeper ($nombre,$apellido,$dni,$telefono,$userName,$contrasena,$remuneracion,$arrayTipo ){

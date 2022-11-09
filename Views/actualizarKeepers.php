@@ -20,10 +20,10 @@
                                             <input style =" text-align: center; font-weight:bold; color:black; border:0;" class ="border-bottom mt-1" type="text" placeholder="<?php echo $estadias->getHasta() ?>" name ="hasta"  value = "<?php echo $estadias->getHasta() ;?>"readonly >
                                         </div>
                                         <?php 
-                                            $select = '<select name="tipo" class = "form-select mt-2 " id="">';
+                                            $select = '<select name="tipo" class = "form-select mt-2 " id="" required>';
                                             $select.='<option selected >Elija su mascota</option> ';
                                             foreach ($petlist as $pet) {
-                                                $select.='<option value="'.$pet->getNombre().'">'.$pet->getNombre().'</option>';
+                                                $select.='<option required value="'.$pet->getNombre().'">'.$pet->getNombre().'</option>';
                                             }
                                             $select.='</select>';
                                             echo $select;

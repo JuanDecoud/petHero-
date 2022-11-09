@@ -12,7 +12,7 @@
                 <div class="form-group m-4  ">
                     <label for="exampleInputEmail1" class = " ">Contraseña</label>
                     <input type="password" class="form-control " id="exampleInputEmail1" 
-                        aria-describedby="emailHelp" placeholder="Contraseña" name = "contrasena" requiered>
+                        aria-describedby="emailHelp" placeholder="Contraseña" name = "contrasena" required>
                 </div>
                 <div class = "form-group m-2">
                     <button type="submit" class="btn btn-danger">Confirmar</button>

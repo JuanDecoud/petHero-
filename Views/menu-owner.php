@@ -48,17 +48,16 @@
                                             <li class="list-group-item"><strong>Tamaño:</strong><?php echo"  ". $pet->getTamano();?></li>
                                             <li class="list-group-item"><strong>Raza:</strong><?php echo "  ". $pet->getRaza();?></li>
                                         </ul>
-<<<<<<< HEAD
-=======
                                         <div class="card-body">
                                             <img onclick="javascript:this.width=450;this.height=338" ondblclick="javascript:this.width=250;this.height=150" width="250" height = "150" src="<?php echo $pet->getPlanVacunacion()?>" width="100"/>
                                         </div>
                                         <div class="card-body">
                                             <iframe class="embed-responsive-item card-img-top" src="<?php echo $pet->getVideo(); ?>"></iframe>
                                         </div>
-                                        
->>>>>>> 5692f2913d424f96b83856dbe5527bf05029b589
+
+
                                     </div>
+                                    
                                 </div>
                                 <?php  }?>
                         </div>

@@ -109,21 +109,31 @@
         }
 
 
-        public function agregarFecha (FechasEstadias $estadia ,$username ){
-            
+        public function buscarEstadias ($nombreUser){
             $this->obtenerDatos();
+            $estadiasLista = array ();
+            foreach ($this->keeperList as $keeper){
+                if ($keeper->getNombreUser () == $nombreUser){
+                    foreach ($keeper->getFechas() as $estadias){
+                        array_push($estadiasLista , $estadias);
+                    }
+                }
+            }
+            return $estadiasLista ;
+        }
+        public function agregarFecha (FechasEstadias $estadia ,$username ){
             foreach($this->keeperList  as $keeper){
                 if ($keeper->getNombreUser()==$username)
                     $keeper->agregarFecha ($estadia);
             }
             $this->guardarDatos();
-
         }
+
 
 
         public function obtenerUser ($username){
             $user = null ;
-           // $this->obtenerDatos();
+            $this->obtenerDatos();
             foreach ($this->keeperList as $keeper){
                 if ($keeper->getNombreUser() == $username){
                     $user = $keeper;

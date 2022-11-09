@@ -1,26 +1,27 @@
 <?php
 
-use Models\Keeper;
-
 
 require_once("navKeeper.php");
 
-use DAO\KeeperDAOSQL as KeeperDAO;
-//use DAO\KeeperDAO as KeeperDAO;
+//use DAO\KeeperDAOSQL as KeeperDAO;
+use DAO\KeeperDAO as KeeperDAO;
+use Models\Keeper;
 use DAO\ReservaDAO;
 use Models\Estadoreserva;
 use Models\Pet;
 
 $keepDao = new KeeperDao();
 $userLogged = $_SESSION['loggedUser'];
-$user = $keepDao->obtenerUser($userLogged->getNombreUser());
-$fechas = $user->getFechas();
+
+// busco las fechas que le asigne al keeper
+$fechas = $keepDao->buscarEstadias($userLogged->getNombreUser());
+
+// traigo todas las reservas 
 $reservadao = new ReservaDAO();
 $lista = $reservadao->getAll();
-$listaReservas = $reservadao->buscarReservaxEstadoKeeper($lista , $user->getNombreUser (),Estadoreserva::Pendiente);
-$listaAceptadas = $reservadao->buscarReservaxEstadoKeeper( $lista ,$user->getNombreUser (), Estadoreserva::Aceptada);
-$listaConfirmadas = $reservadao->buscarReservaxEstadoKeeper( $lista ,$user->getNombreUser (), Estadoreserva::Confirmada);
-
+$listaReservas = $reservadao->buscarReservaxEstadoKeeper($lista , $userLogged->getNombreUser (),Estadoreserva::Pendiente);
+$listaAceptadas = $reservadao->buscarReservaxEstadoKeeper( $lista ,$userLogged->getNombreUser (), Estadoreserva::Aceptada);
+$listaConfirmadas = $reservadao->buscarReservaxEstado($lista , $userLogged->getNombreUser() ,Estadoreserva::Confirmada );
 
 
 ?>
@@ -40,7 +41,7 @@ $listaConfirmadas = $reservadao->buscarReservaxEstadoKeeper( $lista ,$user->getN
                 <label for="" class="mx-2">
                     <h5>Hasta:</h5>
                 </label>
-                <input class="calendar my-4 col-8" style="border 2px solid" type="date" name="hasta" placeholder="" required>
+                <input class="calendar my-4 col-8" style="border: 2px solid" type="date" name="hasta" placeholder="" required>
             </div>
 
             <div>
