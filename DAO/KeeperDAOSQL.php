@@ -84,6 +84,10 @@
             {
                 $query = "SELECT * FROM ". $this->tablename. " k JOIN ". $this->tableUser. " u ON k.idUserr = u.idUser ";
 
+                $queryDates = "SELECT * FROM ". $this->tablename . "k JOIN " . $this->tableDates . " d ON k.idKeeper = d.idKeeper";
+                
+
+
                 $this->connection = Connection::GetInstance();
 
                 $resultUser = $this->connection->Execute($query);
@@ -92,6 +96,19 @@
                     $keeper = new Keeper($value['nombreUser'],$value ['contrasena'],$value ['tipodeCuenta'],
                     $value ['tipoMascota'],$value ['remuneracion'],$value ['nombre'], $value ['apellido'],$value ['DNI'],
                     $value ['telefono']);
+
+                    $queryDates = "SELECT * FROM ". $this->tablename . "k JOIN " . $this->tableDates . " d ON k.idKeeper = d.idKeeper"
+                    . "WHERE d.idKeeper= (SELECT k.idKeeper FROM keeper k JOIN users u ON k.idUserr = u.idUser WHERE u.nombreUser = \"".$keeper->getNombreUser() . "\")";
+                    
+                    $result = $this->connection->Execute($queryDates);
+                    if($result){
+                        var_dump($result);
+                        foreach($result as $fecha){
+                            $fechaResultado = new FechasEstadias($fecha[0]["desde"],$fecha[0]["hasta"]);
+                            $keeper->agregarFecha($fechaResultado);
+                        }
+                    }
+
 
                     array_push($keeperList,$keeper);
                 }
@@ -149,7 +166,7 @@
                     
                     } 
                 }
-
+                
             }catch(Exception $ex){
                 throw $ex;
             }
@@ -162,8 +179,8 @@
         public function agregarFecha(FechasEstadias $estadia, $username){
                 $desde = $estadia -> getDesde();
                 $hasta = $estadia -> getHasta();
-                $desde = date_parse_from_format('d-m-Y',$desde);
-                $desde = date_parse_from_format('d-m-Y',$hasta);
+                $desde = date_parse_from_format('Y-m-d',$desde);
+                $desde = date_parse_from_format('Y-m-d',$hasta);
 
             try{
                 $query = "INSERT INTO ". $this->tableDates . " (desde,hasta,idKeeper) VALUES " . "(".$desde.",".$hasta.",".
