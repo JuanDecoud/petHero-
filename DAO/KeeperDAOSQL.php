@@ -77,7 +77,34 @@
 
         public function getALL()
         {
+            //Crear un arraylist, pushear como en "obtenerUser" y devolver el array.
+            $keeperList = array();
             
+            try
+            {
+                $query = "SELECT * FROM ". $this->tablename. " k JOIN ". $this->tableUser. " u ON k.idUserr = u.idUser ";
+
+                $this->connection = Connection::GetInstance();
+
+                $resultUser = $this->connection->Execute($query);
+
+                foreach($resultUser as $value){
+                    $keeper = new Keeper($value['nombreUser'],$value ['contrasena'],$value ['tipodeCuenta'],
+                    $value ['tipoMascota'],$value ['remuneracion'],$value ['nombre'], $value ['apellido'],$value ['DNI'],
+                    $value ['telefono']);
+
+                    array_push($keeperList,$keeper);
+                }
+
+
+            }
+            catch (Exception $ex)
+            {
+                throw $ex;
+            }
+            
+            return $keeperList;
+
         }
 
         public function obtenerUser($username){
@@ -104,6 +131,53 @@
             return $theKeeper;
         }
 
+        public function comprobarLogin($username, $contrasena){
+            $user = null;
+
+            try{
+                
+                $query = "SELECT * FROM ". $this->tablename. " k JOIN ". $this->tableUser. " u ON k.idUserr = u.idUser WHERE u.nombreUser = \"". $username ."\"" ." AND u.contrasena = \"" .$contrasena."\"";
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query);
+
+                if($resultSet){
+                    foreach ($resultSet as $row)
+                    {            
+                      $user = new Keeper($row["nombreUser"],$row["contrasena"],$row["tipoDeCuenta"],$row["tipoMascota"],$row["remuneracion"],$row["nombre"],$row["apellido"],$row["dni"],$row["telefono"]);
+                    
+                    } 
+                }
+
+            }catch(Exception $ex){
+                throw $ex;
+            }
+            
+
+
+            return $user;
+        }
+
+        public function agregarFecha(FechasEstadias $estadia, $username){
+                $desde = $estadia -> getDesde();
+                $hasta = $estadia -> getHasta();
+                $desde = date_parse_from_format('d-m-Y',$desde);
+                $desde = date_parse_from_format('d-m-Y',$hasta);
+
+            try{
+                $query = "INSERT INTO ". $this->tableDates . " (desde,hasta,idKeeper) VALUES " . "(".$desde.",".$hasta.",".
+                "(SELECT k.idKeeper FROM keeper k JOIN users u on k.idUserr = u.idUser Where u.nombreUser = \"". $username . "\"))";
+
+                $this->connection = Connection::GetInstance();
+                $this->connection->Execute($query);
+
+                
+            } catch (Exception $ex){
+                throw $ex;
+            }
+            
+        }
         
        
     }
