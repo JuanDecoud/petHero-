@@ -25,8 +25,35 @@
             $queryUser =  "INSERT INTO " . $this-> tableUser. " (nombreUser, contrasena,tipoDeCuenta,nombre,apellido,dni,telefono)
             VALUES (:nombreUser, :contrasena,:tipoDeCuenta,:nombre,:apellido,:dni,:telefono)";
 
-            $queryKeeper= "INSERT INTO ".$this->tablename." (idTarjeta,idUser) VALUES (:idTarjeta,:idUser);";
-                
+            $queryOwner= "INSERT INTO ".$this->tablename." (idTarjeta,idUser) VALUES (:idTarjeta,:idUser);";
+            
+            $queryTarjeta = 
+
+            $parametersUser["nombreUser"] = $owner->getNombreUser();
+            $parametersUser["contrasena"] = $owner->getContrasena();
+            $parametersUser["tipoDeCuenta"] = $owner->getTipodecuenta();
+            $parametersUser["nombre"] = $owner->getNombre();
+            $parametersUser["apellido"] = $owner->getApellido();
+            $parametersUser["dni"] = $owner->getDni();
+            $parametersUser["telefono"] = $owner->getTelefono();
+
+            $this->connection = Connection::GetInstance();
+            $this->connection->ExecuteNonQuery($queryUser, $parametersUser);
+            
+            $tarjeta = $owner ->getTarjeta();
+
+            foreach($tarjeta as $ts){
+                $parametersTarjeta["numero"] = $ts->
+                $parametersTarjeta["nombre"] 
+                $parametersTarjeta["fechaVenc"] 
+                $parametersTarjeta["codigo"] 
+                $parametersTarjeta["idOwner"]
+                $parametersTarjeta["apellido"] 
+            }
+
+
+            $parametersOwner["idTarjeta"] = $owner->getTarjeta();
+            $parametersOwner[""]
 
         }
 

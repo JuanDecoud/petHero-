@@ -29,8 +29,7 @@
           
             
             $keeper = $_SESSION['loggedUser'];
-            $verificar = null;
-            //$this->keeperDao->verificarRangos ($desde,$hasta,$keeper->getNombreUser() );
+            $verificar = $this->keeperDao->verificarRangos ($desde,$hasta,$keeper->getNombreUser() );
             $fechaDeldia=$this->keeperDao->verificarFechadeldia($desde , $hasta);
             $lista = $this->reservaDao->GetAll();
             $EstadiaEnCurso = $this->reservaDao->buscarReservaEnCurso($lista,$keeper->getNombreUser(),Estadoreserva::Confirmada ,$desde ,$hasta);

@@ -201,23 +201,43 @@
         public function verificarRangos ($desde , $hasta  ,$userName){
             $verificar = null ;
 
-            foreach ($this->keeperList as $keeper){
-                if ($keeper->getNombreUser () == $userName){
-                    foreach ($keeper->getFechas () as $estadias){
-                        if (($desde >= $estadias->getDesde() && $hasta <= $estadias->getHasta()) 
-                        || ($desde < $estadias->getDesde () &&  $hasta > $estadias->getHasta()) 
-                        || ($desde>=$estadias->getDesde() && $desde<=$estadias->getHasta() && $hasta> $estadias->getHasta() )){
-                            
-                            $verificar=$estadias ;
-                            return $verificar;
+            $fecDesde =  date_create($desde);
+            $fecHasta =  date_create($hasta);
+             ///Modificar mañana que compruebe si esta en la base, y en ese caso retornar la fecha
+            try
+            {
+                $queryFecha = "SELECT * FROM ". $this->tableDates.
+                " f JOIN keeper k ON f.idKeeper = k.idKeeper
+                JOIN users u ON k.idUserr = u.idUser ".
+                " WHERE (f.desde = \"". date_format($fecDesde,"Y/m/d")."\") 
+                AND (f.hasta= \"".date_format($fecHasta,"Y/m/d")."\")". 
+                " AND u.nombreUser = \"".$userName."\"" ;
+
+                $this->connection = Connection::GetInstance();
+
+                $resultUser = $this->connection->Execute($queryFecha);
+                if($resultUser){
+                        foreach ($resultUser as $fecha){
+                        $estadia = new FechasEstadias($fecha["desde"],$fecha["hasta"]);
+                        //var_dump($estadia);
+                        //var_dump($desde);
+                        //var_dump($hasta);
+                        if (($desde >= $estadia->getDesde() && $hasta <= $estadia->getHasta()) 
+                        || ($desde < $estadia->getDesde () &&  $hasta > $estadia->getHasta()) 
+                        || ($desde>=$estadia->getDesde() && $desde<=$estadia->getHasta() && $hasta> $estadia->getHasta() )){
+                            $verificar = $estadia;
                         }
-                        else {
-                            $verificar = null ;
-                            return $verificar ;
                         } 
-                    }
                 }
+
             }
+            catch (Exception $ex)
+            {
+                throw $ex;
+            }
+
+
+            return $verificar;
 
         }
 
@@ -231,7 +251,58 @@
                 return false ;
             }
         }
-        
-       
+
+        public function quitarFecha ($username , FechasEstadias $fecha){
+            $fecDesde =  date_create($fecha->getDesde());
+            $fecHasta =  date_create($fecha->getHasta());
+
+            try
+            {
+                $query="DELETE FROM ". $this->tableDates. " WHERE desde = \"". date_format($fecDesde,"Y/m/d")."\" AND hasta = \"". date_format($fecHasta,"Y/m/d"). "\""
+                ."AND idKeeper = ". "(SELECT k.idKeeper from keeper k JOIN users u ON u.idUser = k.idUserr WHERE u.nombreUser = \"". $username."\")";
+            
+                $this->connection = Connection::GetInstance();
+
+                $this->connection->Execute($query);    
+            }
+            catch (Exception $ex)
+            {
+                throw $ex;
+            }
+            
+        }
+
+        public function buscarEstadias ($nombreUser){
+            $estadiasLista = array ();
+
+            try
+            {
+                $query= "SELECT * FROM ". $this->tableDates. 
+                " f JOIN keeper k ON f.idKeeper = k.idKeeper
+                JOIN users u ON k.idUserr = u.idUser
+                WHERE u.nombreUser = \"". $nombreUser. "\"";
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query);   
+
+                foreach($resultSet as $fecha){
+                    $date = new FechasEstadias($fecha["desde"],$fecha["hasta"]);
+                    array_push($estadiasLista,$date);
+                }
+
+            }
+            catch (Exception $ex)
+            {
+                throw $ex;
+            }
+
+
+            return $estadiasLista;
+
+
+        }
     }
+       
+    
 ?>
