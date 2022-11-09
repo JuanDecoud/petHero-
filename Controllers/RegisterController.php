@@ -8,6 +8,8 @@
     use Models\Keeper as Keeper;
     use Models\Owner as Owner;
     use Models\Pet as Pet;
+    use DAO\OwnerdbDAO as OwnerdbDAO ;
+use Exception;
 
     class RegisterController {
 
@@ -15,6 +17,7 @@
         private $keeperDAO ;
         private $ownerDAO ;
         private $userDAO;
+        private $ownerdb ;
 
 
         public function __construct()
@@ -22,6 +25,7 @@
             $this->keeperDAO = new KeeperDAO ();
             $this->ownerDAO = new OwnerDAO ();
             $this->userDAO = new UserDAO;
+            $this->ownerdb = new OwnerdbDAO() ;
         }
 
         public function login (){
@@ -44,38 +48,79 @@
 
         public function agregarOwner ($nombre,$apellido,$dni,$telefono,$userName,$contrasena ){
 
+            // Base De Datos 
+            try
+            {
+                if ($userName != null && $contrasena !=null){
+                    strtolower($userName);
+                    $usuarios = array ();
+                    $usuarios = $this->ownerdb->owner_getAll();
+                    
+                    $comprobarUser = null ;
+                    foreach ($usuarios as $usuario){
+                        if ($usuario == $userName){
+                            $comprobarUser = $userName;
+                        }
+                    }
+                    if ($comprobarUser == null){
+    
+                        $owner = new Owner ();
+                        $owner->setNombre($nombre);
+                        $owner->setApellido($apellido);
+                        $owner->setDni($dni);
+                        $owner->setTelefono($telefono);
+                        $owner->setNombreUser($userName);
+                        $owner->setContrasena($contrasena);
+                        $owner->setTipodecuenta($_SESSION['owner']);
+                        $this->ownerdb->add($owner);
+                        $this->login();
+                    }   
+            }
+        }
+        catch(Exception $ex)
+        {
+            echo '<script language="javascript">alert("Nombre de usuario ya existe");</script>';
+            $this->registrarOwner();
+        }
 
-            if ($userName != null && $contrasena !=null){
-                strtolower($userName);
-                $comprobarUser = $this->keeperDAO->obtenerUser($userName);
-                if ($comprobarUser==null){
-                    $comprobarUser=$this->ownerDAO->obtenerUser($userName);
-                }
-                if ($comprobarUser == null){
+        //resguardo en JSON
 
-                    $owner = new Owner ();
-                    $owner->setNombre($nombre);
-                    $owner->setApellido($apellido);
-                    $owner->setDni($dni);
-                    $owner->setTelefono($telefono);
-                    $owner->setNombreUser($userName);
-                    $owner->setContrasena($contrasena);
-                    $owner->setTipodecuenta($_SESSION['owner']);
-                    $this->ownerDAO->Add($owner);
-                    $this->login();
-                }
-                else {
-                    echo '<script language="javascript">alert("Nombre de usuario ya existe");</script>';
-                    $this->registrarOwner();
-                }
+/*
+        if ($userName != null && $contrasena !=null){
+            strtolower($userName);
+            $usuarios = array ();
+            $comprobarUser = null ;
 
+            $comprobarUser = $this->keeperDAO->obtenerUser($userName);
+            if ($comprobarUser==null){
+                $comprobarUser=$this->ownerDAO->obtenerUser($userName);
+            }
+
+            if ($comprobarUser == null){
+
+                $owner = new Owner ();
+                $owner->setNombre($nombre);
+                $owner->setApellido($apellido);
+                $owner->setDni($dni);
+                $owner->setTelefono($telefono);
+                $owner->setNombreUser($userName);
+                $owner->setContrasena($contrasena);
+                $owner->setTipodecuenta($_SESSION['owner']);
+                $this->ownerDAO->Add($owner);
+                $this->login();
             }
             else {
-                echo '<script language="javascript">alert("Complete todos los campos");</script>';
+                echo '<script language="javascript">alert("Nombre de usuario ya existe");</script>';
                 $this->registrarOwner();
             }
 
+        }
+        else {
+            echo '<script language="javascript">alert("Complete todos los campos");</script>';
+            $this->registrarOwner();
+        }
 
+*/
             
 
         }

@@ -96,7 +96,6 @@
                                 
                             $verificar=$estadias ;
                             return $verificar;
-                               
                         }
                         else {
                             $verificar = null ;
@@ -111,7 +110,7 @@
 
         public function agregarFecha (FechasEstadias $estadia ,$username ){
             
-           /* $this->obtenerDatos();*/
+            $this->obtenerDatos();
             foreach($this->keeperList  as $keeper){
                 if ($keeper->getNombreUser()==$username)
                     $keeper->agregarFecha ($estadia);
@@ -123,7 +122,7 @@
 
         public function obtenerUser ($username){
             $user = null ;
-            $this->obtenerDatos();
+           // $this->obtenerDatos();
             foreach ($this->keeperList as $keeper){
                 if ($keeper->getNombreUser() == $username){
                     $user = $keeper;
