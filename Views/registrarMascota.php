@@ -1,9 +1,3 @@
-<?php   
-    require_once ("Header.php");
-?>
-
-
-   
 
 <div class = "container col-md-6 mt-5     shadow p-3 mb-5 bg-body rounded">
     
@@ -52,7 +46,3 @@
         </form>
     </div>
 </div>
-
-<?php   
-    require_once ("Footer.php");
-?>

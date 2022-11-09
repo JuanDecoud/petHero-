@@ -7,11 +7,11 @@
         private $tipoMascota ;
         private $remuneracion ;
         private $fechasDisponibles = array();
-
+        //private $reservasAceptadas = array();
         
 
     
-
+        
         public function __construct($username , $contrasena , $tipocuenta , $tipoMascota , $remuneracion, $nombre, $apellido,$dni,$telefono)
         {
             parent::__construct($username,$contrasena);
@@ -24,6 +24,7 @@
             $this->tipoMascota = $tipoMascota;          
             $this->remuneracion = $remuneracion ;
         }
+        
 
         public function getTipo (){return $this->tipoMascota;}
         public function getRemuneracion (){return $this->remuneracion;}
@@ -45,7 +46,16 @@
         public function agregarFecha (FechasEstadias $estadia){
             array_push($this->fechasDisponibles , $estadia);
         }
-
+        /*
+        public function agregarReservaAceptada(Reserva $reserva){
+            array_push($this -> reservasAceptadas, $reserva);
+        }
+        */
+        /*public function getReservas(){
+            return $this -> reservasAceptadas;
+        }
+        */
     }
+
 
 ?>

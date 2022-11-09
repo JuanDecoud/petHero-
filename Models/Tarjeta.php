@@ -6,14 +6,18 @@ class Tarjeta
 {
     private $numero;
     private $nombre;
+    private $apellido ;
     private $fechaVenc;
     private $codigo;
 
    public function __construct()
    {
+
     
    }
 
+   public function getApellido (){return $this->apellido;}
+   public function setApellido ($apellido){$this->apellido = $apellido;}
 
     /**
      * Get the value of numero

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 
 use DAO\TipocuentaDAO;
@@ -13,6 +14,9 @@ use DAO\TipocuentaDAO;
     }
     
 ?>
+=======
+
+>>>>>>> 5692f2913d424f96b83856dbe5527bf05029b589
 
 <div class = "container abs-center    col-md-6 border border-dark  ">
     <div class = " container   ">
@@ -37,4 +41,3 @@ use DAO\TipocuentaDAO;
 
 
 
-<?php require_once("Footer.php") ;?>

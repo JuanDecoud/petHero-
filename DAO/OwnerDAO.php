@@ -17,6 +17,16 @@
             array_push($this->ownerList, $owner);
             $this->SaveData();
         }
+
+        public function agregarTarjeta ($username , Tarjeta $tarjeta){
+            $this->RetrieveData();
+            foreach ($this->ownerList as $owner){
+                if ($owner -> getNombreUser() ==  $username){
+                    $owner->agregarTarjeta($tarjeta);
+                }
+            }
+            $this->SaveData();
+        }
         public function GetAll()
         {
             $this->RetrieveData();
@@ -56,6 +66,26 @@
             return $user ;
         }
 
+        public function buscarTarjeta ($nombreUsuario){
+            $this->RetrieveData();
+            $nuevaTarjeta = null ;
+            foreach ($this->ownerList as $owner){
+                if ($owner->getNombreUser()== $nombreUsuario){
+                    $listaTarjet = $owner->getTarjeta();
+                    foreach ($listaTarjet as $tarjeta){
+                        $nuevaTarjeta = new Tarjeta ();
+                        $nuevaTarjeta->setNombre($tarjeta->getNombre());
+                        $nuevaTarjeta ->setNumero($tarjeta->getNumero());
+                        $nuevaTarjeta ->setCodigo($tarjeta->getCodigo());
+                        $nuevaTarjeta->setFechaVenc($tarjeta->getFechaVenc());
+                        $nuevaTarjeta->setApellido($tarjeta->getApellido());
+                    }
+                }
+                
+            }
+            return $nuevaTarjeta ;
+        }
+
         private function SaveData()
         {
             $tarjeta = array() ;
@@ -75,14 +105,19 @@
                 // agrego la tarjeta 
                 
                 $tarjetaOwner = $owner->getTarjeta ();
+                $valuesArray['tarjeta'] = array ();
                 if ($tarjetaOwner != null){
-                    $tarjeta['numero'] = $tarjetaOwner->getNumero ();
-                    $tarjeta['nombre'] = $tarjetaOwner->getNombre ();
-                    $tarjeta['fechaVenc'] = $tarjetaOwner->getFechaVenc ();
-                    $tarjeta['codigo'] = $tarjetaOwner->getCodigo ();
+                    foreach ($tarjetaOwner as $tarjeta){
+                        $arrayTarjeta['numero'] = $tarjeta->getNumero ();
+                        $arrayTarjeta['nombre'] = $tarjeta->getNombre ();
+                        $arrayTarjeta ['apellido'] = $tarjeta->getApellido ();
+                        $arrayTarjeta['fechaVenc'] = $tarjeta->getFechaVenc ();
+                        $arrayTarjeta['codigo'] = $tarjeta->getCodigo ();
+                        array_push($valuesArray['tarjeta'] , $arrayTarjeta);
+                    }
                     
                 }
-                $valuesArray['tarjeta']= $tarjeta ;
+                
     
                 
               /* $valuesArray['pets']=array ();
@@ -111,11 +146,6 @@
                         $value['imagen']=$mascota->getImg ();
                         array_push($valuesArray['pets'] ,$value);
                     }
-
-                
-                
-                
-
                 array_push($arrayToEncode, $valuesArray);
             }
             $jsonContent= json_encode($arrayToEncode, JSON_PRETTY_PRINT);
@@ -126,7 +156,7 @@
         private function RetrieveData()
         {
             
-            $tarjeta = new tarjeta () ;
+            $tarjeta = null;
             $owner = null ;
             $pet = null ;
             if(file_exists(ROOT."Data/owner.json" ))
@@ -146,20 +176,22 @@
                    $owner->setDni($valuesArray["DNI"]);
                    $owner->setTelefono($valuesArray["telefono"]);
 
+                  if ($valuesArray['tarjeta'] != null){
                     foreach ($valuesArray['tarjeta'] as $value){
-                        if ($value !=null){
-                            $tarjeta->setNumero($value['numero'] );
-                            $tarjeta->setNombre($value['nombre']);
-                            $tarjeta->setFechaVenc($value['fechaVenc']);
-                            $tarjeta->setCodigo($value['codigo'] );
-                        }
-    
-                    }
-                    $owner->setTarjeta($tarjeta);
-
+                        
+                        $tarjeta = new Tarjeta ();
+                        $tarjeta->setNombre($value['nombre']);
+                        $tarjeta ->setNumero($value['numero']);
+                        $tarjeta ->setCodigo($value['codigo']);
+                        $tarjeta->setFechaVenc($value['fechaVenc']);
+                        $tarjeta->setApellido($value['apellido']);
+                        $owner->agregarTarjeta($tarjeta);
+                    
+                    }                   
+                  }
+                     
                     if ($valuesArray['pets']!=null){
-                        
-                        
+
                         foreach ($valuesArray['pets'] as $value){
                             $pet  = new Pet ();
                             $pet->setNombre($value['nombre']);
@@ -172,8 +204,6 @@
                             $owner->agregarPet($pet);
                         }
     
-                       
-
                     }
     
                     array_push($this->ownerList, $owner);
@@ -184,5 +214,4 @@
         }
        
     }
-
 ?>

@@ -1,41 +1,25 @@
 [
     {
-        "nombreUser": "Nahuel",
+        "nombreUser": "decoud",
         "contrasena": "1234",
         "tipodeCuenta": "Keeper",
         "tipoMascota": [
-            "Chica",
-            "Mediana",
-            "Grande"
+            "Chica"
         ],
         "remuneracion": "1500",
-        "nombre": "naasd",
-        "apellido": "asd",
-        "DNI": "51651",
-        "telefono": "51465146",
+        "nombre": "decoud",
+        "apellido": "decouyd",
+        "DNI": "123",
+        "telefono": "123",
         "fechasDisponibles": [
             {
-                "desde": "2022-10-28",
-                "hasta": "2022-10-31"
+                "desde": "2022-12-01",
+                "hasta": "2022-12-06"
             },
             {
-                "desde": "2022-11-03",
-                "hasta": "2022-11-05"
+                "desde": "2022-12-17",
+                "hasta": "2022-12-19"
             }
         ]
-    },
-    {
-        "nombreUser": "elsa",
-        "contrasena": "1234",
-        "tipodeCuenta": "Keeper",
-        "tipoMascota": [
-            "Mediana"
-        ],
-        "remuneracion": "1500",
-        "nombre": "asd",
-        "apellido": "asd",
-        "DNI": "546",
-        "telefono": "5465",
-        "fechasDisponibles": []
     }
 ]

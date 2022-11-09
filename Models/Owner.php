@@ -7,7 +7,7 @@ use Models\Pet as Pet;
 
 class Owner extends User
 {
-    private $tarjeta ;
+    private   $tarjeta = array() ;
     private $pet =array() ;
 
    
@@ -23,8 +23,8 @@ class Owner extends User
     }
     
     
-    public function setTarjeta(Tarjeta $tarjeta){
-        $this->tarjeta = $tarjeta ;
+    public function agregarTarjeta( Tarjeta $tarjeta){
+        array_push($this->tarjeta , $tarjeta);
     }
     public function getTarjeta (){
        

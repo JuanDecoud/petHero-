@@ -1,9 +1,9 @@
-<?php require_once("Header.php"); ?>
+
 
 <nav class="navbar navbar-expand-lg bg-danger">
         <div class="container-fluid ">
           <a class="navbar-brand border-bottom " href="#">
-            <img src="<?php echo FRONT_ROOT.VIEWS_PATH."img/91505.png"; ?>" alt="" width="30" height="24" class="d-inline-block align-text-top">
+            <img src="<?php echo FRONT_ROOT.VIEWS_PATH."img/91506.png"; ?>" alt="" width="30" height="24" class="d-inline-block align-text-top">
              Pet Hero
           </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,4 +34,3 @@
         </div>
 </nav>
 
-<?php require_once("Footer.php") ; ?>

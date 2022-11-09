@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php 
    
     namespace DAO ;
@@ -8,6 +9,17 @@
 
 
     class Connection {
+=======
+<?php
+    namespace DAO;
+
+    use \PDO as PDO;
+    use \Exception as Exception;
+    use DAO\QueryType as QueryType;
+
+    class Connection
+    {
+>>>>>>> 5692f2913d424f96b83856dbe5527bf05029b589
         private $pdo = null;
         private $pdoStatement = null;
         private static $instance = null;
@@ -18,8 +30,11 @@
             {
                 $this->pdo = new PDO("mysql:host=".DB_HOST."; dbname=".DB_NAME, DB_USER, DB_PASS);
                 $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+<<<<<<< HEAD
                
                 
+=======
+>>>>>>> 5692f2913d424f96b83856dbe5527bf05029b589
             }
             catch(Exception $ex)
             {
@@ -52,8 +67,12 @@
                 throw $ex;
             }
         }
+<<<<<<< HEAD
 
 
+=======
+        
+>>>>>>> 5692f2913d424f96b83856dbe5527bf05029b589
         public function ExecuteNonQuery($query, $parameters = array(), $queryType = QueryType::Query)
 	    {            
             try
@@ -71,9 +90,13 @@
                 throw $ex;
             }        	    	
         }
+<<<<<<< HEAD
 
         
 
+=======
+        
+>>>>>>> 5692f2913d424f96b83856dbe5527bf05029b589
         private function Prepare($query)
         {
             try
@@ -100,10 +123,14 @@
                     $this->pdoStatement->bindParam($i, $parameters[$parameterName]);
             }
         }
+<<<<<<< HEAD
 
 
     }
 
 
 
+=======
+    }
+>>>>>>> 5692f2913d424f96b83856dbe5527bf05029b589
 ?>

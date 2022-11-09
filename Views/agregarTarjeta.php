@@ -1,11 +1,14 @@
 
 
 
-  <div class = "container abs-center     ">
-        <form class = "m-2 col-10 shadow  bg-body rounded" method = "post" action = "<?php echo FRONT_ROOT."Register/agregarOwner"; ; ?>"> 
+
+<div class = "container abs-center     ">
+    
+        <form class = "m-2 col-10 shadow  bg-body rounded" method = "post" action = "<?php echo FRONT_ROOT."Owner/agregarTarjeta" ; ?>"> 
                 
                 <div class="form-group  mx-4">
-                    <h2 class = "mb-4 border-bottom col-4">Registro de Usuario</h2>
+             
+                    <h2 class = "mb-4 border-bottom col-4">Nueva Tarjeta Debito/Credito</h2>
                     <label for="exampleInputEmail1" class = " ">Nombre</label>
                     <input type="text" class="form-control  " id="exampleInputEmail1" 
                         aria-describedby="emailHelp" placeholder="Nombre" name = "nombre" required>
@@ -16,28 +19,28 @@
                         aria-describedby="emailHelp" placeholder="Apellido" name = "apellido" required>
                 </div>
                 <div class="form-group mx-4  ">
-                    <label for="exampleInputEmail1" class = " ">DNI</label>
+                    <label for="exampleInputEmail1" class = " ">Numero Tarjeta</label>
                     <input type="number" class="form-control " id="exampleInputEmail1" 
-                        aria-describedby="emailHelp" placeholder="DNI" name = "DNI" required>
+                        aria-describedby="emailHelp" placeholder="" name = "numero" required>
                 </div>
                 <div class="form-group mx-4 ">
-                    <label for="exampleInputEmail1" class = " ">Telefono</label>
+                    <label for="exampleInputEmail1" class = " ">Codigo Seguridad</label>
                     <input type="number" class="form-control " id="exampleInputEmail1" 
-                        aria-describedby="emailHelp" placeholder="Telefono" name = "telefono" required>
+                        aria-describedby="emailHelp" placeholder="" name = "codigo" required>
                 </div>
                  <div class="form-group mx-4  ">
-                    <label for="exampleInputEmail1" class = " ">Nombre Usuario</label>
+                    <label for="exampleInputEmail1" class = " ">Vencimiento</label>
                     <input type="text" class="form-control  " id="exampleInputEmail1" 
-                        aria-describedby="emailHelp" placeholder="Usuario" name = "userName" required>
-                </div>
-                <div class="form-group  mx-4 ">
-                    <label for="exampleInputEmail1" class = " ">Contraseña</label>
-                    <input type="password" class="form-control " id="exampleInputEmail1" 
-                        aria-describedby="emailHelp" placeholder="Contraseña" name = "contrasena" required>
+                        aria-describedby="emailHelp" placeholder="" name = "vencimiento" required>
                 </div>
                 <div class = "form-group m-4 mx-4">
                     <button type="submit" class="btn btn-danger">Confirmar</button>
                 </div>  
         </form>
 </div>
+
+
+
+
+
 
