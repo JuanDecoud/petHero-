@@ -1,12 +1,13 @@
 <?php 
     namespace Controllers ;
 
-    use DAO\KeeperDAO;
+    use DAO\KeeperDAOSQL as KeeperDAO;
+    //use DAO\KeeperDAO;
     use Models\FechasEstadias;
     use Models\Reserva;
     use DAO\ReservaDAO;
-use Models\Estadoreserva;
-use Models\Keeper;
+    use Models\Estadoreserva;
+    use Models\Keeper;
 
     class KeeperController {
         private $keeperDao ;
@@ -27,7 +28,8 @@ use Models\Keeper;
         public function asignarFecha ($desde , $hasta ){
             
             $keeper = $_SESSION['loggedUser'];
-            $verificar = $this->keeperDao->verificarRangos ($desde,$hasta,$keeper->getNombreUser() );
+            $verificar = null;
+            //$this->keeperDao->verificarRangos ($desde,$hasta,$keeper->getNombreUser() );
             $fechaDeldia=$this->keeperDao->verificarFechadeldia($desde , $hasta);
             $lista = $this->reservaDao->GetAll();
             $EstadiaEnCurso = $this->reservaDao->buscarReservaEnCurso($lista,$keeper->getNombreUser(),Estadoreserva::Confirmada ,$desde ,$hasta);
