@@ -54,7 +54,7 @@ create table pet(
     imagen varchar(100),
     planVacunacion varchar(100),
     observacionesGrals varchar(150),
-    video longblob,
+    video varchar(150),
     idOwner int not null,
     foreign key (idOwner) references owner(idOwner) on update cascade on delete cascade
 );

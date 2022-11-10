@@ -1,8 +1,9 @@
 <?php 
     namespace Controllers ;
-
-use DAO\OwnerDao;
-use DAO\PetDAO as petDAO;
+    
+    use DAO\OwnerDAOSQL as OwnerDao;
+    //use DAO\OwnerDao;
+    use DAO\PetDAO as petDAO;
     use Models\Pet as Pet ;
 
     class PetController {
@@ -54,6 +55,7 @@ use DAO\PetDAO as petDAO;
             $pet->setObservacionesGrals($observacion);
             $this->petDao->GetAll();
             $this->petDao->Add($pet);
+            var_dump($owner);
         
             // asocia al owner con la mascota
             $this->ownerDao->agregarPets($owner->getNombreUser() , $pet);

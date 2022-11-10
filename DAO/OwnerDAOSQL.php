@@ -5,7 +5,7 @@
     use Models\Tarjeta as Tarjeta;
     use Models\Pet as Pet ;
     use \Exception as Exception;
-
+use LDAP\Result;
 
     class OwnerDaoSQL implements IOwnerDAO
     {
@@ -13,22 +13,23 @@
         private $tablename = "owner";
         private $tablePet = "pet";
         private $tableUser = "users";
-
-        public function Add(Owner $owner)
-        {
-            array_push($this->ownerList, $owner);
-            $this->SaveData();
-        }
+        private $tableCard= "tarjeta";
 
         public function Add(Owner $owner)
         {
             $queryUser =  "INSERT INTO " . $this-> tableUser. " (nombreUser, contrasena,tipoDeCuenta,nombre,apellido,dni,telefono)
             VALUES (:nombreUser, :contrasena,:tipoDeCuenta,:nombre,:apellido,:dni,:telefono)";
 
-            $queryOwner= "INSERT INTO ".$this->tablename." (idTarjeta,idUser) VALUES (:idTarjeta,:idUser);";
+            $queryOwner= "INSERT INTO ".$this->tablename." (idUser) VALUES (:idUser);";
             
-            $queryTarjeta = 
+            $queryTarjeta = "INSERT INTO ".$this->tableCard." (numero,nombre,apellido,fechaVenc,codigo,idOwner) VALUES (:numero,:nombre,:apellido,:fechaVenc,:codigo,:idOwner);";
 
+            $queryPet= "INSERT INTO ".$this->tablePet." (nombre,raza,tamaño,imagen,planVacunacion,observacionesGrals,video,idDueño) VALUES (:nombre,:raza,:tamaño,:imagen,:planVacunacion,:observacionesGrals,:video,:idDueño)";
+
+            $thirdQuery = "SELECT idUser FROM ". $this->tableUser . " WHERE "." nombreUser = \"". $owner->getNombreUser()."\"";
+
+            ///$fourthQuery = ;
+            ///Creamos el USER en DB
             $parametersUser["nombreUser"] = $owner->getNombreUser();
             $parametersUser["contrasena"] = $owner->getContrasena();
             $parametersUser["tipoDeCuenta"] = $owner->getTipodecuenta();
@@ -41,216 +42,222 @@
             $this->connection->ExecuteNonQuery($queryUser, $parametersUser);
             
             $tarjeta = $owner ->getTarjeta();
-
+            
+            ///Subimos sus TARJETAS a la DB
+            $result = $this->connection->Execute($thirdQuery);
             foreach($tarjeta as $ts){
-                $parametersTarjeta["numero"] = $ts->
-                $parametersTarjeta["nombre"] 
-                $parametersTarjeta["fechaVenc"] 
-                $parametersTarjeta["codigo"] 
-                $parametersTarjeta["idOwner"]
-                $parametersTarjeta["apellido"] 
+                $parametersTarjeta["numero"] = $ts->getNumero();
+                $parametersTarjeta["nombre"] = $ts ->getNombre();
+                $parametersTarjeta["apellido"] = $ts->getApellido();
+                $parametersTarjeta["fechaVenc"] = $ts -> getFechaVenc();
+                $parametersTarjeta["codigo"]  = $ts -> getCodigo();
+                $parametersTarjeta["idOwner"] = $result[0]["idUser"];
+                $this->connection->ExecuteNonQuery($queryTarjeta, $parametersUser);
+            }
+            
+
+            ///Subimos el OWNER como tal a la DB
+            $parametersOwner["idUser"] = $result[0]["idUser"];
+            $this->connection->ExecuteNonQuery($queryOwner, $parametersOwner);
+
+            ///Subimos el PET a la DB
+            $pets = $owner->getPet();
+
+            foreach($pets as $pet){
+                $parametersPet["nombre"] = $pet->getNombre();
+                $parametersPet["raza"] = $pet ->getRaza();
+                $parametersPet["tamaño"] = $pet->getTamano();
+                $parametersPet["imagen"] = $pet -> getImg();
+                $parametersPet["planVacunacion"]  = $pet -> getPlanVacunacion();
+                $parametersPet["observacionesGrals"] = $pet -> getObservacionesGrals();
+                $parametersPet["video"] = $pet -> getVideo();
+                $parametersPet["idDueño"] = $result[0]["idUser"];
+                $this->connection->ExecuteNonQuery($queryPet, $parametersPet);
             }
 
-
-            $parametersOwner["idTarjeta"] = $owner->getTarjeta();
-            $parametersOwner[""]
-
         }
+
+        public function obtenerUser($username){
+            $theOwner = null;
+
+            try{
+                $query = "SELECT * FROM ". $this->tablename. " o JOIN ". $this->tableUser. 
+                " u ON o.idUser = u.idUser ". "WHERE u.nombreUser = \"". $username ."\"";
+            
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query);
+
+                
+
+                foreach ($resultSet as $row)
+                {            
+                    $theOwner = new Owner();
+                    $theOwner -> setNombre($row["nombre"]);
+                    $theOwner -> setApellido($row["apellido"]);
+                    $theOwner -> setContrasena($row["contrasena"]);
+                    $theOwner -> setDni($row["dni"]);
+                    $theOwner -> setNombreUser($row["nombreUser"]);
+                    $theOwner -> setTelefono($row["telefono"]);
+                    $theOwner -> setTipodecuenta($row["tipoDeCuenta"]);
+                    
+                }
+            }
+            catch (Exception $ex)
+            {
+                throw $ex;
+            }
+
+            return $theOwner;
+        } 
 
         public function agregarTarjeta ($username , Tarjeta $tarjeta){
-            $this->RetrieveData();
-            foreach ($this->ownerList as $owner){
-                if ($owner -> getNombreUser() ==  $username){
-                    $owner->agregarTarjeta($tarjeta);
+           
+            try
+            {
+                $queryTarjeta = "INSERT INTO " . $this-> tableUser. " (numero,nombre,apellido,fechaVenc,codigo,idOwner)
+                VALUES (:numero,:nombre,:apellido,:fechaVenc,:codigo,:idOwner)";
+                $query ="SELECT idOwner FROM ". $this->tablename . 
+                " o JOIN users u ON u.idUser = o.idUser".
+                " WHERE "." nombreUser = \"". $username."\"";
+
+                $this->connection = Connection::GetInstance();
+                $resultSet = $this->connection->Execute($query);
+
+                foreach($tarjeta as $ts){
+                    $parametersTarjeta["numero"] = $ts->getNumero();
+                    $parametersTarjeta["nombre"] = $ts ->getNombre();
+                    $parametersTarjeta["apellido"] = $ts->getApellido();
+                    $parametersTarjeta["fechaVenc"] = $ts -> getFechaVenc();
+                    $parametersTarjeta["codigo"]  = $ts -> getCodigo();
+                    $parametersTarjeta["idOwner"] = $resultSet[0]["idOwner"];
+                    $this->connection->ExecuteNonQuery($queryTarjeta, $parametersTarjeta);
                 }
+            
             }
-            $this->SaveData();
+            catch (Exception $ex)
+            {
+                throw $ex;
+            }
+            
+            
+
         }
+
+
+        public function agregarPets($username ,Pet $pet ){
+            try
+            {
+                $queryPet = "INSERT INTO ".$this->tablePet." (nombre,raza,tamano,imagen,planVacunacion,observacionesGrals,video,idDueno) 
+                VALUES (:nombre,:raza,:tamano,:imagen,:planVacunacion,:observacionesGrals,:video,:idDueno)";
+                
+                $query ="SELECT idOwner FROM ". $this->tablename . 
+                " o JOIN users u ON u.idUser = o.idUser".
+                " WHERE "." nombreUser = \"". $username."\"";
+                
+                $this->connection = Connection::GetInstance();
+                $result = $this->connection->Execute($query);
+
+                
+                $pP["nombre"] = $pet->getNombre();
+                $pP["raza"] = $pet ->getRaza();
+                $pP["tamano"] = $pet->getTamano();
+                $pP["imagen"] = $pet -> getImg();
+                $pP["planVacunacion"]  = $pet -> getPlanVacunacion();
+                $pP["observacionesGrals"] = $pet -> getObservacionesGrals();
+                $pP["video"] = $pet -> getVideo();
+                $pP["idDueno"] = $result[0]["idOwner"];
+                
+
+                var_dump($pP);
+
+                $this->connection->ExecuteNonQuery($queryPet, $pP);
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+
+        }
+
         public function GetAll()
         {
-            $this->RetrieveData();
-            return $this->ownerList;
-        }
+            $ownerList = array();
+            /*
+            try
+            {
+                $query = "SELECT * FROM ". $this->tablename. " k JOIN ". $this->tableUser. " u ON k.idUser = u.idUser ";
+                
+                $queryTarjeta = "SELECT * FROM ".$this->tableCard." (numero,nombre,apellido,fechaVenc,codigo,idOwner) VALUES (:numero,:nombre,:apellido,:fechaVenc,:codigo,:idOwner);";
 
-        public function agregarPets ($username ,Pet $pet ){
+                $queryPet = "SELECT * FROM ". $this->tablePet;
 
-            $this->RetrieveData();
-            foreach($this->ownerList  as $owner){
-                if ($owner->getNombreUser()==$username)
-                    $owner->agregarPet ($pet);
-                  
+
+                $this->connection = Connection::GetInstance();
+
+                $resultUser = $this->connection->Execute($query);
+
+                foreach($resultUser as $value){
+                    $owner = new Owner($value['nombreUser'],$value ['contrasena'],$value ['tipodeCuenta'],
+                    $value ['tipoMascota'],$value ['remuneracion'],$value ['nombre'], $value ['apellido'],$value ['DNI'],
+                    $value ['telefono']);
+
+                    $queryDates = "SELECT * FROM ". $this->tablename . "k JOIN " . $this->tableDates . " d ON k.idKeeper = d.idKeeper"
+                    . "WHERE d.idKeeper= (SELECT k.idKeeper FROM keeper k JOIN users u ON k.idUserr = u.idUser WHERE u.nombreUser = \"".$keeper->getNombreUser() . "\")";
+                    
+                    $result = $this->connection->Execute($queryDates);
+                    if($result){
+                        foreach($result as $fecha){
+                            $fechaResultado = new FechasEstadias($fecha[0]["desde"],$fecha[0]["hasta"]);
+                            $keeper->agregarFecha($fechaResultado);
+                        }
+                    }
+
+
+                    array_push($keeperList,$keeper);
+                }
+
+
             }
-            $this->SaveData();
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+            */
         }
-
 
         public function comprobarLogin($username , $contrasena){
-            $this->RetrieveData();
-            $user = null ;
-            foreach ($this->ownerList as $owner){
-                if ($owner->getNombreUser() == $username && $owner->getContrasena() == $contrasena ){
-                    $user = $owner ;
-                }
-            }
-            return $user ;
-        }
-        public function obtenerUser ($username){
-            $this->RetrieveData();
-            $user = null ;
-            foreach ($this->ownerList as $owner){
-                if ($owner->getNombreUser() == $username  ){
-                    $user = $owner ;
-                }
-            }
-            return $user ;
-        }
-
-        public function buscarTarjeta ($nombreUsuario){
-            $this->RetrieveData();
-            $nuevaTarjeta = null ;
-            foreach ($this->ownerList as $owner){
-                if ($owner->getNombreUser()== $nombreUsuario){
-                    $listaTarjet = $owner->getTarjeta();
-                    foreach ($listaTarjet as $tarjeta){
-                        $nuevaTarjeta = new Tarjeta ();
-                        $nuevaTarjeta->setNombre($tarjeta->getNombre());
-                        $nuevaTarjeta ->setNumero($tarjeta->getNumero());
-                        $nuevaTarjeta ->setCodigo($tarjeta->getCodigo());
-                        $nuevaTarjeta->setFechaVenc($tarjeta->getFechaVenc());
-                        $nuevaTarjeta->setApellido($tarjeta->getApellido());
-                    }
-                }
-                
-            }
-            return $nuevaTarjeta ;
-        }
-
-        private function SaveData()
-        {
-            $tarjeta = array() ;
-            $pet = array() ;
-        
-            $arrayToEncode=array();
-            foreach($this->ownerList as $owner)
+            $user = null;
+            try
             {
+                $query = "SELECT * FROM ". $this->tablename. 
+                " k JOIN ". $this->tableUser. 
+                " u ON k.idUserr = u.idUser 
+                WHERE u.nombreUser = \"". $username ."\"" .
+                " AND u.contrasena = \"" .$contrasena."\"";
 
-                $valuesArray["nombreUser"]=$owner->getNombreUser();
-                $valuesArray["contrasena"]=$owner->getContrasena();
-                $valuesArray["tipodeCuenta"]=$owner->getTipocuenta();
-                $valuesArray ['nombre'] = $owner->getNombre();
-                $valuesArray ['apellido'] = $owner->getApellido();
-                $valuesArray ['DNI'] = $owner->getDni();
-                $valuesArray ['telefono'] = $owner->getTelefono();
-                // agrego la tarjeta 
-                
-                $tarjetaOwner = $owner->getTarjeta ();
-                $valuesArray['tarjeta'] = array ();
-                if ($tarjetaOwner != null){
-                    foreach ($tarjetaOwner as $tarjeta){
-                        $arrayTarjeta['numero'] = $tarjeta->getNumero ();
-                        $arrayTarjeta['nombre'] = $tarjeta->getNombre ();
-                        $arrayTarjeta ['apellido'] = $tarjeta->getApellido ();
-                        $arrayTarjeta['fechaVenc'] = $tarjeta->getFechaVenc ();
-                        $arrayTarjeta['codigo'] = $tarjeta->getCodigo ();
-                        array_push($valuesArray['tarjeta'] , $arrayTarjeta);
-                    }
-                    
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query);
+
+                if($resultSet){
+                    foreach ($resultSet as $row)
+                    {            
+                      $user = new Owner($row["nombreUser"],$row["contrasena"],$row["tipoDeCuenta"],$row["nombre"],$row["apellido"],$row["dni"],$row["telefono"]);
+                    } 
                 }
-                
-    
-                
-              /* $valuesArray['pets']=array ();
-                foreach($owner->getPetList() as $pet){
-                    $valuesArray["pets"][] = array(
-                        'nombre' => $pet->getNombre(),
-                        'raza' => $pet->getRaza(),
-                        'tamano' => $pet->getTamano(),
-                        'planVacunacion' => $pet->GetPlanVacunacion(),
-                        'observacionesGrals' => $pet->getObservacionesGrals(),
-                        'video' => $pet->getVideo(),
-                        'imagen' => $pet->getImg()
-                    );
-                }*/
-
-                $petarray = $owner->getPet();
-                $valuesArray['pets']=array ();
-                
-                    foreach ($petarray as $mascota){
-                        $value['nombre']=$mascota->getNombre ();
-                        $value['raza']=$mascota->getRaza ();
-                        $value['tamano']=$mascota->getTamano ();
-                        $value['planVacunacion']=$mascota->GetPlanVacunacion ();
-                        $value['observacionesGrals']=$mascota->getObservacionesGrals ();
-                        $value['video']=$mascota->getVideo ();
-                        $value['imagen']=$mascota->getImg ();
-                        array_push($valuesArray['pets'] ,$value);
-                    }
-                array_push($arrayToEncode, $valuesArray);
             }
-            $jsonContent= json_encode($arrayToEncode, JSON_PRETTY_PRINT);
-
-            file_put_contents(ROOT."Data/owner.json" , $jsonContent);
-        }
-
-        private function RetrieveData()
-        {
-            
-            $tarjeta = null;
-            $owner = null ;
-            $pet = null ;
-            if(file_exists(ROOT."Data/owner.json" ))
+            catch (Exception $ex)
             {
-                $jsonContent=file_get_contents(ROOT."Data/owner.json" );
-                $arrayToDecode=($jsonContent) ? json_decode($jsonContent, true) : array();
-
-                foreach($arrayToDecode as $valuesArray)
-                {   
-                    $owner=new Owner ();
-          
-                   $owner->setNombreUser( $valuesArray["nombreUser"]);
-                   $owner->setContrasena($valuesArray["contrasena"]);
-                   $owner->setTipodecuenta ($valuesArray["tipodeCuenta"]);
-                   $owner->setNombre($valuesArray["nombre"]);
-                   $owner->setApellido($valuesArray["apellido"]);
-                   $owner->setDni($valuesArray["DNI"]);
-                   $owner->setTelefono($valuesArray["telefono"]);
-
-                  if ($valuesArray['tarjeta'] != null){
-                    foreach ($valuesArray['tarjeta'] as $value){
-                        
-                        $tarjeta = new Tarjeta ();
-                        $tarjeta->setNombre($value['nombre']);
-                        $tarjeta ->setNumero($value['numero']);
-                        $tarjeta ->setCodigo($value['codigo']);
-                        $tarjeta->setFechaVenc($value['fechaVenc']);
-                        $tarjeta->setApellido($value['apellido']);
-                        $owner->agregarTarjeta($tarjeta);
-                    
-                    }                   
-                  }
-                     
-                    if ($valuesArray['pets']!=null){
-
-                        foreach ($valuesArray['pets'] as $value){
-                            $pet  = new Pet ();
-                            $pet->setNombre($value['nombre']);
-                            $pet->setRaza($value['raza']);
-                            $pet->setTamano($value ['tamano']);
-                            $pet ->setPlanVacunacion($value['planVacunacion'] );
-                            $pet->setObservacionesGrals($value ['observacionesGrals']);
-                            $pet->setVideo($value ['video']);
-                            $pet->setImg($value ['imagen']);
-                            $owner->agregarPet($pet);
-                        }
-    
-                    }
-    
-                    array_push($this->ownerList, $owner);
-
-                    
-                }
+                throw $ex;
             }
+           
+            return $user;
+
+
         }
+
+
        
     }
 ?>

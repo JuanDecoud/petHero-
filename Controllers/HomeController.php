@@ -3,7 +3,8 @@
 
     use DAO\KeeperDAOSQL as KeeperDAO ;
     //use DAO\KeeperDAO as KeeperDAO ;
-    use DAO\OwnerDao as OwnerDAO ;
+    //use DAO\OwnerDao as OwnerDAO ;
+    use DAO\OwnerDAOSQL as OwnerDAO ;
     use DAO\PetDAO as PetDAO ;
 
     class HomeController
@@ -56,7 +57,7 @@
         public function login ($usuario , $contraseña){
              $userkeeper = $this->keeperDao->comprobarLogin($usuario , $contraseña);
              $userOwner = $this->ownerDao->obtenerUser($usuario , $contraseña);
-
+            
              if ($userkeeper !=null){
                 $_SESSION['loggedUser'] = $userkeeper ;
                 $this->principalKeeper();  
