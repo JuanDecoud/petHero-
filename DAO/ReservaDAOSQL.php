@@ -271,8 +271,12 @@ use Models\Tarjeta;
             $reservas ['tipoMascota'],$reservas ['remuneracion'],$reservas ['nombre'], $reservas ['apellido'],$reservas ['DNI'],
             $reservas ['telefono']);
            
-            $queryDates = "SELECT * FROM ". $this->tableKeeper . "k JOIN " . $this->tableDates . " d ON k.idKeeper = d.idKeeper"
-            . "WHERE d.idKeeper= (SELECT k.idKeeper FROM keeper k JOIN user u ON k.idUser = u.idUser WHERE u.nombreUser = \"".$keeper->getNombreUser() . "\")";
+            $queryDates = "SELECT * FROM ". $this->tableKeeper . 
+            " k JOIN " . $this->tableDates . " d ON k.idKeeper = d.idKeeper"
+            . "WHERE d.idKeeper= 
+            (SELECT k.idKeeper FROM 
+            keeper k JOIN user u ON k.idUser = u.idUser 
+            WHERE u.nombreUser = \"".$keeper->getNombreUser() . "\")";
             
             $result = $this->connection->Execute($queryDates);
             if($result){
