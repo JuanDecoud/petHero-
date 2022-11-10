@@ -55,13 +55,10 @@
             $user["nombreUser"] = $keeper->getNombreUser();
 
             $tiposMascota = $keeper->getTipo();
-           /* $string = array();
-            foreach($tiposMascota as $tipo){
-                array_push ($string , $tipo);    
-            }*/
-            var_dump($tiposMascota);
-
-            $parametersKeeper["tipoMascota"] = $tiposMascota;
+            foreach ($tiposMascota as $tipo){
+                $parametersKeeper["tipoMascota"] = $tipo;
+            }
+  
             $parametersKeeper["remuneracion"] = $keeper->getRemuneracion();
             $result = $this->connection->Execute($queryUser , $user , queryType::StoredProcedure);
 
