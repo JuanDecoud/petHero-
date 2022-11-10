@@ -24,7 +24,7 @@ use Models\Tarjeta;
         private $tableCard = "tarjeta";
 
         public function getLista (){
-            return $this->reservaList;
+            return $this->getAll();
         }
 
         public function Add(Reserva $reserva)
@@ -224,6 +224,141 @@ use Models\Tarjeta;
             return $reservaList;
 
         }
+
+
+        public function reservasAceptadas(){
+            $reservasAceptadas = array(); 
+
+            $query = "SELECT * FROM ". $this->tablename . "WHERE estado = \"".Estadoreserva::Aceptada."\"";
+
+            $this->connection = Connection::GetInstance();
+
+            $resultSet = $this->connection->Execute($query);
+
+            foreach($resultSet as $reservas){
+                $reserva = new Reserva(); ///Reserva tiene Owner(Dentro de pet), Keeper, y Pet
+                    
+                    $reserva->setImporteReserva($reservas["importeReserva"]);
+                    $reserva->setImporteTotal($reservas["importeTotal"]);
+                    $reserva->setEstado($reservas["estado"]);
+
+                    $queryDatesReserva = "SELECT f.desde,f.hasta FROM ". $this->tablename .
+                    "r JOIN fechasdisponibles f ON r.idFechasDis = f.idFechasDisp";
+                    $resultDatesReserva = $this->connection->Execute($queryDatesReserva);
+
+                    foreach($resultDatesReserva as $rango){
+                        $reserva->setFechadesde($rango["desde"]);
+                        $reserva->setFechahasta($rango["hasta"]);   
+                    }
+
+
+                    $owner = new Owner();
+                    $petReserva = new Pet();
+                    
+                    ///Primero Creamos y llenamos el Keeper
+                    $keeper = new Keeper($reservas['nombreUser'],$reservas ['contrasena'],$reservas ['tipodeCuenta'],
+                    $reservas ['tipoMascota'],$reservas ['remuneracion'],$reservas ['nombre'], $reservas ['apellido'],$reservas ['DNI'],
+                    $reservas ['telefono']);
+                   
+                    $queryDates = "SELECT * FROM ". $this->tableKeeper . "k JOIN " . $this->tableDates . " d ON k.idKeeper = d.idKeeper"
+                    . "WHERE d.idKeeper= (SELECT k.idKeeper FROM keeper k JOIN user u ON k.idUser = u.idUser WHERE u.nombreUser = \"".$keeper->getNombreUser() . "\")";
+                    
+                    $result = $this->connection->Execute($queryDates);
+                    if($result){
+                        foreach($result as $fecha){
+                            $fechaResultado = new FechasEstadias($fecha["desde"],$fecha["hasta"]);
+                            $keeper->agregarFecha($fechaResultado);
+                        }
+                    }
+                    
+                    $reserva->setKeeper($keeper);
+
+                    ///LLenamos el Owner de Nuestro Pet
+                    $queryFillOwner = "SELECT u.nombreUser, u.contrasena, u.tipoDeCuenta,u.nombre,u.apellido,u.dni,u.telefono FROM ". $this->tablename. 
+                    " r JOIN ". $this->tablePet. " p ON p.idPet = r.idPet".
+                    " JOIN ". $this->tableOwner. " o ON p.idOwner = o.idOwner".
+                    " JOIN ". $this->tableUser . " u ON u.idUser = o.idUser";
+
+                    $resultOwner = $this->connection->Execute($queryFillOwner);
+
+                    if($resultOwner){
+                        foreach($resultOwner as $value){
+                            $owner -> setNombreUser($value["nombreUser"]);
+                            $owner -> setContrasena($value["contrasena"]);
+                            $owner -> setTipodecuenta($value["tipoDeCuenta"]);
+                            $owner -> setNombre($value["nombre"]);
+                            $owner -> setApellido($value["apellido"]);
+                            $owner -> setDni($value["dni"]);
+                            $owner -> setTelefono($value["telefono"]);
+                        }
+                    }
+
+                    $queryTarjeta = "SELECT * FROM ". $this->tableCard . " WHERE "." idOwner = 
+                    (SELECT o.idOwner FROM Owner o 
+                    JOIN user u ON u.idUser = o.idUser 
+                    WHERE u.nombreUser = \"".$owner->getNombreUser()."\")";
+                    
+                    ///Le llenamos las tarjetas al owner
+                    $resultOwnerTarjeta = $this->connection->Execute($queryTarjeta);
+
+                    foreach($resultOwnerTarjeta as $tarjeta){
+                        $tarjeta = new Tarjeta();
+                        $tarjeta->setNumero($tarjeta["numero"]);
+                        $tarjeta->setNombre($tarjeta["nombre"]);
+                        $tarjeta->setFechaVenc($tarjeta["fechaVenc"]);
+                        $tarjeta->setCodigo($tarjeta["codigo"]);
+                        $tarjeta->setApellido($tarjeta["Apellido"]);
+                        $owner->agregarTarjeta($tarjeta);
+                    }
+
+                    ///Conseguimos y le llenamos los pets al owner
+
+                    $queryPetOwner = "SELECT * FROM ". $this->tablePet . " WHERE "." idOwner = 
+                    (SELECT o.idOwner FROM Owner o 
+                    JOIN user u ON u.idUser = o.idUser 
+                    WHERE u.nombreUser = \"".$owner->getNombreUser()."\")";
+
+
+                    $resultOwnerPets = $this->connection->Execute($queryPetOwner);
+
+                    foreach($resultOwnerPets as $pet){
+                        $pet = new Pet();
+                        $pet->setNombre($pet["nombre"]);
+                        $pet->setRaza($pet["raza"]);
+                        $pet->setTamano($pet["tamano"]);
+                        $pet->setImg($pet["imagen"]);
+                        $pet->setPlanVacunacion($pet["planVacunacion"]);
+                        $pet->setObservacionesGrals($pet["observacionesGrals"]);
+                        $pet->setVideo($pet["video"]);
+                        $pet->setOwner($owner); ///El owner a su vez tiene un pet
+                        $owner->agregarPet($pet);
+                    }
+
+                    ///Creamos y llenamos el pet de LA RESERVA
+                    $queryFillPet = "SELECT * FROM ". $this->tablename. 
+                    " r JOIN ". $this->tablePet. " p ON p.idPet = r.idPet";
+
+                    $resultPet = $this->connection->Execute($queryFillPet);
+
+                    foreach($resultPet as $pet){
+                        $petReserva->setNombre($pet["nombre"]);
+                        $petReserva->setRaza($pet["raza"]);
+                        $petReserva->setTamano($pet["tamano"]);
+                        $petReserva->setImg($pet["imagen"]);
+                        $petReserva->setPlanVacunacion($pet["planVacunacion"]);
+                        $petReserva->setObservacionesGrals($pet["observacionesGrals"]);
+                        $petReserva->setVideo($pet["video"]);
+                        $petReserva->setOwner($owner); ///Le seteamos el owner que llenamos arriba
+                    }
+
+                    $reserva->setPet($petReserva);
+
+                    array_push($reservasAceptadas,$reserva);
+            }
+
+            return $reservasAceptadas;
+        }
+
 
         public function obtenerUser($username){
             $theKeeper = null;
