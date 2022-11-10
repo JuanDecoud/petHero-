@@ -12,7 +12,7 @@ use LDAP\Result;
         private $connection;
         private $tablename = "owner";
         private $tablePet = "pet";
-        private $tableUser = "users";
+        private $tableUser = "user";
         private $tableCard= "tarjeta";
 
         public function Add(Owner $owner)
@@ -60,7 +60,7 @@ use LDAP\Result;
             $parametersOwner["idUser"] = $result[0]["idUser"];
             $this->connection->ExecuteNonQuery($queryOwner, $parametersOwner);
 
-            ///Subimos el PET a la DB
+         /*   ///Subimos el PET a la DB
             $pets = $owner->getPet();
 
             foreach($pets as $pet){
@@ -74,7 +74,7 @@ use LDAP\Result;
                 $parametersPet["idDueño"] = $result[0]["idUser"];
                 $this->connection->ExecuteNonQuery($queryPet, $parametersPet);
             }
-
+*/
         }
 
         public function obtenerUser($username){
@@ -118,7 +118,7 @@ use LDAP\Result;
                 $queryTarjeta = "INSERT INTO " . $this-> tableUser. " (numero,nombre,apellido,fechaVenc,codigo,idOwner)
                 VALUES (:numero,:nombre,:apellido,:fechaVenc,:codigo,:idOwner)";
                 $query ="SELECT idOwner FROM ". $this->tablename . 
-                " o JOIN users u ON u.idUser = o.idUser".
+                " o JOIN user u ON u.idUser = o.idUser".
                 " WHERE "." nombreUser = \"". $username."\"";
 
                 $this->connection = Connection::GetInstance();
@@ -152,7 +152,7 @@ use LDAP\Result;
                 VALUES (:nombre,:raza,:tamano,:imagen,:planVacunacion,:observacionesGrals,:video,:idDueno)";
                 
                 $query ="SELECT idOwner FROM ". $this->tablename . 
-                " o JOIN users u ON u.idUser = o.idUser".
+                " o JOIN user u ON u.idUser = o.idUser".
                 " WHERE "." nombreUser = \"". $username."\"";
                 
                 $this->connection = Connection::GetInstance();

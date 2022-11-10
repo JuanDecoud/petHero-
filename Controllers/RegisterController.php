@@ -1,12 +1,12 @@
 <?php 
     namespace Controllers ;
 
-    //use DAO\KeeperDAOSQL as KeeperDao;
+    use DAO\KeeperDAOSQL as KeeperDao;
     use DAO\OwnerDAOSQL as OwnerDAO;
     //use DAO\OwnerDAO as OwnerDAO;
     use DAO\PetDAO as PetDAO;
     use DAO\UserDAO;
-    use DAO\KeeperDAO ;
+    //use DAO\KeeperDAO ;
     use Models\Keeper as Keeper;
     use Models\Owner as Owner;
     use Models\Pet as Pet;
@@ -90,7 +90,6 @@
 
         if ($userName != null && $contrasena !=null){
             strtolower($userName);
-            $usuarios = array ();
             $comprobarUser = null ;
 
             $comprobarUser = $this->keeperDAO->obtenerUser($userName);

@@ -16,45 +16,61 @@
 
         public function addKeeper(Keeper $keeper)
         {
-            try
-            {
+          
+         /*
+            $queryUser =  "INSERT INTO " . $this-> tableUser. " (nombreUser, contrasena,tipoDeCuenta,nombre,apellido,dni,telefono)
+                                                                VALUES (:nombreUser, :contrasena,:tipoDeCuenta,:nombre,:apellido,:dni,:telefono)";
+            $queryKeeper= "INSERT INTO ".$this->tablename." (tipoMascota,remuneracion,idUser) VALUES (:tipoMascota,:remuneracion,:idUserr);";
+            
+            $queryFechas= "INSERT INTO ". $this->tableDates . " (desde,hasta,idKeeper) VALUES (:desde, :hasta, :idKeeper) ";
 
-                $queryUser =  "INSERT INTO " . $this-> tableUser. " (nombreUser, contrasena,tipoDeCuenta,nombre,apellido,dni,telefono)
-                                                                    VALUES (:nombreUser, :contrasena,:tipoDeCuenta,:nombre,:apellido,:dni,:telefono)";
-                $queryKeeper= "INSERT INTO ".$this->tablename." (tipoMascota,remuneracion,idUserr) VALUES (:tipoMascota,:remuneracion,:idUserr);";
-                
-                $queryFechas= "INSERT INTO ". $this->tableDates . " (desde,hasta,idKeeper) VALUES (:desde, :hasta, :idKeeper) ";
+            $thirdQuery = "SELECT idUser FROM ". $this->tableUser . " WHERE "." nombreUser = \"". $keeper->getNombreUser()."\"";
+            
+            $fourthQuery = "SELECT k.idKeeper FROM ". $this->tablename . " k LEFT JOIN " . $this->tableUser." u ON k.idUser = u.idUser WHERE u.nombreUser = \"".$keeper->getNombreUser()."\"";
+            
 
-                $thirdQuery = "SELECT idUser FROM ". $this->tableUser . " WHERE "." nombreUser = \"". $keeper->getNombreUser()."\"";
-                
-                $fourthQuery = "SELECT k.idKeeper FROM ". $this->tablename . " k LEFT JOIN " . $this->tableUser." u ON k.idUserr = u.idUser WHERE u.nombreUser = \"".$keeper->getNombreUser()."\"";
-                
-                
-                $parametersUser["nombreUser"] = $keeper->getNombreUser();
-                $parametersUser["contrasena"] = $keeper->getContrasena();
-                $parametersUser["tipoDeCuenta"] = $keeper->getTipodecuenta();
-                $parametersUser["nombre"] = $keeper->getNombre();
-                $parametersUser["apellido"] = $keeper->getApellido();
-                $parametersUser["dni"] = $keeper->getDni();
-                $parametersUser["telefono"] = $keeper->getTelefono();
-                
-                $this->connection = Connection::GetInstance();
-                $this->connection->ExecuteNonQuery($queryUser, $parametersUser);
+            $queryKeeper= "INSERT INTO ".$this->tablename." (tipoMascota,remuneracion,idUser) VALUES (:tipoMascota,:remuneracion,:idUserr);";
 
-                /////Keeper como tal
-                $tiposMascota = $keeper->getTipo();
-                $string = "";
-                foreach($tiposMascota as $tipo){
-                    $string .= $tipo;
-                    $string .= " ";
-                }
-                $parametersKeeper["tipoMascota"] = $string;
-                $parametersKeeper["remuneracion"] = $keeper->getRemuneracion();
-                $result = $this->connection->Execute($thirdQuery);
-                $parametersKeeper["idUserr"] = $result[0]["idUser"];
+            $thirdQuery = "SELECT idUser FROM ". $this->tableUser . " WHERE "." nombreUser = \"". $keeper->getNombreUser()."\"";
 
-                $this->connection->ExecuteNonQuery($queryKeeper, $parametersKeeper);
+            */
 
+            $queryUser = "Call add_user (?,?,?,?,?,?,?)";
+            
+            $parametersUser["nombreUser"] = $keeper->getNombreUser();
+            $parametersUser["contrasena"] = $keeper->getContrasena();
+            $parametersUser["tipoDeCuenta"] = $keeper->getTipodecuenta();
+            $parametersUser["nombre"] = $keeper->getNombre();
+            $parametersUser["apellido"] = $keeper->getApellido();
+            $parametersUser["dni"] = $keeper->getDni();
+            $parametersUser["telefono"] = $keeper->getTelefono();
+            
+            $this->connection = Connection::GetInstance();
+            $this->connection->ExecuteNonQuery($queryUser, $parametersUser , queryType::StoredProcedure);
+
+            /////Keeper como tal
+            $queryKeeper = "Call add_keeper (?,?,?)";
+            $queryUser  = "CALL buscar_user (?)";
+            $user = array(); 
+            $user["nombreUser"] = $keeper->getNombreUser();
+
+            $tiposMascota = $keeper->getTipo();
+           /* $string = array();
+            foreach($tiposMascota as $tipo){
+                array_push ($string , $tipo);    
+            }*/
+            var_dump($tiposMascota);
+
+            $parametersKeeper["tipoMascota"] = $tiposMascota;
+            $parametersKeeper["remuneracion"] = $keeper->getRemuneracion();
+            $result = $this->connection->Execute($queryUser , $user , queryType::StoredProcedure);
+
+            foreach ($result as $row){
+                $parametersKeeper["idUser"] = $row["idUser"];
+            }
+
+            $this->connection->ExecuteNonQuery($queryKeeper, $parametersKeeper , queryType::StoredProcedure);
+/*
 
                 ///Conseguimos el user para el que llenaremos fechas:
                 $idUser = $this->connection->Execute($fourthQuery);
@@ -67,13 +83,12 @@
                     $this->connection->ExecuteNonQuery($queryFechas, $parametersFechas);
                     }
                 }
-                
-            }
-            catch(Exception $ex)
-            {
-                throw $ex;
-            }
+                */
+            
+      
         }
+
+
 
         public function getALL()
         {
@@ -98,7 +113,7 @@
                     $value ['telefono']);
 
                     $queryDates = "SELECT * FROM ". $this->tablename . "k JOIN " . $this->tableDates . " d ON k.idKeeper = d.idKeeper"
-                    . "WHERE d.idKeeper= (SELECT k.idKeeper FROM keeper k JOIN users u ON k.idUser = u.idUser WHERE u.nombreUser = \"".$keeper->getNombreUser() . "\")";
+                    . "WHERE d.idKeeper= (SELECT k.idKeeper FROM keeper k JOIN user u ON k.idUser = u.idUser WHERE u.nombreUser = \"".$keeper->getNombreUser() . "\")";
                     
                     $result = $this->connection->Execute($queryDates);
                     if($result){
@@ -206,7 +221,7 @@
             {
                 $queryFecha = "SELECT * FROM ". $this->tableDates.
                 " f JOIN keeper k ON f.idKeeper = k.idKeeper
-                JOIN users u ON k.idUser = u.idUser ".
+                JOIN user u ON k.idUser = u.idUser ".
                 " WHERE (f.desde = \"". date_format($fecDesde,"Y/m/d")."\") 
                 AND (f.hasta= \"".date_format($fecHasta,"Y/m/d")."\")". 
                 " AND u.nombreUser = \"".$userName."\"" ;
@@ -257,7 +272,7 @@
             try
             {
                 $query="DELETE FROM ". $this->tableDates. " WHERE desde = \"". date_format($fecDesde,"Y/m/d")."\" AND hasta = \"". date_format($fecHasta,"Y/m/d"). "\""
-                ."AND idKeeper = ". "(SELECT k.idKeeper from keeper k JOIN user u ON u.idUser = k.idUserr WHERE u.nombreUser = \"". $username."\")";
+                ."AND idKeeper = ". "(SELECT k.idKeeper from keeper k JOIN user u ON u.idUser = k.idUser WHERE u.nombreUser = \"". $username."\")";
             
                 $this->connection = Connection::GetInstance();
 
@@ -277,7 +292,7 @@
             {
                 $query= "SELECT * FROM ". $this->tableDates. 
                 " f JOIN keeper k ON f.idKeeper = k.idKeeper
-                JOIN users u ON k.idUser = u.idUser
+                JOIN user u ON k.idUser = u.idUser
                 WHERE u.nombreUser = \"". $nombreUser. "\"";
 
                 $this->connection = Connection::GetInstance();

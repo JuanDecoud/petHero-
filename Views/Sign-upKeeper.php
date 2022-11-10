@@ -17,12 +17,12 @@
                 </div>
                 <div class="form-group mx-4  ">
                     <label for="exampleInputEmail1" class = " ">DNI</label>
-                    <input type="number" class="form-control " id="exampleInputEmail1" 
+                    <input type="text" class="form-control " id="exampleInputEmail1" 
                         aria-describedby="emailHelp" placeholder="DNI" name = "DNI" required>
                 </div>
                 <div class="form-group mx-4 ">
                     <label for="exampleInputEmail1" class = " ">Telefono</label>
-                    <input type="number" class="form-control " id="exampleInputEmail1" 
+                    <input type="text" class="form-control " id="exampleInputEmail1" 
                         aria-describedby="emailHelp" placeholder="Telefono" name = "telefono" required>
                 </div>
                  <div class="form-group mx-4  ">
