@@ -117,6 +117,8 @@
                         foreach($result as $row){
                             $fechaResultado = new FechasEstadias($row
                             ['desde'],$row["hasta"]);
+                        foreach($result as $fecha){
+                            $fechaResultado = new FechasEstadias($fecha["desde"],$fecha["hasta"]);
                             $keeper->agregarFecha($fechaResultado);
                         }
                     }
@@ -185,7 +187,8 @@
         }
 
         public function agregarFecha(FechasEstadias $estadia, $username){
-                $desde = $estadia -> getDesde();
+                
+            $desde = $estadia -> getDesde();
                 $hasta = $estadia -> getHasta();
                 //$desde = date_parse_from_format('Y-m-d',$desde);
                 //$desde = date_parse_from_format('Y-m-d',$hasta);
@@ -330,8 +333,6 @@
             $keeperlist = array ();
             $listaEstadias = array ();
             $newkeeper = null ;
-
-       
             foreach ($this->keeperList as $keeper){
                 foreach ($keeper->getFechas() as $estadias){
                     if ($estadias->getDesde () >= $desde && $estadias->getHasta () <= $hasta){

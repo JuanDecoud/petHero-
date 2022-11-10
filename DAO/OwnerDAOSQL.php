@@ -148,8 +148,8 @@ use LDAP\Result;
         public function agregarPets($username ,Pet $pet ){
             try
             {
-                $queryPet = "INSERT INTO ".$this->tablePet." (nombre,raza,tamano,imagen,planVacunacion,observacionesGrals,video,idDueno) 
-                VALUES (:nombre,:raza,:tamano,:imagen,:planVacunacion,:observacionesGrals,:video,:idDueno)";
+                $queryPet = "INSERT INTO ".$this->tablePet." (nombre,raza,tamano,imagen,planVacunacion,observacionesGrals,video,idOwner) 
+                VALUES (:nombre,:raza,:tamano,:imagen,:planVacunacion,:observacionesGrals,:video,:idOwner)";
                 
                 $query ="SELECT idOwner FROM ". $this->tablename . 
                 " o JOIN user u ON u.idUser = o.idUser".
@@ -166,7 +166,7 @@ use LDAP\Result;
                 $pP["planVacunacion"]  = $pet -> getPlanVacunacion();
                 $pP["observacionesGrals"] = $pet -> getObservacionesGrals();
                 $pP["video"] = $pet -> getVideo();
-                $pP["idDueno"] = $result[0]["idOwner"];
+                $pP["idOwner"] = $result[0]["idOwner"];
                 
 
                 var_dump($pP);
@@ -231,13 +231,12 @@ use LDAP\Result;
 
             try{
                 $query = "SELECT * FROM ". $this->tablename. " o JOIN ". $this->tableUser. 
-                " u ON o.idUser = u.idUser ". "WHERE u.nombreUser = \"". $username ."\""." AND u.contrasena = \"" .$contrasena."\"";
+                " u ON o.idUser = u.idUser ". "WHERE u.nombreUser = \"". $username ."\"".
+                " AND u.contrasena = \"" .$contrasena."\"";
             
                 $this->connection = Connection::GetInstance();
 
                 $resultSet = $this->connection->Execute($query);
-
-                
 
                 foreach ($resultSet as $row)
                 {            
