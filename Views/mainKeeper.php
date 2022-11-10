@@ -1,30 +1,4 @@
-<?php
 
-
-require_once("navKeeper.php");
-
-//use DAO\KeeperDAOSQL as KeeperDAO;
-use DAO\KeeperDAO as KeeperDAO;
-use Models\Keeper;
-use DAO\ReservaDAO;
-use Models\Estadoreserva;
-use Models\Pet;
-
-$keepDao = new KeeperDao();
-$userLogged = $_SESSION['loggedUser'];
-
-// busco las fechas que le asigne al keeper
-$fechas = $keepDao->buscarEstadias($userLogged->getNombreUser());
-
-// traigo todas las reservas 
-$reservadao = new ReservaDAO();
-$lista = $reservadao->getAll();
-$listaReservas = $reservadao->buscarReservaxEstadoKeeper($lista , $userLogged->getNombreUser (),Estadoreserva::Pendiente);
-$listaAceptadas = $reservadao->buscarReservaxEstadoKeeper( $lista ,$userLogged->getNombreUser (), Estadoreserva::Aceptada);
-$listaConfirmadas = $reservadao->buscarReservaxEstado($lista , $userLogged->getNombreUser() ,Estadoreserva::Confirmada );
-
-
-?>
 
 <div class="container mt-5   shadow p-3 mb-5 bg-ligh rounded">
     <div class="d-flex  flex-row  justify-content-around">
@@ -92,7 +66,7 @@ $listaConfirmadas = $reservadao->buscarReservaxEstado($lista , $userLogged->getN
                     Estadias Solicitadas 
                 </button>
             </h2>
-            <div id="collapseone" class="accordion-collapse collapse" aria-labelledby="headingone" data-bs-parent="#accordionExample">
+            <div id="collapseone" class="accordion-collapse collapse show" aria-labelledby="headingone" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
 
                 <?php foreach ($listaReservas as $reserva) {
@@ -159,7 +133,7 @@ $listaConfirmadas = $reservadao->buscarReservaxEstado($lista , $userLogged->getN
                 Pendientes de cobro
             </button>
         </h2>
-        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordion2">
+        <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo" data-bs-parent="#accordion2">
             <div class="accordion-body  ">            
                 <?php foreach ($listaAceptadas as $reserva) {
                         $pet = $reserva->getPet();  ?>
@@ -221,7 +195,7 @@ $listaConfirmadas = $reservadao->buscarReservaxEstado($lista , $userLogged->getN
                     Estadias en curso.
                 </button>
             </h2>
-            <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="heading3" data-bs-parent="#accordion3">
+            <div id="collapse3" class="accordion-collapse collapse show" aria-labelledby="heading3" data-bs-parent="#accordion3">
                 <div class="accordion-body  ">            
                     <?php foreach ($listaConfirmadas as $reserva) {
                             $pet = $reserva->getPet();  ?>
@@ -232,7 +206,7 @@ $listaConfirmadas = $reservadao->buscarReservaxEstado($lista , $userLogged->getN
                                     <form action="<?php echo FRONT_ROOT . "Keeper/rechazarReserva" ?>">
                                         <div class="col-auto mt-2">
                                             <label for="" class="mx-2  ">
-                                                <h7>Desde:</h7>
+                                                <h7>Desde:<?php  ?></h7>
                                             </label>
                                             <input style=" text-align: center; font-weight:bold; color:black; border :0;" class="border-bottom" type="text" placeholder="<?php echo $reserva->getFechadesde(); ?>" name="desde" value="<?php echo $reserva->getFechadesde(); ?>" readonly></td>
                                         </div>

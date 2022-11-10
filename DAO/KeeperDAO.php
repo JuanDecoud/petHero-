@@ -110,7 +110,7 @@
 
 
         public function buscarEstadias ($nombreUser){
-            $this->obtenerDatos();
+           // $this->obtenerDatos();
             $estadiasLista = array ();
             foreach ($this->keeperList as $keeper){
                 if ($keeper->getNombreUser () == $nombreUser){
@@ -121,6 +121,7 @@
             }
             return $estadiasLista ;
         }
+        
         public function agregarFecha (FechasEstadias $estadia ,$username ){
             foreach($this->keeperList  as $keeper){
                 if ($keeper->getNombreUser()==$username)
