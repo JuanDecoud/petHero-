@@ -41,9 +41,9 @@ use LDAP\Result;
             $this->connection = Connection::GetInstance();
             $this->connection->ExecuteNonQuery($queryUser, $parametersUser);
             
-            $tarjeta = $owner ->getTarjeta();
+          /*  $tarjeta = $owner ->getTarjeta();
             
-            ///Subimos sus TARJETAS a la DB
+         /*   ///Subimos sus TARJETAS a la DB
             $result = $this->connection->Execute($thirdQuery);
             foreach($tarjeta as $ts){
                 $parametersTarjeta["numero"] = $ts->getNumero();

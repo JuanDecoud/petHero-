@@ -75,3 +75,71 @@ BEGIN
         values (tipoMascota , remuneracion , idUser);
 END$$
 DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE add_reserva (in idKeeper int , in idFechasDis INT , in idPet int , in importeReserva double , in importeTotal double , in estado varchar (100) )
+BEGIN 
+	INSERT INTO  reserva (idKeeper , idFechasDis , idPet , importeReserva , importeTotal , estado )
+    values (idKeeper,idFechasDis,idPet,importeReserva,importeTotal,estado);
+END$$
+DELIMITER ;
+
+
+DELIMITER $$
+CREATE PROCEDURE add_reserva (in idKeeper int , in idFechasDis INT , in idPet int , in importeReserva double , in importeTotal double , in estado varchar (100) )
+BEGIN 
+	INSERT INTO  reserva (idKeeper , idFechasDis , idPet , importeReserva , importeTotal , estado )
+    values (idKeeper,idFechasDis,idPet,importeReserva,importeTotal,estado);
+END$$
+DELIMITER ;
+
+
+DELIMITER $$ 
+
+CREATE PROCEDURE buscar_keeper (in nombreUser varchar (50))
+
+BEGIN 
+	select idKeeper from keeper k 
+    inner join user u on u.idUser = k.idUser 
+    where u.nombreUser = nombreUser and u.idUser = k.idUser ;
+END$$
+
+
+DELIMITER ;
+
+
+DELIMITER $$ 
+
+CREATE PROCEDURE buscar_fechas (in desde date , in hasta date)
+BEGIN
+	select idFechasDisp from fechasdisponibles f
+    where f.desde = desde and f.hasta = hasta ;
+END$$
+
+DELIMITER ;
+
+
+DELIMITER $$ 
+CREATE PROCEDURE  buscar_pet (in userName varchar (50))
+BEGIN
+	select idPet from pet p 
+    inner join owner o on o.idOwner = p.idOwner 
+	inner join user u on u.idUser = o.idUser 
+    Where u.nombreUser = userName and o.idOwner = p.idOwner ;
+END$$
+
+DELIMITER ;
+
+DELIMITER $$ 
+
+CREATE PROCEDURE buscar_fechasKeeper (in  nombreUser varchar (50) )
+
+BEGIN 
+	SELECT desde , hasta from  fechasdisponibles f
+    inner join keeper k on k.idKeeper = f.idKeeper 
+    inner join user u on u.idUser = k.idUser 
+    where  u.idUser = k.idUser and k.idKeeper = f.idKeeper ;
+    
+END$$
+
+DELIMITER ;

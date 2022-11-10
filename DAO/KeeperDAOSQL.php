@@ -13,6 +13,7 @@
         private $tablename = "keeper";
         private $tableDates = "fechasdisponibles";
         private $tableUser = "user";
+        private $keeperList  = array ();
 
         public function addKeeper(Keeper $keeper)
         {
@@ -81,8 +82,6 @@
                     }
                 }
                 */
-            
-      
         }
 
 
@@ -99,31 +98,31 @@
                 $queryDates = "SELECT * FROM ". $this->tablename . "k JOIN " . $this->tableDates . " d ON k.idKeeper = d.idKeeper";
                 
 
-
                 $this->connection = Connection::GetInstance();
 
                 $resultUser = $this->connection->Execute($query);
 
                 foreach($resultUser as $value){
-                    $keeper = new Keeper($value['nombreUser'],$value ['contrasena'],$value ['tipodeCuenta'],
-                    $value ['tipoMascota'],$value ['remuneracion'],$value ['nombre'], $value ['apellido'],$value ['DNI'],
+                    $keeper = new Keeper($value['nombreUser'],$value ['contrasena'],$value ['tipoDeCuenta'],
+                    $value ['tipoMascota'],$value ['remuneracion'],$value ['nombre'], $value ['apellido'],$value ['dni'],
                     $value ['telefono']);
 
-                    $queryDates = "SELECT * FROM ". $this->tablename . "k JOIN " . $this->tableDates . " d ON k.idKeeper = d.idKeeper"
-                    . "WHERE d.idKeeper= (SELECT k.idKeeper FROM keeper k JOIN user u ON k.idUser = u.idUser WHERE u.nombreUser = \"".$keeper->getNombreUser() . "\")";
+                    //$queryDates = "SELECT * FROM ". $this->tablename . "k JOIN " . $this->tableDates . " d ON k.idKeeper = d.idKeeper"
+                    //. "WHERE d.idKeeper= (SELECT k.idKeeper FROM keeper k JOIN user u ON k.idUser = u.idUser WHERE u.nombreUser = \"".$keeper->getNombreUser() . "\")";
                     
-                    $result = $this->connection->Execute($queryDates);
+                    $queryDates = "CALL buscar_fechasKeeper(?)";
+                    $nombreUser['nombreUser'] = $keeper->getNombreUser();
+                    $result = $this->connection->Execute($queryDates , $nombreUser ,queryType::StoredProcedure);
                     if($result){
-                        foreach($result as $fecha){
-                            $fechaResultado = new FechasEstadias($fecha[0]["desde"],$fecha[0]["hasta"]);
+                        foreach($result as $row){
+                            $fechaResultado = new FechasEstadias($row
+                            ['desde'],$row["hasta"]);
                             $keeper->agregarFecha($fechaResultado);
                         }
                     }
-
-
-                    array_push($keeperList,$keeper);
+                 
+                    array_push($this->keeperList,$keeper);
                 }
-
 
             }
             catch (Exception $ex)
@@ -131,8 +130,8 @@
                 throw $ex;
             }
             
-            return $keeperList;
-
+            return $this->keeperList;
+            
         }
 
         public function obtenerUser($username){
@@ -200,6 +199,7 @@
 
                 $this->connection = Connection::GetInstance();
                 $this->connection->Execute($query);
+                echo "hola";
 
                 
             } catch (Exception $ex){
@@ -311,6 +311,41 @@
             return $estadiasLista;
 
 
+        }
+
+
+        public function listaEstadias ($listadeKeepers){
+            $listaEstadias = array ();
+            foreach ($listadeKeepers as $keeper){
+                foreach ($keeper->getFechas() as $estadias){
+                    array_push($listaEstadias , $estadias);
+                }
+            }
+            return $listaEstadias;
+        }
+
+        public function estadiasPorfecha ($desde , $hasta){
+            
+            $this->getALL();
+            $keeperlist = array ();
+            $listaEstadias = array ();
+            $newkeeper = null ;
+
+       
+            foreach ($this->keeperList as $keeper){
+                foreach ($keeper->getFechas() as $estadias){
+                    if ($estadias->getDesde () >= $desde && $estadias->getHasta () <= $hasta){
+                        $newkeeper = $keeper ;
+                        array_push ($listaEstadias , $estadias); 
+                    }   
+                }
+                if ($listaEstadias != null){
+                    $newkeeper->setFechas ($listaEstadias); 
+                    array_push ($keeperlist ,  $newkeeper);
+                }
+                $listaEstadias = array();
+            }
+            return $keeperlist;
         }
     }
        
