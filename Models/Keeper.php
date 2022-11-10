@@ -4,7 +4,7 @@
     class Keeper extends User {
 
         
-        private $tipoMascota ;
+        private $tipoMascota = array() ;
         private $remuneracion ;
         private $fechasDisponibles = array();
         //private $reservasAceptadas = array();
