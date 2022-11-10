@@ -27,21 +27,30 @@
             $this->connection->ExecuteNonQuery($query, $parametros, QueryType::StoredProcedure);
         }
 
-        public function owner_getAll()
+        public function obtenerUser($usuario , $contraseña)
         {
             $ownerList = array();
-            $query = "CALL owner_getAll()";
+            $query = "CALL comprobarUser_owner(?,?)";
             $this->connection = Connection::GetInstance();
+            $ownerList ['nombreUser'] = $usuario ;
+            $ownerList['contrasena'] = $contraseña ;
             $result = $this->connection->Execute($query, $ownerList, QueryType::StoredProcedure);
+            $owner = null ;
 
             foreach($result as $row)
             {
                 $owner = new Owner();
                 $owner->setNombreUser($row["nombreUser"]);
-                array_push($ownerList, $owner);
+                $owner->setContrasena($row["contrasena"]);
+                $owner->setNombre($row["nombre"]);
+                $owner->setApellido($row["apellido"]);
+                $owner->setDni($row["dni"]);
+                $owner->setTelefono($row["telefono"]);
+
+                
             }
 
-            return $ownerList;
+            return $owner;
         }
 
 

@@ -12,7 +12,7 @@
         private $connection;
         private $tablename = "keeper";
         private $tableDates = "fechasdisponibles";
-        private $tableUser = "users";
+        private $tableUser = "user";
 
         public function addKeeper(Keeper $keeper)
         {
@@ -82,7 +82,7 @@
             
             try
             {
-                $query = "SELECT * FROM ". $this->tablename. " k JOIN ". $this->tableUser. " u ON k.idUserr = u.idUser ";
+                $query = "SELECT * FROM ". $this->tablename. " k JOIN ". $this->tableUser. " u ON k.idUser = u.idUser ";
 
                 $queryDates = "SELECT * FROM ". $this->tablename . "k JOIN " . $this->tableDates . " d ON k.idKeeper = d.idKeeper";
                 
@@ -98,7 +98,7 @@
                     $value ['telefono']);
 
                     $queryDates = "SELECT * FROM ". $this->tablename . "k JOIN " . $this->tableDates . " d ON k.idKeeper = d.idKeeper"
-                    . "WHERE d.idKeeper= (SELECT k.idKeeper FROM keeper k JOIN users u ON k.idUserr = u.idUser WHERE u.nombreUser = \"".$keeper->getNombreUser() . "\")";
+                    . "WHERE d.idKeeper= (SELECT k.idKeeper FROM keeper k JOIN users u ON k.idUser = u.idUser WHERE u.nombreUser = \"".$keeper->getNombreUser() . "\")";
                     
                     $result = $this->connection->Execute($queryDates);
                     if($result){
@@ -128,7 +128,7 @@
 
             try{
                 
-                $query = "SELECT * FROM ". $this->tablename. " k JOIN ". $this->tableUser. " u ON k.idUserr = u.idUser ". "WHERE u.nombreUser = \"". $username ."\"";
+                $query = "SELECT * FROM ". $this->tablename. " k JOIN ". $this->tableUser. " u ON k.idUser = u.idUser ". "WHERE u.nombreUser = \"". $username ."\"";
 
                 $this->connection = Connection::GetInstance();
 
@@ -152,7 +152,7 @@
 
             try{
                 
-                $query = "SELECT * FROM ". $this->tablename. " k JOIN ". $this->tableUser. " u ON k.idUserr = u.idUser WHERE u.nombreUser = \"". $username ."\"" ." AND u.contrasena = \"" .$contrasena."\"";
+                $query = "SELECT * FROM ". $this->tablename. " k JOIN ". $this->tableUser. " u ON k.idUser = u.idUser WHERE u.nombreUser = \"". $username ."\"" ." AND u.contrasena = \"" .$contrasena."\"";
 
                 $this->connection = Connection::GetInstance();
 
@@ -186,7 +186,7 @@
 
             try{
                 $query = "INSERT INTO ". $this->tableDates . " (desde,hasta,idKeeper) VALUES " . "(\"".date_format($dateDesde,"Y/m/d")."\",\"".date_format($dateHasta,"Y/m/d")."\",".
-                "(SELECT k.idKeeper FROM keeper k JOIN users u on k.idUserr = u.idUser WHERE u.nombreUser = \"". $username . "\"))";
+                "(SELECT k.idKeeper FROM keeper k JOIN user u on k.idUser = u.idUser WHERE u.nombreUser = \"". $username . "\"))";
 
                 $this->connection = Connection::GetInstance();
                 $this->connection->Execute($query);
@@ -208,7 +208,7 @@
             {
                 $queryFecha = "SELECT * FROM ". $this->tableDates.
                 " f JOIN keeper k ON f.idKeeper = k.idKeeper
-                JOIN users u ON k.idUserr = u.idUser ".
+                JOIN users u ON k.idUser = u.idUser ".
                 " WHERE (f.desde = \"". date_format($fecDesde,"Y/m/d")."\") 
                 AND (f.hasta= \"".date_format($fecHasta,"Y/m/d")."\")". 
                 " AND u.nombreUser = \"".$userName."\"" ;
@@ -259,7 +259,7 @@
             try
             {
                 $query="DELETE FROM ". $this->tableDates. " WHERE desde = \"". date_format($fecDesde,"Y/m/d")."\" AND hasta = \"". date_format($fecHasta,"Y/m/d"). "\""
-                ."AND idKeeper = ". "(SELECT k.idKeeper from keeper k JOIN users u ON u.idUser = k.idUserr WHERE u.nombreUser = \"". $username."\")";
+                ."AND idKeeper = ". "(SELECT k.idKeeper from keeper k JOIN user u ON u.idUser = k.idUserr WHERE u.nombreUser = \"". $username."\")";
             
                 $this->connection = Connection::GetInstance();
 
@@ -279,7 +279,7 @@
             {
                 $query= "SELECT * FROM ". $this->tableDates. 
                 " f JOIN keeper k ON f.idKeeper = k.idKeeper
-                JOIN users u ON k.idUserr = u.idUser
+                JOIN users u ON k.idUser = u.idUser
                 WHERE u.nombreUser = \"". $nombreUser. "\"";
 
                 $this->connection = Connection::GetInstance();

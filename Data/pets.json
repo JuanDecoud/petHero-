@@ -2,13 +2,13 @@
     {
         "petName": "Scooby",
         "petBreed": "Perruno",
-        "petSize": "Grande",
+        "petSize": "Chico",
         "petObserv": "Buen Perro",
         "petVideo": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/Mujer - 58142.mp4",
         "petImg": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg",
         "petVacc": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/b0922b69bac5f67df40c7e3fad643040.jpg",
         "owner": {
-            "nombreUser": "deco"
+            "nombreUser": "juan"
         }
     }
 ]

@@ -3,10 +3,12 @@
 
     use DAO\KeeperDAOSQL as KeeperDAO ;
     //use DAO\KeeperDAO as KeeperDAO ;
-    use DAO\OwnerDao as OwnerDAO ;
+    //use DAO\OwnerDao as OwnerDAO ;
+    use DAO\OwnerdbDAO as OwnerDAO;
     use DAO\PetDAO as PetDAO ;
     use DAO\ReservaDAO ;
     use Models\Estadoreserva ;
+    
 
     class HomeController
     {
@@ -29,6 +31,7 @@
         } 
 
         public function principalKeeper (){
+            
             require_once (VIEWS_PATH."navKeeper.php");
             $keeper = $_SESSION['loggedUser'];
             $fechas = $this->keeperDao->buscarEstadias($keeper->getNombreUser());
@@ -70,7 +73,7 @@
 
              if ($userkeeper !=null){
 
-                
+                $_SESSION['loggedUser'] = $userkeeper ;
                 $this->principalKeeper();  
              }
              else if ($userOwner !=null){

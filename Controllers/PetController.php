@@ -1,9 +1,11 @@
 <?php 
     namespace Controllers ;
 
-use DAO\OwnerDao;
-use DAO\PetDAO as petDAO;
+    use DAO\OwnerDao;
+    use DAO\PetDAO as petDAO;
+    use Exception;
     use Models\Pet as Pet ;
+    use DAO\PetDAOSQL ;
 
     class PetController {
 
@@ -15,6 +17,7 @@ use DAO\PetDAO as petDAO;
         {
             $this->petDao = new PetDAO ();
             $this->ownerDao = new OwnerDao();
+            $this->petSQL = new PetDAOSQL ();
         }
 /*
         public function agregarMascota ($nombre , $raza, $tamano, $planVacunacion, $observacionesGrals){
@@ -57,7 +60,17 @@ use DAO\PetDAO as petDAO;
         
             // asocia al owner con la mascota
             $this->ownerDao->agregarPets($owner->getNombreUser() , $pet);
-            $this->principalOwner();
+            
+
+            try {
+                echo "hola";
+                $this->petSQL->Add ($pet);
+                $this->principalOwner();
+
+            }
+            catch (Exception $ex)  {
+                throw $ex;
+            }
 
        
         }
