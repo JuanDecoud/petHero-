@@ -57,6 +57,7 @@
             $pet->setObservacionesGrals($observacion);
             $this->petDao->GetAll();
             $this->petDao->Add($pet);
+            var_dump($owner);
         
             // asocia al owner con la mascota
             $this->ownerDao->agregarPets($owner->getNombreUser() , $pet);

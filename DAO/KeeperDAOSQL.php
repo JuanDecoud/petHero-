@@ -163,15 +163,13 @@
                     {            
                       $user = new Keeper($row["nombreUser"],$row["contrasena"],$row["tipoDeCuenta"],$row["tipoMascota"],$row["remuneracion"],$row["nombre"],$row["apellido"],$row["dni"],$row["telefono"]);
                     
-                    } 
+                    }
                 }
                 
             }catch(Exception $ex){
                 throw $ex;
             }
             
-
-
             return $user;
         }
 
