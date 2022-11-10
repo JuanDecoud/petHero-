@@ -227,32 +227,37 @@ use LDAP\Result;
         }
 
         public function comprobarLogin($username , $contrasena){
-            $user = null;
-            try
-            {
-                $query = "SELECT * FROM ". $this->tablename. 
-                " k JOIN ". $this->tableUser. 
-                " u ON k.idUserr = u.idUser 
-                WHERE u.nombreUser = \"". $username ."\"" .
-                " AND u.contrasena = \"" .$contrasena."\"";
+            $theOwner = null;
 
+            try{
+                $query = "SELECT * FROM ". $this->tablename. " o JOIN ". $this->tableUser. 
+                " u ON o.idUser = u.idUser ". "WHERE u.nombreUser = \"". $username ."\""." AND u.contrasena = \"" .$contrasena."\"";
+            
                 $this->connection = Connection::GetInstance();
 
                 $resultSet = $this->connection->Execute($query);
 
-                if($resultSet){
-                    foreach ($resultSet as $row)
-                    {            
-                      $user = new Owner($row["nombreUser"],$row["contrasena"],$row["tipoDeCuenta"],$row["nombre"],$row["apellido"],$row["dni"],$row["telefono"]);
-                    } 
+                
+
+                foreach ($resultSet as $row)
+                {            
+                    $theOwner = new Owner();
+                    $theOwner -> setNombre($row["nombre"]);
+                    $theOwner -> setApellido($row["apellido"]);
+                    $theOwner -> setContrasena($row["contrasena"]);
+                    $theOwner -> setDni($row["dni"]);
+                    $theOwner -> setNombreUser($row["nombreUser"]);
+                    $theOwner -> setTelefono($row["telefono"]);
+                    $theOwner -> setTipodecuenta($row["tipoDeCuenta"]);
+                    
                 }
             }
             catch (Exception $ex)
             {
                 throw $ex;
             }
-           
-            return $user;
+
+            return $theOwner;
 
 
         }
