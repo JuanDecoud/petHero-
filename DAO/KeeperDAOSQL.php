@@ -115,7 +115,7 @@
                     $result = $this->connection->Execute($queryDates);
                     if($result){
                         foreach($result as $fecha){
-                            $fechaResultado = new FechasEstadias($fecha[0]["desde"],$fecha[0]["hasta"]);
+                            $fechaResultado = new FechasEstadias($fecha["desde"],$fecha["hasta"]);
                             $keeper->agregarFecha($fechaResultado);
                         }
                     }
