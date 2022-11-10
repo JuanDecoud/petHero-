@@ -1,10 +1,12 @@
 <?php 
     namespace Controllers ;
 
-    use DAO\KeeperDAO;
+   // use DAO\KeeperDAO;
+    use DAO\KeeperDAOSQL as KeeperDAO ;
     use DAO\OwnerDao;
     use DAO\PetDAO ;
-    use DAO\ReservaDAO ;
+    //use DAO\ReservaDAO ;
+    use DAO\ReservaDAOSQL as ReservaDAO ;
     use Models\Estadoreserva;
     use Models\Reserva ;
     use Models\FechasEstadias ;
@@ -37,6 +39,7 @@
                 $keeper = $this->keeperdao->obtenerUser($nombreKeeper);
                 $pet = $this->petdao->retrievePet($nombreMascota);
                 $importeTotal = $keeper->getRemuneracion();
+                $importeTotal = floatval($importeTotal);
                 $importeReserva = ($importeTotal/2) ;
 
                 $reserva = new Reserva ();
