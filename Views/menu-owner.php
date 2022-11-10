@@ -72,7 +72,7 @@
                                 Pendientes de pago 
                             </button>
                             </h2>
-                            <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="heading3" data-bs-parent="#accordio3">
+                            <div id="collapse3" class="accordion-collapse collapse show" aria-labelledby="heading3" data-bs-parent="#accordio3">
                                
                                     <?php foreach ($listaAceptada as $reserva){ 
                                         $pet = $reserva->getPet();
@@ -115,7 +115,7 @@
                             Estadia en curso
                         </button>
                         </h2>
-                        <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="heading4" data-bs-parent="#accordio4">
+                        <div id="collapse4" class="accordion-collapse collapse show" aria-labelledby="heading4" data-bs-parent="#accordio4">
                             
                                 <?php foreach ($ListaEnCurso as $reserva){ 
                                     $pet = $reserva->getPet();

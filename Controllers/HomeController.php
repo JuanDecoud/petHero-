@@ -6,18 +6,22 @@
     //use DAO\OwnerDao as OwnerDAO ;
     use DAO\OwnerDAOSQL as OwnerDAO ;
     use DAO\PetDAO as PetDAO ;
+    use DAO\ReservaDAO ;
+    use Models\Estadoreserva ;
 
     class HomeController
     {
         private $keeperDao ;
         private $ownerDao ;
         private $petDao ;
+        private $reservadao ;
 
         public function __construct()
         {
             $this->keeperDao = new KeeperDAO();
             $this->ownerDao = new OwnerDAO ();
             $this->petDao = new PetDao ();
+            $this->reservadao = new ReservaDAO ();
         }
 
         public function Index($message = "")
@@ -26,6 +30,13 @@
         } 
 
         public function principalKeeper (){
+            require_once (VIEWS_PATH."navKeeper.php");
+            $keeper = $_SESSION['loggedUser'];
+            $fechas = $this->keeperDao->buscarEstadias($keeper->getNombreUser());
+            $lista = $this->reservadao->getAll();
+            $listaReservas = $this->reservadao->buscarReservaxEstadoKeeper($lista , $keeper->getNombreUser (),Estadoreserva::Pendiente);
+            $listaAceptadas = $this->reservadao->buscarReservaxEstadoKeeper( $lista ,$keeper->getNombreUser (), Estadoreserva::Aceptada);
+            $listaConfirmadas = $this->reservadao->buscarReservaxEstadoKeeper($lista , $keeper->getNombreUser() ,Estadoreserva::Confirmada );
             require_once(VIEWS_PATH."mainKeeper.php");
         }
 
@@ -59,7 +70,8 @@
              $userOwner = $this->ownerDao->obtenerUser($usuario , $contraseña);
             
              if ($userkeeper !=null){
-                $_SESSION['loggedUser'] = $userkeeper ;
+
+                
                 $this->principalKeeper();  
              }
              else if ($userOwner !=null){

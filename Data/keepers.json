@@ -1,44 +1,16 @@
 [
     {
-        "nombreUser": "deco",
-        "contrasena": "1234",
-        "tipodeCuenta": "Keeper",
-        "tipoMascota": [
-            "Chica"
-        ],
-        "remuneracion": "1412",
-        "nombre": "Juan",
-        "apellido": "Jose",
-        "DNI": "526416",
-        "telefono": "5649",
-        "fechasDisponibles": [
-            {
-                "desde": "2022-11-18",
-                "hasta": "2022-11-24"
-            }
-        ]
-    },
-    {
-        "nombreUser": "decoud",
+        "nombreUser": "juan",
         "contrasena": "1234",
         "tipodeCuenta": "Keeper",
         "tipoMascota": [
             "Chica"
         ],
         "remuneracion": "1500",
-        "nombre": "decoud",
-        "apellido": "decouyd",
-        "DNI": "123",
-        "telefono": "123",
-        "fechasDisponibles": [
-            {
-                "desde": "2022-12-01",
-                "hasta": "2022-12-06"
-            },
-            {
-                "desde": "2022-12-17",
-                "hasta": "2022-12-19"
-            }
-        ]
+        "nombre": "Juan",
+        "apellido": "Decoud",
+        "DNI": "35410517",
+        "telefono": "2234559528",
+        "fechasDisponibles": []
     }
 ]

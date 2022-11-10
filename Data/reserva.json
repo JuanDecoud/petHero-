@@ -1,33 +1,33 @@
 [
     {
-        "fdesde": "2022-11-11",
-        "fhasta": "2022-11-17",
-        "importeReserva": 706,
-        "importeTotal": "1412",
+        "fdesde": "2022-12-08",
+        "fhasta": "2022-12-12",
+        "importeReserva": 750,
+        "importeTotal": "1500",
         "pet": {
             "nombre": "Scooby",
-            "raza": "Perro",
-            "tamano": "Medio",
+            "raza": "Perruno",
+            "tamano": "Grande",
             "planVacunacion": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/b0922b69bac5f67df40c7e3fad643040.jpg",
-            "observacionesGrals": "Buenas",
+            "observacionesGrals": "Buen Perro",
             "video": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/Mujer - 58142.mp4",
             "imagen": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg",
             "owner": {
-                "nombreUser": "juan"
+                "nombreUser": "deco"
             }
         },
         "keeper": {
-            "nombreUser": "deco",
+            "nombreUser": "juan",
             "contrasena": "1234",
             "tipodeCuenta": "Keeper",
             "tipoMascota": [
                 "Chica"
             ],
-            "remuneracion": "1412",
+            "remuneracion": "1500",
             "nombre": "Juan",
-            "apellido": "Jose",
-            "DNI": "526416",
-            "telefono": "5649"
+            "apellido": "Decoud",
+            "DNI": "35410517",
+            "telefono": "2234559528"
         },
         "estado": "Confirmada"
     }

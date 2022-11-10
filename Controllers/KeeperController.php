@@ -1,8 +1,8 @@
 <?php 
     namespace Controllers ;
 
-    use DAO\KeeperDAOSQL as KeeperDAO;
-    //use DAO\KeeperDAO;
+   // use DAO\KeeperDAOSQL as KeeperDAO;
+    use DAO\KeeperDAO;
     use Models\FechasEstadias;
     use Models\Reserva;
     use DAO\ReservaDAO;
@@ -21,15 +21,26 @@
 
         
         public function principalKeeper (){
+
+          require_once (VIEWS_PATH."navKeeper.php");
+
+            $keeper = $_SESSION['loggedUser'];
+            $fechas = $this->keeperDao->buscarEstadias($keeper->getNombreUser());
+            $lista = $this->reservaDao->getAll();
+            $listaReservas = $this->reservaDao->buscarReservaxEstadoKeeper($lista , $keeper->getNombreUser (),Estadoreserva::Pendiente);
+            $listaAceptadas = $this->reservaDao->buscarReservaxEstadoKeeper( $lista ,$keeper->getNombreUser (), Estadoreserva::Aceptada);
+            $listaConfirmadas = $this->reservaDao->buscarReservaxEstadoKeeper($lista , $keeper->getNombreUser() ,Estadoreserva::Confirmada );
             require_once(VIEWS_PATH."mainKeeper.php");
         }
+        
 
 
         public function asignarFecha ($desde , $hasta ){
-          
-            
+
+         
             $keeper = $_SESSION['loggedUser'];
-            $verificar = $this->keeperDao->verificarRangos ($desde,$hasta,$keeper->getNombreUser() );
+            $verificar = null;
+            $this->keeperDao->verificarRangos ($desde,$hasta,$keeper->getNombreUser() );
             $fechaDeldia=$this->keeperDao->verificarFechadeldia($desde , $hasta);
             $lista = $this->reservaDao->GetAll();
             $EstadiaEnCurso = $this->reservaDao->buscarReservaEnCurso($lista,$keeper->getNombreUser(),Estadoreserva::Confirmada ,$desde ,$hasta);

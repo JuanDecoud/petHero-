@@ -1,26 +1,12 @@
-[
-    {
-        "petName": "Scooby",
-        "petBreed": "Perro",
-        "petSize": "Medio",
-        "petObserv": "Buenas",
-        "petVideo": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/Mujer - 58142.mp4",
-        "petImg": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg",
-        "petVacc": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/b0922b69bac5f67df40c7e3fad643040.jpg",
-        "owner": {
-            "nombreUser": null
-        }
-    },
-    {
-        "petName": "asd",
-        "petBreed": "asd",
-        "petSize": "Chico",
-        "petObserv": "asd",
-        "petVideo": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/",
-        "petImg": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/",
-        "petVacc": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/",
-        "owner": {
-            "nombreUser": "polivera1234"
-        }
+[{
+    "petName": "Scooby",
+    "petBreed": "Perruno",
+    "petSize": "Grande",
+    "petObserv": "Buen Perro",
+    "petVideo": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/Mujer - 58142.mp4",
+    "petImg": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/th.jpg",
+    "petVacc": "\/TP-FINAL-2022\/Views\/\/img\/uploads\/b0922b69bac5f67df40c7e3fad643040.jpg",
+    "owner": {
+        "nombreUser": null
     }
-]
+}]
