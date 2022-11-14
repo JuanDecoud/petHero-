@@ -264,10 +264,10 @@ DELIMITER ;
 DROP procedure IF EXISTS `add_reserva`
 
 DELIMITER $$
-CREATE PROCEDURE add_reserva (in idKeeper int , in idFechasDis INT , in idPet int , in importeReserva double , in importeTotal double , in estado varchar (100) )
+CREATE PROCEDURE add_reserva (in idKeeper int , in idPet int , in importeReserva double , in importeTotal double , in estado varchar (100) )
 BEGIN 
-	INSERT INTO  reserva (idKeeper , idFechasDis , idPet , importeReserva , importeTotal , estado )
-    values (idKeeper,idFechasDis,idPet,importeReserva,importeTotal,estado);
+	INSERT INTO  reserva (idKeeper  , idPet , importeReserva , importeTotal , estado )
+    values (idKeeper,idPet,importeReserva,importeTotal,estado);
 END$$
 DELIMITER ;
 

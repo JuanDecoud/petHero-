@@ -170,7 +170,7 @@
                     $parametrosMascota['idOwner'] = $fila1['idOwner'] ;
                 }
                 
-                var_dump($parametrosMascota);
+                
                 //buscar el id de la mascota
                 $resultadoMascota = $this->connection->Execute($queryPet , $parametrosMascota , QueryType::StoredProcedure);
 
@@ -183,7 +183,7 @@
                 $parametros ['importeTotal'] = $reserva->getImporteTotal();
                 $parametros['estado'] = Estadoreserva::Pendiente;
 
-                
+                var_dump($parametros);
     
                 $this->connection->ExecuteNonQuery($query,$parametros,queryType::StoredProcedure);
 
