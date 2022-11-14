@@ -386,7 +386,7 @@ CREATE PROCEDURE  buscarPetId(in nombrePet varchar (50), in idOwner int)
 
 BEGIN
 	select idPet from pet p 
-    inner join owner o on o.idOwner = p.idPet
+    inner join owner o on o.idOwner = p.idOwner
     where p.nombre = nombrePet and p.idOwner = idOwner;
 END$$
 

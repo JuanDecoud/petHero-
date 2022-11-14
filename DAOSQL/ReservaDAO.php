@@ -169,21 +169,25 @@
                 foreach ($resultadoOwner as $fila1){
                     $parametrosMascota['idOwner'] = $fila1['idOwner'] ;
                 }
-
+                
+                var_dump($parametrosMascota);
                 //buscar el id de la mascota
                 $resultadoMascota = $this->connection->Execute($queryPet , $parametrosMascota , QueryType::StoredProcedure);
 
                 foreach ($resultadoMascota as $row){
                     $parametros['idPet']=$row[0];
                 }
+               
     
                 $parametros ['importeReserva'] = $reserva->getImporteReserva();
                 $parametros ['importeTotal'] = $reserva->getImporteTotal();
                 $parametros['estado'] = Estadoreserva::Pendiente;
+
+                
     
                 $this->connection->ExecuteNonQuery($query,$parametros,queryType::StoredProcedure);
 
-    
+                
                 //guardo los dias seleccionados correspondientes al rango que figura en sistema
                 $diasSeleccionados = $reserva->getDias();
                 $this->guardarDias($diasSeleccionados , $parametros['idKeeper'] , $parametros['idPet']);

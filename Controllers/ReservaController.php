@@ -6,9 +6,8 @@
     use DAOSQL\ReservaDAO as ReservaDAO ;
     use DAOSQL\PetDAO as PetDAO ;
     use DAOSQL\OwnerDAO as OwnerDAO ;
-   
-
-    //JSON
+use Exception;
+//JSON
     /*
     use DAO\KeeperDAO as KeeperDAO;
     use DAO\OwnerDao as OwnerDAO ;
@@ -73,13 +72,19 @@
         }
 
         public function solicitadudEstadia ($nombreKeeper , $nombreMascota ,$arreglo ){
+
+            try
+            {
                 $user = $_SESSION['loggedUser'];
 
                 $keeper = $this->keeperdao->obtenerUser($nombreKeeper);
+               
                 $pet= $this->petdao->buscarPet($nombreMascota , $user);
+                
                 $importeTotal = $keeper->getRemuneracion();
                 $importeTotal = floatval($importeTotal*(count($arreglo)));
                 $importeReserva = ($importeTotal/2) ;
+               
 
                 $reserva = new Reserva ();
                 $reserva->setImporteTotal($importeTotal);
@@ -89,7 +94,14 @@
                 $reserva->setKeeper($keeper);
                 $this->reservaDao->Add ($reserva);
 
-                $this->vistaOwner();     
+                $this->vistaOwner(); 
+
+            }
+            catch (Exception $ex)
+            {
+                throw $ex ;
+            }
+
         }
 
         public function  keepersPorfecha ($desde , $hasta){
