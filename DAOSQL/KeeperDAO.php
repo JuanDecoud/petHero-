@@ -205,14 +205,16 @@
                     ,$row['remuneracion'] , $row['nombre'] ,$row['apellido'] ,$row['dni'] ,$row['telefono']);
                     
                 }
-                                  
-                    $keeper['idKeeper'] = $idKeeper;
-                    $tipoMascota = array();
-                    $resultado = $this->connection->Execute($querytipoMascota , $keeper,queryType::StoredProcedure);
-                    foreach ($resultado as $row){
-                        array_push($tipoMascota,$row[0]);
-                    }
-                    $theKeeper->setTipoMascota($tipoMascota);
+                    if($theKeeper !=null) {
+                        $keeper['idKeeper'] = $idKeeper;
+                        $tipoMascota = array();
+                        $resultado = $this->connection->Execute($querytipoMascota , $keeper,queryType::StoredProcedure);
+                        foreach ($resultado as $row){
+                            array_push($tipoMascota,$row[0]);
+                        }
+                        $theKeeper->setTipoMascota($tipoMascota);
+                    }       
+
                     
 
             }catch(Exception $ex){

@@ -252,7 +252,7 @@ DELIMITER ;
 DROP procedure IF EXISTS `add_keeper`
 
 DELIMITER $$
-create PROCEDURE add_keeper (, in remuneracion float , in idUser int)
+create PROCEDURE add_keeper ( in remuneracion float , in idUser int)
 
 BEGIN 
 		insert into keeper ( remuneracion , idUser) 
@@ -393,18 +393,7 @@ END$$
 
 DELIMITER ; 
 
-DROP procedure IF EXISTS `add_reserva`
 
-DELIMITER $$
-
-CREATE PROCEDURE  add_reserva (in idKeeper int, in idPet int, in importeReserva double , in importeTotal double ,in estado varchar(50))
-
-BEGIN
-	insert into reserva (idKeeper,idPet,importeReserva,importeTotal,estado) values (idKeeper,idPet,importeReserva,importeTotal,estado);
-END$$
-
-
-DELIMITER ; 
 
 DROP procedure IF EXISTS `buscaridRango`
 
