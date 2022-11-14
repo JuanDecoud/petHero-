@@ -26,6 +26,56 @@
         public function getLista (){
             return $this->getAll();
         }
+        /*
+        public function Add(Reserva $reserva){
+            // almaceno los datos del pet y owner para buscar el id en la bd
+
+            $pet = $reserva->getPet();
+            $owner = $pet->getOwner();
+            
+            $keeper = $reserva->getKeeper();
+
+            // las querys que se van ejecutar 
+            $query = "CALL add_reserva (?,?,?,?,?,?)";
+            $queryKeeper = "CALL buscar_keeper(?)";
+            $queryEstadia = "CALL buscar_fechas (?,?)";
+            $queryPet = "CALL buscar_pet(?)";
+        
+            $this->connection= Connection::GetInstance();
+
+            //PARAMETROS-------------------------------
+
+            $parametros = array ();
+            // busco el id del owner 
+            
+            $keeperName['nombreUser'] = $keeper->getNombreUser();
+            $result =  $this->connection->Execute($queryKeeper ,$keeperName,queryType::StoredProcedure);
+            foreach ($result as $fila){
+                $parametros['idKeeper'] = $fila['idKeeper'] ;
+            }
+            //fechas Disponibles
+            $fecha['desde'] = $reserva->getFechadesde();
+            $fecha['hasta'] = $reserva->getFechahasta();
+            $result = $this->connection->Execute($queryEstadia , $fecha , queryType::StoredProcedure);
+            foreach ($result as $fila){
+                $parametros['idFechasDis'] = $fila['idFechasDisp'] ;
+            }
+
+            // busco la mascota 
+            $ownerNombre1['nombreUser'] = $owner->getNombreUser() ;
+            $result1 = $this->connection->Execute  ($queryPet , $ownerNombre1 , QueryType::StoredProcedure);
+            foreach ($result1 as $fila1){
+                $parametros['idPet'] = $fila1['idPet'] ;
+            }
+
+            $parametros ['importeReserva'] = $reserva->getImporteReserva();
+            $parametros ['importeTotal'] = $reserva->getImporteTotal();
+            $parametros['estado'] = Estadoreserva::Pendiente;
+
+
+            $this->connection->ExecuteNonQuery($query,$parametros,queryType::StoredProcedure);
+        }
+        */
 
         public function Add(Reserva $reserva)
         {
@@ -34,34 +84,48 @@
 
                 /*
                 $reserva->setEstado(Estadoreserva::Pendiente);
-
+                
                 $query= "INSERT INTO ".$this->tablename." 
                 (idKeeper,idFechaDis,idPet,importeReserva,importeTotal,estado) 
                 VALUES (:idKeeper,:idFechaDis,:idPet,:importeReserva,:importeTotal,:estado);";
-                
+             
                 $querySKeeper = "SELECT idKeeper FROM ". $this->tableKeeper .
                 " k JOIN " . $this->tableUser. " u ON k.idUser = u.idUser".
-                " WHERE u.nombreUser = \"". $keeper->getNombreUser();
-                
-                $querySPet = "SELECT idPet FROM ". $this->tablePet .
+                " WHERE u.nombreUser = \"". $keeper->getNombreUser()."\"";
+               
+                $querySPet = "SELECT p.idPet FROM ". $this->tablePet .
                 " p JOIN " . $this->tableOwner. " o ON o.idOwner = p.idOwner".
-                " JOIN ". $this->tableUser . "u ON o.idUser = u.idUser".
-                " WHERE  u.nombreUser= \"". $keeper->getNombreUser(). "\"
-                 AND p.nombre = \"". $pet->getNombre() . "\"";
-
+                " JOIN ". $this->tableUser . " u ON o.idUser = u.idUser".
+                " WHERE u.nombreUser= \"". $keeper->getNombreUser(). 
+                "\" AND p.nombre = \"". $pet->getNombre() . "\"";
+                 
                 $querySFecha = "SELECT f.idFechasDisp FROM ". $this->tableDates .
                 " f JOIN " . $this->tableKeeper. " k ON k.idKeeper = f.idKeeper".
-                " JOIN ". $this->tableUser . "u ON k.idUser = u.idUser".
+                " JOIN ". $this->tableUser . " u ON k.idUser = u.idUser".
                 " WHERE  u.nombreUser= \"". $keeper->getNombreUser(). "\"";
+
+                var_dump($reserva);
 
                 $this->connection = Connection::GetInstance();
                 
                 $idKeeper = $this->connection->Execute($querySKeeper);
                 $idPet = $this->connection->Execute($querySPet);
                 $idFecha = $this->connection->Execute($querySFecha);
-                $parametersReserva["idKeeper"] = $idKeeper[0]["idKeeper"];
-                $parametersReserva["idPet"] = $idPet[0]["idPet"];
-                $parametersReserva["idFechasDis"] = $idFecha[0]["idFechasDisp"];
+
+                var_dump($idKeeper,$idPet,$idFecha);
+
+                foreach($idKeeper as $keeper){
+                    $parametersReserva["idKeeper"] = $keeper["idKeeper"];
+                }
+
+                foreach($idPet as $pet){
+                    $parametersReserva["idPet"] = $pet["idPet"];
+                }
+
+                foreach($idFecha as $fecha){
+                    $parametersReserva["idFechasDis"] = $fecha["idFechasDisp"];
+                }
+
                 $parametersReserva["importeReserva"] = $reserva->getImporteReserva();
                 $parametersReserva["importeTotal"] = $reserva->getImporteTotal();
                 $parametersReserva["estado"] = $reserva->getEstado();
@@ -284,7 +348,7 @@
            
             $queryDates = "SELECT * FROM ". $this->tableKeeper . 
             " k JOIN " . $this->tableDates . " d ON k.idKeeper = d.idKeeper"
-            . "WHERE d.idKeeper= 
+            . " WHERE d.idKeeper= 
             (SELECT k.idKeeper FROM 
             keeper k JOIN user u ON k.idUser = u.idUser 
             WHERE u.nombreUser = \"".$keeper->getNombreUser() . "\")";

@@ -63,8 +63,8 @@
             catch (Exception $ex)  {
                 throw $ex;
             }
-
-       
+            
+            $this->principalOwner();
         }
 
         public function principalOwner (){

@@ -155,8 +155,8 @@
                     }
                     $keeper->setTipoMascota($tipoMascota);
 
-                    //$queryDates = "SELECT * FROM ". $this->tablename . "k JOIN " . $this->tableDates . " d ON k.idKeeper = d.idKeeper"
-                    //. "WHERE d.idKeeper= (SELECT k.idKeeper FROM keeper k JOIN user u ON k.idUser = u.idUser WHERE u.nombreUser = \"".$keeper->getNombreUser() . "\")";
+                    $queryDates = "SELECT * FROM ". $this->tablename . " k JOIN " . $this->tableDates . " d ON k.idKeeper = d.idKeeper"
+                    . " WHERE d.idKeeper= (SELECT k.idKeeper FROM keeper k JOIN user u ON k.idUser = u.idUser WHERE u.nombreUser = \"".$keeper->getNombreUser()."\")";
                     
                     $nombreUser['nombreUser'] = $keeper->getNombreUser();
                     $result = $this->connection->Execute($queryDates , $nombreUser ,queryType::StoredProcedure);
@@ -177,10 +177,12 @@
             {
                 throw $ex;
             }
+
             
             return $this->keeperList;
             
         }
+        
 
         public function obtenerUser($username){
             $theKeeper = null;
