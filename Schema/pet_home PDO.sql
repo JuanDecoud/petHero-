@@ -349,3 +349,31 @@ BEGIN
 END$$
 
 DELIMITER ;
+
+
+
+DROP procedure IF EXISTS `agregar_rango`
+
+DELIMITER $$ 
+
+CREATE PROCEDURE agregar_rango (in desde date , in hasta date , in idKeeper int , in estado varchar (50))
+BEGIN
+	INSERT INTO fechasdisponibles (desde , hasta , idKeeper , estado) values (desde , hasta , idKeeper , estado);
+END$$
+
+DELIMITER ;
+
+DROP procedure IF EXISTS `buscar_reservaPet`
+
+DELIMITER $$
+
+CREATE PROCEDURE buscar_reservaPet (in nombrePet varchar (50) , in nombreOwner varchar(50))
+
+BEGIN
+	select p.nombre, p.raza ,p.tamaño,p.imagen ,p.planVacunacion,p.observacionesGrals,p.video from  pet p
+    inner join owner o on o.idOwner = p.idOwner 
+    inner join user u on u.idUser = o.idUser 
+    where p.nombre = nombrePet and u.nombreUser = nombreOwner;
+END$$
+
+DELIMITER ;

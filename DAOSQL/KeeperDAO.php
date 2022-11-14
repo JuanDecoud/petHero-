@@ -184,42 +184,36 @@
 
         public function obtenerUser($username){
             $theKeeper = null;
+            $idKeeper = null ;
 
             try{
                 
-                /*$query = "SELECT * FROM ". $this->tablename. " k JOIN ". $this->tableUser. " u ON k.idUser = u.idUser ". "WHERE u.nombreUser = \"". $username ."\"";*/
+                $queryKeeper = "SELECT * FROM ". $this->tablename. " k JOIN ". $this->tableUser. " u ON k.idUser = u.idUser ". "WHERE u.nombreUser = \"". $username ."\"";
                 
-                $query = "Call buscar_keeper(?)";
-                $parametro ['userName'] = $username ;
-
-               
                 $this->connection = Connection::GetInstance();
-
-                $resultSet = $this->connection->Execute($query , $parametro ,QueryType::StoredProcedure);
+                $resultado = $this->connection->Execute($queryKeeper);
 
                 $querytipoMascota = "Call buscar_tipoMascota (?)";
 
                
-
-                foreach ($resultSet as $row)
+                foreach ($resultado as $row)
                 {  
-                              
-                    $theKeeper = $row[0];
+                    $idKeeper = $row['idKeeper'];
+                    $theKeeper = new Keeper($row['nombreUser'] , $row['contrasena'] , $row['tipoDeCuenta'] 
+                    ,$row['remuneracion'] , $row['nombre'] ,$row['apellido'] ,$row['dni'] ,$row['telefono']);
                     
                 }
-                
-                /// agrego el tipo de mascota 
-                    if ($theKeeper !=null){
-                        $nombreUser['nombreUser'] = $theKeeper->getNombreUser();
-                        $tipoMascota = array();
-                        $resultado = $this->connection->Execute($querytipoMascota , $nombreUser,queryType::StoredProcedure);
-                        foreach ($resultado as $row){
-                            array_push($tipoMascota,$row);
-                        }
-                        $theKeeper->setTipoMascota($tipoMascota);
+                                  
+                    $keeper['idKeeper'] = $idKeeper;
+                    $tipoMascota = array();
+                    $resultado = $this->connection->Execute($querytipoMascota , $keeper,queryType::StoredProcedure);
+                    foreach ($resultado as $row){
+                        array_push($tipoMascota,$row[0]);
                     }
+                    $theKeeper->setTipoMascota($tipoMascota);
+                    
 
-                
+                    var_dump($theKeeper);
 
 
             }catch(Exception $ex){
@@ -292,6 +286,8 @@
                     $parametros['idKeeper'] = $row[0];
                 }
                 $parametros['estado'] = Estadoreserva::Activo;
+
+                var_dump($parametros);
 
                 $this->connection->ExecuteNonQuery($queryRango , $parametros , QueryType::StoredProcedure);
 
