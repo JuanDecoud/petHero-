@@ -377,3 +377,55 @@ BEGIN
 END$$
 
 DELIMITER ;
+
+DROP procedure IF EXISTS `buscar_reservaPet`
+
+DELIMITER $$
+
+CREATE PROCEDURE  buscarPetId(in nombrePet varchar (50), in idOwner int)
+
+BEGIN
+	select idPet from pet p 
+    inner join owner o on o.idOwner = p.idPet
+    where p.nombre = nombrePet and p.idOwner = idOwner;
+END$$
+
+
+DELIMITER ; 
+
+DROP procedure IF EXISTS `add_reserva`
+
+DELIMITER $$
+
+CREATE PROCEDURE  add_reserva (in idKeeper int, in idPet int, in importeReserva double , in importeTotal double ,in estado varchar(50))
+
+BEGIN
+	insert into reserva (idKeeper,idPet,importeReserva,importeTotal,estado) values (idKeeper,idPet,importeReserva,importeTotal,estado);
+END$$
+
+
+DELIMITER ; 
+
+DROP procedure IF EXISTS `buscaridRango`
+
+DELIMITER $$
+
+CREATE PROCEDURE  buscaridRango (in fecha date , in idKeeper int)
+
+BEGIN
+	select idFechasDisp from fechasdisponibles fd
+    inner join keeper k on k.idKeeper = fd.idKeeper 
+    where fecha >=fd.desde and fecha <= fd.hasta and k.idKeeper = idKeeper ;
+END$$
+
+
+DELIMITER ; 
+
+DROP procedure IF EXISTS `guardarDias`
+
+DELIMITER $$
+CREATE PROCEDURE guardarDias  (in idrango int,in idReserva int,in fecha date)
+begin
+	insert into diasxrango (idrango,idReserva,fecha)values(idrango,idReserva,fecha);
+end$$
+DELIMITER ;

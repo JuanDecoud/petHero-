@@ -429,6 +429,7 @@
                 // parametros para buscar el rango 
                 $dia['fecha'] = $dias[0];
                 $dia['idKeeper'] = $idKeeper ;
+                var_dump($dia);
 
                 // obtengo el id del rango y lo guardo
                 $this->connection = Connection::GetInstance();
@@ -445,8 +446,7 @@
                 foreach ($resultadoReserva as $row){
                     $parametro['idReserva'] = $row[0];
                 }
- 
-                // agrego cada una de las fechas seleccionadas por el owner
+
                foreach ($dias as $fecha){
                 $parametro['fecha'] = $fecha ;
                 $this->connection->ExecuteNonQuery($guardarDias , $parametro , queryType::StoredProcedure);
