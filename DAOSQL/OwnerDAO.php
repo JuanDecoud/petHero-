@@ -1,13 +1,14 @@
 <?php
-    namespace DAO;
+    namespace DAOSQL;
     use DAO\IOwnerDAO as IOwnerDAO;
     use Models\Owner as Owner;
     use Models\Tarjeta as Tarjeta;
     use Models\Pet as Pet ;
     use \Exception as Exception;
-use LDAP\Result;
+    use LDAP\Result;
+    use Models\FechasEstadias;
 
-    class OwnerDaoSQL implements IOwnerDAO
+    class OwnerDAO implements IOwnerDAO
     {
         private $connection;
         private $tablename = "owner";
@@ -41,40 +42,17 @@ use LDAP\Result;
             $this->connection = Connection::GetInstance();
             $this->connection->ExecuteNonQuery($queryUser, $parametersUser);
             
-          /*  $tarjeta = $owner ->getTarjeta();
+          
             
-         /*   ///Subimos sus TARJETAS a la DB
+           ///Subimos sus TARJETAS a la DB
             $result = $this->connection->Execute($thirdQuery);
-            foreach($tarjeta as $ts){
-                $parametersTarjeta["numero"] = $ts->getNumero();
-                $parametersTarjeta["nombre"] = $ts ->getNombre();
-                $parametersTarjeta["apellido"] = $ts->getApellido();
-                $parametersTarjeta["fechaVenc"] = $ts -> getFechaVenc();
-                $parametersTarjeta["codigo"]  = $ts -> getCodigo();
-                $parametersTarjeta["idOwner"] = $result[0]["idUser"];
-                $this->connection->ExecuteNonQuery($queryTarjeta, $parametersUser);
-            }
-            
+
 
             ///Subimos el OWNER como tal a la DB
             $parametersOwner["idUser"] = $result[0]["idUser"];
             $this->connection->ExecuteNonQuery($queryOwner, $parametersOwner);
 
-         /*   ///Subimos el PET a la DB
-            $pets = $owner->getPet();
 
-            foreach($pets as $pet){
-                $parametersPet["nombre"] = $pet->getNombre();
-                $parametersPet["raza"] = $pet ->getRaza();
-                $parametersPet["tamaño"] = $pet->getTamano();
-                $parametersPet["imagen"] = $pet -> getImg();
-                $parametersPet["planVacunacion"]  = $pet -> getPlanVacunacion();
-                $parametersPet["observacionesGrals"] = $pet -> getObservacionesGrals();
-                $parametersPet["video"] = $pet -> getVideo();
-                $parametersPet["idDueño"] = $result[0]["idUser"];
-                $this->connection->ExecuteNonQuery($queryPet, $parametersPet);
-            }
-*/
         }
 
         public function obtenerUser($username){
@@ -83,13 +61,8 @@ use LDAP\Result;
             try{
                 $query = "SELECT * FROM ". $this->tablename. " o JOIN ". $this->tableUser. 
                 " u ON o.idUser = u.idUser ". "WHERE u.nombreUser = \"". $username ."\"";
-            
                 $this->connection = Connection::GetInstance();
-
                 $resultSet = $this->connection->Execute($query);
-
-                
-
                 foreach ($resultSet as $row)
                 {            
                     $theOwner = new Owner();
@@ -145,11 +118,14 @@ use LDAP\Result;
         }
 
 
-        public function agregarPets($username ,Pet $pet ){
+     /*   public function agregarPets($username ,Pet $pet ){
             try
             {
-                $queryPet = "INSERT INTO ".$this->tablePet." (nombre,raza,tamano,imagen,planVacunacion,observacionesGrals,video,idOwner) 
-                VALUES (:nombre,:raza,:tamano,:imagen,:planVacunacion,:observacionesGrals,:video,:idOwner)";
+                
+                $queryPet = "INSERT INTO ".$this->tablePet." (nombre,raza,tamaño,imagen,planVacunacion,observacionesGrals,video,idOwner) 
+                VALUES (:nombre,:raza,:tamaño,:imagen,:planVacunacion,:observacionesGrals,:video,:idOwner)";
+
+                $queryPet = "CALL add_pet(?,?,?,?,?,?,?,?)";
                 
                 $query ="SELECT idOwner FROM ". $this->tablename . 
                 " o JOIN user u ON u.idUser = o.idUser".
@@ -157,21 +133,20 @@ use LDAP\Result;
                 
                 $this->connection = Connection::GetInstance();
                 $result = $this->connection->Execute($query);
+                $number=number_format($result[0]["idOwner"]);
 
                 
                 $pP["nombre"] = $pet->getNombre();
                 $pP["raza"] = $pet ->getRaza();
-                $pP["tamano"] = $pet->getTamano();
+                $pP["tamaño"] = $pet->getTamano();
                 $pP["imagen"] = $pet -> getImg();
                 $pP["planVacunacion"]  = $pet -> getPlanVacunacion();
                 $pP["observacionesGrals"] = $pet -> getObservacionesGrals();
                 $pP["video"] = $pet -> getVideo();
                 $pP["idOwner"] = $result[0]["idOwner"];
+
                 
-
-                var_dump($pP);
-
-                $this->connection->ExecuteNonQuery($queryPet, $pP);
+                $this->connection->ExecuteNonQuery($queryPet, $pP , QueryType::StoredProcedure);
             }
             catch(Exception $ex)
             {
@@ -179,11 +154,11 @@ use LDAP\Result;
             }
 
         }
+        */
 
         public function GetAll()
         {
             $ownerList = array();
-            /*
             try
             {
                 $query = "SELECT * FROM ". $this->tablename. " k JOIN ". $this->tableUser. " u ON k.idUser = u.idUser ";
@@ -192,29 +167,14 @@ use LDAP\Result;
 
                 $queryPet = "SELECT * FROM ". $this->tablePet;
 
-
                 $this->connection = Connection::GetInstance();
-
                 $resultUser = $this->connection->Execute($query);
 
                 foreach($resultUser as $value){
                     $owner = new Owner($value['nombreUser'],$value ['contrasena'],$value ['tipodeCuenta'],
                     $value ['tipoMascota'],$value ['remuneracion'],$value ['nombre'], $value ['apellido'],$value ['DNI'],
                     $value ['telefono']);
-
-                    $queryDates = "SELECT * FROM ". $this->tablename . "k JOIN " . $this->tableDates . " d ON k.idKeeper = d.idKeeper"
-                    . "WHERE d.idKeeper= (SELECT k.idKeeper FROM keeper k JOIN users u ON k.idUserr = u.idUser WHERE u.nombreUser = \"".$keeper->getNombreUser() . "\")";
-                    
-                    $result = $this->connection->Execute($queryDates);
-                    if($result){
-                        foreach($result as $fecha){
-                            $fechaResultado = new FechasEstadias($fecha[0]["desde"],$fecha[0]["hasta"]);
-                            $keeper->agregarFecha($fechaResultado);
-                        }
-                    }
-
-
-                    array_push($keeperList,$keeper);
+                    array_push($ownerList,$owner);
                 }
 
 
@@ -223,23 +183,24 @@ use LDAP\Result;
             {
                 throw $ex;
             }
-            */
+            
         }
 
         public function comprobarLogin($username , $contrasena){
             $theOwner = null;
 
             try{
+  
                 $query = "SELECT * FROM ". $this->tablename. " o JOIN ". $this->tableUser. 
                 " u ON o.idUser = u.idUser ". "WHERE u.nombreUser = \"". $username ."\"".
                 " AND u.contrasena = \"" .$contrasena."\"";
             
+                
                 $this->connection = Connection::GetInstance();
-
-                $resultSet = $this->connection->Execute($query);
-
+                $resultSet = $this->connection->Execute($query );
                 foreach ($resultSet as $row)
-                {            
+                {   
+                           
                     $theOwner = new Owner();
                     $theOwner -> setNombre($row["nombre"]);
                     $theOwner -> setApellido($row["apellido"]);
@@ -256,7 +217,9 @@ use LDAP\Result;
                 throw $ex;
             }
 
+            
             return $theOwner;
+            
 
 
         }

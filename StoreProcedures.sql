@@ -75,3 +75,4 @@ BEGIN
         values (tipoMascota , remuneracion , idUser);
 END$$
 DELIMITER ;
+

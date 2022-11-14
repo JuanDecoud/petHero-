@@ -6,6 +6,10 @@
         const Cumplida = "Cumplida";
         const Aceptada = "Aceptada";
         const Confirmada = "Confirmada";
+        const Activo = "Activo";
+        const Inactivo = "Inactivo";
+        const en_curso = "En_Curso";
+        const Terminado = "Terminado";
 
     }
 

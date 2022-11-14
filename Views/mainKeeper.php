@@ -8,14 +8,14 @@
                 <label for="" class="mx-2">
                     <h5>Desde:</h5>
                 </label>
-                <input class="calendar my-4 col-8" style="border: 2px solid;" type="date" name="desde" placeholder="" required>
+                <input class="calendar my-4 col-8" style="border: 2px solid;" type="date" name="desde" placeholder="" required min ="<?php $hoy = date("Y-m-d"); echo $hoy ?>">
             </div>
 
             <div class="col-auto mx-auto">
                 <label for="" class="mx-2">
                     <h5>Hasta:</h5>
                 </label>
-                <input class="calendar my-4 col-8" style="border: 2px solid" type="date" name="hasta" placeholder="" required>
+                <input class="calendar my-4 col-8" style="border: 2px solid" type="date" name="hasta" placeholder="" required min ="<?php $hoy = date("Y-m-d"); echo $hoy ?>">
             </div>
 
             <div>
@@ -70,25 +70,24 @@
                 <div class="accordion-body">
 
                 <?php foreach ($listaReservas as $reserva) {
-                    $pet = $reserva->getPet();  ?>
+                    $pet = $reserva->getPet();
+                    $owner = $pet->getOwner ()?>
                     <div class="d-inline-flex flew-wrap">
                         <div class="card m-2" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="border-bottom">Solicitud de estadia.</h5>
+                                <div class = "container mt-3">
+                                    <h6 >Fechas solicitadas</h6>
+                                </div>
                                 <form action="<?php echo FRONT_ROOT . "Reserva/aceptarReserva" ?>">
                                     <div class="col-auto mt-2">
-                                        <label for="" class="mx-2  ">
-                                            <h7>Desde:</h7>
-                                        </label>
-                                        <input style=" text-align: center; font-weight:bold; color:black; border :0;" class="border-bottom" type="text" placeholder="<?php echo $reserva->getFechadesde(); ?>" name="desde" value="<?php echo $reserva->getFechadesde(); ?>" readonly></td>
-                                    </div>
-
-                                    <div class="col-auto">
-                                        <label for="" class="mx-2 ">
-                                            <h7>Hasta:</h7>
-                                        </label>
-                                        <input style=" text-align: center; font-weight:bold; color:black; border:0;" class="border-bottom" type="text" placeholder="<?php echo $reserva->getFechahasta(); ?>" name="hasta" value="<?php echo $reserva->getFechahasta(); ?>" readonly></td>
-                                    </div>
+                                        <input type="hidden" value = "<?php echo  $owner->getNombreUser(); ?>" name = "owner">
+                                        <input type="hidden" value = "<?php echo $pet->getNombre(); ?>" name = "pet">
+                                    <ul class="list-group list-group-flush">
+                                        <?php foreach ($reserva->getDias() as $dias ) { ?>
+                                        <li class="list-group-item"><input style=" text-align: center; font-weight:bold; color:black; border :0;" class="border-bottom" type="text" placeholder="<?php echo $dias?>" name="desde" value="" readonly></td></li>
+                                        <?php }?>
+                                    </ul>
 
                                     <div class="col-auto">
                                         <label for="" class="mx-2 ">
@@ -113,7 +112,10 @@
                                                 <button type="submit" class=" mx-2 mt-2 btn btn-danger btn-sm ">Aceptar</button>
                                             
                                 </form>
+                                
                                         <form action="<?php echo FRONT_ROOT . "Reserva/rechazarReserva" ?>" method="post">
+                                        <input type="hidden" value = "<?php echo  $owner->getNombreUser(); ?>" name = "owner">
+                                        <input type="hidden" value = "<?php echo $pet->getNombre(); ?>" name = "pet">
                                         <input style=" text-align: center; font-weight:bold; color:black; border:0;" class="border-bottom" type="hidden" placeholder="<?php echo $pet->getNombre(); ?>" name="petName" value="<?php echo $pet->getNombre(); ?>" readonly></td>
                                         <button type="submit " class=" mt-2 btn btn-danger btn-sm ">Rechazar</button>
                                         </form>
@@ -142,19 +144,11 @@
                             <div class="card-body">
                                 <h5 class="border-bottom">En proceso de cobro.</h5>
                                     <div class="col-auto mt-2">
-                                        <label for="" class="mx-2  ">
-                                            <h7>Desde:</h7>
-                                        </label>
-                                        <input style=" text-align: center; font-weight:bold; color:black; border :0;" class="border-bottom" type="text" placeholder="<?php echo $reserva->getFechadesde(); ?>" name="desde" value="<?php echo $reserva->getFechadesde(); ?>" readonly></td>
-                                    </div>
-
-                                    <div class="col-auto">
-                                        <label for="" class="mx-2 ">
-                                            <h7>Hasta:</h7>
-                                        </label>
-                                        <input style=" text-align: center; font-weight:bold; color:black; border:0;" class="border-bottom" type="text" placeholder="<?php echo $reserva->getFechahasta(); ?>" name="hasta" value="<?php echo $reserva->getFechahasta(); ?>" readonly></td>
-                                    </div>
-
+                                        <ul class="list-group list-group-flush">
+                                            <?php foreach ($reserva->getDias() as $dias ) { ?>
+                                            <li class="list-group-item"><input style=" text-align: center; font-weight:bold; color:black; border :0;" class="border-bottom" type="text" placeholder="<?php echo $dias?>" name="desde" value="" readonly></td></li>
+                                            <?php }?>
+                                        </ul>
                                     <div class="col-auto">
                                         <label for="" class="mx-2 ">
                                             <h7>Raza</h7>

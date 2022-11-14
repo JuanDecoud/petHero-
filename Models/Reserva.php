@@ -2,30 +2,22 @@
     namespace Models ;
 
     class Reserva {
-        private $fdesde ;
-        private $fhasta ;
+        private $diasReservados = array ();
         private Keeper $keeper ;
         private Pet $pet ;
         private $importeReserva ;
         private $importeTotal ;
         private $estado ;
+  
 
-        /*
-        public function __construct($fdesde ,$fhasta , Keeper $keeper , Pet $pet , $importeReserva , $importeTotal )
+        public function __construct()
         {
-            $this->fdesde= $fdesde ;
-            $this->fhasta= $fhasta ;
-            $this->keeper= $keeper ;
-            $this->pet= $pet ;
-            $this->importeReserva= $importeReserva ;
-            $this->importeTotal= $importeTotal ;
-
             
         }
-        */
+
         
-        public function setFechadesde ($fdesde){$this->fdesde = $fdesde ;}
-        public function getFechadesde (){ return $this->fdesde  ;}
+        public function setDias ($listReservados){$this->diasReservados = $listReservados;}
+        public function getDias (){return $this->diasReservados;}
 
         public function setFechahasta ($fhasta){$this->fhasta = $fhasta ;}
         public function getFechahasta (){ return $this->fhasta  ;}

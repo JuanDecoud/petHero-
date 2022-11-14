@@ -1,20 +1,4 @@
-<?php
 
-
-    require_once ("navOwner.php");
-    use DAO\PetDAO;
-    use DAO\ReservaDAO;
-    use Models\Estadoreserva;
-
-    $petDao = new PetDAO ();
-    $user = $_SESSION['loggedUser'];
-    $petlist = $petDao->buscarPets($user->getNombreUser());
-    $reservadao = new ReservaDAO();
-    $lista=$reservadao->GetAll();
-    $listaAceptada = $reservadao->buscarReservaxEstado($lista,$user->getNombreUser(), Estadoreserva::Aceptada);
-    $ListaEnCurso = $reservadao->buscarReservaxEstado($lista,$user->getNombreUser(),Estadoreserva::Confirmada);
-     
-?>
    
 <div class = "d-flex justify-content-center mt-10 col-11 mx-auto  ">
     
@@ -74,10 +58,10 @@
                             </h2>
                             <div id="collapse3" class="accordion-collapse collapse show" aria-labelledby="heading3" data-bs-parent="#accordio3">
                                
-                                    <?php foreach ($listaAceptada as $reserva){ 
-                                        $pet = $reserva->getPet();
-                                        $keeper = $reserva->getKeeper ();
-                                        ?>
+                                <?php foreach ($listaAceptada as $reserva){ 
+                                    $pet = $reserva->getPet();
+                                    $keeper = $reserva->getKeeper ();
+                                    ?>
                                 <div class = " d-inline-flex flex-wrap">
                                     <form action="<?php echo FRONT_ROOT."Reserva/simulacionPago"; ?>" method ="post">
                                         <div class="card m-3 " style="width: 18rem;">
@@ -89,9 +73,10 @@
                                                 <h5 class="card-title"><?php echo $pet->getNombre(); ?></h5>
                                             </div>
                                             <ul class="list-group list-group-flush">
-                                                <li class="list-group-item"><strong>Desde:</strong>:<input style=" text-align: center;  color:black; border:0;"  type="text" placeholder="<?php echo $reserva->getFechadesde(); ?>" name="desde" value="<?php echo $reserva->getFechadesde(); ?>" readonly></li>
-
-                                                <li class="list-group-item"><strong>Hasta:</strong><input style=" text-align: center; color:black; border:0;"  type="text" placeholder="<?php echo $reserva->getFechahasta(); ?>" name="hasta" value="<?php echo $reserva->getFechahasta(); ?>" readonly></li>
+                                            
+                                                <?php foreach ($reserva->getDias() as $dias ) { ?>
+                                                <li class="list-group-item"><input style=" text-align: center; font-weight:bold; color:black; border :0;" class="border-bottom" type="text" placeholder="<?php echo $dias?>" name="desde" value="" readonly></td></li>
+                                                <?php }?>
 
                                                 <li class="list-group-item"><strong>Keeper:</strong><input style=" text-align: center; color:black; border:0;"  type="text" placeholder="<?php echo $keeper->getNombreUser(); ?>" name="keeper" value="<?php echo $keeper->getNombreUser(); ?>" readonly></li>
 
@@ -156,9 +141,9 @@
                 <form class="row g-5 d-flex justify-content-end " method = "post" action="<?php echo FRONT_ROOT."Reserva/keepersPorfecha" ;?>">
                         <div class = "d-inline-flex  col-9   ">
                             <input type="text" readonly class="form-control-plaintext text-center mt-4" id="" value="Desde">
-                            <input type="date" class="form-control mt-4" id="" placeholder="" name="desde" required>
+                            <input type="date" class="form-control mt-4" id="" placeholder="" name="desde" required min ="<?php $hoy = date("Y-m-d"); echo $hoy ?>">
                             <input type="text" readonly class="form-control-plaintext text-center mt-4" id="" value="Hasta">
-                            <input type="date" class="form-control mt-4" id="" placeholder="" name="hasta" required>
+                            <input type="date" class="form-control mt-4" id="" placeholder="" name="hasta" required min ="<?php $hoy = date("Y-m-d"); echo $hoy ?>"> 
                             <button  type ="submit"class = "btn btn-sm btn-danger mx-4 mt-4">Buscar</button>
                         </div>
                 </form>

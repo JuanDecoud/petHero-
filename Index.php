@@ -15,6 +15,7 @@
 
 	session_start();
 
+	
 	require_once(VIEWS_PATH."Header.php");
 	
 

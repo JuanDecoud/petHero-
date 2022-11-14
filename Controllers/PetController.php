@@ -1,11 +1,20 @@
 <?php 
     namespace Controllers ;
 
-    use DAO\OwnerDao;
-    use DAO\PetDAO as petDAO;
-    use Exception;
+    // JSON-------------------
+    //use DAO\OwnerDao as OwnerDao;
+    //use DAO\PetDAO as petDAO;
+
+    // SQL 
+    use DAOSQL\PetDAO as PetDAO;
+    use DAOSQL\OwnerDao  as OwnerDAO;
+    use DAOSQL\ReservaDAO as ReservaDAO ;
+
+    // models 
     use Models\Pet as Pet ;
-    use DAO\PetDAOSQL ;
+    use Exception;
+    use Models\Estadoreserva;
+
 
     class PetController {
 
@@ -16,26 +25,15 @@
         public function __construct()
         {
             $this->petDao = new PetDAO ();
-            $this->ownerDao = new OwnerDao();
-            $this->petSQL = new PetDAOSQL ();
+            $this->ownerDao = new OwnerDAO();
+            $this->reservadao = new ReservaDAO ;
+           
         }
-/*
-        public function agregarMascota ($nombre , $raza, $tamano, $planVacunacion, $observacionesGrals){
-            $owner = $_SESSION['loggedUser'];
-            $pet = new Pet ();
-            $pet->setNombre($nombre);
-            $pet->setOwner($owner);
-            $pet->setRaza($raza);
-            $pet->setTamano($tamano);
-            $pet->setPlanVacunacion($planVacunacion);
-            $pet->setObservacionesGrals($observacionesGrals);
-            $this->petDAO->Add($pet);
-            $this->agregarPet();
-        }
-*/
+
+
         public function agregarMascota ($nombre , $raza ,$tamanio , $observacion ){
-          
-            
+         
+           
             $target_dir = VIEWS_PATH."/img/uploads/";
             $target_file1 = $target_dir.basename($_FILES["imagenPerfil"]["name"]);
             $target_file2 = $target_dir.basename($_FILES["vacunacion"]["name"]);
@@ -55,17 +53,10 @@
             $pet->setPlanVacunacion(FRONT_ROOT.VIEWS_PATH."/img/uploads/".basename($_FILES['vacunacion']['name']));
             $pet->setVideo(FRONT_ROOT.VIEWS_PATH."/img/uploads/".basename($_FILES['video']['name']));
             $pet->setObservacionesGrals($observacion);
-            $this->petDao->GetAll();
-            $this->petDao->Add($pet);
-            var_dump($owner);
-        
-            // asocia al owner con la mascota
-            $this->ownerDao->agregarPets($owner->getNombreUser() , $pet);
-            
-
+          
             try {
-                echo "hola";
-                $this->petSQL->Add ($pet);
+                
+                $this->petDao->Add ($pet);
                 $this->principalOwner();
 
             }
@@ -77,12 +68,21 @@
         }
 
         public function principalOwner (){
+            
+            require_once (VIEWS_PATH."navOwner.php");
+            $petDao = new PetDAO ();
+            $user = $_SESSION['loggedUser'];
+            $petlist = $petDao->buscarPets($user->getNombreUser());
+            $reservadao = new ReservaDAO();
+            $lista=$reservadao->GetAll();
+            $listaAceptada = $this->reservadao->buscarReservaxEstado($lista,$user->getNombreUser(), Estadoreserva::Aceptada);
+            $ListaEnCurso = $this->reservadao->buscarReservaxEstado($lista,$user->getNombreUser(),Estadoreserva::Confirmada);
             require_once(VIEWS_PATH."menu-owner.php");
         }
 
-      
 
         public function agregarPet (){
+            require_once(VIEWS_PATH."check.php");
             require_once(VIEWS_PATH."registrarMascota.php");
         }
     }

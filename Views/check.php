@@ -1,12 +1,9 @@
 <?php
-    session_start();
-    if(isset($_SESSION["email"]))
+    if(!isset($_SESSION["loggedUser"]))
     {
-        $email=$_SESSION["email"];
+        $email=$_SESSION["loggedUser"];
+        echo '<script language="javascript">alert("Por favor , inicie session");</script>';
+        header("location:" .FRONT_ROOT."/index.php");
     }
-    else{
-        header("location: login.php");
-        echo "Debes iniciar sesion";
-    }
-
+ 
 ?>

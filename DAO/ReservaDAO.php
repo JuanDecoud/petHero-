@@ -5,7 +5,7 @@
     use Models\Estadoreserva as Estadoreserva;
     use Models\Pet as Pet ;
     use Models\Keeper as Keeper ;
-    use Models\Reserva as Reserva;
+    use Models\Reserva ;
     use Models\Owner ;
 
     class ReservaDAO implements IReservaDAO
@@ -127,8 +127,7 @@
                 foreach($arrayToDecode as $valuesArray)
                 {
                     $reserva = new Reserva();
-                    $reserva->setFechadesde($valuesArray["fdesde"]);
-                    $reserva->setFechahasta($valuesArray["fhasta"]);
+
                     $reserva->setImporteReserva($valuesArray["importeReserva"]);
                     $reserva->setImporteTotal($valuesArray["importeTotal"]);
                     
@@ -222,11 +221,13 @@
         }
 
         public function buscarReservaxEstadoKeeper ($lista,$nombreUser , $estado ){
+     
            
             $listaReservas = array ();
+         
             foreach($lista as $reserva){
                 
-                $pet = $reserva->getPet();
+                $pet =  $reserva->getPet();
                 $keeper = $reserva->getKeeper();
                 if ($keeper->getNombreUser() == $nombreUser && $pet->getNombre() 
                 && $reserva->getEstado () == $estado){

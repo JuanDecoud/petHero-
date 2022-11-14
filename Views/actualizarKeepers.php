@@ -3,7 +3,7 @@
                             <div class = " d-inline-flex flex-wrap">
                                 <?php foreach ($keeperlist as $keeper){ ?>
                                 <?php foreach ($keeper->getFechas() as $estadias){?>
-                            <form action="<?php echo FRONT_ROOT."Reserva/solicitadudEstadia" ?>" method = "post">
+                            <form action="<?php echo FRONT_ROOT."Reserva/seleccionarDias" ?>" method = "post">
                                 <div class="card m-2" style="width: 18rem;">
                                     <div class="card-body">
                                         <h7 style= "color:aqua">Disponible</h7>
@@ -21,7 +21,7 @@
                                         </div>
                                         <?php 
                                             $select = '<select name="tipo" class = "form-select mt-2 " id="" required>';
-                                            $select.='<option selected >Elija su mascota</option> ';
+                                            $select.='<option value ="">Elija su mascota</option> ';
                                             foreach ($petlist as $pet) {
                                                 $select.='<option required value="'.$pet->getNombre().'">'.$pet->getNombre().'</option>';
                                             }
