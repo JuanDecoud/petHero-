@@ -36,6 +36,7 @@ create table IF NOT EXISTS fechasDisponibles(
     desde date not null,
     hasta date not null,
     idKeeper int not null,
+    estado varchar (50),
     foreign key (idKeeper) references keeper(idKeeper) on update cascade on delete cascade
 );
 create table IF NOT EXISTS pet(
