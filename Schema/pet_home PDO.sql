@@ -301,7 +301,7 @@ DROP procedure IF EXISTS `buscar_pet`
 DELIMITER $$ 
 CREATE PROCEDURE  buscar_pet (in userName varchar (50))
 BEGIN
-	select idPet from pet p 
+	select * from pet p 
     inner join owner o on o.idOwner = p.idOwner 
 	inner join user u on u.idUser = o.idUser 
     Where u.nombreUser = userName and o.idOwner = p.idOwner ;

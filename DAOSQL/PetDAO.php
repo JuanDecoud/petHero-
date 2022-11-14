@@ -59,13 +59,13 @@
                 foreach ($resultado as $fila){
 
                     $pet = new Pet ();
-                    $pet->setNombre($fila[0]);
-                    $pet->setRaza($fila[1]);
-                    $pet->setTamano($fila[2]);
-                    $pet->setImg($fila[3]);
-                    $pet->setPlanVacunacion($fila[4]);
-                    $pet->setObservacionesGrals($fila[5]);
-                    $pet->setVideo($fila[6]);
+                    $pet->setNombre($fila[1]);
+                    $pet->setRaza($fila[2]);
+                    $pet->setTamano($fila[3]);
+                    $pet->setImg($fila[4]);
+                    $pet->setPlanVacunacion($fila[5]);
+                    $pet->setObservacionesGrals($fila[6]);
+                    $pet->setVideo($fila[7]);
                     array_push ($listaMascota , $pet);
                 }
             }

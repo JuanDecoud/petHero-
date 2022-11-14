@@ -380,11 +380,11 @@
                 $resultSet = $this->connection->Execute($query);  
                 
           
-                $queryKeeper = "CALL buscar_datosUser(?)";
+              /*  $queryKeeper = "CALL buscar_datosUser(?)";
                 $user['nombreUsuario'] = $nombreUser;
                 $datosKeeper = $this->connection->Execute($queryKeeper , $user , queryType::StoredProcedure);
                 $keeper = null;
-
+*/
 
                 foreach($resultSet as $fecha){
                     $date = new FechasEstadias($fecha["desde"],$fecha["hasta"]);
