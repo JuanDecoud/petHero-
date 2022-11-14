@@ -94,8 +94,10 @@
                 if ($comprobarUser==null){
                     $comprobarUser=$this->ownerDAO->obtenerUser($userName);
                 }
+
                 if ($comprobarUser == null){
-                    $keeper = new Keeper($userName,$contrasena,$_SESSION['keeper'],$tipoMascota,$remuneracion,$nombre, $apellido,$dni,$telefono);
+                    $keeper = new Keeper($userName,$contrasena,$_SESSION['keeper'],$remuneracion,$nombre, $apellido,$dni,$telefono);
+                    $keeper->setTipoMascota($arrayTipo);
                     $this->keeperDAO->addKeeper($keeper);
                     $this->login();
                 }

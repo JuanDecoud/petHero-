@@ -1,13 +1,14 @@
 <?php
     namespace DAOSQL;
-
+    
     use \Exception as Exception;
     use Models\Keeper as Keeper ;
     use DAO\OwnerDao as OwnerDao;
     use Models\FechasEstadias as FechasEstadias;
     use Models\Reserva;
     USE DAO\IKeeperDAO;
-use Models\Estadoreserva;
+    use Models\Estadoreserva;
+    
 
     class KeeperDAO implements IKeeperDAO
     {
@@ -37,58 +38,69 @@ use Models\Estadoreserva;
             $thirdQuery = "SELECT idUser FROM ". $this->tableUser . " WHERE "." nombreUser = \"". $keeper->getNombreUser()."\"";
 
             */
+            try{
+                  // QUERYS -------------------------------------------------------
+
+                  $queryUser = "Call add_user(?,?,?,?,?,?,?)";
+                  $queryKeeper = "Call add_keeper(?,?)";
+                  $queryidUser = "CALL buscar_user(?)";
+                  $queryidKeeper = "Call buscar_keeper(?)";
+                  $queryTipoMascota = "Call add_tipoMascota(?,?)";
+  
+                  // parametros User ----------------------------------------------------
+  
+                  $parametersUser["nombreUser"] = $keeper->getNombreUser();
+                  $parametersUser["contrasena"] = $keeper->getContrasena();
+                  $parametersUser["tipoDeCuenta"] = $keeper->getTipodecuenta();
+                  $parametersUser["nombre"] = $keeper->getNombre();
+                  $parametersUser["apellido"] = $keeper->getApellido();
+                  $parametersUser["dni"] = $keeper->getDni();
+                  $parametersUser["telefono"] = $keeper->getTelefono();
+                  
+                  $this->connection = Connection::GetInstance();
+                  $this->connection->ExecuteNonQuery($queryUser, $parametersUser , QueryType::StoredProcedure);
+                 
+                 // parametros Keeper---------------------------------------------------   
+                  $parametersKeeper["remuneracion"] = $keeper->getRemuneracion();
+                  
+                
+                  // busco el id del User 
+                  $user["nombreUser"] = $keeper->getNombreUser();
+                  $result = $this->connection->Execute($queryidUser , $user , QueryType::StoredProcedure);
+
+              
+                  foreach ($result as $row){
+                      $parametersKeeper["idUser"] = $row[0];
+                  }
+                  
+                  var_dump($parametersKeeper);
+                  $this->connection->ExecuteNonQuery($queryKeeper, $parametersKeeper , QueryType::StoredProcedure);
+                  
+                  //id keeper para agregar el tipo de mascota que cuida 
+                  $resultadoKeeper = $this->connection->Execute($queryidKeeper ,$user ,QueryType::StoredProcedure);
+                  $idKeeper = null ;
+                  foreach ($resultadoKeeper as $row){
+                      $idKeeper = $row[0];
+                  }
+  
+  
+  
+                  // agrego los tipo de mascotas
+                  $parametroTipomascota['idKeeper'] = $idKeeper;
+                  $arregloTipomascota = $keeper->getTipo();
+                  foreach ($arregloTipomascota as $tipoMascota){
+                      $parametroTipomascota['tipo_mascota'] = $tipoMascota;
+                      $this->connection->ExecuteNonQuery($queryTipoMascota , $parametroTipomascota , QueryType::StoredProcedure);
+                  }    
+  
+
+            }
+            catch (Exception $Ex){
             
+                throw $Ex ;
+            }
            
-                // QUERYS -------------------------------------------------------
-
-                $queryUser = "Call add_user(?,?,?,?,?,?,?)";
-                $queryKeeper = "Call add_keeper(?,?)";
-                $queryidUser = "CALL buscar_user(?)";
-                $queryidKeeper = "Call buscar_keeper(?)";
-                $queryTipoMascota = "Call add_tipoMascota(?,?)";
-
-                // parametros User ----------------------------------------------------
-
-                $parametersUser["nombreUser"] = $keeper->getNombreUser();
-                $parametersUser["contrasena"] = $keeper->getContrasena();
-                $parametersUser["tipoDeCuenta"] = $keeper->getTipodecuenta();
-                $parametersUser["nombre"] = $keeper->getNombre();
-                $parametersUser["apellido"] = $keeper->getApellido();
-                $parametersUser["dni"] = $keeper->getDni();
-                $parametersUser["telefono"] = $keeper->getTelefono();
-               
-                $this->connection = Connection::GetInstance();
-                $this->connection->ExecuteNonQuery($queryUser, $parametersUser , queryType::StoredProcedure);
-
-                // parametros Keeper---------------------------------------------------   
-                $parametersKeeper["remuneracion"] = $keeper->getRemuneracion();
-                // busco el id del User 
-                $user["nombreUser"] = $keeper->getNombreUser();
-                $this->connection = Connection::GetInstance();
-                $result = $this->connection->Execute($queryidUser , $user , queryType::StoredProcedure);
-            
-                foreach ($result as $row){
-                    $parametersKeeper["idUser"] = $row[0];
-                }
-                $this->connection->ExecuteNonQuery($queryKeeper, $parametersKeeper , queryType::StoredProcedure);
-               
-                //id keeper para agregar el tipo de mascota que cuida 
-                $resultadoKeeper = $this->connection->Execute($queryidKeeper ,$user ,queryType::StoredProcedure);
-                $idKeeper = null ;
-                foreach ($resultadoKeeper as $row){
-                    $idKeeper = $row[0];
-                }
-
-
-
-                // agrego los tipo de mascotas
-                $parametroTipomascota['idKeeper'] = $idKeeper;
-                $arregloTipomascota = $keeper->getTipo();
-                foreach ($arregloTipomascota as $tipoMascota){
-                    $parametroTipomascota['tipo_mascota'] = $tipoMascota;
-                    $this->connection->ExecuteNonQuery($queryTipoMascota , $parametroTipomascota , queryType::StoredProcedure);
-                }    
-
+              
       
          
 /*

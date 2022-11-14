@@ -8,7 +8,7 @@ create table IF NOT EXISTS user(
     tipoDeCuenta varchar(50) not null,
     nombre varchar(50) not null,
     apellido varchar(50) not null,
-    dni int not null,
+    dni varchar (50) unique key not null,
     telefono long not null
 );
 create table IF NOT EXISTS owner(
@@ -27,7 +27,6 @@ create table IF NOT EXISTS tarjeta(
 );
 create table IF NOT EXISTS keeper(
 	idKeeper int primary key not null auto_increment,
-    tipoMascota varchar(50) not null,
     remuneracion float not null,
     idUser int not null,
     foreign key (idUser) references user(idUser) on update cascade on delete cascade
@@ -252,11 +251,11 @@ DELIMITER ;
 DROP procedure IF EXISTS `add_keeper`
 
 DELIMITER $$
-create PROCEDURE add_keeper (in tipoMascota varchar (50) , in remuneracion float , in idUser int)
+create PROCEDURE add_keeper (, in remuneracion float , in idUser int)
 
 BEGIN 
-		insert into keeper (tipoMascota , remuneracion , idUser) 
-        values (tipoMascota , remuneracion , idUser);
+		insert into keeper ( remuneracion , idUser) 
+        values ( remuneracion , idUser);
 END$$
 DELIMITER ;
 
@@ -338,4 +337,14 @@ END$$
 
 DELIMITER ;
 
+DROP procedure IF EXISTS `add_tipoMascota`
 
+DELIMITER $$ 
+
+CREATE PROCEDURE add_tipoMascota (in idKeeper int , in tipoMascota varchar (50))
+BEGIN
+	insert into tipomascotaxkeeper (idKeeper , tipo_mascota) values (idKeeper , tipoMascota);
+    
+END$$
+
+DELIMITER ;
