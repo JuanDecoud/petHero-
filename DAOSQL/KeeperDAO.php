@@ -213,9 +213,6 @@
                     $theKeeper->setTipoMascota($tipoMascota);
                     
 
-                    var_dump($theKeeper);
-
-
             }catch(Exception $ex){
                 throw $ex;
             }
@@ -318,7 +315,8 @@
                     if ( ($desde>=$row[0] && $desde<=$row[1] && $hasta> $row[1] )
                         || ($desde <= $row[0] && $hasta >= $row[1])
                         || ($desde <= $row[0] && $hasta <= $row[1] && $hasta >=$row[1])
-                        || ($desde <= $row[0] && $hasta >= $row[0] && $hasta <=$row[1])){
+                        || ($desde <= $row[0] && $hasta >= $row[0] && $hasta <=$row[1])
+                        || ($desde >= $row[0] && $hasta >= $row[0] && $hasta <=$row[1]) && $hasta >=$row[0]){
                             $estadia  = new FechasEstadias($row[0] , $row[1]);
                             $verificar=$estadia ;
                             return $verificar;

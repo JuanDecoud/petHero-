@@ -429,3 +429,18 @@ begin
 	insert into diasxrango (idrango,idReserva,fecha)values(idrango,idReserva,fecha);
 end$$
 DELIMITER ;
+
+
+DELIMITER $$
+
+CREATE PROCEDURE  buscarPetId_Nombre(in nombrePet varchar (50), in ownerName varchar (50))
+
+BEGIN
+	select idPet from pet p 
+    inner join owner o on o.idOwner = p.idOwner
+    inner join user u on u.idUser = o.idUser 
+    where p.nombre = nombrePet and u.nombreUser = ownerName ;
+END$$
+
+
+DELIMITER ; 

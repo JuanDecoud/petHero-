@@ -191,19 +191,19 @@
 
 
                     ///Creamos y llenamos el pet de LA RESERVA
-                    $queryFillPet = "SELECT * FROM ". $this->tablename. 
-                    " r JOIN ". $this->tablePet. " p ON p.idPet = r.idPet";
+                    $queryFillPet = "SELECT * FROM ". "pet";
+                  
 
                     $resultPet = $this->connection->Execute($queryFillPet);
 
                     foreach($resultPet as $pet){
-                        $petReserva->setNombre($pet["nombre"]);
-                        $petReserva->setRaza($pet["raza"]);
-                        $petReserva->setTamano($pet["tamaño"]);
-                        $petReserva->setImg($pet["imagen"]);
-                        $petReserva->setPlanVacunacion($pet["planVacunacion"]);
-                        $petReserva->setObservacionesGrals($pet["observacionesGrals"]);
-                        $petReserva->setVideo($pet["video"]);
+                        $petReserva->setNombre($pet[1]);
+                        $petReserva->setRaza($pet[2]);
+                        $petReserva->setTamano($pet[3]);
+                        $petReserva->setImg($pet[4]);
+                        $petReserva->setPlanVacunacion($pet[5]);
+                        $petReserva->setObservacionesGrals($pet[6]);
+                        $petReserva->setVideo($pet[7]);
                         $petReserva->setOwner($owner); ///Le seteamos el owner que llenamos arriba
                     }
 
@@ -496,7 +496,7 @@
             
             try
             {
-                $query = "CALL buscar_datosPet(?,?)";
+                $query = "CALL buscarPetId_Nombre(?,?)";
                 $parametros ['nombrePet'] = $pet ;
                 $parametros ['nombreUser'] = $owner ;
                 $this->connection = Connection::GetInstance() ;
@@ -530,7 +530,7 @@
                         
             try
             {
-                $query = "CALL buscar_datosPet(?,?)";
+                $query = "CALL buscarPetId_Nombre(?,?)";
                 $keeper = "CALL buscar_Keeper(?)";
                 $buscarReserva = "Call buscar_reservaiD(?,?)";
                 $eliminardiasReserva = "Call eliminar_diasReserva(?)";
