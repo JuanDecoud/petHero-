@@ -59,7 +59,6 @@ create table IF NOT EXISTS reserva(
     importeTotal float not null,
     estado varchar(50) not null,
 	foreign key (idKeeper) references keeper(idKeeper) on update cascade on delete cascade,
-    foreign key (idFechasDis) references fechasDisponibles(idFechasDisp) on update cascade on delete cascade,
     foreign key (idPet) references pet(idPet) on update cascade on delete cascade
 );
 create table IF NOT EXISTS reviews(
@@ -70,7 +69,7 @@ create table IF NOT EXISTS reviews(
 );
 
 create table IF NOT EXISTS tipoMascotaxKeeper (
-	id int not null auto_increment ,
+	id int not null auto_increment primary key ,
     idKeeper int not null ,
     tipo_mascota varchar (50) not null unique key ,
     constraint fk_tipomascota foreign key (idKeeper) references keeper (idKeeper)    
@@ -156,7 +155,7 @@ delimiter $$
 
 create procedure eliminar_diasReserva (in idReserva int )
  BEGIN 
-	DELETE  from diasxrango dr
+	DELETE dr from diasxrango dr
    where dr.idReserva = idReserva;
  END$$
 
@@ -327,12 +326,16 @@ END$$
 
 DELIMITER ;
 
+DROP procedure IF EXISTS `buscar_tipoMascota`
 
+DELIMITER $$ 
 
+CREATE PROCEDURE buscar_tipoMascota (in idKeeper varchar (50))
+BEGIN
+	select tipo_mascota from tipomascotaxkeeper tm
+    where tm.idKeeper = idKeeper;
+END$$
 
+DELIMITER ;
 
-
-
-
- 
 
