@@ -473,20 +473,7 @@
                     array_push ($array_fechas , $fecha);
                     $fecha=date("Y-m-d",strtotime($fecha."+ 1 days")); 
                 }
-                 $diasDisponibles = array_diff($array_fechas , $arregloDias);
-               
-          /*      if ( count($array_fechas) == count($arregloDias) ){
-                 
-                    $estadoRango = "Call cambiar_estadoRango(?,?,?,?)";
-                    $parametrosEstado['desde']=$desde;
-                    $parametrosEstado['hasta']=$hasta;
-                    $parametrosEstado['nombreUser']=$nombreKeeper;
-                    $parametrosEstado['estado']=Estadoreserva::Inactivo;
-    
-                    $this->connection->ExecuteNonQuery($estadoRango ,$parametrosEstado , QueryType::StoredProcedure);
-    
-                }
-            */     
+                 $diasDisponibles = array_diff($array_fechas , $arregloDias); 
                 
                 return $diasDisponibles;
                 
@@ -501,9 +488,77 @@
             
         }
 
-        private function comprobarRango (){
-            
-        }
+        public function comprobarRango ($nombreKeeper ){
+            try
+            {
+                /// querys
+
+                $keeperId = "Call buscar_keeper (?)";
+                $rango = "Call buscar_rango(?,?)";
+                $querydiasreservados = "Call buscarDias (?,?,?)" ;
+                $estado = "Call cambiar_estadoRango(?,?,?,?)";
+                
+   
+                $this->connection = Connection::GetInstance();
+
+                $parametros['nombreUser'] = $nombreKeeper ;
+                $idKeeper['idKeeper'] = null;
+
+                // busco el id del Keeper 
+                $resultadoKeeper = $this->connection->Execute ($keeperId,$parametros , QueryType::StoredProcedure);
+                foreach ($resultadoKeeper as $row){
+                    $idKeeper['idKeeper'] = $row[0];
+                }
+                
+                 // busco los rangos del keeper segun su id 
+
+                $rangoParametros['idKeeper'] = $idKeeper['idKeeper'];
+                $rangoParametros['estado'] = Estadoreserva::Activo;
+                $arregloDias = array ();
+                $arregloRango = array ();
+
+                $resultadoRango = $this->connection->Execute ($rango , $rangoParametros , QueryType::StoredProcedure);
+                foreach ($resultadoRango as $row){
+                    /// parametros para buscar los dias 
+                    $parametrosDias['desde'] = $row[0];
+                    $parametrosDias['hasta']=$row[1];
+                    $parametrosDias['nombreUser'] = $nombreKeeper;
+
+                    // armo el arreglo con todos los dias que corresponden al rango 
+                    $fecha = $row[0];
+                    while ($fecha <= $row[1]){
+                        $fecha=date("Y-m-d",strtotime($fecha."+ 1 days"));
+                        array_push ($arregloRango , $fecha);
+                    }
+                    // armo el arreglo correspondiente a los dias que estan reservados 
+                    $dias = $this->connection->Execute($querydiasreservados , $parametrosDias , queryType::StoredProcedure);
+                    foreach ($dias as $fila){
+                        array_push($arregloDias , $fila[0]);
+                        
+                    }
+                    // si la suma de los valores dentro del arreglo es igual quiere decir que el rango tiene todas las fechas reservadas
+                    // por lo que se cambia el estado del rango a inactivo.
+                 if ( count($arregloRango) == count($arregloDias) ){
+                 
+                    $parametrosEstado['desde']=$row[0];
+                    $parametrosEstado['hasta']=$row[1];
+                    $parametrosEstado['nombreUser']=$nombreKeeper;
+                    $parametrosEstado['estado']=Estadoreserva::Inactivo;
+                    $this->connection->ExecuteNonQuery($estado ,$parametrosEstado , QueryType::StoredProcedure);
+    
+                }
+
+
+                }
+
+            }
+            catch (Exception $ex)
+            {
+                throw $ex ;
+            }
+
+
+        }   
 
         private function guardarDias ($dias , $idKeeper , $idmascota ){
             $result = null ;

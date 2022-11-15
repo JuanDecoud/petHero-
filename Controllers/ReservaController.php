@@ -119,11 +119,13 @@ use Exception;
             require_once(VIEWS_PATH."actualizarKeepers.php");
         }
 
-        public function aceptarReserva ($owner , $pet){
+        public function aceptarReserva ($owner , $pet ,$arregloDias){
 
             $user = $_SESSION['loggedUser'];
             
             $this->reservaDao->cambiarEstado($owner , $pet , $user->getNombreUser() , Estadoreserva::Aceptada);
+            $this->reservaDao->comprobarRango($user->getNombreUser());
+
             $this->vistaKeeper();
         }
 
@@ -134,10 +136,7 @@ use Exception;
 
         public function  simulacionPago ( $pet,$keeper){
 
-            echo $pet ;
-            echo $keeper ;
             $user = $_SESSION['loggedUser'];
-            var_dump($user);
             $this->reservaDao->cambiarEstado($user->getNombreUser() , $pet , $keeper , Estadoreserva::Confirmada);
 
             // buscar y crea la reserva para guardarla en un session

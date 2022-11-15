@@ -449,3 +449,23 @@ END$$
 
 DELIMITER ;
 
+DELIMITER $$
+
+create procedure buscarEstados (in idKeeper int) 
+begin
+	select  idFechasDisp from fechasdisponibles fd 
+    where fd.idKeeper =idKeeper ;
+
+end$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+create procedure buscar_rango (in idKeeper int , in estado varchar (50))
+begin
+	select desde , hasta from fechasdisponibles fd 
+    where fd.idKeeper = idKeeper and fd.estado = estado ;
+end$$
+
+delimiter ;
