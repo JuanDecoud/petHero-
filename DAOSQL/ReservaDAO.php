@@ -501,7 +501,9 @@
             
         }
 
-        private function comprobarRango ()
+        private function comprobarRango (){
+            
+        }
 
         private function guardarDias ($dias , $idKeeper , $idmascota ){
             $result = null ;
