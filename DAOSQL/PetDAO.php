@@ -76,6 +76,7 @@
               echo "ocurrio un error";
 
             }
+           
             return $listaMascota ;
         }
 
@@ -114,7 +115,34 @@
             }
         }
 
+        public function comprobarPet ($nombrePet , $idOwner){
+                $pet = null ;
+            try
+            {
+                $query = "CALL buscarPetId(?,?)";
+
+                $parametro['nombrePet'] = $nombrePet ;
+                $parametro['idOwner'] = $idOwner ;
+
+                $this->connection = Connection::GetInstance();
+                $resultado = $this->connection->Execute($query ,$parametro ,QueryType::StoredProcedure);
+                
+                foreach ($resultado as $fila){
+                    $pet = $fila[0];
+                }
+                return $pet ;
+            }
+            catch (Exception $Ex)
+            {
+                throw $Ex ;
+
+            }
+        }
+
     }
+
+
+    
 
 
 

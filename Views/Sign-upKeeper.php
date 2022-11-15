@@ -27,7 +27,7 @@
                 </div>
                  <div class="form-group mx-4  ">
                     <label for="exampleInputEmail1" class = " ">Nombre Usuario</label>
-                    <input type="text" class="form-control  " id="exampleInputEmail1" 
+                    <input type="email" class="form-control  " id="exampleInputEmail1" 
                         aria-describedby="emailHelp" placeholder="Usuario" name = "userName" required>
                 </div>
                 <div class="form-group  mx-4 ">

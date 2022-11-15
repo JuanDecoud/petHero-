@@ -71,25 +71,20 @@ use Exception;
 
         }
 
-        public function solicitadudEstadia ($nombreKeeper , $nombreMascota ,$arreglo ){
+        public function solicitadudEstadia ($nombreKeeper , $nombreMascota ,$arregloDias ){
 
             try
             {
                 $user = $_SESSION['loggedUser'];
-
                 $keeper = $this->keeperdao->obtenerUser($nombreKeeper);
-               
                 $pet= $this->petdao->buscarPet($nombreMascota , $user);
-                
                 $importeTotal = $keeper->getRemuneracion();
-                $importeTotal = floatval($importeTotal*(count($arreglo)));
+                $importeTotal = floatval($importeTotal*(count($arregloDias)));
                 $importeReserva = ($importeTotal/2) ;
-               
-
                 $reserva = new Reserva ();
                 $reserva->setImporteTotal($importeTotal);
                 $reserva->setImporteReserva($importeReserva);
-                $reserva->setDias($arreglo);
+                $reserva->setDias($arregloDias);
                 $reserva->setPet($pet);
                 $reserva->setKeeper($keeper);
                 $this->reservaDao->Add ($reserva);
@@ -117,7 +112,7 @@ use Exception;
         public function listaKeepers (){
 
             $keeperlist = $this->keeperdao->getAll();
-            $listaEstadias = $this->keeperdao->listaEstadias($keeperlist);
+           // $listaEstadias = $this->keeperdao->listaEstadias($keeperlist);
             $this->vistaOwner();
             $user = $_SESSION['loggedUser'];
             $petlist = $this->petdao->buscarPets($user->getNombreUser());
@@ -126,13 +121,9 @@ use Exception;
 
         public function aceptarReserva ($owner , $pet){
 
-            echo $owner ;
-            echo $pet ;
             $user = $_SESSION['loggedUser'];
-            $this->reservaDao->cambiarEstado($owner , $pet , $user->getNombreUser() , Estadoreserva::Aceptada);
-            //$estadia = new FechasEstadias($desde , $hasta);
             
-            //$this->keeperdao->quitarFecha($user->getNombreUser(), $estadia);
+            $this->reservaDao->cambiarEstado($owner , $pet , $user->getNombreUser() , Estadoreserva::Aceptada);
             $this->vistaKeeper();
         }
 
@@ -141,22 +132,21 @@ use Exception;
         }
 
 
-        public function  simulacionPago ($desde , $hasta ,$keeper, $importe){
+        public function  simulacionPago ( $pet,$keeper){
 
- 
+            echo $pet ;
+            echo $keeper ;
             $user = $_SESSION['loggedUser'];
-            // Confirma la reserva
-            //$this->reservaDao->cambiarEstado($desde , $hasta , $keeper , Estadoreserva::Confirmada);
+            var_dump($user);
+            $this->reservaDao->cambiarEstado($user->getNombreUser() , $pet , $keeper , Estadoreserva::Confirmada);
 
             // buscar y crea la reserva para guardarla en un session
-
-            $lista=$this->reservaDao->getLista();
-            //$reservaLista = $this->reservaDao->buscarReservaEnCurso($lista,$keeper,Estadoreserva::Confirmada,$desde,$hasta);
+            $lista=$this->reservaDao->getALL();
+            $reservaLista = $this->reservaDao->buscarReservaEnCurso($lista,$user->getNombreUser(),Estadoreserva::Confirmada);
             $reservaNueva = null ;
-           /* foreach($reservaLista as $reserva){
+            foreach($reservaLista as $reserva){
                 $reservaNueva = new Reserva ();
-                $reservaNueva->setFechadesde($reserva->getFechadesde());
-                $reservaNueva->setFechahasta($reserva->getFechahasta());
+                $reservaNueva=$reserva->geDias();
                 $reservaNueva->setPet($reserva->getPet());
                 $reservaNueva->setKeeper($reserva->getKeeper());
                 $reservaNueva->setImporteTotal($reserva->getImporteTotal());
@@ -165,19 +155,21 @@ use Exception;
 
             }
             $_SESSION['reserva'] = $reservaNueva;
-            $comprobartarjeta = $this->ownerdao->buscarTarjeta($user->getNombreUser());
+            $this->vistaOwner();
+
+            //$comprobartarjeta = $this->ownerdao->buscarTarjeta($user->getNombreUser());
         
             
             
             /// si el usuario no tiene tarjeta se ingresa una sino directamente se pasa al pago 
 
-            if ($comprobartarjeta == null){
+          /*  if ($comprobartarjeta == null){
                 $this->agregarTarjeta();
             }
             else {
                 $this->vistaPago();
             }
-            */
+           */ 
         }
 
         public function agregarTarjeta (){

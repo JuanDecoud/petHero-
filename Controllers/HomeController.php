@@ -34,6 +34,11 @@
             $this->reservadao = new ReservaDAO ();
         }
 
+        public function cerrarSession (){
+            require_once(VIEWS_PATH."Logout.php");
+
+        }
+
         public function Index($message = "")
         {   
             require_once(VIEWS_PATH."Home.php");
@@ -47,9 +52,13 @@
             $userName = $keeper->getNombreUser();
             $fechas = $this->keeperDao->buscarEstadias($userName);
             $lista = $this->reservadao->getAll();
+          
             $listaReservas = $this->reservadao->buscarReservaxEstadoKeeper($lista , $keeper->getNombreUser (),Estadoreserva::Pendiente);
+            
             $listaAceptadas = $this->reservadao->buscarReservaxEstadoKeeper( $lista ,$keeper->getNombreUser (), Estadoreserva::Aceptada);
             $listaConfirmadas = $this->reservadao->buscarReservaxEstadoKeeper($lista , $keeper->getNombreUser() ,Estadoreserva::Confirmada );
+            
+
             require_once(VIEWS_PATH."mainKeeper.php");
         }
 
@@ -85,7 +94,8 @@
         }
         
         public function vistaLogin (){
-       
+
+            
             require_once(VIEWS_PATH."Login.php");
             
         }
@@ -96,7 +106,7 @@
 
 
              if ($userkeeper !=null){
-
+                
                 $_SESSION['loggedUser'] = $userkeeper ;
                 $this->principalKeeper();  
              }

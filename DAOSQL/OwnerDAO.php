@@ -224,6 +224,26 @@
 
         }
 
+        public function buscarId ($nombreOwner){
+            $idOwner = null ;
+            try {
+
+                $query = "Call buscar_owner(?)";
+                $parametro ['nombreUser'] = $nombreOwner ;
+                
+                $this->connection = Connection::GetInstance();
+                $result=$this->connection->Execute ($query , $parametro , QueryType::StoredProcedure);
+                foreach ($result as $row){
+                    $idOwner= $row[0];
+                }
+                return $idOwner;
+                
+            } catch (Exception $ex) {
+                throw $ex;
+            }
+
+        }
+
 
        
     }

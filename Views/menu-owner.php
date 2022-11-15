@@ -70,12 +70,12 @@
                                             </div>
                                             <img src="<?php echo $pet->getImg(); ?>" class="card-img-top" alt="...">
                                             <div class="card-body">
-                                                <h5 class="card-title"><?php echo $pet->getNombre(); ?></h5>
+                                                <h5 class="card-title"><input style=" text-align: center; font-weight:bold; color:black; border :0;" class="border-bottom" type="text" placeholder="<?php echo $pet->getNombre();?>" name="pet" value="<?php echo $pet->getNombre();?>" readonly></h5>
                                             </div>
                                             <ul class="list-group list-group-flush">
                                             
                                                 <?php foreach ($reserva->getDias() as $dias ) { ?>
-                                                <li class="list-group-item"><input style=" text-align: center; font-weight:bold; color:black; border :0;" class="border-bottom" type="text" placeholder="<?php echo $dias?>" name="desde" value="" readonly></td></li>
+                                                <li class="list-group-item"><?php echo $dias?></td></li>
                                                 <?php }?>
 
                                                 <li class="list-group-item"><strong>Keeper:</strong><input style=" text-align: center; color:black; border:0;"  type="text" placeholder="<?php echo $keeper->getNombreUser(); ?>" name="keeper" value="<?php echo $keeper->getNombreUser(); ?>" readonly></li>
@@ -116,8 +116,9 @@
                                         <ul class="list-group list-group-flush">
                                             <li class="list-group-item">Nombre:<input style=" text-align: center; color:black; border:0;"  type="text" placeholder="<?php echo $pet->getNombre(); ?>" name="pet" value="<?php echo $pet->getNombre(); ?>" readonly></li> 
                                             <li class="list-group-item">Cuidador:<input style=" text-align: center; color:black; border:0;"  type="text" placeholder="<?php echo $keeper->getNombreUser(); ?>" name="keeper" value="<?php echo $keeper->getNombreUser(); ?>" readonly></li>
-                                            <li class="list-group-item"><strong>Desde:</strong><?php  echo $reserva->getFechadesde(); ?><li>
-                                            <li class="list-group-item"><strong>Hasta:</strong><?php echo $reserva->getFechahasta();?></li>
+                                            <?php foreach ($reserva->getDias() as $dias ) { ?>
+                                                <li class="list-group-item"><?php echo $dias?></td></li>
+                                                <?php }?>
                                         </ul>
                                         <div class="card-body">
                                             <button type = "submit" class = "btn-sm btn-danger">Completar</button>

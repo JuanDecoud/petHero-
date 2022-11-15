@@ -23,9 +23,7 @@
         private $tablePet = "pet";
         private $tableCard = "tarjeta";
 
-        public function getLista (){
-            return $this->getAll();
-        }
+     
         /*
         public function Add(Reserva $reserva){
             // almaceno los datos del pet y owner para buscar el id en la bd
@@ -183,10 +181,10 @@
                 $parametros ['importeTotal'] = $reserva->getImporteTotal();
                 $parametros['estado'] = Estadoreserva::Pendiente;
 
-                var_dump($parametros);
     
                 $this->connection->ExecuteNonQuery($query,$parametros,queryType::StoredProcedure);
 
+                
                 
                 //guardo los dias seleccionados correspondientes al rango que figura en sistema
                 $diasSeleccionados = $reserva->getDias();
@@ -202,7 +200,12 @@
         public function getALL()
         {
             //Crear un arraylist, pushear como en "obtenerUser" y devolver el array.
-            $reservaList = array();
+            $listaReserva = array();
+
+            $idKeeper = null ;
+            $idPet = null ;
+            $idOwner = null ;
+
             
             try
             {
@@ -215,68 +218,51 @@
                 $resultReserva = $this->connection->Execute($queryFillKeeper);
 
                 foreach($resultReserva as $value){
+                    $reserva = new Reserva ();
+                    $pet = new Pet ();
+                    $owner = new Owner ();
 
                     $idKeeper = $value['idKeeper'];
                     $idPet = $value ['idPet'];
-                    $idReserva = $value['idReserva'];
-
+                    
                     $reserva = new Reserva(); ///Reserva tiene Owner(Dentro de pet), Keeper, y Pet
                     $reserva->setImporteReserva($value["importeReserva"]);
                     $reserva->setImporteTotal($value["importeTotal"]);
                     $reserva->setEstado($value["estado"]);
 
-                    $owner = new Owner();
-                    $petReserva = new Pet();
                     
                     ///Primero Creamos y llenamos el Keeper
                     $keeper = new Keeper($value['nombreUser'],$value ['contrasena'],$value ['tipoDeCuenta']
                    ,$value ['remuneracion'],$value ['nombre'], $value ['apellido'],$value ['dni'],
                     $value ['telefono']);                   
                     
-                    $reserva->setKeeper($keeper);
+                    
 
-                    ///LLenamos el Owner de Nuestro Pet
-                    $queryFillOwner = "SELECT u.nombreUser FROM ". $this->tablename. 
-                    " r JOIN ". $this->tablePet. " p ON p.idPet = r.idPet".
-                    " JOIN ". $this->tableOwner. " o ON p.idOwner = o.idOwner".
-                    " JOIN ". $this->tableUser . " u ON u.idUser = o.idUser";
+                    $queryPet = "SELECT *FROM Pet Where ".$idPet."=pet.idPet";
+                    $resultadoPet=$this->connection->Execute($queryPet);
+                    foreach ($resultadoPet as $row){
+                        $pet->setNombre($row[1]);
+                        $pet->setRaza($row[2]);
+                        $pet->setTamano($row[3]);
+                        $pet->setImg($row[4]);
+                        $pet->setPlanVacunacion($row[5]);
+                        $pet->setObservacionesGrals($row[6]);
+                        $pet->setVideo($row[7]);
+                        $idOwner = $row[8];
 
-                    $resultOwner = $this->connection->Execute($queryFillOwner);
+                    }
+                    
+                    $queryOwner = "SELECT nombreUser  FROM user u  inner join  owner o on o.idUser = u.idUser
+                                    where ".$idOwner."= o.idOwner";
+                    
 
-                    if($resultOwner){
-                        foreach($resultOwner as $value){
-                            $owner -> setNombreUser($value["nombreUser"]);
-                        }
-                    }             
-
-                    ///Conseguimos y le llenamos los pets al owner
-
-                    $queryPetOwner = "SELECT * FROM ". $this->tablePet . " WHERE "." idOwner = 
-                    (SELECT o.idOwner FROM Owner o 
-                    JOIN user u ON u.idUser = o.idUser 
-                    WHERE u.nombreUser = \"".$owner->getNombreUser()."\")";
-
-
-
-                    ///Creamos y llenamos el pet de LA RESERVA
-                    $queryFillPet = "SELECT * FROM ". "pet";
-                  
-
-                    $resultPet = $this->connection->Execute($queryFillPet);
-
-                    foreach($resultPet as $pet){
-                        $petReserva->setNombre($pet[1]);
-                        $petReserva->setRaza($pet[2]);
-                        $petReserva->setTamano($pet[3]);
-                        $petReserva->setImg($pet[4]);
-                        $petReserva->setPlanVacunacion($pet[5]);
-                        $petReserva->setObservacionesGrals($pet[6]);
-                        $petReserva->setVideo($pet[7]);
-                        $petReserva->setOwner($owner); ///Le seteamos el owner que llenamos arriba
+                    $resultadoOwner=$this->connection->Execute($queryOwner);
+                    foreach ($resultadoOwner as $row){
+                        $owner->setNombreUser($row[0]);
                     }
 
-         
-                    $parametro['idReserva'] = $idReserva;
+                    
+                    $parametro['idReserva'] = $value['idReserva'];
     
                     $buscarFechas = "Call buscar_diasReserva(?)";
                     $diasEncontrados = $this->connection->Execute($buscarFechas ,$parametro ,QueryType::StoredProcedure);
@@ -284,14 +270,21 @@
                     foreach ($diasEncontrados as $row){
                         array_push($dias, $row[0]);
                     } 
-                    $reserva->setDias($dias);
+
                     
-                    $reserva->setPet($petReserva);
+                    $reserva->setDias($dias);
+                    $pet->setOwner ($owner);
+                    $reserva->setPet($pet);
+                    $reserva->setKeeper($keeper);
 
-
-                    array_push($reservaList,$reserva);
+                    
+                    array_push($listaReserva,$reserva);
+                   
+                    
                 }
 
+                return $listaReserva;
+                
 
             }
             catch (Exception $ex)
@@ -299,7 +292,9 @@
                 throw $ex;
             }
             
-            return $reservaList;
+            
+            
+            
 
         }
 
@@ -361,6 +356,8 @@
             if($result){
                 foreach($result as $fecha){
                     $fechaResultado = new FechasEstadias($fecha["desde"],$fecha["hasta"]);
+                    $fechaResultado->setEstado($fecha["estado"] );
+                    $fechaResultado->setKeeper($keeper);
                     $keeper->agregarFecha($fechaResultado);
                 }
             }
@@ -462,26 +459,49 @@
                 $this->connection = Connection::GetInstance();
 
                 $dias = $this->connection->Execute($querydiasreservados , $parametrosDias , queryType::StoredProcedure);
+
+                // busco los dias seleccionados por el owner que corresponden al rango seleccionado 
                 foreach ($dias as $fila){
                     array_push($arregloDias , $fila[0]);
                     
                 }
+
+                $fecha= $desde; 
+                $array_fechas = array ();
+                // armo un arreglo con los dias correspondientes al rango y elimino los seleccionados
+                while ($fecha <= $hasta){
+                    array_push ($array_fechas , $fecha);
+                    $fecha=date("Y-m-d",strtotime($fecha."+ 1 days")); 
+                }
+                 $diasDisponibles = array_diff($array_fechas , $arregloDias);
+               
+          /*      if ( count($array_fechas) == count($arregloDias) ){
+                 
+                    $estadoRango = "Call cambiar_estadoRango(?,?,?,?)";
+                    $parametrosEstado['desde']=$desde;
+                    $parametrosEstado['hasta']=$hasta;
+                    $parametrosEstado['nombreUser']=$nombreKeeper;
+                    $parametrosEstado['estado']=Estadoreserva::Inactivo;
+    
+                    $this->connection->ExecuteNonQuery($estadoRango ,$parametrosEstado , QueryType::StoredProcedure);
+    
+                }
+            */     
+                
+                return $diasDisponibles;
+                
             }
             catch (Exception $ex)
             {
                 throw $ex ;
             }
 
-            $fecha= $desde; 
-            $array_fechas = array ();
-            while ($fecha <= $hasta){
-                array_push ($array_fechas , $fecha);
-                $fecha=date("Y-m-d",strtotime($fecha."+ 1 days")); 
-            }
-             $diasDisponibles = array_diff($array_fechas , $arregloDias);
+
            
-            return $diasDisponibles;
+            
         }
+
+        private function comprobarRango ()
 
         private function guardarDias ($dias , $idKeeper , $idmascota ){
             $result = null ;
@@ -497,7 +517,7 @@
                 // parametros para buscar el rango 
                 $dia['fecha'] = $dias[0];
                 $dia['idKeeper'] = $idKeeper ;
-                var_dump($dia);
+               
 
                 // obtengo el id del rango y lo guardo
                 $this->connection = Connection::GetInstance();
@@ -552,7 +572,7 @@
                 
                 $pet =  $reserva->getPet();
                 $keeper = $reserva->getKeeper();
-                if ($keeper->getNombreUser() == $nombreUser && $pet->getNombre() 
+                if ($keeper->getNombreUser() == $nombreUser  
                 && $reserva->getEstado () == $estado){
                     array_push($listaReservas , $reserva);
                 }
@@ -567,6 +587,7 @@
                 $query = "CALL buscarPetId_Nombre(?,?)";
                 $parametros ['nombrePet'] = $pet ;
                 $parametros ['nombreUser'] = $owner ;
+                
                 $this->connection = Connection::GetInstance() ;
 
                 $result  = $this->connection->Execute($query,$parametros ,QueryType::StoredProcedure);
@@ -575,12 +596,15 @@
                     
                     $idPet = $row['idPet'];
                 }
+                echo $idPet;
 
                 $cambiarEstado = "Call cambiarEstado(?,?,?)";
 
                 $parametrosEstado ['idPet'] = $idPet;
                 $parametrosEstado['nombreUser'] = $nombreUsuario;
                 $parametrosEstado['estado'] = $estado;
+
+                
 
                 $this->connection->ExecuteNonQuery($cambiarEstado , $parametrosEstado , QueryType::StoredProcedure);
 
@@ -632,6 +656,8 @@
                     $idReserva['idReserva']  = $row['idReserva'];
                 }
 
+                
+
                 $this->connection->ExecuteNonQuery($eliminardiasReserva , $idReserva ,QueryType::StoredProcedure);
                 $this->connection->ExecuteNonQuery($eliminarReserva ,$idReserva , QueryType::StoredProcedure );
 
@@ -642,6 +668,21 @@
                 throw $ex ;
             }
 
+        }
+
+        public function buscarReservaEnCurso ($lista,$nombreUser , $estado ){
+           
+            $listaReservas = array ();
+            foreach($lista as $reserva){
+                $pet = $reserva->getPet();
+                $owner = $pet->getOwner();
+                $keeper = $reserva->getKeeper();
+                if ($owner->getNombreUser() == $nombreUser and $reserva->getEstado() == $estado ){
+                    array_push ($listaReservas , $reserva);
+                }
+       
+            }
+            return $listaReservas;
         }
 
 

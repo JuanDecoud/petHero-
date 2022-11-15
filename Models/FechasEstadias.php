@@ -7,11 +7,11 @@
         private $estado ;
         private Keeper $keeper ;
 
-        public function __construct($desde , $hasta)
+        public function __construct($desde , $hasta )
         {
             $this->desde = $desde ;
             $this ->hasta = $hasta;
-            $this->estado = Estadoreserva::Activo ;
+   
         }
 
         public function getEstado (){return $this->estado;}

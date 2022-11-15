@@ -155,8 +155,8 @@ delimiter $$
 
 create procedure eliminar_diasReserva (in idReserva int )
  BEGIN 
-	DELETE dr from diasxrango dr
-   where dr.idReserva = idReserva;
+	DELETE from diasxrango 
+    where diasxrango.idReserva = idReserva;
  END$$
 
 delimiter ;
@@ -168,7 +168,7 @@ create procedure eliminar_Reserva (in idReserva int)
 
 begin 
 	delete from reserva
-    where idReserva = idReserva;
+    where idReserva = id;
 end$$
 
 delimiter ;
@@ -218,7 +218,7 @@ CREATE PROCEDURE buscar_owner (in nombreUser varchar (50))
 BEGIN 
 	select idOwner from owner o 
     inner join user u on o.idUser = u.idUser 
-    where o.idUser = u.idUser ;
+    where o.idUser = u.idUser and u.nombreUser = nombreUser ;
 END$$
 
 DELIMITER ;
@@ -419,6 +419,7 @@ begin
 end$$
 DELIMITER ;
 
+DROP procedure IF EXISTS `buscarPetId_Nombre`
 
 DELIMITER $$
 
@@ -433,3 +434,18 @@ END$$
 
 
 DELIMITER ; 
+
+DROP procedure IF EXISTS `cambiar_estadoRango`
+
+DELIMITER $$
+create procedure cambiar_estadoRango(in desde date , in hasta date , in nombreKeeper varchar (50) , in estado varchar (50))
+BEGIN
+	UPDATE fechasdisponibles fd 
+    inner join keeper k on k.idKeeper = fd.idKeeper 
+    inner join user u on k.idUser = u.idUser 
+    set estado = estado 
+    where fd.desde = desde and fd.hasta = hasta and u.nombreUser = nombreKeeper ;
+END$$
+
+DELIMITER ;
+

@@ -163,8 +163,11 @@
                     if($result){
               
                     foreach($result as $fecha){
-                        $fechaResultado = new FechasEstadias($fecha["desde"],$fecha["hasta"]);
-                        $keeper->agregarFecha($fechaResultado);
+                        $fechaResultado = new FechasEstadias($fecha["desde"],$fecha["hasta"] );
+                        $fechaResultado->setEstado($fecha["estado"] );
+                        $fechaResultado->setKeeper($keeper);
+                        if ($fecha['estado'] == Estadoreserva::Activo)
+                            $keeper->agregarFecha($fechaResultado);
                     }
                 
                  
@@ -287,9 +290,6 @@
                     $parametros['idKeeper'] = $row[0];
                 }
                 $parametros['estado'] = Estadoreserva::Activo;
-
-                var_dump($parametros);
-
                 $this->connection->ExecuteNonQuery($queryRango , $parametros , QueryType::StoredProcedure);
 
                 
@@ -387,7 +387,8 @@
                 foreach($resultSet as $fecha){
                     $date = new FechasEstadias($fecha["desde"],$fecha["hasta"]);
                     $date->setEstado($fecha['estado']);
-                    array_push($estadiasLista,$date);
+                    if($date->getEstado()==Estadoreserva::Activo)
+                        array_push($estadiasLista,$date);
                 }
 
             }
@@ -407,7 +408,8 @@
             $listaEstadias = array ();
             foreach ($listadeKeepers as $keeper){
                 foreach ($keeper->getFechas() as $estadias){
-                    array_push($listaEstadias , $estadias);
+                    if ($estadias->getEstado() == Estadoreserva::Activo)
+                        array_push($listaEstadias , $estadias);
                 }
             }
             return $listaEstadias;
@@ -421,7 +423,8 @@
             $newkeeper = null ;
             foreach ($this->keeperList as $keeper){
                 foreach ($keeper->getFechas() as $estadias){
-                    if ($estadias->getDesde () >= $desde && $estadias->getHasta () <= $hasta){
+                    if ($estadias->getDesde () >= $desde && $estadias->getHasta () <= $hasta 
+                    && $estadias->getEstado()==Estadoreserva::Activo){
                         $newkeeper = $keeper ;
                         array_push ($listaEstadias , $estadias); 
                     }   
