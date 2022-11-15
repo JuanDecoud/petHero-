@@ -71,7 +71,7 @@ create table IF NOT EXISTS reviews(
 create table IF NOT EXISTS tipoMascotaxKeeper (
 	id int not null auto_increment primary key ,
     idKeeper int not null ,
-    tipo_mascota varchar (50) not null unique key ,
+    tipo_mascota varchar (50) not null ,
     constraint fk_tipomascota foreign key (idKeeper) references keeper (idKeeper)    
 );
 
@@ -164,7 +164,7 @@ delimiter ;
 DROP procedure IF EXISTS `eliminar_Reserva`
 
 delimiter $$ 
-create procedure eliminar_Reserva (in idReserva int)
+create procedure eliminar_Reserva (in id int)
 
 begin 
 	delete from reserva

@@ -16,7 +16,7 @@ use Exception;
     */
     //MODELS
     use Models\Estadoreserva;
-    use Models\Reserva ;
+    use Models\Reserva as Reserva;
     use Models\FechasEstadias ;
     use Models\Pet ;
 
@@ -146,7 +146,7 @@ use Exception;
             $reservaNueva = null ;
             foreach($reservaLista as $reserva){
                 $reservaNueva = new Reserva ();
-                $reservaNueva=$reserva->geDias();
+                $reservaNueva->setDias($reserva->getDias());
                 $reservaNueva->setPet($reserva->getPet());
                 $reservaNueva->setKeeper($reserva->getKeeper());
                 $reservaNueva->setImporteTotal($reserva->getImporteTotal());

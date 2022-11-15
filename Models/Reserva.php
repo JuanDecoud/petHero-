@@ -17,7 +17,7 @@
 
         
         public function setDias ($listReservados){$this->diasReservados = $listReservados;}
-        public function getDias (){return $this->diasReservados;}
+        public function getDias(){return $this->diasReservados;}
 
         public function setFechahasta ($fhasta){$this->fhasta = $fhasta ;}
         public function getFechahasta (){ return $this->fhasta  ;}

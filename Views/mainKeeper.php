@@ -198,19 +198,11 @@
                                 <div class="card-body">
                                     <h5 class="border-bottom">Estadia en curso.</h5>
                                     <form action="<?php echo FRONT_ROOT . "Keeper/rechazarReserva" ?>">
-                                        <div class="col-auto mt-2">
-                                            <label for="" class="mx-2  ">
-                                                <h7>Desde:<?php  ?></h7>
-                                            </label>
-                                            <input style=" text-align: center; font-weight:bold; color:black; border :0;" class="border-bottom" type="text" placeholder="<?php echo $reserva->getFechadesde(); ?>" name="desde" value="<?php echo $reserva->getFechadesde(); ?>" readonly></td>
-                                        </div>
-
-                                        <div class="col-auto">
-                                            <label for="" class="mx-2 ">
-                                                <h7>Hasta:</h7>
-                                            </label>
-                                            <input style=" text-align: center; font-weight:bold; color:black; border:0;" class="border-bottom" type="text" placeholder="<?php echo $reserva->getFechahasta(); ?>" name="hasta" value="<?php echo $reserva->getFechahasta(); ?>" readonly></td>
-                                        </div>
+                                        <ul class="list-group list-group-flush">
+                                            <?php foreach ($reserva->getDias() as $dias ) { ?>
+                                            <li class="list-group-item"><input style=" text-align: center; font-weight:bold; color:black; border :0;" class="border-bottom" type="text" placeholder="<?php echo $dias?>" name="desde" value="" readonly></td></li>
+                                            <?php }?>
+                                        </ul>
 
                                         <div class="col-auto">
                                             <label for="" class="mx-2 ">

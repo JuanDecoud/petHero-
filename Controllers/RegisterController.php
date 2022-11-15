@@ -47,14 +47,15 @@
 
         public function agregarOwner ($nombre,$apellido,$dni,$telefono,$userName,$contrasena ){
 
-            try
-            {
+         
                     strtolower($userName);
                     $comprobarUser=null;
                     $comprobarUser = $this->keeperDAO->obtenerUser($userName);
                     if ($comprobarUser==null){
                         $comprobarUser=$this->ownerDAO->obtenerUser($userName);
+                        
                     }
+
                     if ($comprobarUser == null){
                         $owner = new Owner ();
                         $owner->setNombre($nombre);
@@ -64,6 +65,7 @@
                         $owner->setNombreUser($userName);
                         $owner->setContrasena($contrasena);
                         $owner->setTipodecuenta($_SESSION['owner']);
+             
                         $this->ownerDAO->add($owner);
                         $this->login();
                     }
@@ -74,12 +76,7 @@
 
                     }   
             
-        }
-        catch(Exception $ex)
-        {
-            echo "Ha Ocurrido un error";
-        }
- 
+    
 
         }
 
@@ -109,7 +106,7 @@
             }
             catch (Exception $ex)
             {
-                    echo "ha ocurrido un error";
+                    throw $ex;
 
             }
 

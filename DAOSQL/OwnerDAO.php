@@ -1,5 +1,6 @@
 <?php
     namespace DAOSQL;
+    
     use DAO\IOwnerDAO as IOwnerDAO;
     use Models\Owner as Owner;
     use Models\Tarjeta as Tarjeta;
@@ -38,10 +39,10 @@
             $parametersUser["apellido"] = $owner->getApellido();
             $parametersUser["dni"] = $owner->getDni();
             $parametersUser["telefono"] = $owner->getTelefono();
-
-            $this->connection = Connection::GetInstance();
-            $this->connection->ExecuteNonQuery($queryUser, $parametersUser);
             
+            $this->connection = Connection::GetInstance();
+            $this->connection->ExecuteNonQuery($queryUser, $parametersUser );
+    
           
             
            ///Subimos sus TARJETAS a la DB
@@ -50,7 +51,8 @@
 
             ///Subimos el OWNER como tal a la DB
             $parametersOwner["idUser"] = $result[0]["idUser"];
-            $this->connection->ExecuteNonQuery($queryOwner, $parametersOwner);
+            $this->connection->ExecuteNonQuery($queryOwner, $parametersOwner );
+
 
 
         }

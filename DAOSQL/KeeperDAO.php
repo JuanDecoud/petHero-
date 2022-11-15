@@ -73,7 +73,7 @@
                       $parametersKeeper["idUser"] = $row[0];
                   }
                   
-                  var_dump($parametersKeeper);
+
                   $this->connection->ExecuteNonQuery($queryKeeper, $parametersKeeper , QueryType::StoredProcedure);
                   
                   //id keeper para agregar el tipo de mascota que cuida 
