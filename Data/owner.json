@@ -1,1 +1,13 @@
-[]
+[
+    {
+        "nombreUser": "owner@hotmail.com",
+        "contrasena": "1234",
+        "tipodeCuenta": "Owner",
+        "nombre": "Juan",
+        "apellido": "Decoud",
+        "DNI": "35410517",
+        "telefono": "2234559528",
+        "tarjeta": [],
+        "pets": []
+    }
+]
