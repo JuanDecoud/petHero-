@@ -259,7 +259,7 @@
                     
                     $tarjeta = new Tarjeta();
                     $tarjeta->setNumero($row[0]);
-                    var_dump($tarjeta);
+                    
                 }
                 return $tarjeta;
                 

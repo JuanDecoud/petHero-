@@ -2,27 +2,53 @@
 
     namespace Controllers ;
 
-    ///use DAO\OwnerDao;
+    //SQL
     use DAOSQL\OwnerDAO;
-    use DAO\ReservaDAO;
+    use DAOSQL\PetDAO;
+    use DAOSQL\ReservaDAO;
+
+    //JSON
+    //use DAO\ReservaDAO;
+    ///use DAO\OwnerDao;
+   
+    use Exception;
     use Models\Tarjeta;
-    use Models\Estadoreserva;
+        use Models\Estadoreserva;
 
     class OwnerController {
         private $ownerdao ;
         private $reservaDao ;
+        private $petDao ;
 
         public function __construct()
         {
             $this->ownerdao=new OwnerDao();
             $this->reservaDao = new ReservaDAO();
+            $this->petDao = new PetDAO ();
         }
+
+
 
         public function principalOwner (){
             echo "<script>if(confirm('Pago realizado con exito'));</script>";
+            $user = $_SESSION['loggedUser'];
+            try
+            {
+                $petlist = $this->petDao->buscarPets($user->getNombreUser());
+                $lista=$this->reservaDao->GetAll();
+                $listaAceptada = $this->reservaDao->buscarReservaxEstado($lista,$user->getNombreUser(), Estadoreserva::Aceptada);
+                $ListaEnCurso = $this->reservaDao->buscarReservaxEstado($lista,$user->getNombreUser(),Estadoreserva::Confirmada);
+
+            }
+            catch (Exception $ex)
+            {
+
+                throw $ex ;
+            }
             require_once (VIEWS_PATH."check.php");
             require_once (VIEWS_PATH."navOwner.php");
             require_once (VIEWS_PATH."menu-owner.php");
+
         }
 
         

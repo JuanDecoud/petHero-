@@ -223,7 +223,7 @@ use Exception;
             $reserva = $_SESSION['reserva'];
             $keeper = $reserva->getKeeper();
             $pet = $reserva->getPet();
-            var_dump($keeper);
+ 
             require_once(VIEWS_PATH."check.php");
             require_once(VIEWS_PATH."simulacionPago.php");
         }
