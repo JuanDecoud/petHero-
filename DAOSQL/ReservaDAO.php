@@ -80,58 +80,6 @@
             try
             {
 
-                /*
-                $reserva->setEstado(Estadoreserva::Pendiente);
-                
-                $query= "INSERT INTO ".$this->tablename." 
-                (idKeeper,idFechaDis,idPet,importeReserva,importeTotal,estado) 
-                VALUES (:idKeeper,:idFechaDis,:idPet,:importeReserva,:importeTotal,:estado);";
-             
-                $querySKeeper = "SELECT idKeeper FROM ". $this->tableKeeper .
-                " k JOIN " . $this->tableUser. " u ON k.idUser = u.idUser".
-                " WHERE u.nombreUser = \"". $keeper->getNombreUser()."\"";
-               
-                $querySPet = "SELECT p.idPet FROM ". $this->tablePet .
-                " p JOIN " . $this->tableOwner. " o ON o.idOwner = p.idOwner".
-                " JOIN ". $this->tableUser . " u ON o.idUser = u.idUser".
-                " WHERE u.nombreUser= \"". $keeper->getNombreUser(). 
-                "\" AND p.nombre = \"". $pet->getNombre() . "\"";
-                 
-                $querySFecha = "SELECT f.idFechasDisp FROM ". $this->tableDates .
-                " f JOIN " . $this->tableKeeper. " k ON k.idKeeper = f.idKeeper".
-                " JOIN ". $this->tableUser . " u ON k.idUser = u.idUser".
-                " WHERE  u.nombreUser= \"". $keeper->getNombreUser(). "\"";
-
-                var_dump($reserva);
-
-                $this->connection = Connection::GetInstance();
-                
-                $idKeeper = $this->connection->Execute($querySKeeper);
-                $idPet = $this->connection->Execute($querySPet);
-                $idFecha = $this->connection->Execute($querySFecha);
-
-                var_dump($idKeeper,$idPet,$idFecha);
-
-                foreach($idKeeper as $keeper){
-                    $parametersReserva["idKeeper"] = $keeper["idKeeper"];
-                }
-
-                foreach($idPet as $pet){
-                    $parametersReserva["idPet"] = $pet["idPet"];
-                }
-
-                foreach($idFecha as $fecha){
-                    $parametersReserva["idFechasDis"] = $fecha["idFechasDisp"];
-                }
-
-                $parametersReserva["importeReserva"] = $reserva->getImporteReserva();
-                $parametersReserva["importeTotal"] = $reserva->getImporteTotal();
-                $parametersReserva["estado"] = $reserva->getEstado();
-                
-
-                $this->connection->ExecuteNonQuery($query, $parametersReserva);
-                */
-
                 $pet = $reserva->getPet();
                 $owner = $pet->getOwner();
                 $keeper = $reserva->getKeeper();
@@ -167,24 +115,19 @@
                 foreach ($resultadoOwner as $fila1){
                     $parametrosMascota['idOwner'] = $fila1['idOwner'] ;
                 }
-                
-                
+                           
                 //buscar el id de la mascota
                 $resultadoMascota = $this->connection->Execute($queryPet , $parametrosMascota , QueryType::StoredProcedure);
 
                 foreach ($resultadoMascota as $row){
                     $parametros['idPet']=$row[0];
                 }
-               
-    
+            
                 $parametros ['importeReserva'] = $reserva->getImporteReserva();
                 $parametros ['importeTotal'] = $reserva->getImporteTotal();
                 $parametros['estado'] = Estadoreserva::Pendiente;
-
-    
                 $this->connection->ExecuteNonQuery($query,$parametros,queryType::StoredProcedure);
-
-                
+   
                 
                 //guardo los dias seleccionados correspondientes al rango que figura en sistema
                 $diasSeleccionados = $reserva->getDias();
@@ -225,7 +168,7 @@
                     $idKeeper = $value['idKeeper'];
                     $idPet = $value ['idPet'];
                     
-                    $reserva = new Reserva(); ///Reserva tiene Owner(Dentro de pet), Keeper, y Pet
+                    $reserva = new Reserva(); 
                     $reserva->setImporteReserva($value["importeReserva"]);
                     $reserva->setImporteTotal($value["importeTotal"]);
                     $reserva->setEstado($value["estado"]);
@@ -261,7 +204,6 @@
                         $owner->setNombreUser($row[0]);
                     }
 
-                    
                     $parametro['idReserva'] = $value['idReserva'];
     
                     $buscarFechas = "Call buscar_diasReserva(?)";
@@ -271,7 +213,6 @@
                         array_push($dias, $row[0]);
                     } 
 
-                    
                     $reserva->setDias($dias);
                     $pet->setOwner ($owner);
                     $reserva->setPet($pet);
@@ -611,7 +552,7 @@
                 
                 $pet = $reserva->getPet();
                 $owner = $pet->getOwner();
-                if ($owner->getNombreUser() == $nombreUser && $pet->getNombre() 
+                if ($owner->getNombreUser() == $nombreUser 
                 && $reserva->getEstado () == $estado){
                     array_push($listaReservas , $reserva);
                 }
@@ -741,6 +682,28 @@
             }
             return $listaReservas;
         }
+
+
+        public function buscarReservaxPet ($lista ,$nombreMascota ,$owner ,$estado ){
+            $reservaBuscada = null;
+            
+            foreach ($lista as $reserva){
+                $pet = $reserva->getPet();
+                $ownerEnpet = $pet->getOwner();
+                if ($pet->getNombre() == $nombreMascota && $owner== $ownerEnpet->getNombreUser()
+                && $reserva->getEstado()== $estado){
+                    $reservaBuscada = $reserva ;
+                    
+                }
+
+            }
+
+            return $reservaBuscada ;
+        }
+
+        
+     
+
 
 
     

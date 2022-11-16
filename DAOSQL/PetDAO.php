@@ -81,8 +81,8 @@
         }
 
         public function buscarPet ($nombrePet , Owner $owner){
-            $pet = null ;
             
+            $pet = null ;
             try
             {   
                 $query = "CALL buscar_reservaPet (?,?)";
@@ -138,6 +138,12 @@
 
             }
         }
+
+        
+
+  
+
+    
 
     }
 

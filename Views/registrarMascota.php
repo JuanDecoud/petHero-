@@ -17,8 +17,8 @@
                 <div class="form-group ">
                     <label for="exampleInputEmail1" class = "mb-2" ><strong>Tamaño</strong></label>
                     <select name="tamaño" class="form-select" id="iname" placeholder="Seleccione tamaño" required>
-                    <option value="Chico">Chico</option>
-                    <option value="Medio">Mediano</option>
+                    <option value="Chica">Chica</option>
+                    <option value="Mediana">Mediana</option>
                     <option value="Grande">Grande</option>
                     </select>
                     <!-- <input type="text" class="form-control " id="exampleInputEmail1" 

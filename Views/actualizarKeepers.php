@@ -9,14 +9,25 @@
                                         <h7 style= "color:aqua">Disponible</h7>
                                         <h5 class="card-title"><?php echo $keeper->getNombre()." ".$keeper->getApellido(); ?></h5>
                                         <input id="prodId" name="prodId" type="hidden" value="<?php echo $keeper->getNombreUser(); ?>">
+                                        <ul class="list-group list-group-flush ">
+                                            <h6 class = " mt-2 border-top">Tipos de mascota</h6>
+                                            <?php foreach ($keeper->getTipo() as $tipoMascota ) { ?>
+                                            <li class="list-group-item border-button"><strong><?php echo $tipoMascota ;?></strong></li>
+                                            <input id="prodId" name="tipomascota[]" type="hidden" value="<?php echo $tipoMascota ;?>">
+                                            <?php }?>
+                                        </ul>
+                                        <ul class="list-group list-group-flush ">
+                                            <h6 class = " mt-2 border-top">Importe</h6>
+                                            <li class="list-group-item border-button"><strong>$<?php echo $keeper->getRemuneracion();?></strong></li>
+                                        </ul>
                                     </div>
                                     <div class="card-body">
                                         <div class = "col-auto">
-                                            <label for="" class = "m-2  "><h5>Desde:</h5></label>
+                                            <label for="" class = ""><h5>Desde:</h5></label>
                                             <input style =" text-align: center; font-weight:bold; color:black; border :0;" class ="border-bottom mt-1" type="text" placeholder="<?php echo $estadias->getDesde(); ?>" name ="desde"  value = "<?php echo $estadias->getDesde() ?>"readonly >
                                         </div>
                                         <div class = "col-auto" >
-                                            <label for="" class = "mx-2 mt-2"><h5>Hasta:</h5></label>
+                                            <label for="" class = ""><h5>Hasta:</h5></label>
                                             <input style =" text-align: center; font-weight:bold; color:black; border:0;" class ="border-bottom mt-1" type="text" placeholder="<?php echo $estadias->getHasta() ?>" name ="hasta"  value = "<?php echo $estadias->getHasta() ;?>"readonly >
                                         </div>
                                         <?php 

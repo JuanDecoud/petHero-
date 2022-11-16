@@ -29,11 +29,20 @@
         public function principalKeeper (){
             require_once (VIEWS_PATH."navKeeper.php");
             $keeper = $_SESSION['loggedUser'];
-            $fechas = $this->keeperDao->buscarEstadias($keeper->getNombreUser());
-            $lista = $this->reservaDao->getAll();
-            $listaReservas = $this->reservaDao->buscarReservaxEstadoKeeper($lista , $keeper->getNombreUser (),Estadoreserva::Pendiente);
-            $listaAceptadas = $this->reservaDao->buscarReservaxEstadoKeeper( $lista ,$keeper->getNombreUser (), Estadoreserva::Aceptada);
-            $listaConfirmadas = $this->reservaDao->buscarReservaxEstadoKeeper($lista , $keeper->getNombreUser() ,Estadoreserva::Confirmada );
+            try
+            {
+                $fechas = $this->keeperDao->buscarEstadias($keeper->getNombreUser());
+                $lista = $this->reservaDao->getAll();
+                $listaReservas = $this->reservaDao->buscarReservaxEstadoKeeper($lista , $keeper->getNombreUser (),Estadoreserva::Pendiente);
+                $listaAceptadas = $this->reservaDao->buscarReservaxEstadoKeeper( $lista ,$keeper->getNombreUser (), Estadoreserva::Aceptada);
+                $listaConfirmadas = $this->reservaDao->buscarReservaxEstadoKeeper($lista , $keeper->getNombreUser() ,Estadoreserva::Confirmada );
+
+            }
+            catch (Exception $ex)
+            {
+                throw $ex ;
+
+            }
             require_once (VIEWS_PATH."mainKeeper.php");
         }
         
@@ -47,9 +56,6 @@
                 $verificar = null;
                 $verificar=$this->keeperDao->verificarRangos ($desde,$hasta,$keeper->getNombreUser() );
                 
-                //$lista = $this->reservaDao->GetAll();
-                //$EstadiaEnCurso = $this->reservaDao->buscarReservaEnCurso($lista,$keeper->getNombreUser(),Estadoreserva::Confirmada ,$desde ,$hasta);
-          
                if ($verificar ==null){
                     $estadia = new FechasEstadias($desde , $hasta);
                     $this->keeperDao->agregarFecha($estadia , $keeper->getNombreUser() );
@@ -70,33 +76,22 @@
         }
 
         public function quitarFecha ($desde , $hasta ){
-           
-            $estadia = new FechasEstadias($desde , $hasta);
-            $user = $_SESSION['loggedUser'];
-            $this->keeperDao->quitarFecha($user->getNombreUser(),$estadia);
-            $this->principalKeeper();
+
+           try
+           {
+                $estadia = new FechasEstadias($desde , $hasta);
+                $user = $_SESSION['loggedUser'];
+                $this->keeperDao->quitarFecha($user->getNombreUser(),$estadia);
+                $this->principalKeeper();
+
+           }
+           catch (Exception $ex)
+           {
+                throw $ex;
+           }
 
         }
-        /*
-        public function rechazarReserva($petName){
-            $borrarReserva = new ReservaDAO();
 
-            $user = $_SESSION['loggedUser'];
-            $borrarReserva -> borrarReservaxNombre($user->getNombre(),$petName);
-            $this->principalKeeper();
-        }
-
-        
-        public function aceptarReserva($petName){
-
-            $buscarReserva = new ReservaDAO();
-            $user = $_SESSION['loggedUser'];
-            $reserva = new Reserva();
-            $reserva = $buscarReserva -> buscarReserva($user->getNombre(), $petName);
-            $keeper = $this->keeperDao->obtenerUser($user->getNombre());
-            $keeper->agregarReservaAceptada($reserva);
-        }
-        */
 
     }
 ?>
