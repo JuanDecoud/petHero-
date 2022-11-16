@@ -256,7 +256,9 @@
                 $this->connection = Connection::GetInstance();
                 $result=$this->connection->Execute ($query , $parametro , QueryType::StoredProcedure);
                 foreach ($result as $row){
-                    $tarjeta= $row[0];
+
+                    $tarjeta = new Tarjeta();
+                    $tarjeta->setNumero($row[0]);
                 }
                 return $tarjeta;
                 

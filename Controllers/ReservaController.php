@@ -214,6 +214,16 @@ use Exception;
         }
 
         public function vistaPago (){
+            
+            $owner = $_SESSION['loggedUser'];
+            $tarjeta= null ;
+            $ownerdao = new OwnerDao();
+            $tarjeta = $ownerdao->buscarTarjeta($owner->getNombreUser());
+
+            $reserva = $_SESSION['reserva'];
+            $keeper = $reserva->getKeeper();
+            $pet = $reserva->getPet();
+            require_once(VIEWS_PATH."check.php");
             require_once(VIEWS_PATH."simulacionPago.php");
         }
 
@@ -257,6 +267,7 @@ use Exception;
         }
 
         public function agregarTarjeta (){
+            require_once(VIEWS_PATH."check.php");
             require_once(VIEWS_PATH."agregarTarjeta.php");
         }
 

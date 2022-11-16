@@ -20,7 +20,7 @@ create table IF NOT EXISTS tarjeta(
     numero int not null,
     nombre varchar(50) not null,
     apellido varchar(50) not null,
-    fechaVenc date not null,
+    fechaVenc varchar (50) not null,
     codigo int not null,
     idOwner int not null,
     foreign key(idOwner) references owner(idOwner) on update cascade on delete cascade
@@ -465,10 +465,10 @@ DELIMITER $$
 create procedure buscar_tarjetaOwner (nombreOwner varchar(50))
 begin
 	select * from tarjeta
-	where idOwner = (select idUser from user where nombre = nombreOwner);
-END
+	where idOwner = (select idUser from user u  where u.nombreUser = nombreOwner);
+END$$
 
-delimiter ;
+DELIMITER ;
 
 DELIMITER $$
 create PROCEDURE `pet_home`.`buscar_tarjetaOwner`(idOwner int)

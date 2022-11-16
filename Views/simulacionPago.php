@@ -1,20 +1,3 @@
-<?php
-
-use DAO\OwnerDao;
-use Models\Tarjeta;
-
-
-
-    $owner = $_SESSION['loggedUser'];
-    $tarjeta= null ;
-    $ownerdao = new OwnerDao();
-    $tarjeta = $ownerdao->buscarTarjeta($owner->getNombreUser());
-
-    $reserva = $_SESSION['reserva'];
-    $keeper = $reserva->getKeeper();
-    $pet = $reserva->getPet();
-
-?>
 
 
 <div class = "container abs-center     ">
@@ -30,16 +13,11 @@ use Models\Tarjeta;
             <input type="number" class="form-control " id="exampleInputEmail1" 
                 aria-describedby="emailHelp" placeholder="<?php echo $pet->getNombre(); ?>" value = "" name = "Importe" required readonly>
         </div>
-        <div class="form-group mx-4  ">
-            <label for="exampleInputEmail1" class = " ">Desde</label>
-            <input type="text" class="form-control  " id="exampleInputEmail1" 
-                aria-describedby="emailHelp" placeholder="<?php echo $reserva->getFechadesde(); ?>" name = "Desde" required readonly>
-        </div>
-        <div class="form-group mx-4  ">
-            <label for="exampleInputEmail1" class = " ">Hasta</label>
-            <input type="number" class="form-control " id="exampleInputEmail1" 
-                aria-describedby="emailHelp" placeholder="<?php echo $reserva->getFechahasta(); ?>" value = "" name = "Hasta" required readonly>
-        </div>
+        <h6>Estadia :</h6>
+        <?php foreach ($reserva->getDias() as $dias ) { ?>
+        <input style=" text-align: center; font-weight:bold; color:black; border :0;" class="border-bottom" type="text" placeholder="<?php echo $dias?>" name="arreglo[]" value="<?php echo $dias?>" readonly>
+        <?php }?>
+
         <div class="form-group mx-4 ">
             <label for="exampleInputEmail1" class = " ">Importe</label>
             <input type="number" class="form-control " id="exampleInputEmail1" 

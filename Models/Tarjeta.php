@@ -36,7 +36,6 @@ class Tarjeta
     {
         $this->numero = $numero;
 
-        return $this;
     }
 
     /**

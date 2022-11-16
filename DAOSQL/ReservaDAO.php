@@ -180,7 +180,6 @@
                     $value ['telefono']);                   
                     
                     
-
                     $queryPet = "SELECT *FROM Pet Where ".$idPet."=pet.idPet";
                     $resultadoPet=$this->connection->Execute($queryPet);
                     foreach ($resultadoPet as $row){
