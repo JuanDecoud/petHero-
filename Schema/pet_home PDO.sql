@@ -478,15 +478,6 @@ END$$
 
 DELIMITER ;
 
-DELIMITER $$
-create PROCEDURE `pet_home`.`buscar_tarjetaPago`(idOwner int)
-begin
-	select * from tarjeta
-	where idOwner = tarjeta.idOwner;
-END$$
-
-
-delimiter ;
 
 DROP procedure IF EXISTS `buscar_rango`
 
