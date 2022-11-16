@@ -26,19 +26,19 @@
                 </div>
                 <div class="mb-3 ">
                     <label for="formFile" class="form-label"><strong>Foto</strong></label>
-                    <input class="form-control" type="file" id="formFile" name ="imagenPerfil" >
+                    <input class="form-control" type="file" id="formFile" name ="imagenPerfil" required>
                 </div>
                 <div class="mb-3 ">
                     <label for="formFile" class="form-label"><strong>Plan Vacunacion</strong></label>
-                    <input class="form-control " type="file" id="formFile" name = "vacunacion" >
+                    <input class="form-control " type="file" id="formFile" name = "vacunacion" required >
                 </div>
                 <div class="mb-3 ">
                     <label for="formFile" class="form-label"><strong>Video</strong></label>
-                    <input class="form-control " type="file" id="formFile" name = "video" >
+                    <input class="form-control " type="file" id="formFile" name = "video" required>
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlTextarea1" class="form-label"><strong>Observacion</strong></label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name = "observacion"></textarea>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name = "observacion" required></textarea>
                 </div>
                 <div class = "form-group m-0">
                     <button type="submit" class="btn btn-danger">Agregar</button>
