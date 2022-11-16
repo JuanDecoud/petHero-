@@ -479,3 +479,16 @@ END$$
 
 
 delimiter ;
+
+
+
+DELIMITER $$
+
+create procedure buscar_rango (in idKeeper int , in estado varchar (50))
+BEGIN
+	select desde , hasta from fechasdisponibles fd
+    inner join keeper k on k.idKeeper = fd.idKeeper 
+    where fd.estado = estado ;
+END$$
+
+DELIMITER ;
