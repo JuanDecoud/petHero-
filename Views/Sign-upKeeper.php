@@ -47,11 +47,11 @@
                 </div>
                 <div class="form-check form-check-inline m-1">
                     <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Mediana" name = "arreglo[]">
-                    <label class="form-check-label" for="inlineCheckbox1"  value = "Chica">Mediana</label>
+                    <label class="form-check-label" for="inlineCheckbox1"  value = "Mediana">Mediana</label>
                 </div>
                 <div class="form-check form-check-inline m-1">
                     <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Grande" name = "arreglo[]">
-                    <label class="form-check-label" for="inlineCheckbox1"  value = "Chica">Grande</label>
+                    <label class="form-check-label" for="inlineCheckbox1"  value = "Grande">Grande</label>
                 </div>
                 <div class = "form-group m-4 mx-4">
                     <button type="submit" class="btn btn-danger">Confirmar</button>

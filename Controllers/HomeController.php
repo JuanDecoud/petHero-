@@ -13,10 +13,8 @@
     use DAOSQL\OwnerDAO as OwnerDAO ;
     use DAOSQL\ReservaDAO as ReservaDAO;
     USE DAOSQL\PetDAO as PetDAO ;
-
-  
-   
-    use Models\Estadoreserva ;
+use Exception;
+use Models\Estadoreserva ;
     
 
     class HomeController
@@ -48,16 +46,23 @@
 
             require_once (VIEWS_PATH."check.php");
             require_once (VIEWS_PATH."navKeeper.php");
-            $keeper = $_SESSION['loggedUser'];
-            $userName = $keeper->getNombreUser();
-            $fechas = $this->keeperDao->buscarEstadias($userName);
-            $lista = $this->reservadao->getAll();
-          
-            $listaReservas = $this->reservadao->buscarReservaxEstadoKeeper($lista , $keeper->getNombreUser (),Estadoreserva::Pendiente);
-            
-            $listaAceptadas = $this->reservadao->buscarReservaxEstadoKeeper( $lista ,$keeper->getNombreUser (), Estadoreserva::Aceptada);
-            $listaConfirmadas = $this->reservadao->buscarReservaxEstadoKeeper($lista , $keeper->getNombreUser() ,Estadoreserva::Confirmada );
-            
+
+            try 
+            {
+                $keeper = $_SESSION['loggedUser'];
+                $userName = $keeper->getNombreUser();
+                $fechas = $this->keeperDao->buscarEstadias($userName);
+                $lista = $this->reservadao->getAll();
+                $listaReservas = $this->reservadao->buscarReservaxEstadoKeeper($lista , $keeper->getNombreUser (),Estadoreserva::Pendiente);
+                $listaAceptadas = $this->reservadao->buscarReservaxEstadoKeeper( $lista ,$keeper->getNombreUser (), Estadoreserva::Aceptada);
+                $listaConfirmadas = $this->reservadao->buscarReservaxEstadoKeeper($lista , $keeper->getNombreUser() ,Estadoreserva::Confirmada );
+
+            }
+            catch (Exception $ex)
+            {
+                throw $ex ;
+            }
+    
 
             require_once(VIEWS_PATH."mainKeeper.php");
         }
@@ -65,12 +70,24 @@
         public function menuOwner (){
             require_once (VIEWS_PATH."check.php");
             require_once (VIEWS_PATH."navOwner.php");
-            $user = $_SESSION['loggedUser'];
-            $petlist = $this->petDao->buscarPets($user->getNombreUser());
-            $lista=$this->reservadao->GetAll();
-            $listaAceptada = $this->reservadao->buscarReservaxEstado($lista,$user->getNombreUser(), Estadoreserva::Aceptada);
-            $ListaEnCurso = $this->reservadao->buscarReservaxEstado($lista,$user->getNombreUser(),Estadoreserva::Confirmada);
+
+            try 
+            {
+                $user = $_SESSION['loggedUser'];
+                $petlist = $this->petDao->buscarPets($user->getNombreUser());
+                $lista=$this->reservadao->GetAll();
+                $listaAceptada = $this->reservadao->buscarReservaxEstado($lista,$user->getNombreUser(), Estadoreserva::Aceptada);
+                $ListaEnCurso = $this->reservadao->buscarReservaxEstado($lista,$user->getNombreUser(),Estadoreserva::Confirmada);
+                
+            }
+            catch (Exception $ex)
+            {
+                throw $ex ;
+
+            }
+
             require_once(VIEWS_PATH."menu-owner.php");
+
         }
 
         public function vistaTipocuenta (){
@@ -101,23 +118,31 @@
         }
       
         public function login ($usuario , $contraseña){
-            $userkeeper = $this->keeperDao->comprobarLogin($usuario , $contraseña);
-            $userOwner = $this->ownerDao->comprobarLogin($usuario , $contraseña);
+            try 
+            {
+                $userkeeper = $this->keeperDao->comprobarLogin($usuario , $contraseña);
+                $userOwner = $this->ownerDao->comprobarLogin($usuario , $contraseña);
+    
+                 if ($userkeeper !=null){
+                    
+                    $_SESSION['loggedUser'] = $userkeeper ;
+                    $this->principalKeeper();  
+                 }
+                 else if ($userOwner !=null){
+                    $_SESSION['loggedUser'] = $userOwner ;
+                    $this->menuOwner();
+                 }
+                 else {
+                    echo '<script language="javascript">alert("Nombre de usuario o contraseña incorrecto");</script>';
+                    $this->vistaLogin();
+                 }
 
+            }
+            catch (Exception $ex)
+            {
+                throw $ex ;
+            }
 
-             if ($userkeeper !=null){
-                
-                $_SESSION['loggedUser'] = $userkeeper ;
-                $this->principalKeeper();  
-             }
-             else if ($userOwner !=null){
-                $_SESSION['loggedUser'] = $userOwner ;
-                $this->menuOwner();
-             }
-             else {
-                echo '<script language="javascript">alert("Nombre de usuario o contraseña incorrecto");</script>';
-                $this->vistaLogin();
-             }
         }
 
         public function seleccinarCuenta ($tipoCuenta){
@@ -135,12 +160,6 @@
             }
         }
 
-        public function ShowListViewKeeper()
-        {
-            $keeperList = $this->keeperDao->GetAll();
-
-            require_once(VIEWS_PATH."List-AllKeepers.php");
-        }
 
 
     }

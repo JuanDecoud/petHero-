@@ -47,37 +47,41 @@
 
         public function agregarOwner ($nombre,$apellido,$dni,$telefono,$userName,$contrasena ){
 
+            try
+            {
+                strtolower($userName);
+                $comprobarUser=null;
+                $comprobarUser = $this->keeperDAO->obtenerUser($userName);
+                if ($comprobarUser==null){
+                    $comprobarUser=$this->ownerDAO->obtenerUser($userName);
+                    
+                }
+
+                if ($comprobarUser == null){
+                    $owner = new Owner ();
+                    $owner->setNombre($nombre);
+                    $owner->setApellido($apellido);
+                    $owner->setDni($dni);
+                    $owner->setTelefono($telefono);
+                    $owner->setNombreUser($userName);
+                    $owner->setContrasena($contrasena);
+                    $owner->setTipodecuenta($_SESSION['owner']);
          
-                    strtolower($userName);
-                    $comprobarUser=null;
-                    $comprobarUser = $this->keeperDAO->obtenerUser($userName);
-                    if ($comprobarUser==null){
-                        $comprobarUser=$this->ownerDAO->obtenerUser($userName);
-                        
-                    }
+                    $this->ownerDAO->add($owner);
+                    $this->login();
+                }
+                else 
+                {
+                    echo '<script language="javascript">alert("Nombre de usuario ya existe");</script>';
+                    $this->registrarOwner();
 
-                    if ($comprobarUser == null){
-                        $owner = new Owner ();
-                        $owner->setNombre($nombre);
-                        $owner->setApellido($apellido);
-                        $owner->setDni($dni);
-                        $owner->setTelefono($telefono);
-                        $owner->setNombreUser($userName);
-                        $owner->setContrasena($contrasena);
-                        $owner->setTipodecuenta($_SESSION['owner']);
-             
-                        $this->ownerDAO->add($owner);
-                        $this->login();
-                    }
-                    else 
-                    {
-                        echo '<script language="javascript">alert("Nombre de usuario ya existe");</script>';
-                        $this->registrarOwner();
+                }   
 
-                    }   
-            
-    
-
+            }
+            catch (Exception $ex)
+            {
+                throw $ex ;
+            } 
         }
 
         public function agregarKeeper ($nombre,$apellido,$dni,$telefono,$userName,$contrasena,$remuneracion,$arrayTipo ){

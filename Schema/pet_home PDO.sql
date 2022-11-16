@@ -320,7 +320,7 @@ BEGIN
 	SELECT desde , hasta from  fechasdisponibles f
     inner join keeper k on k.idKeeper = f.idKeeper 
     inner join user u on u.idUser = k.idUser 
-    where  u.idUser = k.idUser and k.idKeeper = f.idKeeper ;
+    where  u.idUser = k.idUser and u.nombreUser = nombreUser ;
     
 END$$
 

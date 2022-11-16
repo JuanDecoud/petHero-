@@ -141,17 +141,18 @@
                 $resultUser = $this->connection->Execute($query);
 
                 foreach($resultUser as $value){
+                    $idKeeper['idKeeper'] = $value['idKeeper'] ;
                     $keeper = new Keeper($value['nombreUser'],$value ['contrasena'],$value ['tipoDeCuenta']
                     ,$value ['remuneracion'],$value ['nombre'], $value ['apellido'],$value ['dni'],
                     $value ['telefono']);
                     
-                    $nombreuser['nombreUser'] = $keeper->getNombreUser() ;
+                    
     
                     // busco los tipos de mascotas que elijio cuidar el keeper
                     $tipoMascota = array();
-                    $resultado = $this->connection->Execute($querytipoMascota , $nombreuser,queryType::StoredProcedure);
+                    $resultado = $this->connection->Execute($querytipoMascota , $idKeeper,queryType::StoredProcedure);
                     foreach ($resultado as $row){
-                        array_push($tipoMascota,$row);
+                        array_push($tipoMascota,$row[0]);
                     }
                     $keeper->setTipoMascota($tipoMascota);
 
@@ -169,6 +170,7 @@
                         if ($fecha['estado'] == Estadoreserva::Activo)
                             $keeper->agregarFecha($fechaResultado);
                     }
+                  
                 
                  
                     array_push($this->keeperList,$keeper);
@@ -308,8 +310,7 @@
             try{
                 
                 $queryFechas = "CALL buscar_fechasKeeper(?)";
-                $parametro['userName']= $userName ;
-
+                $parametro['keeper'] = $userName ;
                 $this->connection = Connection::GetInstance();
 
                 $resultado = $this->connection->Execute($queryFechas , $parametro , QueryType::StoredProcedure);
