@@ -2,7 +2,8 @@
 
     namespace Controllers ;
 
-    use DAO\OwnerDao;
+    ///use DAO\OwnerDao;
+    use DAOSQL\OwnerDAO;
     use DAO\ReservaDAO;
     use Models\Tarjeta;
     use Models\Estadoreserva;

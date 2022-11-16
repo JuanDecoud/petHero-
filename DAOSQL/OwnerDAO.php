@@ -91,7 +91,7 @@
            
             try
             {
-                $queryTarjeta = "INSERT INTO " . $this-> tableUser. " (numero,nombre,apellido,fechaVenc,codigo,idOwner)
+                $queryTarjeta = "INSERT INTO " . $this-> tableCard. " (numero,nombre,apellido,fechaVenc,codigo,idOwner)
                 VALUES (:numero,:nombre,:apellido,:fechaVenc,:codigo,:idOwner)";
                 $query ="SELECT idOwner FROM ". $this->tablename . 
                 " o JOIN user u ON u.idUser = o.idUser".
@@ -99,16 +99,15 @@
 
                 $this->connection = Connection::GetInstance();
                 $resultSet = $this->connection->Execute($query);
-
-                foreach($tarjeta as $ts){
-                    $parametersTarjeta["numero"] = $ts->getNumero();
-                    $parametersTarjeta["nombre"] = $ts ->getNombre();
-                    $parametersTarjeta["apellido"] = $ts->getApellido();
-                    $parametersTarjeta["fechaVenc"] = $ts -> getFechaVenc();
-                    $parametersTarjeta["codigo"]  = $ts -> getCodigo();
-                    $parametersTarjeta["idOwner"] = $resultSet[0]["idOwner"];
-                    $this->connection->ExecuteNonQuery($queryTarjeta, $parametersTarjeta);
-                }
+                
+                $parametersTarjeta["numero"] = $tarjeta->getNumero();
+                $parametersTarjeta["nombre"] = $tarjeta ->getNombre();
+                $parametersTarjeta["apellido"] = $tarjeta->getApellido();
+                $parametersTarjeta["fechaVenc"] = $tarjeta -> getFechaVenc();
+                $parametersTarjeta["codigo"]  = $tarjeta -> getCodigo();
+                $parametersTarjeta["idOwner"] = $resultSet[0]["idOwner"];
+                $this->connection->ExecuteNonQuery($queryTarjeta, $parametersTarjeta);
+                
             
             }
             catch (Exception $ex)
