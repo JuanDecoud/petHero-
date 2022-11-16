@@ -227,6 +227,7 @@ use Exception;
             $lista=$this->reservaDao->getALL();
             $reservaLista = $this->reservaDao->buscarReservaEnCurso($lista,$user->getNombreUser(),Estadoreserva::Confirmada);
             $reservaNueva = null ;
+
             foreach($reservaLista as $reserva){
                 $reservaNueva = new Reserva ();
                 $reservaNueva->setDias($reserva->getDias());
@@ -237,22 +238,22 @@ use Exception;
                 $reservaNueva->setEstado ($reserva->getEstado());
 
             }
-            $_SESSION['reserva'] = $reservaNueva;
-            $this->vistaOwner();
 
-            //$comprobartarjeta = $this->ownerdao->buscarTarjeta($user->getNombreUser());
+            $_SESSION['reserva'] = $reservaNueva;
+
+            $comprobartarjeta = $this->ownerdao->buscarTarjeta($user->getNombreUser());
         
-            
+            var_dump($comprobartarjeta);
             
             /// si el usuario no tiene tarjeta se ingresa una sino directamente se pasa al pago 
 
-          /*  if ($comprobartarjeta == null){
+           if ($comprobartarjeta == null){
                 $this->agregarTarjeta();
             }
             else {
                 $this->vistaPago();
             }
-           */ 
+        
         }
 
         public function agregarTarjeta (){

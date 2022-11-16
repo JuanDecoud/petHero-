@@ -247,6 +247,26 @@
 
         }
 
+        public function buscarTarjeta($nombreOwner){
+            $tarjeta = null ;
+            try {
+
+                $query = "Call buscar_tarjetaOwner(?)";
+                $parametro ['nombreUser'] = $nombreOwner ;
+                
+                $this->connection = Connection::GetInstance();
+                $result=$this->connection->Execute ($query , $parametro , QueryType::StoredProcedure);
+                foreach ($result as $row){
+                    $tarjeta= $row[0];
+                }
+                return $tarjeta;
+                
+            } catch (Exception $ex) {
+                throw $ex;
+            }
+
+            
+        }
 
        
     }

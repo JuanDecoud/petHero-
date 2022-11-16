@@ -462,10 +462,20 @@ DELIMITER ;
 
 DELIMITER $$
 
-create procedure buscar_rango (in idKeeper int , in estado varchar (50))
+create procedure buscar_tarjetaOwner (nombreOwner varchar(50))
 begin
-	select desde , hasta from fechasdisponibles fd 
-    where fd.idKeeper = idKeeper and fd.estado = estado ;
-end$$
+	select * from tarjeta
+	where idOwner = (select idUser from user where nombre = nombreOwner);
+END
+
+delimiter ;
+
+DELIMITER $$
+create PROCEDURE `pet_home`.`buscar_tarjetaOwner`(idOwner int)
+begin
+	select * from tarjeta
+	where idOwner = tarjeta.idOwner;
+END$$
+
 
 delimiter ;
