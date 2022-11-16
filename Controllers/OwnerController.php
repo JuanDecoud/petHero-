@@ -38,7 +38,7 @@
             $tarjeta= null ;
             $ownerdao = new OwnerDao();
             $tarjeta = $ownerdao->buscarTarjeta($owner->getNombreUser());
-
+            var_dump($tarjeta);
             $reserva = $_SESSION['reserva'];
             $keeper = $reserva->getKeeper();
             $pet = $reserva->getPet();

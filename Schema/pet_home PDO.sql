@@ -468,10 +468,12 @@ DELIMITER $$
 
 create procedure buscar_tarjetaOwner (nombreOwner varchar(50))
 begin
-	select * from tarjeta
-	where idOwner = (select idUser from user u  where u.nombreUser = nombreOwner);
+	select numero from tarjeta t
+    inner join owner o on o.idOwner = t.idOwner 
+    inner join user u on u.idUser = o.idUser
+    where u.NombreUser = nombreOwner ;
+	
 END$$
-
 
 
 DELIMITER ;
