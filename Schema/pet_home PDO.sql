@@ -63,9 +63,13 @@ create table IF NOT EXISTS reserva(
 );
 create table IF NOT EXISTS reviews(
 	idReview int primary key not null auto_increment,
+    idKeeper int not null ,
+    idPet int not null ,
     descripcion varchar(150) not null,
     fecha date not null,
-    puntuacion float not null
+    puntuacion float not null,
+    constraint fk_reviewK foreign key (idKeeper) references keeper (idKeeper),
+    constraint fk_reviewP foreign key (idPet) references pet (idPet),
 );
 
 create table IF NOT EXISTS tipoMascotaxKeeper (
@@ -488,6 +492,18 @@ BEGIN
 	select desde , hasta from fechasdisponibles fd
     inner join keeper k on k.idKeeper = fd.idKeeper 
     where fd.estado = estado ;
+END$$
+
+DELIMITER ;
+
+
+DROP procedure IF EXISTS `agregar_review`
+
+DELIMITER $$
+
+CREATE procedure agregar_review (in idKeeper int , in idPet int , in descripcion varchar (300) , in fecha date , in puntuacion int )
+BEGIN
+	insert into reviews (idKeeper , idPet , descripcion , fecha , puntuacion) values (idKeeper , idPet , descripcion , fecha , puntuacion);
 END$$
 
 DELIMITER ;

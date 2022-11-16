@@ -4,8 +4,8 @@
     class Review {
         private $description ;
         private $fecha;
-        private $idKeeper ;
-        private $idPet ;
+        private $Keeper ;
+        private $Pet ;
         private $puntaje ;
 
 
@@ -21,11 +21,11 @@
         public function setFecha ($fecha){$this->fecha = $fecha;}
         public function getFecha (){return $this->fecha;}
 
-        public function setKeeper ( $keeper){$this->idKeeper = $keeper;}
-        public function getKeeper (){return $this->idKeeper;}
+        public function setKeeper ( Keeper $keeper){$this->Keeper = $keeper;}
+        public function getKeeper (){return $this->Keeper;}
 
-        public function setOwner ($pet){$this->idPet = $pet;}
-        public function getOwner (){return $this->idPet;}
+        public function setPet ( Pet $pet){$this->Pet = $pet;}
+        public function getPet (){return $this->Pet;}
 
         public function setPuntaje ($puntaje){$this->puntaje = $puntaje;}
         public function getPuntaje (){return $this->puntaje;}
