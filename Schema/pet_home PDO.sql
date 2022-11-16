@@ -471,7 +471,7 @@ END$$
 DELIMITER ;
 
 DELIMITER $$
-create PROCEDURE `pet_home`.`buscar_tarjetaOwner`(idOwner int)
+create PROCEDURE `pet_home`.`buscar_tarjetaPago`(idOwner int)
 begin
 	select * from tarjeta
 	where idOwner = tarjeta.idOwner;

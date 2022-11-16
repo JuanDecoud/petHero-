@@ -20,6 +20,8 @@
 
         public function principalOwner (){
             echo "<script>if(confirm('Pago realizado con exito'));</script>";
+            require_once (VIEWS_PATH."check.php");
+            require_once (VIEWS_PATH."navOwner.php");
             require_once (VIEWS_PATH."menu-owner.php");
         }
 
