@@ -449,6 +449,8 @@ END$$
 
 DELIMITER ;
 
+DROP procedure IF EXISTS `buscarEstados`
+
 DELIMITER $$
 
 create procedure buscarEstados (in idKeeper int) 
@@ -460,6 +462,8 @@ end$$
 
 DELIMITER ;
 
+DROP procedure IF EXISTS `buscar_tarjetaOwner`
+
 DELIMITER $$
 
 create procedure buscar_tarjetaOwner (nombreOwner varchar(50))
@@ -467,6 +471,8 @@ begin
 	select * from tarjeta
 	where idOwner = (select idUser from user u  where u.nombreUser = nombreOwner);
 END$$
+
+
 
 DELIMITER ;
 
@@ -480,7 +486,7 @@ END$$
 
 delimiter ;
 
-
+DROP procedure IF EXISTS `buscar_rango`
 
 DELIMITER $$
 
