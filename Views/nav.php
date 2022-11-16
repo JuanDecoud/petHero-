@@ -12,11 +12,11 @@
           <div class="collapse navbar-collapse " id="navbarSupportedContent">
 
             <ul class="navbar-nav mx-auto ">
-                <li class="nav-item  border-dark border-start  m-1">
-                    <a class="nav-link  " aria-current="page" href="#">Home</a>
+                <li class="nav-item  border-dark   m-1">
+                    <a class="nav-link  " aria-current="page" href="#"></a>
                 </li>
-                <li class="nav-item  border-dark border-start border-end m-1">
-                    <a class="nav-link " href="#">Estadias</a>
+                <li class="nav-item  border-dark   m-1">
+                    <a class="nav-link " href="#"></a>
                 </li>
             </ul>
             <ul class="navbar-nav  me-5">

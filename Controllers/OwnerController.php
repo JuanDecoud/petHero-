@@ -27,11 +27,22 @@
 
         
         public function vistaNuevatarjeta (){
+            require_once (VIEWS_PATH."check.php");
+            require_once (VIEWS_PATH."navOwner.php");
             require_once(VIEWS_PATH."agregarTarjeta.php");
         }
 
  
         public function vistaSimulacionpago (){
+            $owner = $_SESSION['loggedUser'];
+            $tarjeta= null ;
+            $ownerdao = new OwnerDao();
+            $tarjeta = $ownerdao->buscarTarjeta($owner->getNombreUser());
+
+            $reserva = $_SESSION['reserva'];
+            $keeper = $reserva->getKeeper();
+            $pet = $reserva->getPet();
+ 
             require_once (VIEWS_PATH."simulacionPago.php");
         }
 

@@ -91,7 +91,7 @@ use Models\Estadoreserva ;
         }
 
         public function vistaTipocuenta (){
-            
+            require_once(VIEWS_PATH."nav.php");
             require_once(VIEWS_PATH."tipodecuenta.php");
         }
 

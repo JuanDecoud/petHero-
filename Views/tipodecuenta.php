@@ -1,8 +1,3 @@
-<?php
-
- require_once("Header.php");
- 
-?>
 
 <div class = "container abs-center    col-md-6 border border-dark  ">
     <div class = " container   ">
