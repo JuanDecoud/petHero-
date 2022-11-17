@@ -33,52 +33,76 @@
 
         public function agregarMascota ($nombre , $raza ,$tamanio , $observacion ){
             
+            $formatos_permitidosIMG =  array('jpg','pdf');
+            $array_Archivo = array ($_FILES['imagenPerfil']['name'],$_FILES['vacunacion']['name']);
+            $comprobar = false ;
+            foreach ($array_Archivo as $archivo)
+            {
+                $extension = pathinfo($archivo, PATHINFO_EXTENSION);
+                if(!in_array($extension, $formatos_permitidosIMG) ) {
+                   $comprobar = true ;
+                   
+                }
 
+            }
 
-            try {
+            if ($comprobar == false)
+            {
+                try {
 
-                $owner = $_SESSION['loggedUser'];
-                $idOwner = $this->ownerDao->buscarId($owner->getNombreUser());
-                $targetdir = VIEWS_PATH."/img/uploads/";
+                    $owner = $_SESSION['loggedUser'];
+                    $idOwner = $this->ownerDao->buscarId($owner->getNombreUser());
+                    $targetdir = VIEWS_PATH."/img/uploads/";
+    
+     
+                   $target_file1 = $targetdir.basename($_FILES["imagenPerfil"]["name"]);
+                   $target_file2 = $targetdir.basename($_FILES["vacunacion"]["name"]);
+                   $target_file3 = $targetdir.basename($_FILES["video"]["name"]);
+    
+                   
        
-
-                $target_file1 = $targetdir.basename($_FILES["imagenPerfil"]["name"]);
-                $target_file2 = $targetdir.basename($_FILES["vacunacion"]["name"]);
-                $target_file3 = $targetdir.basename($_FILES["video"]["name"]);
-
-                
+                   move_uploaded_file($_FILES["imagenPerfil"]["tmp_name"], $target_file1);
+                   move_uploaded_file($_FILES["vacunacion"]["tmp_name"], $target_file2);
+                   move_uploaded_file($_FILES["video"]["tmp_name"], $target_file3);
     
-                move_uploaded_file($_FILES["imagenPerfil"]["tmp_name"], $target_file1);
-                move_uploaded_file($_FILES["vacunacion"]["tmp_name"], $target_file2);
-                move_uploaded_file($_FILES["video"]["tmp_name"], $target_file3);
-
-                // valido que no haya ninguna pet registrada anteriormente con el mismo nombre 
-                $validarPet = null ;
-                strtolower($nombre);
-                $validarPet = $this->petDao->comprobarPet($nombre , $idOwner);
-
-                if ($validarPet == null){
-                    $pet = new Pet ();
-                    $pet->setNombre($nombre);
-                    $pet->setOwner($owner);
-                    $pet->setRaza($raza);
-                    $pet->setTamano($tamanio);
-                    $pet->setImg(FRONT_ROOT.VIEWS_PATH."/img/uploads/".basename($_FILES['imagenPerfil']['name']));
-                    $pet->setPlanVacunacion(FRONT_ROOT.VIEWS_PATH."/img/uploads/".basename($_FILES['vacunacion']['name']));
-                    $pet->setVideo(FRONT_ROOT.VIEWS_PATH."/img/uploads/".basename($_FILES['video']['name']));
-                    $pet->setObservacionesGrals($observacion); 
-                    $this->petDao->Add ($pet);
-                    $this->principalOwner();
-                }
-                else {
-                    echo '<script language="javascript">alert("Ya se encuentra registrada una mascota con ese nombre");</script>';
-                    $this->principalOwner();
-                }
+                   // valido que no haya ninguna pet registrada anteriormente con el mismo nombre 
+                   $validarPet = null ;
+                   strtolower($nombre);
+                   $validarPet = $this->petDao->comprobarPet($nombre , $idOwner);
     
+                   if ($validarPet == null){
+                       $pet = new Pet ();
+                       $pet->setNombre($nombre);
+                       $pet->setOwner($owner);
+                       $pet->setRaza($raza);
+                       $pet->setTamano($tamanio);
+                       $pet->setImg(FRONT_ROOT.VIEWS_PATH."/img/uploads/".basename($_FILES['imagenPerfil']['name']));
+                       $pet->setPlanVacunacion(FRONT_ROOT.VIEWS_PATH."/img/uploads/".basename($_FILES['vacunacion']['name']));
+                       $pet->setVideo(FRONT_ROOT.VIEWS_PATH."/img/uploads/".basename($_FILES['video']['name']));
+                       $pet->setObservacionesGrals($observacion); 
+                       $this->petDao->Add ($pet);
+                       $this->principalOwner();
+                   }
+                   else {
+                       echo '<script language="javascript">alert("Ya se encuentra registrada una mascota con ese nombre");</script>';
+                       $this->principalOwner();
+                   }
+       
+               }
+               catch (Exception $ex)  {
+                   throw $ex;
+               }
+             
             }
-            catch (Exception $ex)  {
-                throw $ex;
+            else
+            {
+                echo '<script language="javascript">alert("Fromato de archivo no valido");</script>';
+                $this->agregarPet();
+
             }
+             
+
+
             
             
         }
