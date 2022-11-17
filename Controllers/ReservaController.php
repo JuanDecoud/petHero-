@@ -36,6 +36,26 @@ use Exception;
             $this->ownerdao = new OwnerDao();
             
         }
+
+        public function reservasCompletadas ()
+        {
+            require_once(VIEWS_PATH."check.php");
+            require_once (VIEWS_PATH."navKeeper.php");
+            $user = $_SESSION['loggedUser'];
+            try
+            {
+                $lista=$this->reservaDao->getAll();
+                $listaEstadias = $this->reservaDao->buscarReservaxEstadoKeeper($lista,$user->getNombreUser(), Estadoreserva::Cumplida);
+
+            }
+            catch (Exception $ex)
+            {
+                throw $ex ;
+            }
+            
+            require_once(VIEWS_PATH."estadiasCompletadas.php");
+        }
+
         public function vistaKeeper (){
             require_once (VIEWS_PATH."navKeeper.php");
             $keeper = $_SESSION['loggedUser'];
