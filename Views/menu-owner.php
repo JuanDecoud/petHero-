@@ -117,7 +117,7 @@
                                             <li class="list-group-item">Nombre:<input style=" text-align: center; color:black; border:0;"  type="text" placeholder="<?php echo $pet->getNombre(); ?>" name="pet" value="<?php echo $pet->getNombre(); ?>" readonly></li> 
                                             <li class="list-group-item">Cuidador:<input style=" text-align: center; color:black; border:0;"  type="text" placeholder="<?php echo $keeper->getNombreUser(); ?>" name="keeper" value="<?php echo $keeper->getNombreUser(); ?>" readonly></li>
                                             <?php foreach ($reserva->getDias() as $dias ) { ?>
-                                                <li class="list-group-item"><?php echo $dias?></td></li>
+                                                <li class="list-group-item"><input style=" text-align: center; font-weight:bold; color:black; border :0;" class="border-bottom" type="text" placeholder="<?php echo $dias?>" name="arreglo[]" value="<?php echo $dias?>" readonly></td></li>
                                                 <?php }?>
                                         </ul>
                                         <div class="card-body">

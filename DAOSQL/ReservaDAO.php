@@ -699,6 +699,16 @@
             return $reservaBuscada ;
         }
 
+
+ 
+        public function ComprobarFecha ($arregloDias ){
+            $date = date("Y-m-d");
+           asort ($arregloDias);
+           $ultimaFecha = array_pop ($arregloDias);
+           return $ultimaFecha ;
+
+
+        }
         
      
 
