@@ -4,33 +4,94 @@
     use DAOSQL\ReviewDao;
     use DAOSQL\PetDAO ;
     use DAOSQL\ReservaDAO ;
+    use DAOSQL\OwnerDAO ;
 
     use Exception;
     use Models\Keeper;
     use Models\Pet;
     use Models\Review;
     use Models\Estadoreserva;
+    use Models\Reserva ;
 
  class ReviewController {
 
     private  $reviewdao ;
     private $petdao ;
     private $reservaDao ;
+    private $ownerdao ;
 
     public function __construct()
     {
         $this->reviewdao = new ReviewDao();
         $this->petdao = new PetDAO ();
         $this->reservaDao = new ReservaDAO ();
+        $this->ownerdao = new OwnerDAO ();
         
     }
 
     public function vistaReview ($nombrePet , $nombreKeeper){
-        $nombreKeeper = $nombreKeeper ;
-        $nombrePet = $nombrePet ;
+        $reserva = $_SESSION['reserva'];
+        $keeper = $reserva->getKeeper();
+        $pet = $reserva->getPet();
         require_once(VIEWS_PATH."check.php");
         require_once (VIEWS_PATH."review.php");
         
+    }
+
+    public function agregarTarjeta (){
+        require_once(VIEWS_PATH."check.php");
+        require_once(VIEWS_PATH."agregarTarjeta.php");
+    }
+
+    public function vistaPago (){
+            
+        $owner = $_SESSION['loggedUser'];
+        $tarjeta= null ;
+        $ownerdao = new OwnerDao();
+        $tarjeta = $ownerdao->buscarTarjeta($owner->getNombreUser());
+
+        $reserva = $_SESSION['reserva'];
+        $keeper = $reserva->getKeeper();
+        $pet = $reserva->getPet();
+
+        require_once(VIEWS_PATH."check.php");
+        require_once(VIEWS_PATH."vistaCompletarPago.php");
+    }
+
+    public function  simulacionPago ( $pet,$keeper){
+
+        
+        $user = $_SESSION['loggedUser'];
+        $this->reservaDao->cambiarEstado($user->getNombreUser() , $pet , $keeper , Estadoreserva::Cumplida);
+
+        // buscar y crea la reserva para guardarla en un session
+        $lista=$this->reservaDao->getALL();
+        $reservaLista = $this->reservaDao->buscarReservaEnCurso($lista,$user->getNombreUser(),Estadoreserva::Cumplida);
+        $reservaNueva = null ;
+
+
+        foreach($reservaLista as $reserva){
+            $reservaNueva = new Reserva ();
+            $reservaNueva->setDias($reserva->getDias());
+            $reservaNueva->setPet($reserva->getPet());
+            $reservaNueva->setKeeper($reserva->getKeeper());
+            $reservaNueva->setImporteTotal($reserva->getImporteTotal());
+            $reservaNueva->setImporteReserva($reserva->getImporteReserva());
+            $reservaNueva->setEstado ($reserva->getEstado());
+
+        }
+
+        $_SESSION['reserva'] = $reservaNueva;
+        $comprobartarjeta = $this->ownerdao->buscarTarjeta($user->getNombreUser());           
+        /// si el usuario no tiene tarjeta se ingresa una sino directamente se pasa al pago 
+
+       if ($comprobartarjeta == null){
+            $this->agregarTarjeta();
+        }
+        else {
+            $this->vistaPago();
+        }
+    
     }
 
     public function principal (){
@@ -62,7 +123,6 @@
             $pet->setOwner($user);
             $keeper = new Keeper($nombreKeeper,
             null,null,null,null,null,null,null);
-
             $pet->setNombre($nombrePet);
             $fecha = date('Y-m-d');
             $review->setDescription($descripcion);

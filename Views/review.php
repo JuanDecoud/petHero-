@@ -52,11 +52,11 @@ input[type="radio"]:checked ~ label {
             <h3>Comentario</h3>
             <div class="form-group">
                 <h6>Cuidador</h6>
-                <input type="textr" class="form-control" id="" placeholder="<?php echo $nombreKeeper ?>" name ="nombreKeeper" value ="<?php echo $nombreKeeper ?>"  readonly>
+                <input type="textr" class="form-control" id="" placeholder="<?php echo $keeper->getNombreUser() ?>" name ="nombreKeeper" value ="<?php echo $keeper->getNombreUser() ?>"  readonly>
             </div>
             <div class="form-group">
                 <h6>Mascota</h6>
-                <input type="textr" class="form-control" id="" placeholder="<?php echo $nombrePet ?>" name ="nombreMascota" readonly value ="<?php echo $nombrePet ?>">
+                <input type="textr" class="form-control" id="" placeholder="<?php echo $pet->getNombre()?>" name ="nombreMascota" readonly value ="<?php echo $pet->getNombre(); ?>">
             </div>
             <div class="input-group mt-4">
                 <span class="input-group-text bg-danger">Comentario</span>

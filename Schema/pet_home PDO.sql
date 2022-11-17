@@ -69,7 +69,7 @@ create table IF NOT EXISTS reviews(
     fecha date not null,
     puntuacion float not null,
     constraint fk_reviewK foreign key (idKeeper) references keeper (idKeeper),
-    constraint fk_reviewP foreign key (idPet) references pet (idPet),
+    constraint fk_reviewP foreign key (idPet) references pet (idPet)
 );
 
 create table IF NOT EXISTS tipoMascotaxKeeper (
@@ -147,7 +147,7 @@ create procedure cambiarEstado (in idPet int , in nombreUser varchar(50) , in es
 	INNER JOIN  keeper k on k.idKeeper = r.idKeeper
     INNER JOIN USER U on u.idUser = k.idUser 
 	SET r.estado = estado 
-    where r.idPet = idPet and u.nombreUser = nombreUser;
+    where r.idPet = idPet and u.nombreUser = nombreUser and r.estado !="Cumplida";
  END$$
 
 
@@ -448,7 +448,7 @@ BEGIN
     inner join keeper k on k.idKeeper = fd.idKeeper 
     inner join user u on k.idUser = u.idUser 
     set estado = estado 
-    where fd.desde = desde and fd.hasta = hasta and u.nombreUser = nombreKeeper ;
+    where fd.desde = desde and fd.hasta = hasta and u.nombreUser = nombreKeeper  ;
 END$$
 
 DELIMITER ;

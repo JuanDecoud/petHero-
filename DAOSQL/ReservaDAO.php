@@ -593,14 +593,13 @@
                     
                     $idPet = $row['idPet'];
                 }
-                echo $idPet;
+             
 
                 $cambiarEstado = "Call cambiarEstado(?,?,?)";
 
                 $parametrosEstado ['idPet'] = $idPet;
                 $parametrosEstado['nombreUser'] = $nombreUsuario;
                 $parametrosEstado['estado'] = $estado;
-
                 
 
                 $this->connection->ExecuteNonQuery($cambiarEstado , $parametrosEstado , QueryType::StoredProcedure);

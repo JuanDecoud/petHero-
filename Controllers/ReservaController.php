@@ -81,12 +81,9 @@ use Exception;
 
                 $user = $_SESSION ['loggedUser'];
 
-               
-
             try
             {   
-               
-              
+                         
                 // busco las reservas 
                 $listaReservas = $this->reservaDao->getALL();
 
@@ -95,8 +92,7 @@ use Exception;
                  Evitan que si una pet tiene ya iniciado el proceso de reserva 
                  no le permita hacer nuevas  hasta que el keeper acepte o rechace  y tambien que si la misma
                  fue confirmada, no le permita, realizar otra  antes de terminar la estadia . asi como tambien
-                 verifican que el keeper cuide mascotas del tamaño solicitado por el owner*/
-                 
+                 verifican que el keeper cuide mascotas del tamaño solicitado por el owner*/      
                  
                 $pet = $this->petdao->buscarPet($nombreMascota , $user);
                 
@@ -106,9 +102,6 @@ use Exception;
                 ,$user->getNombreUser(), Estadoreserva::Pendiente);
                 $reservaEncurso=$this->reservaDao->buscarReservaxPet($listaReservas , $nombreMascota
                 ,$user->getNombreUser(), Estadoreserva::Confirmada);
-                
-
-
 
 
                 if ($tamanio == true && $buscarReservaPendiente == null && $reservaEncurso == null)
@@ -251,11 +244,7 @@ use Exception;
             }
 
             $_SESSION['reserva'] = $reservaNueva;
-
-            $comprobartarjeta = $this->ownerdao->buscarTarjeta($user->getNombreUser());
-        
-            var_dump($comprobartarjeta);
-            
+            $comprobartarjeta = $this->ownerdao->buscarTarjeta($user->getNombreUser());           
             /// si el usuario no tiene tarjeta se ingresa una sino directamente se pasa al pago 
 
            if ($comprobartarjeta == null){
