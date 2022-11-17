@@ -43,7 +43,6 @@
                    $comprobar = true ;
                    
                 }
-
             }
 
             if ($comprobar == false)
@@ -97,13 +96,10 @@
             else
             {
                 echo '<script language="javascript">alert("Fromato de archivo no valido");</script>';
-                $this->agregarPet();
+                $this->principalOwner();
 
             }
              
-
-
-            
             
         }
 
