@@ -13,11 +13,12 @@
             <input type="number" class="form-control " id="exampleInputEmail1" 
                 aria-describedby="emailHelp" placeholder="<?php echo $pet->getNombre(); ?>" value = "" name = "Importe" required readonly>
         </div>
-        <h6>Estadia :</h6>
-        <?php foreach ($reserva->getDias() as $dias ) { ?>
-        <input style=" text-align: center; font-weight:bold; color:black; border :0;" class="border-bottom" type="text" placeholder="<?php echo $dias?>" name="arreglo[]" value="<?php echo $dias?>" readonly>
-        <?php }?>
-
+        <div class = "container mx-4">
+            <h6>Estadia :</h6>
+            <?php foreach ($reserva->getDias() as $dias ) { ?>
+            <input style=" text-align: center; font-weight:bold; color:black; border :0;" class="border-bottom" type="text" placeholder="<?php echo $dias?>" name="arreglo[]" value="<?php echo $dias?>" readonly>
+            <?php }?>
+        </div>
         <div class="form-group mx-4 ">
             <label for="exampleInputEmail1" class = " ">Importe</label>
             <input type="number" class="form-control " id="exampleInputEmail1" 

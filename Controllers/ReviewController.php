@@ -35,6 +35,7 @@
         $pet = $reserva->getPet();
         require_once(VIEWS_PATH."check.php");
         require_once (VIEWS_PATH."review.php");
+       
         
     }
 
@@ -67,6 +68,7 @@
 
         $fechadelDia = date ("Y-m-d");
         $date = $this->reservaDao->ComprobarFecha($arregloDias);
+        $fechadelDia = "2022-11-28";
         if ($fechadelDia >= $date){
             try 
             {   

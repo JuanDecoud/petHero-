@@ -501,7 +501,7 @@ DROP procedure IF EXISTS `agregar_review`
 
 DELIMITER $$
 
-CREATE procedure agregar_review (in idKeeper int , in idPet int , in descripcion varchar (300) , in fecha date , in puntuacion int )
+CREATE procedure agregar_review (in idPet int , in idKeeper int , in descripcion varchar (300) , in fecha date , in puntuacion int )
 BEGIN
 	insert into reviews (idKeeper , idPet , descripcion , fecha , puntuacion) values (idKeeper , idPet , descripcion , fecha , puntuacion);
 END$$

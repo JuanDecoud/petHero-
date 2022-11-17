@@ -46,10 +46,13 @@ use Exception;
                     $parametrosReview['idKeeper'] =$fila[0];
                 }
                 
+                
 
                 $parametrosReview['descripcion'] = $review->getDescription();
                 $parametrosReview['fecha'] = $review->getFecha();
                 $parametrosReview['puntuacion'] = $review->getPuntaje();
+
+               
 
                 $this->connection->ExecuteNonQuery($query, $parametrosReview, QueryType::StoredProcedure);
 
