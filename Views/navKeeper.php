@@ -13,7 +13,7 @@
 
             <ul class="navbar-nav mx-auto ">
                 <li class="nav-item   m-1">
-                    <a class="nav-link active" href="#">Estadias</a>
+                    <a class="nav-link active" href="#"></a>
                 </li>
             </ul>
             

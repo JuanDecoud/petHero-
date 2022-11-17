@@ -71,7 +71,6 @@
         if ($fechadelDia >= $date){
             try 
             {   
-    
                 $this->reservaDao->cambiarEstado($user->getNombreUser() , $pet , $keeper , Estadoreserva::Cumplida);
                 // buscar y crea la reserva para guardarla en un session
                 $lista=$this->reservaDao->getALL();
@@ -160,6 +159,24 @@
         catch (Exception $ex) {
             throw $ex;
         }
+    }
+
+    public function historico (){
+
+        require_once (VIEWS_PATH."check.php");
+        $keeper = $_SESSION['loggedUser'];
+        $listareviews = array ();
+        try 
+        {  
+            $listareviews = $this->reviewdao->keeperReviews($keeper);
+        }
+        catch (Exception $ex)
+        {
+            throw $ex ;
+        }
+        
+        require_once (VIEWS_PATH."navKeeper.php");
+        require_once(VIEWS_PATH."historicoKeeper.php");
     }
  }
 

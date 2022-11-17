@@ -507,3 +507,14 @@ BEGIN
 END$$
 
 DELIMITER ;
+
+
+DELIMITER $$ 
+
+create procedure buscar_Review (in idKeeper int)
+BEGIN
+	select descripcion , fecha , puntuacion from reviews r
+    where r.idKeeper =idKeeper ;
+END$$
+
+DELIMITER ;

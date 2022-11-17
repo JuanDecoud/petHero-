@@ -2,6 +2,7 @@
 
     namespace DAOSQL ;
     use Models\Review;
+    use Models\Keeper;
     use DAO\IReviewDao;
     use DAOSQL\QueryType ;
 use Exception;
@@ -62,6 +63,55 @@ use Exception;
         }
 
         public function getAll (){
+           
+
+        }
+
+        public function keeperReviews  ( Keeper $keeper){
+            
+            $listaReviews = array ();
+
+            try
+            {
+                
+                $queryKeeper = "Call buscar_Keeper(?)";
+                $queryReview = "Call buscar_Review (?)";
+    
+                $parametroKeeper['nombreUser'] = $keeper->getNombreUser();
+    
+                $this->connection = Connection::GetInstance() ;
+    
+                $parametroReview = array ();
+
+            
+    
+                $resultadokeeper = $this->connection->Execute($queryKeeper , $parametroKeeper , QueryType::StoredProcedure);
+                foreach ($resultadokeeper as $fila){
+                    $parametroReview['idKeeper'] = $fila[0];
+                }
+
+
+                
+    
+                $resultadoreviews = $this->connection->Execute ($queryReview , $parametroReview , QueryType::StoredProcedure);
+               
+                foreach ($resultadoreviews as $fila){
+                    $review = new Review();
+                    $review->setDescription($fila[0]);
+                    $review->setFecha($fila[1]);
+                    $review->setPuntaje($fila[2]);
+                    array_push($listaReviews , $review);
+                
+                }
+
+            }
+            catch (Exception $Ex)
+            {
+                throw $Ex ;
+            }
+
+
+            return $listaReviews ;
 
         }
     }

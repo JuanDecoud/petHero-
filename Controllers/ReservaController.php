@@ -103,7 +103,6 @@ use Exception;
                 $reservaEncurso=$this->reservaDao->buscarReservaxPet($listaReservas , $nombreMascota
                 ,$user->getNombreUser(), Estadoreserva::Confirmada);
 
-
                 if ($tamanio == true && $buscarReservaPendiente == null && $reservaEncurso == null)
                 {
                         $nombreKeeper = $nombreKeeper ;
