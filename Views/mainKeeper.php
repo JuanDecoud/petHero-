@@ -58,7 +58,7 @@
     </div>
     <div class = "d-inline-flex justify-content-between justify-content-end">
         <form action="<?php echo FRONT_ROOT."Review/historico"; ?>" method ="get">
-            <button type="submit" class="btn btn-danger btn-md ">Historico</button>
+            <button type="submit" class="btn btn-danger btn-md ">Reviews</button>
         </form>
     </div>
 </div>

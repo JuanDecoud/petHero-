@@ -67,7 +67,6 @@
 
         $fechadelDia = date ("Y-m-d");
         $date = $this->reservaDao->ComprobarFecha($arregloDias);
-
         if ($fechadelDia >= $date){
             try 
             {   
@@ -109,7 +108,7 @@
         else {
             echo '<script language="javascript">alert("La Estadia aun no esta completa");</script>';
             $this->principal();
-            echo "holaa";
+            
         }
        
     
