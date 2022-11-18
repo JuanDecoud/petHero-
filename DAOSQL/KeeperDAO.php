@@ -21,23 +21,7 @@
         public function addKeeper(Keeper $keeper)
         {
           
-         /*
-            $queryUser =  "INSERT INTO " . $this-> tableUser. " (nombreUser, contrasena,tipoDeCuenta,nombre,apellido,dni,telefono)
-                                                                VALUES (:nombreUser, :contrasena,:tipoDeCuenta,:nombre,:apellido,:dni,:telefono)";
-            $queryKeeper= "INSERT INTO ".$this->tablename." (tipoMascota,remuneracion,idUser) VALUES (:tipoMascota,:remuneracion,:idUserr);";
-            
-            $queryFechas= "INSERT INTO ". $this->tableDates . " (desde,hasta,idKeeper) VALUES (:desde, :hasta, :idKeeper) ";
 
-            $thirdQuery = "SELECT idUser FROM ". $this->tableUser . " WHERE "." nombreUser = \"". $keeper->getNombreUser()."\"";
-            
-            $fourthQuery = "SELECT k.idKeeper FROM ". $this->tablename . " k LEFT JOIN " . $this->tableUser." u ON k.idUser = u.idUser WHERE u.nombreUser = \"".$keeper->getNombreUser()."\"";
-            
-
-            $queryKeeper= "INSERT INTO ".$this->tablename." (tipoMascota,remuneracion,idUser) VALUES (:tipoMascota,:remuneracion,:idUserr);";
-
-            $thirdQuery = "SELECT idUser FROM ". $this->tableUser . " WHERE "." nombreUser = \"". $keeper->getNombreUser()."\"";
-
-            */
             try{
                   // QUERYS -------------------------------------------------------
 
@@ -100,23 +84,7 @@
                 throw $Ex ;
             }
            
-              
-      
-         
-/*
-
-                ///Conseguimos el user para el que llenaremos fechas:
-                $idUser = $this->connection->Execute($fourthQuery);
-
-                if($keeper -> getFechas() != null){
-                    foreach ($keeper->getFechas() as $estadia){
-                    $parametersFechas['desde']=$estadia->getDesde();
-                    $parametersFechas['hasta']=$estadia->getHasta(); 
-                    $parametersFechas['idKeeper']=$idUser["idKeeper"][0];
-                    $this->connection->ExecuteNonQuery($queryFechas, $parametersFechas);
-                    }
-                }
-                */
+            
         }
 
 
@@ -378,12 +346,6 @@
                 $this->connection = Connection::GetInstance();
                 $resultSet = $this->connection->Execute($query);  
                 
-          
-              /*  $queryKeeper = "CALL buscar_datosUser(?)";
-                $user['nombreUsuario'] = $nombreUser;
-                $datosKeeper = $this->connection->Execute($queryKeeper , $user , queryType::StoredProcedure);
-                $keeper = null;
-*/
 
                 foreach($resultSet as $fecha){
                     $date = new FechasEstadias($fecha["desde"],$fecha["hasta"]);

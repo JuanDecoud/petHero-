@@ -28,6 +28,7 @@
 
         
         public function principalKeeper (){
+            require_once (VIEWS_PATH."check.php");
             require_once (VIEWS_PATH."navKeeper.php");
             $keeper = $_SESSION['loggedUser'];
             try

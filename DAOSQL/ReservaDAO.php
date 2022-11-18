@@ -23,57 +23,6 @@
         private $tablePet = "pet";
         private $tableCard = "tarjeta";
 
-     
-        /*
-        public function Add(Reserva $reserva){
-            // almaceno los datos del pet y owner para buscar el id en la bd
-
-            $pet = $reserva->getPet();
-            $owner = $pet->getOwner();
-            
-            $keeper = $reserva->getKeeper();
-
-            // las querys que se van ejecutar 
-            $query = "CALL add_reserva (?,?,?,?,?,?)";
-            $queryKeeper = "CALL buscar_keeper(?)";
-            $queryEstadia = "CALL buscar_fechas (?,?)";
-            $queryPet = "CALL buscar_pet(?)";
-        
-            $this->connection= Connection::GetInstance();
-
-            //PARAMETROS-------------------------------
-
-            $parametros = array ();
-            // busco el id del owner 
-            
-            $keeperName['nombreUser'] = $keeper->getNombreUser();
-            $result =  $this->connection->Execute($queryKeeper ,$keeperName,queryType::StoredProcedure);
-            foreach ($result as $fila){
-                $parametros['idKeeper'] = $fila['idKeeper'] ;
-            }
-            //fechas Disponibles
-            $fecha['desde'] = $reserva->getFechadesde();
-            $fecha['hasta'] = $reserva->getFechahasta();
-            $result = $this->connection->Execute($queryEstadia , $fecha , queryType::StoredProcedure);
-            foreach ($result as $fila){
-                $parametros['idFechasDis'] = $fila['idFechasDisp'] ;
-            }
-
-            // busco la mascota 
-            $ownerNombre1['nombreUser'] = $owner->getNombreUser() ;
-            $result1 = $this->connection->Execute  ($queryPet , $ownerNombre1 , QueryType::StoredProcedure);
-            foreach ($result1 as $fila1){
-                $parametros['idPet'] = $fila1['idPet'] ;
-            }
-
-            $parametros ['importeReserva'] = $reserva->getImporteReserva();
-            $parametros ['importeTotal'] = $reserva->getImporteTotal();
-            $parametros['estado'] = Estadoreserva::Pendiente;
-
-
-            $this->connection->ExecuteNonQuery($query,$parametros,queryType::StoredProcedure);
-        }
-        */
 
         public function Add(Reserva $reserva)
         {
@@ -269,12 +218,6 @@
             $queryDatesReserva = "SELECT f.desde,f.hasta FROM ". $this->tablename .
             "r JOIN fechasdisponibles f ON r.idFechasDis = f.idFechasDisp";
             $resultDatesReserva = $this->connection->Execute($queryDatesReserva);
-
-            foreach($resultDatesReserva as $rango){
-                //$reserva->setFechadesde($rango["desde"]);
-                //$reserva->setFechahasta($rango["hasta"]);   
-            }
-        
         
 
             $owner = new Owner();
