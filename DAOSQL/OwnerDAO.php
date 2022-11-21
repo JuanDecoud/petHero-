@@ -120,43 +120,7 @@
         }
 
 
-     /*   public function agregarPets($username ,Pet $pet ){
-            try
-            {
-                
-                $queryPet = "INSERT INTO ".$this->tablePet." (nombre,raza,tamaño,imagen,planVacunacion,observacionesGrals,video,idOwner) 
-                VALUES (:nombre,:raza,:tamaño,:imagen,:planVacunacion,:observacionesGrals,:video,:idOwner)";
-
-                $queryPet = "CALL add_pet(?,?,?,?,?,?,?,?)";
-                
-                $query ="SELECT idOwner FROM ". $this->tablename . 
-                " o JOIN user u ON u.idUser = o.idUser".
-                " WHERE "." nombreUser = \"". $username."\"";
-                
-                $this->connection = Connection::GetInstance();
-                $result = $this->connection->Execute($query);
-                $number=number_format($result[0]["idOwner"]);
-
-                
-                $pP["nombre"] = $pet->getNombre();
-                $pP["raza"] = $pet ->getRaza();
-                $pP["tamaño"] = $pet->getTamano();
-                $pP["imagen"] = $pet -> getImg();
-                $pP["planVacunacion"]  = $pet -> getPlanVacunacion();
-                $pP["observacionesGrals"] = $pet -> getObservacionesGrals();
-                $pP["video"] = $pet -> getVideo();
-                $pP["idOwner"] = $result[0]["idOwner"];
-
-                
-                $this->connection->ExecuteNonQuery($queryPet, $pP , QueryType::StoredProcedure);
-            }
-            catch(Exception $ex)
-            {
-                throw $ex;
-            }
-
-        }
-        */
+    
 
         public function GetAll()
         {
