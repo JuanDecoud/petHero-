@@ -19,7 +19,7 @@
             
             <ul class="navbar-nav  me-5">
                 <li class="nav-item border-start border-dark">
-                    <a class="nav-link active" aria-current="page" href="<?php echo FRONT_ROOT."Home/vistaLogin" ?>">Salir</a>
+                    <a class="nav-link active" aria-current="page" href="<?php echo FRONT_ROOT."Home/cerrarSession" ?>">Salir</a>
                 </li>
             </ul>
 
